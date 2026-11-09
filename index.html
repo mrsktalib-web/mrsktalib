@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SK TALIB | Personal Website</title>
+
+<style>
+:root {
+  --bg:#070707;
+  --card:#141414;
+  --text:#ffffff;
+  --muted:#aaaaaa;
+  --gold:#f3bd35;
+  --border:#453719;
+}
+
+body.light {
+  --bg:#f5f8ff;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#667085;
+  --gold:#d99b00;
+  --border:#dce3ef;
+}
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  transition:0.3s;
+}
+
+/* HEADER */
+
+header {
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  padding:15px 18px;
+}
+
+.header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.logo {
+  font-size:22px;
+  font-weight:bold;
+}
+
+.logo span {
+  color:var(--gold);
+}
+
+.controls {
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.controls button,
+.controls select {
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:9px;
+  font-size:14px;
+}
+
+nav {
+  display:flex;
+  gap:18px;
+  overflow-x:auto;
+  padding-top:15px;
+  scrollbar-width:none;
+}
+
+nav a {
+  text-decoration:none;
+  color:var(--muted);
+  font-size:13px;
+  white-space:nowrap;
+}
+
+nav a:hover {
+  color:var(--gold);
+}
+
+/* MAIN */
+
+main {
+  max-width:1050px;
+  margin:auto;
+  padding:20px 16px;
+}
+
+/* HERO */
+
+.hero {
+  text-align:center;
+  padding:45px 10px 35px;
+}
+
+.profile {
+  width:175px;
+  height:175px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid var(--gold);
+  box-shadow:0 0 25px #eab52d55;
+}
+
+.crown {
+  color:var(--gold);
+  font-size:35px;
+  margin-top:15px;
+}
+
+.hero h1 {
+  font-size:38px;
+  margin:7px 0;
+}
+
+.hero h1 span {
+  color:var(--gold);
+}
+
+.hero .subtitle {
+  font-size:18px;
+  color:var(--muted);
+}
+
+.hero .welcome {
+  color:var(--muted);
+  line-height:1.7;
+  max-width:500px;
+  margin:15px auto;
+}
+
+/* GOLD LINE */
+
+.gold-line {
+  width:100px;
+  height:3px;
+  background:var(--gold);
+  margin:20px auto 30px;
+  border-radius:10px;
+}
+
+/* SECTION */
+
+.section-heading {
+  text-align:center;
+  font-size:23px;
+  margin:25px 0;
+}
+
+.section-heading span {
+  color:var(--gold);
+}
+
+/* CARDS */
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px;
+}
+
+.tile {
+  min-height:135px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:15px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:13px;
+  text-decoration:none;
+  color:var(--text);
+  padding:15px 8px;
+  text-align:center;
+  transition:0.25s;
+}
+
+.tile:hover {
+  border-color:var(--gold);
+  transform:translateY(-4px);
+  box-shadow:0 5px 20px #eab52d22;
+}
+
+.tile .icon {
+  font-size:32px;
+  color:var(--gold);
+}
+
+.tile h3 {
+  font-size:15px;
+  line-height:1.4;
+}
+
+/* FOOTER DESIGN */
+
+.wave {
+  margin-top:50px;
+  height:65px;
+  border-top:3px solid var(--gold);
+  border-radius:50% 50% 0 0;
+  opacity:.7;
+}
+
+footer {
+  text-align:center;
+  color:var(--muted);
+  padding:20px 10px 30px;
+  font-size:13px;
+}
+
+footer span {
+  color:var(--gold);
+}
+
+/* DESKTOP */
+
+@media(min-width:700px) {
+
+  .grid {
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .tile {
+    min-height:170px;
+  }
+
+  .hero {
+    padding:60px 10px 45px;
+  }
+
+  .profile {
+    width:200px;
+    height:200px;
+  }
+
+  .hero h1 {
+    font-size:48px;
+  }
+
+  main {
+    padding:35px 25px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="header">
+
+  <div class="logo">
+    👑 SK <span>TALIB</span>
+  </div>
+
+  <div class="controls">
+
+    <select id="language" onchange="changeLanguage()">
+      <option value="en">EN</option>
+      <option value="hi">हिंदी</option>
+    </select>
+
+    <button onclick="toggleTheme()" id="themeBtn">
+      ☀️
+    </button>
+
+  </div>
+
+</div>
+
+<nav>
+
+  <a href="index.html">Home</a>
+  <a href="about.html">About Me</a>
+  <a href="story.html">My Story</a>
+  <a href="study.html">My Study</a>
+  <a href="movies.html">Movies</a>
+  <a href="products.html">Products</a>
+  <a href="book.html">My Book</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="social.html">Social Media</a>
+  <a href="contact.html">Contact</a>
+
+</nav>
+
+</header>
+
+<main>
+
+<!-- PROFILE SECTION -->
+
+<div class="hero">
+
+  <!-- Later upload your photo as profile.jpg -->
+
+  <img
+    src="profile.jpg"
+    class="profile"
+    alt="SK Talib"
+    onerror="this.style.display='none'"
+  >
+
+  <div class="crown">♛</div>
+
+  <h1>
+    I'm <span>SK TALIB</span>
+  </h1>
+
+  <p class="subtitle">
+    Personal Website
+  </p>
+
+  <div class="gold-line"></div>
+
+  <p class="welcome">
+    Welcome to my personal website.
+    A place where I share my life,
+    education, interests, memories
+    and everything about me.
+  </p>
+
+</div>
+
+<!-- PERSONAL PAGES -->
+
+<h2 class="section-heading">
+  Explore <span>My World</span>
+</h2>
+
+<div class="grid">
+
+  <a href="about.html" class="tile">
+    <span class="icon">👤</span>
+    <h3>About Me</h3>
+  </a>
+
+  <a href="story.html" class="tile">
+    <span class="icon">📖</span>
+    <h3>My Story</h3>
+  </a>
+
+  <a href="study.html" class="tile">
+    <span class="icon">🎓</span>
+    <h3>My Study</h3>
+  </a>
+
+  <a href="movies.html" class="tile">
+    <span class="icon">🎬</span>
+    <h3>Movies I've Watched</h3>
+  </a>
+
+  <a href="products.html" class="tile">
+    <span class="icon">📦</span>
+    <h3>Products I Use</h3>
+  </a>
+
+  <a href="book.html" class="tile">
+    <span class="icon">✍️</span>
+    <h3>My Book</h3>
+  </a>
+
+  <a href="gallery.html" class="tile">
+    <span class="icon">🖼️</span>
+    <h3>Gallery</h3>
+  </a>
+
+  <a href="social.html" class="tile">
+    <span class="icon">🔗</span>
+    <h3>My Social Media</h3>
+  </a>
+
+  <a href="contact.html" class="tile">
+    <span class="icon">✉️</span>
+    <h3>My Contact</h3>
+  </a>
+
+</div>
+
+<div class="wave"></div>
+
+</main>
+
+<footer>
+
+  © 2026 <span>SK TALIB</span>
+  <br><br>
+  Personal Website | All Rights Reserved
+
+</footer>
+
+<script>
+
+/* DARK AND WHITE MODE */
+
+function toggleTheme() {
+
+  document.body.classList.toggle("light");
+
+  let isLight =
+    document.body.classList.contains("light");
+
+  document.getElementById("themeBtn").textContent =
+    isLight ? "🌙" : "☀️";
+
+  localStorage.setItem(
+    "sk-theme",
+    isLight ? "light" : "dark"
+  );
+}
+
+/* SAVE THEME */
+
+if(localStorage.getItem("sk-theme")==="light") {
+
+  document.body.classList.add("light");
+
+  document.getElementById("themeBtn").textContent="🌙";
+}
+
+/* LANGUAGE */
+
+const translations = {
+
+  "Home":"होम",
+  "About Me":"मेरे बारे में",
+  "My Story":"मेरी कहानी",
+  "My Study":"मेरी पढ़ाई",
+  "Movies":"फिल्में",
+  "Movies I've Watched":"मेरी देखी हुई फिल्में",
+  "Products":"प्रोडक्ट",
+  "Products I Use":"मेरे इस्तेमाल के प्रोडक्ट",
+  "My Book":"मेरी किताब",
+  "Gallery":"गैलरी",
+  "Social Media":"सोशल मीडिया",
+  "My Social Media":"मेरे सोशल मीडिया",
+  "Contact":"संपर्क",
+  "My Contact":"मेरा संपर्क",
+  "Explore My World":"मेरी दुनिया देखें",
+  "Personal Website":"व्यक्तिगत वेबसाइट"
+};
+
+function changeLanguage() {
+
+  const lang =
+    document.getElementById("language").value;
+
+  document.querySelectorAll("nav a, .tile h3, .hero .subtitle").forEach(el => {
+
+    if(!el.dataset.original) {
+      el.dataset.original = el.textContent;
+    }
+
+    el.textContent =
+      lang === "hi"
+      ? (translations[el.dataset.original] || el.dataset.original)
+      : el.dataset.original;
+
+  });
+
+  const heading = document.querySelector(".section-heading");
+
+  if(lang === "hi") {
+    heading.innerHTML = 'मेरी <span>दुनिया देखें</span>';
+  } else {
+    heading.innerHTML = 'Explore <span>My World</span>';
+  }
+
+}
+
+</script>
+
+</body>
+  </html>
+    
