@@ -88,13 +88,13 @@ header{
 }
 
 .language-btn{
-  min-width:105px;
-  padding:0 10px;
+  min-width:112px;
+  padding:0 9px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:8px;
-  font-size:13px;
+  gap:7px;
+  font-size:12px;
 }
 
 .language-btn .arrow{
@@ -154,7 +154,7 @@ header{
 
 .language-option{
   width:100%;
-  padding:16px 19px;
+  padding:15px 19px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -162,7 +162,7 @@ header{
   color:#eeeeee;
   border:0;
   border-bottom:1px solid #29251e;
-  font-size:17px;
+  font-size:16px;
   text-align:left;
   cursor:pointer;
 }
@@ -378,73 +378,40 @@ footer{
 
 @media(max-width:380px){
 
-  header{
-    padding:8px 10px;
-  }
+  header{padding:8px 10px}
 
-  .brand h2{
-    font-size:19px;
-  }
-
-  .brand p{
-    font-size:8px;
-    letter-spacing:1.8px;
-  }
+  .brand h2{font-size:19px}
+  .brand p{font-size:8px;letter-spacing:1.8px}
 
   .language-btn{
-    min-width:87px;
+    min-width:96px;
     font-size:11px;
     padding:0 7px;
   }
 
-  .theme-btn{
-    width:35px;
-    height:36px;
-  }
+  .theme-btn{width:35px;height:36px}
 
-  .hero{
-    padding:17px 12px 8px;
-  }
+  .hero{padding:17px 12px 8px}
+  .hero-main{gap:11px}
 
-  .hero-main{
-    gap:11px;
-  }
-
-  .profile-wrap{
-    max-width:145px;
-  }
-
-  .hero-info{
-    padding-left:11px;
-  }
-
-  .signature{
-    font-size:34px;
-  }
+  .profile-wrap{max-width:145px}
+  .hero-info{padding-left:11px}
+  .signature{font-size:34px}
 
   .tagline{
     font-size:9px;
     letter-spacing:1px;
   }
 
-  .hero-quote{
-    font-size:10px;
-  }
-
-  .welcome{
-    font-size:11px;
-    margin-top:12px;
-  }
+  .hero-quote{font-size:10px}
+  .welcome{font-size:11px;margin-top:12px}
 
   .section-title{
     font-size:16px;
     margin:13px 5px 10px;
   }
 
-  .cards{
-    gap:7px;
-    padding:0 9px;
-  }
+  .cards{gap:7px;padding:0 9px}
 
   .card{
     min-height:81px;
@@ -452,93 +419,39 @@ footer{
     gap:6px;
   }
 
-  .card svg{
-    width:23px;
-    height:23px;
-  }
+  .card svg{width:23px;height:23px}
+  .card h3{font-size:10px}
 
-  .card h3{
-    font-size:10px;
-  }
-
-  .wave{
-    height:17px;
-    margin-top:9px;
-  }
-
-  footer{
-    padding-top:5px;
-    font-size:9px;
-  }
+  .wave{height:17px;margin-top:9px}
+  footer{padding-top:5px;font-size:9px}
 }
 
 @media(max-height:780px) and (max-width:600px){
 
-  .hero{
-    padding-top:12px;
-  }
-
-  .profile-wrap{
-    max-width:125px;
-  }
-
-  .hero-quote{
-    margin-top:7px;
-  }
-
-  .welcome{
-    margin-top:10px;
-  }
+  .hero{padding-top:12px}
+  .profile-wrap{max-width:125px}
+  .hero-quote{margin-top:7px}
+  .welcome{margin-top:10px}
 
   .section-title{
     margin-top:12px;
     margin-bottom:9px;
   }
 
-  .card{
-    min-height:75px;
-  }
-
-  .wave{
-    margin-top:7px;
-    height:14px;
-  }
-
-  footer{
-    padding-top:4px;
-  }
+  .card{min-height:75px}
+  .wave{margin-top:7px;height:14px}
+  footer{padding-top:4px}
 }
 
 @media(min-width:600px){
 
-  .hero{
-    padding-top:35px;
-  }
-
-  .profile-wrap{
-    max-width:210px;
-  }
-
-  .welcome{
-    font-size:15px;
-  }
-
-  .cards{
-    gap:15px;
-  }
-
-  .card{
-    min-height:120px;
-  }
-
-  .card svg{
-    width:35px;
-    height:35px;
-  }
-
-  .card h3{
-    font-size:15px;
-  }
+  .hero{padding-top:35px}
+  .profile-wrap{max-width:210px}
+  .welcome{font-size:15px}
+  .cards{gap:15px}
+  .card{min-height:120px}
+  .card svg{width:35px;height:35px}
+  .card h3{font-size:15px}
 }
 
 [dir="rtl"] .hero-info{
@@ -571,11 +484,13 @@ footer{
     </button>
 
     <button class="theme-btn" id="themeBtn"
-      onclick="toggleTheme" aria-label="Change theme">☀</button>
+      onclick="toggleTheme()" aria-label="Change theme">☀</button>
 
   </div>
 
 </header>
+
+<!-- DARK LANGUAGE POPUP -->
 
 <div class="language-overlay" id="languageOverlay"
   onclick="outsideClose(event)">
@@ -592,19 +507,24 @@ footer{
       <span>English</span><span class="radio"></span>
     </button>
 
-    <button class="language-option" data-lang="hi"
-      onclick="changeLanguage('hi')">
-      <span>हिन्दी</span><span class="radio"></span>
+    <button class="language-option" data-lang="roman"
+      onclick="changeLanguage('roman')">
+      <span>Roman Hindi</span><span class="radio"></span>
     </button>
 
     <button class="language-option" data-lang="ur"
       onclick="changeLanguage('ur')">
-      <span>اردو</span><span class="radio"></span>
+      <span>Urdu</span><span class="radio"></span>
+    </button>
+
+    <button class="language-option" data-lang="hi"
+      onclick="changeLanguage('hi')">
+      <span>Hindi</span><span class="radio"></span>
     </button>
 
     <button class="language-option" data-lang="or"
       onclick="changeLanguage('or')">
-      <span>ଓଡ଼ିଆ</span><span class="radio"></span>
+      <span>Odia</span><span class="radio"></span>
     </button>
 
   </div>
@@ -690,7 +610,7 @@ footer{
     <h3 data-i18n="story">My Story</h3>
   </a>
 
-  <!-- 5 MOVIES I HAVE WATCHED -->
+  <!-- 5 MOVIES -->
   <a class="card" href="movies.html">
     <svg viewBox="0 0 24 24">
       <rect x="3" y="4" width="18" height="16" rx="2"/>
@@ -769,31 +689,31 @@ contact:"Contact",
 book:"My Book"
 },
 
-hi:{
-personal:"मेरी व्यक्तिगत वेबसाइट",
-selectLanguage:"भाषा चुनें",
-tagline:"सपने • निर्माण • सफलता",
-quote:"सपनों और संभावनाओं का एक सफर",
-welcome:"मेरी दुनिया में आपका स्वागत है। यहाँ मैं अपने सफर, रुचियों, यादों और खास पलों को साझा करता हूँ।",
-explore:"देखें",
-world:"मेरी दुनिया",
-about:"मेरे बारे में",
-study:"मेरी पढ़ाई",
-social:"मेरे सोशल मीडिया",
-story:"मेरी कहानी",
-movies:"मेरी देखी हुई फिल्में",
-gallery:"फोटो गैलरी",
-products:"मेरे उत्पाद",
-contact:"संपर्क",
-book:"मेरी किताब"
+roman:{
+personal:"MERI PERSONAL WEBSITE",
+selectLanguage:"Apni Language Chunein",
+tagline:"SAPNE • NAYI SOCH • KAMYABI",
+quote:"Sapno aur naye maukon ka ek khoobsurat safar",
+welcome:"Meri duniya mein aapka swagat hai. Yahan main apni zindagi, pasand, yaadein aur khaas pal share karta hoon.",
+explore:"Dekhiye",
+world:"Meri Duniya",
+about:"Mere Baare Mein",
+study:"Meri Padhai",
+social:"Mere Social Media",
+story:"Meri Kahani",
+movies:"Meri Dekhi Hui Filmein",
+gallery:"Photo Gallery",
+products:"Mere Products",
+contact:"Sampark Karein",
+book:"Meri Kitab"
 },
 
 ur:{
 personal:"میری ذاتی ویب سائٹ",
 selectLanguage:"زبان منتخب کریں",
 tagline:"خواب • تخلیق • کامیابی",
-quote:"خوابوں اور امکانات کا ایک سفر",
-welcome:"میری دنیا میں خوش آمدید۔ یہاں میں اپنا سفر، دلچسپیاں، یادیں اور خاص لمحات شیئر کرتا ہوں۔",
+quote:"خوابوں اور امکانات کا ایک خوبصورت سفر",
+welcome:"میری دنیا میں خوش آمدید۔ یہاں میں اپنی زندگی، دلچسپیوں، یادوں اور خاص لمحات کو شیئر کرتا ہوں۔",
 explore:"دیکھیے",
 world:"میری دنیا",
 about:"میرے بارے میں",
@@ -807,12 +727,31 @@ contact:"رابطہ",
 book:"میری کتاب"
 },
 
+hi:{
+personal:"मेरी व्यक्तिगत वेबसाइट",
+selectLanguage:"भाषा चुनें",
+tagline:"सपने • निर्माण • सफलता",
+quote:"सपनों और संभावनाओं का एक खूबसूरत सफर",
+welcome:"मेरी दुनिया में आपका स्वागत है। यहाँ मैं अपनी जिंदगी, रुचियों, यादों और खास पलों को साझा करता हूँ।",
+explore:"देखें",
+world:"मेरी दुनिया",
+about:"मेरे बारे में",
+study:"मेरी पढ़ाई",
+social:"मेरे सोशल मीडिया",
+story:"मेरी कहानी",
+movies:"मेरी देखी हुई फिल्में",
+gallery:"फोटो गैलरी",
+products:"मेरे उत्पाद",
+contact:"संपर्क",
+book:"मेरी किताब"
+},
+
 or:{
 personal:"ମୋର ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟ୍",
 selectLanguage:"ଭାଷା ବାଛନ୍ତୁ",
 tagline:"ସ୍ୱପ୍ନ • ସୃଷ୍ଟି • ସଫଳତା",
-quote:"ସ୍ୱପ୍ନ ଓ ସମ୍ଭାବନାର ଏକ ଯାତ୍ରା",
-welcome:"ମୋ ଦୁନିଆକୁ ସ୍ୱାଗତ। ଏଠାରେ ମୁଁ ମୋର ଯାତ୍ରା, ଆଗ୍ରହ, ସ୍ମୃତି ଏବଂ ବିଶେଷ ମୁହୂର୍ତ୍ତ ସେୟାର କରେ।",
+quote:"ସ୍ୱପ୍ନ ଓ ସମ୍ଭାବନାର ଏକ ସୁନ୍ଦର ଯାତ୍ରା",
+welcome:"ମୋ ଦୁନିଆକୁ ସ୍ୱାଗତ। ଏଠାରେ ମୁଁ ମୋର ଜୀବନ, ଆଗ୍ରହ, ସ୍ମୃତି ଏବଂ ବିଶେଷ ମୁହୂର୍ତ୍ତ ସେୟାର କରେ।",
 explore:"ଦେଖନ୍ତୁ",
 world:"ମୋ ଦୁନିଆ",
 about:"ମୋ ବିଷୟରେ",
@@ -830,9 +769,10 @@ book:"ମୋ ବହି"
 
 const languageNames={
 en:"English",
-hi:"हिन्दी",
-ur:"اردو",
-or:"ଓଡ଼ିଆ"
+roman:"Roman Hindi",
+ur:"Urdu",
+hi:"Hindi",
+or:"Odia"
 };
 
 function openLanguages(){
@@ -854,7 +794,7 @@ function changeLanguage(lang){
   const words=translations[lang];
   if(!words) return;
 
-  document.documentElement.lang=lang;
+  document.documentElement.lang=lang==="roman"?"hi":lang;
   document.documentElement.dir=lang==="ur"?"rtl":"ltr";
 
   document.querySelectorAll("[data-i18n]").forEach(element=>{
@@ -918,4 +858,4 @@ document.addEventListener("keydown",function(event){
 
 </body>
       </html>
-    
+        
