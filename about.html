@@ -1,385 +1,355 @@
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080808">
 <title>About Me | SK TALIB</title>
 
 <style>
-:root{
-  --bg:#080808;
-  --paper:#111111;
-  --card:#17140f;
-  --text:#f1f1f1;
-  --muted:#b8b8b8;
-  --gold:#c99b36;
-  --border:#493b22;
-  --shadow:rgba(201,155,54,.10);
-}
-body.light{
-  --bg:#f3f5f9;
-  --paper:#ffffff;
-  --card:#f5f7fb;
-  --text:#1d2638;
-  --muted:#626d80;
-  --gold:#a87817;
-  --border:#d7deea;
-  --shadow:rgba(30,50,80,.08);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:Georgia,"Times New Roman",serif;
-  line-height:1.7;
-  transition:background .25s,color .25s;
-}
-button{font-family:Arial,Helvetica,sans-serif}
-
-/* HEADER */
-header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  min-height:68px;
-  padding:9px 4%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  background:var(--bg);
-  border-bottom:1px solid var(--border);
-}
-.brand h2{
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:23px;
-  letter-spacing:1px;
-  line-height:1.2;
-}
-.gold{color:var(--gold)}
-.brand p{
-  font-family:Arial,Helvetica,sans-serif;
-  color:var(--muted);
-  font-size:10px;
-  letter-spacing:2.5px;
-  margin-top:3px;
-}
-.controls{display:flex;align-items:center;gap:8px}
-.language-btn,.theme-btn{
-  height:39px;
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  border-radius:10px;
-  cursor:pointer;
-}
-.language-btn{
-  min-width:112px;
-  padding:0 9px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:7px;
-  font-size:12px;
-}
-.theme-btn{
-  width:40px;
-  color:var(--gold);
-  font-size:19px;
+:root {
+    --bg: #080808;
+    --card: #111111;
+    --text: #eeeeee;
+    --muted: #a5a5a5;
+    --gold: #c9a85b;
+    --border: #29251c;
+    --header: rgba(8,8,8,.96);
 }
 
-/* LANGUAGE POPUP */
-.language-overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:500;
-  background:rgba(0,0,0,.72);
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-}
-.language-overlay.show{display:flex}
-.language-panel{
-  width:100%;
-  max-width:380px;
-  background:#111;
-  border:1px solid #554426;
-  border-radius:16px;
-  overflow:hidden;
-  box-shadow:0 15px 45px rgba(0,0,0,.5);
-  font-family:Arial,Helvetica,sans-serif;
-}
-.language-heading{
-  padding:16px 18px;
-  color:#eee;
-  border-bottom:1px solid #30291d;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-weight:bold;
-}
-.close-language{
-  border:0;
-  background:transparent;
-  color:#aaa;
-  font-size:24px;
-  cursor:pointer;
-}
-.language-option{
-  width:100%;
-  padding:14px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:#111;
-  color:#eee;
-  border:0;
-  border-bottom:1px solid #29251e;
-  font-size:15px;
-  text-align:left;
-  cursor:pointer;
-}
-.language-option:last-child{border-bottom:0}
-.language-option.active{color:#d5ad5b;background:#1b1811}
-.radio{
-  width:17px;height:17px;
-  border:2px solid #777;
-  border-radius:50%;
-}
-.active .radio{border-color:#c99b36;position:relative}
-.active .radio:after{
-  content:"";
-  position:absolute;
-  width:7px;height:7px;
-  border-radius:50%;
-  background:#c99b36;
-  top:3px;left:3px;
+body.light {
+    --bg: #f4f6fa;
+    --card: #ffffff;
+    --text: #182235;
+    --muted: #64748b;
+    --gold: #315c9b;
+    --border: #dce3ed;
+    --header: rgba(255,255,255,.96);
 }
 
-/* PAGE */
-.page{
-  max-width:950px;
-  margin:auto;
-  padding:16px 15px 30px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* NEWSPAPER MASTHEAD */
-.masthead{
-  text-align:center;
-  padding:20px 10px 16px;
-  border-top:3px double var(--gold);
-  border-bottom:3px double var(--gold);
-  background:var(--paper);
-}
-.masthead-small{
-  font-family:Arial,Helvetica,sans-serif;
-  color:var(--muted);
-  font-size:10px;
-  letter-spacing:3px;
-}
-.masthead h1{
-  font-size:clamp(31px,7vw,54px);
-  line-height:1.2;
-  margin:8px 0;
-  letter-spacing:1px;
-}
-.masthead h1 span{color:var(--gold)}
-.masthead-subtitle{
-  font-size:14px;
-  color:var(--muted);
-  font-style:italic;
-}
-.masthead-line{
-  margin:13px auto 0;
-  width:80%;
-  border-top:1px solid var(--gold);
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background .25s, color .25s;
+    line-height: 1.7;
 }
 
-/* ARTICLE */
-.article{
-  margin-top:22px;
-  padding:18px;
-  background:var(--paper);
-  border:1px solid var(--border);
-  box-shadow:0 5px 20px var(--shadow);
-}
-.article-label{
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  letter-spacing:2px;
-  color:var(--gold);
-  margin-bottom:7px;
-}
-.article h2{
-  font-size:clamp(21px,5vw,29px);
-  line-height:1.3;
-  margin-bottom:12px;
-}
-.article h3{
-  font-size:18px;
-  color:var(--gold);
-  margin:15px 0 7px;
-}
-.article p{
-  color:var(--muted);
-  font-size:15px;
-  margin:8px 0;
-  text-align:justify;
-}
-.article-image{
-  width:100%;
-  display:block;
-  object-fit:cover;
-  border:1px solid var(--border);
-  border-radius:3px;
-  margin:13px 0;
-  max-height:420px;
-}
-.banner-image{max-height:390px}
-.profile-image{
-  max-height:470px;
-  object-position:center 30%;
-  filter:grayscale(100%);
-}
-.caption{
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  color:var(--muted);
-  text-align:center;
-  letter-spacing:1px;
-  margin-top:-7px;
-  margin-bottom:12px;
-}
-.gold-line{
-  border:0;
-  border-top:1px solid var(--border);
-  margin:17px 0;
+header {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--header);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
 }
 
-/* DETAILS */
-.details{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-  margin-top:14px;
-}
-.detail{
-  padding:12px;
-  background:var(--card);
-  border:1px solid var(--border);
-  min-width:0;
-}
-.detail small{
-  display:block;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  color:var(--gold);
-  letter-spacing:1px;
-  margin-bottom:4px;
-}
-.detail strong{
-  font-size:14px;
-  font-weight:normal;
-  overflow-wrap:anywhere;
+.nav {
+    max-width: 1100px;
+    margin: auto;
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
 }
 
-/* LISTS */
-.clean-list{
-  list-style:none;
-  margin:12px 0;
-}
-.clean-list li{
-  padding:9px 10px;
-  margin:7px 0;
-  background:var(--card);
-  border-left:2px solid var(--gold);
-  color:var(--muted);
-  font-size:14px;
-}
-[dir="rtl"] .clean-list li{
-  border-left:0;
-  border-right:2px solid var(--gold);
+.brand {
+    line-height: 1.2;
 }
 
-/* VISION */
-.vision-list{
-  counter-reset:vision;
-  list-style:none;
-  margin:12px 0;
-}
-.vision-list li{
-  counter-increment:vision;
-  position:relative;
-  padding:11px 10px 11px 42px;
-  margin:7px 0;
-  background:var(--card);
-  border:1px solid var(--border);
-  color:var(--muted);
-  font-size:14px;
-}
-.vision-list li:before{
-  content:counter(vision);
-  position:absolute;
-  left:12px;
-  top:10px;
-  color:var(--gold);
-  font-family:Arial,Helvetica,sans-serif;
-  font-weight:bold;
-}
-[dir="rtl"] .vision-list li{padding:11px 42px 11px 10px}
-[dir="rtl"] .vision-list li:before{left:auto;right:12px}
-
-/* QUOTE */
-.quote{
-  margin:15px 0;
-  padding:16px;
-  border-top:1px solid var(--gold);
-  border-bottom:1px solid var(--gold);
-  color:var(--text);
-  font-size:18px;
-  text-align:center;
-  font-style:italic;
+.brand h2 {
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: var(--gold);
 }
 
-/* FOOTER */
-.back-home{
-  display:block;
-  width:max-content;
-  margin:22px auto;
-  padding:10px 22px;
-  border:1px solid var(--gold);
-  border-radius:7px;
-  color:var(--gold);
-  text-decoration:none;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:13px;
-}
-footer{
-  text-align:center;
-  padding:18px 8px;
-  border-top:2px double var(--gold);
-  color:var(--muted);
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:10px;
-  letter-spacing:1px;
+.brand span {
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--muted);
 }
 
-@media(max-width:420px){
-  header{padding:8px 10px}
-  .brand h2{font-size:19px}
-  .brand p{font-size:8px;letter-spacing:1.8px}
-  .language-btn{min-width:96px;font-size:11px}
-  .theme-btn{width:36px}
-  .page{padding:10px 9px 22px}
-  .article{padding:13px;margin-top:15px}
-  .article p{font-size:14px}
-  .details{gap:7px}
-  .detail{padding:9px}
-  .detail strong{font-size:12px}
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-btn {
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: var(--card);
+    border-radius: 8px;
+    padding: 8px 11px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.control-btn:hover {
+    border-color: var(--gold);
+}
+
+.language-wrap {
+    position: relative;
+}
+
+.language-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 43px;
+    width: 175px;
+    background: #151515;
+    border: 1px solid #393124;
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+}
+
+.language-menu.show {
+    display: block;
+}
+
+.language-menu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #eee;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.language-menu button:hover,
+.language-menu button.active {
+    background: #292319;
+    color: #d8b96d;
+}
+
+body.light .language-menu {
+    background: #fff;
+    border-color: #dce3ed;
+}
+
+body.light .language-menu button {
+    color: #182235;
+}
+
+body.light .language-menu button:hover,
+body.light .language-menu button.active {
+    background: #edf2f9;
+    color: #315c9b;
+}
+
+.container {
+    width: min(100% - 30px, 1000px);
+    margin: auto;
+}
+
+.hero {
+    text-align: center;
+    padding: 45px 10px 30px;
+}
+
+.hero img {
+    width: 145px;
+    height: 145px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold);
+    padding: 4px;
+    background: var(--card);
+}
+
+.hero h1 {
+    font-size: clamp(28px, 6vw, 43px);
+    letter-spacing: 4px;
+    margin-top: 15px;
+    color: var(--gold);
+}
+
+.hero .subtitle {
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-top: 5px;
+}
+
+.hero .intro {
+    max-width: 600px;
+    margin: 18px auto 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.section-title {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.section-title h2 {
+    color: var(--gold);
+    font-size: 23px;
+    letter-spacing: 2px;
+}
+
+.section-title p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.articles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding-bottom: 35px;
+}
+
+.article {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    overflow: hidden;
+    transition: transform .2s, border-color .2s;
+}
+
+.article:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+}
+
+.article img {
+    width: 100%;
+    height: 190px;
+    display: block;
+    object-fit: cover;
+    background: var(--bg);
+}
+
+.article-content {
+    padding: 17px;
+}
+
+.article-content h3 {
+    color: var(--gold);
+    font-size: 17px;
+    margin-bottom: 9px;
+}
+
+.article-content p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.article-content ul {
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.article-content li {
+    margin: 5px 0;
+}
+
+.profile-list {
+    list-style: none;
+    padding: 0 !important;
+}
+
+.profile-list li {
+    border-bottom: 1px solid var(--border);
+    padding: 7px 0;
+}
+
+.profile-list strong {
+    color: var(--text);
+}
+
+.vision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.vision-item {
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+footer {
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 22px 10px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.back-link {
+    display: inline-block;
+    margin: 0 auto 25px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.back-wrap {
+    text-align: center;
+}
+
+[dir="rtl"] {
+    direction: rtl;
+}
+
+[dir="rtl"] .article-content ul {
+    padding-right: 18px;
+    padding-left: 0;
+}
+
+@media(max-width: 650px) {
+    .articles {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .article img {
+        height: 200px;
+    }
+
+    .hero {
+        padding-top: 32px;
+    }
+
+    .hero img {
+        width: 125px;
+        height: 125px;
+    }
+
+    .brand h2 {
+        font-size: 17px;
+    }
+
+    .control-btn {
+        padding: 8px;
+    }
 }
 </style>
 </head>
@@ -387,326 +357,322 @@ footer{
 <body>
 
 <header>
-  <div class="brand">
-    <h2>SK <span class="gold">TALIB</span></h2>
-    <p data-i18n="personal">PERSONAL WEBSITE</p>
-  </div>
+    <div class="nav">
+        <div class="brand">
+            <h2>SK TALIB</h2>
+            <span>PERSONAL WEBSITE</span>
+        </div>
 
-  <div class="controls">
-    <button class="language-btn" type="button" onclick="openLanguages()">
-      <span id="languageName">English</span>
-      <span>▼</span>
-    </button>
-    <button class="theme-btn" id="themeBtn" type="button"
-      onclick="toggleTheme()" aria-label="Change theme">☀</button>
-  </div>
+        <div class="controls">
+            <div class="language-wrap">
+                <button class="control-btn" onclick="openLanguages()" id="languageName">
+                    English ▾
+                </button>
+
+                <div class="language-menu" id="languageMenu">
+                    <button onclick="changeLanguage('en')">English</button>
+                    <button onclick="changeLanguage('roman')">Roman Hindi</button>
+                    <button onclick="changeLanguage('ur')">Urdu</button>
+                    <button onclick="changeLanguage('hi')">Hindi</button>
+                    <button onclick="changeLanguage('or')">Odia</button>
+                </div>
+            </div>
+
+            <button class="control-btn" onclick="toggleTheme()" id="themeButton">
+                ☼
+            </button>
+        </div>
+    </div>
 </header>
 
-<!-- LANGUAGE POPUP -->
-<div class="language-overlay" id="languageOverlay"
-  onclick="outsideClose(event)">
-  <div class="language-panel">
-    <div class="language-heading">
-      <span data-i18n="selectLanguage">Select Language</span>
-      <button class="close-language" type="button"
-        onclick="closeLanguages()">×</button>
+<main class="container">
+
+    <section class="hero">
+        <img src="profile.jpg.jpg" alt="SK Talib Profile Picture">
+
+        <h1>SK TALIB</h1>
+
+        <div class="subtitle" data-i18n="heroSubtitle">
+            DREAM • CREATE • ACHIEVE
+        </div>
+
+        <p class="intro" data-i18n="heroIntro">
+            Welcome to my personal space. Here, I share my journey,
+            thoughts, interests, memories and the little things that
+            make life meaningful.
+        </p>
+    </section>
+
+    <div class="section-title">
+        <h2 data-i18n="pageTitle">ABOUT ME</h2>
+        <p data-i18n="pageSubtitle">A little introduction to who I am</p>
     </div>
 
-    <button class="language-option active" type="button"
-      data-lang="en" onclick="changeLanguage('en')">
-      <span>English</span><span class="radio"></span>
-    </button>
-    <button class="language-option" type="button"
-      data-lang="roman" onclick="changeLanguage('roman')">
-      <span>Roman Hindi</span><span class="radio"></span>
-    </button>
-    <button class="language-option" type="button"
-      data-lang="ur" onclick="changeLanguage('ur')">
-      <span>Urdu</span><span class="radio"></span>
-    </button>
-    <button class="language-option" type="button"
-      data-lang="hi" onclick="changeLanguage('hi')">
-      <span>Hindi</span><span class="radio"></span>
-    </button>
-    <button class="language-option" type="button"
-      data-lang="or" onclick="changeLanguage('or')">
-      <span>Odia</span><span class="radio"></span>
-    </button>
-  </div>
-</div>
+    <section class="articles">
 
-<main class="page">
+        <!-- 1. INTRODUCTION -->
+        <article class="article">
+            <img src="about_banner.jpg" alt="Introduction">
+            <div class="article-content">
+                <h3 data-i18n="introTitle">My Introduction</h3>
+                <p data-i18n="introText">
+                    I am SK Talib. I believe every person has a unique
+                    journey, and every experience teaches us something.
+                    This website is a small reflection of my life,
+                    thoughts and dreams.
+                </p>
+            </div>
+        </article>
 
-  <section class="masthead">
-    <div class="masthead-small" data-i18n="edition">THE PERSONAL EDITION</div>
-    <h1>SK <span>TALIB</span></h1>
-    <div class="masthead-subtitle" data-i18n="mastheadSub">
-      A little introduction to who I am
+        <!-- 2. PROFILE -->
+        <article class="article">
+            <img src="about_profile.jpg" alt="Personal Profile">
+            <div class="article-content">
+                <h3 data-i18n="profileTitle">Personal Profile</h3>
+                <ul class="profile-list">
+                    <li><strong data-i18n="nameLabel">Name:</strong> SK Talib</li>
+                    <li><strong data-i18n="locationLabel">Location:</strong> Kendrapara, Odisha, India</li>
+                    <li><strong data-i18n="colorLabel">Favourite Colours:</strong> Black & White</li>
+                    <li><strong data-i18n="foodLabel">Favourite Food:</strong> Depends on my mood</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 3. MYSELF -->
+        <article class="article">
+            <img src="about_myself.jpg" alt="Myself">
+            <div class="article-content">
+                <h3 data-i18n="myselfTitle">About Myself</h3>
+                <p data-i18n="myselfText">
+                    I am someone who enjoys thinking deeply, observing
+                    life and understanding different perspectives.
+                    I value honesty, personal freedom and meaningful
+                    moments.
+                </p>
+            </div>
+        </article>
+
+        <!-- 4. INTERESTS -->
+        <article class="article">
+            <img src="about_interests.jpg" alt="My Interests">
+            <div class="article-content">
+                <h3 data-i18n="interestsTitle">My Interests</h3>
+                <ul>
+                    <li data-i18n="interest1">Technology and computers</li>
+                    <li data-i18n="interest2">Learning new things</li>
+                    <li data-i18n="interest3">Deep thinking and ideas</li>
+                    <li data-i18n="interest4">Peaceful nature</li>
+                    <li data-i18n="interest5">Spending quiet time alone</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- 5. PERSONALITY -->
+        <article class="article">
+            <img src="about_personality.jpg" alt="My Personality">
+            <div class="article-content">
+                <h3 data-i18n="personalityTitle">My Personality</h3>
+                <p data-i18n="personalityText">
+                    I enjoy silence and peaceful surroundings. I especially
+                    like quiet nights, moonlight and moments when I can
+                    think without disturbance. Loud noise and very bright
+                    lights are not my preference.
+                </p>
+            </div>
+        </article>
+
+        <!-- 6. STRENGTH AND WEAKNESS -->
+        <article class="article">
+            <img src="about_strength_weakness.jpg" alt="Strength and Weakness">
+            <div class="article-content">
+                <h3 data-i18n="strengthTitle">My Strength & Weakness</h3>
+
+                <p>
+                    <strong data-i18n="strengthLabel">My Strength:</strong>
+                    <span data-i18n="strengthText">
+                        I try to understand other people's feelings.
+                        I do not like making anyone feel insulted or
+                        uncomfortable. I like helping others.
+                    </span>
+                </p>
+
+                <br>
+
+                <p>
+                    <strong data-i18n="weaknessLabel">My Weakness:</strong>
+                    <span data-i18n="weaknessText">
+                        Sometimes I trust people too quickly and
+                        consider others very close to me.
+                    </span>
+                </p>
+            </div>
+        </article>
+
+        <!-- 7. PHILOSOPHY -->
+        <article class="article">
+            <img src="about_philosophy.jpg" alt="My Philosophy">
+            <div class="article-content">
+                <h3 data-i18n="philosophyTitle">My Philosophy</h3>
+                <p data-i18n="philosophyText">
+                    I believe in treating people with respect. I want to
+                    help others without making them feel small. Everyone
+                    deserves happiness, peace and freedom.
+                </p>
+            </div>
+        </article>
+
+        <!-- 8. LIFESTYLE -->
+        <article class="article">
+            <img src="about_lifestyle.jpg" alt="My Lifestyle">
+            <div class="article-content">
+                <h3 data-i18n="lifestyleTitle">My Lifestyle</h3>
+                <p data-i18n="lifestyleText">
+                    I prefer a simple and peaceful lifestyle. Sitting
+                    under a tree, spending time near a pond or river,
+                    and enjoying the calmness of nature make me happy.
+                </p>
+            </div>
+        </article>
+
+        <!-- 9. ANIMALS -->
+        <article class="article">
+            <img src="about_animals.jpg" alt="Favourite Animals">
+            <div class="article-content">
+                <h3 data-i18n="animalsTitle">Animals I Like</h3>
+                <p data-i18n="animalsText">
+                    I like animals and birds. Some of my favourites
+                    are horses, dogs, cats, birds, goats, hens and cows.
+                    I appreciate the beauty of every living creature.
+                </p>
+            </div>
+        </article>
+
+        <!-- 10. MOMENTS -->
+        <article class="article">
+            <img src="about_moments.jpg" alt="Favourite Moments">
+            <div class="article-content">
+                <h3 data-i18n="momentsTitle">My Favourite Moments</h3>
+                <p data-i18n="momentsText">
+                    My favourite moments depend on my mood. A quiet
+                    afternoon under a tree, a peaceful evening near
+                    water and a beautiful moonlit night are special
+                    to me.
+                </p>
+            </div>
+        </article>
+
+        <!-- 11. DREAM LIFESTYLE -->
+        <article class="article">
+            <img src="about_dream_lifestyle.jpg" alt="Dream Lifestyle">
+            <div class="article-content">
+                <h3 data-i18n="dreamTitle">My Dream Lifestyle</h3>
+                <p data-i18n="dreamText">
+                    I dream of a simple and peaceful home close to nature,
+                    surrounded by trees, open space and animals.
+                    A life with freedom, comfort and happiness.
+                </p>
+            </div>
+        </article>
+
+        <!-- 12. VISION -->
+        <article class="article">
+            <img src="about_vision.jpg" alt="My Vision">
+            <div class="article-content">
+                <h3 data-i18n="visionTitle">My Vision</h3>
+
+                <div class="vision-grid">
+                    <div class="vision-item" data-i18n="vision1">Build my own identity</div>
+                    <div class="vision-item" data-i18n="vision2">Become financially independent</div>
+                    <div class="vision-item" data-i18n="vision3">Become a successful entrepreneur</div>
+                    <div class="vision-item" data-i18n="vision4">Explore technology</div>
+                    <div class="vision-item" data-i18n="vision5">Explore new opportunities</div>
+                    <div class="vision-item" data-i18n="vision6">Gain more knowledge</div>
+                    <div class="vision-item" data-i18n="vision7">Live with freedom</div>
+                    <div class="vision-item" data-i18n="vision8">Help humanity</div>
+                    <div class="vision-item" data-i18n="vision9">Achieve success through hard work</div>
+                </div>
+            </div>
+        </article>
+
+    </section>
+
+    <div class="back-wrap">
+        <a href="index.html" class="back-link" data-i18n="backHome">
+            ← Back to Home
+        </a>
     </div>
-    <div class="masthead-line"></div>
-  </section>
-
-  <!-- 1. INTRODUCTION -->
-  <article class="article">
-    <div class="article-label" data-i18n="headlineLabel">THE FIRST PAGE</div>
-    <h2 data-i18n="headline">A Quiet Mind, A World of Thoughts</h2>
-    <img class="article-image banner-image"
-      src="about_banner.jpg" alt="Peaceful moonlit night">
-    <p data-i18n="opening">
-      This page is a personal introduction to my nature, my thoughts,
-      my preferences and the values I believe in.
-    </p>
-  </article>
-
-  <!-- 2. PERSONAL PROFILE -->
-  <article class="article">
-    <div class="article-label" data-i18n="profileLabel">PERSONAL PROFILE</div>
-    <h2 data-i18n="profileTitle">Who Am I?</h2>
-    <img class="article-image profile-image"
-      src="about_profile.jpg" alt="SK Talib">
-    <div class="caption" data-i18n="profileCaption">SK TALIB · PERSONAL PROFILE</div>
-
-    <div class="details">
-      <div class="detail">
-        <small data-i18n="nameLabel">FULL NAME</small>
-        <strong>SK Talib</strong>
-      </div>
-      <div class="detail">
-        <small data-i18n="locationLabel">LOCATION</small>
-        <strong>Kendrapara, Odisha, India</strong>
-      </div>
-      <div class="detail">
-        <small data-i18n="colourLabel">FAVOURITE COLOURS</small>
-        <strong data-i18n="colourValue">Black and White</strong>
-      </div>
-      <div class="detail">
-        <small data-i18n="foodLabel">FOOD PREFERENCE</small>
-        <strong data-i18n="foodValue">Depends on my mood</strong>
-      </div>
-    </div>
-  </article>
-
-  <!-- 3. MYSELF -->
-  <article class="article">
-    <div class="article-label" data-i18n="myselfLabel">ABOUT ME</div>
-    <h2 data-i18n="myselfTitle">A Little About Myself</h2>
-    <img class="article-image" src="about_myself.jpg" alt="Personal interests">
-    <p data-i18n="myselfText">
-      I like to think in my own way. Peace, personal freedom and
-      treating people with respect matter to me.
-    </p>
-  </article>
-
-  <!-- 4. INTERESTS -->
-  <article class="article">
-    <div class="article-label" data-i18n="interestsLabel">THINGS I LIKE</div>
-    <h2 data-i18n="interestsTitle">My Interests</h2>
-    <img class="article-image" src="about_interests.jpg" alt="Technology">
-    <ul class="clean-list">
-      <li data-i18n="interest1">Technology and computers</li>
-      <li data-i18n="interest2">Learning new things and gaining knowledge</li>
-      <li data-i18n="interest3">Thinking deeply and exploring ideas</li>
-      <li data-i18n="interest4">Peaceful natural places</li>
-      <li data-i18n="interest5">Spending quiet time by myself</li>
-    </ul>
-  </article>
-
-  <!-- 5. PERSONALITY -->
-  <article class="article">
-    <div class="article-label" data-i18n="personalityLabel">MY NATURE</div>
-    <h2 data-i18n="personalityTitle">My Personality</h2>
-    <img class="article-image" src="about_personality.jpg" alt="Quiet night">
-    <p data-i18n="personalityText1">
-      I like being alone, especially at night. I enjoy silence and
-      peaceful surroundings. I do not like loud noise or bright light.
-      I like spending time alone on a moonlit night.
-    </p>
-    <p data-i18n="personalityText2">
-      My mood changes. Sometimes I like to sit quietly and think;
-      sometimes I simply enjoy the surroundings.
-    </p>
-  </article>
-
-  <!-- 6. STRENGTH AND WEAKNESS -->
-  <article class="article">
-    <div class="article-label" data-i18n="strengthLabel">KNOWING MYSELF</div>
-    <h2 data-i18n="strengthTitle">My Strength and Weakness</h2>
-    <img class="article-image" src="about_strength_weakness.jpg"
-      alt="Strength and weakness">
-
-    <h3 data-i18n="strengthHeading">My Strength</h3>
-    <p data-i18n="strengthText">
-      I think about how the other person might feel. I do not want to
-      say anything that makes someone feel bad, awkward or insulted.
-      I want to help people and see everyone happy and free.
-    </p>
-
-    <hr class="gold-line">
-
-    <h3 data-i18n="weaknessHeading">My Weakness</h3>
-    <p data-i18n="weaknessText">
-      I trust people quickly and consider everyone my own.
-      Sometimes I trust people more than I should.
-    </p>
-  </article>
-
-  <!-- 7. PHILOSOPHY -->
-  <article class="article">
-    <div class="article-label" data-i18n="philosophyLabel">WHAT I BELIEVE</div>
-    <h2 data-i18n="philosophyTitle">My Philosophy</h2>
-    <img class="article-image" src="about_philosophy.jpg"
-      alt="Thoughtful life">
-    <p data-i18n="philosophyText">
-      I believe in treating people with respect. I want to help others
-      without making them feel small. I want everyone to live happily,
-      peacefully and freely.
-    </p>
-    <div class="quote" data-i18n="quoteText">
-      Help others, respect their feelings, and let everyone live freely.
-    </div>
-  </article>
-
-  <!-- 8. LIFESTYLE -->
-  <article class="article">
-    <div class="article-label" data-i18n="lifestyleLabel">PEACEFUL LIVING</div>
-    <h2 data-i18n="lifestyleTitle">My Nature and Lifestyle</h2>
-    <img class="article-image" src="about_lifestyle.jpg"
-      alt="River and peaceful nature">
-    <p data-i18n="lifestyleText">
-      I like peaceful natural places. I enjoy sitting under a tree,
-      near a pond or beside a river, especially in the afternoon.
-      I prefer quiet surroundings over crowds and noise.
-    </p>
-    <p data-i18n="travelText">
-      I do not like travelling. I prefer enjoying a peaceful place.
-    </p>
-  </article>
-
-  <!-- 9. ANIMALS -->
-  <article class="article">
-    <div class="article-label" data-i18n="animalsLabel">ANIMALS I LIKE</div>
-    <h2 data-i18n="animalsTitle">My Favourite Animals</h2>
-    <img class="article-image" src="about_animals.jpg"
-      alt="Favourite animals">
-    <p data-i18n="animalsText">
-      I like animals and birds that can be part of a calm and natural life.
-    </p>
-    <ul class="clean-list">
-      <li data-i18n="animal1">Horse</li>
-      <li data-i18n="animal2">Dog</li>
-      <li data-i18n="animal3">Cat</li>
-      <li data-i18n="animal4">Birds</li>
-      <li data-i18n="animal5">Goat</li>
-      <li data-i18n="animal6">Hen</li>
-      <li data-i18n="animal7">Cow</li>
-    </ul>
-  </article>
-
-  <!-- 10. FAVOURITE MOMENTS -->
-  <article class="article">
-    <div class="article-label" data-i18n="momentsLabel">MOMENTS I ENJOY</div>
-    <h2 data-i18n="momentsTitle">My Favourite Moments</h2>
-    <img class="article-image" src="about_moments.jpg"
-      alt="Moonlit night and nature">
-    <p data-i18n="momentsText">
-      My favourite moments depend on my mood. I enjoy quiet afternoons
-      under a tree, sitting beside a pond or river, peaceful evenings
-      and moonlit nights.
-    </p>
-  </article>
-
-  <!-- 11. DREAM LIFESTYLE -->
-  <article class="article">
-    <div class="article-label" data-i18n="dreamLabel">A PEACEFUL DREAM</div>
-    <h2 data-i18n="dreamTitle">My Dream Lifestyle</h2>
-    <img class="article-image" src="about_dream_lifestyle.jpg"
-      alt="Peaceful home in nature">
-    <p data-i18n="dreamText">
-      I like the idea of a peaceful life close to nature, with a calm
-      home, trees, open space and animals around. I value a simple
-      and natural environment.
-    </p>
-  </article>
-
-  <!-- 12. MY VISION -->
-  <article class="article">
-    <div class="article-label" data-i18n="visionLabel">LOOKING AHEAD</div>
-    <h2 data-i18n="visionTitle">My Vision</h2>
-    <img class="article-image" src="about_vision.jpg"
-      alt="Looking towards the future">
-    <p data-i18n="visionIntro">
-      These are the goals and values I want to move towards in life:
-    </p>
-    <ol class="vision-list">
-      <li data-i18n="vision1">Build my own identity</li>
-      <li data-i18n="vision2">Become financially independent</li>
-      <li data-i18n="vision3">Become a successful entrepreneur</li>
-      <li data-i18n="vision4">Explore technology</li>
-      <li data-i18n="vision5">Explore the world</li>
-      <li data-i18n="vision6">Gain knowledge</li>
-      <li data-i18n="vision7">Live freely</li>
-      <li data-i18n="vision8">Help humanity</li>
-      <li data-i18n="vision9">Achieve success through hard work</li>
-    </ol>
-    <div class="quote" data-i18n="finalQuote">
-      My life, my thoughts, my journey.
-    </div>
-  </article>
-
-  <a class="back-home" href="index.html" data-i18n="backHome">
-    ← Back to Home
-  </a>
 
 </main>
 
 <footer>
-  © 2026 SK TALIB |
-  <span data-i18n="personal">PERSONAL WEBSITE</span>
+    <p>© <span id="year"></span> SK TALIB. <span data-i18n="footerText">All Rights Reserved.</span></p>
 </footer>
 
 <script>
-"use strict";
-
-/* TRANSLATIONS */
-
 const translations = {
-en:{
-personal:"PERSONAL WEBSITE",
-selectLanguage:"Select Language",
-edition:"THE PERSONAL EDITION",
-mastheadSub:"A little introduction to who I am",
-headlineLabel:"THE FIRST PAGE",
-headline:"A Quiet Mind, A World of Thoughts",
-opening:"This page is a personal introduction to my nature, my thoughts, my preferences and the values I believe in.",
-profileLabel:"PERSONAL PROFILE",
-profileTitle:"Who Am I?",
-profileCaption:"SK TALIB · PERSONAL PROFILE",
-nameLabel:"FULL NAME",
-locationLabel:"LOCATION",
-colourLabel:"FAVOURITE COLOURS",
-colourValue:"Black and White",
-foodLabel:"FOOD PREFERENCE",
-foodValue:"Depends on my mood",
-myselfLabel:"ABOUT ME",
-myselfTitle:"A Little About Myself",
-myselfText:"I like to think in my own way. Peace, personal freedom and treating people with respect matter to me.",
-interestsLabel:"THINGS I LIKE",
-interestsTitle:"My Interests",
-interest1:"Technology and computers",
-interest2:"Learning new things and gaining knowledge",
-interest3:"Thinking deeply and exploring ideas",
-interest4:"Peaceful natural places",
-interest5:"Spending quiet time by myself",
-personalityLabel:"MY NATURE",
-personalityTitle:"My Personality",
-personalityText1:"I like being alone, especially at night. I enjoy silence and peaceful surroundings. I do not like loud noise or bright light. I like spending time alone on a moonlit night.",
-personalityText2:"My mood changes. Sometimes I like to sit quietly and think; sometimes I simply enjoy the surroundings.",
-strengthLabel:"KNOWING MYSELF",
-strengthTitle:"My Strength and Weakness",
-strengthHeading:"My Strength",
-strengthText:"I think about how the other person might feel. I do not want to say anything that makes someone feel bad, awkward or insulted. I want to help people and see everyone happy and free.",
-weaknessHeading:"My Weakness",
-weaknessText:"I trust people quickly and consider everyone my own. Sometimes I trust people more than I should.",
-philosophyLabel:"WHAT I BELIEVE",
-philosophyTitle:"My Philosophy",
-philosophyText:"I believe in treating people with respect. I want to help others without
+
+en: {
+    heroSubtitle:"DREAM • CREATE • ACHIEVE",
+    heroIntro:"Welcome to my personal space. Here, I share my journey, thoughts, interests, memories and the little things that make life meaningful.",
+    pageTitle:"ABOUT ME",
+    pageSubtitle:"A little introduction to who I am",
+    introTitle:"My Introduction",
+    introText:"I am SK Talib. I believe every person has a unique journey, and every experience teaches us something. This website is a small reflection of my life, thoughts and dreams.",
+    profileTitle:"Personal Profile",
+    nameLabel:"Name:",
+    locationLabel:"Location:",
+    colorLabel:"Favourite Colours:",
+    foodLabel:"Favourite Food:",
+    myselfTitle:"About Myself",
+    myselfText:"I am someone who enjoys thinking deeply, observing life and understanding different perspectives. I value honesty, personal freedom and meaningful moments.",
+    interestsTitle:"My Interests",
+    interest1:"Technology and computers",
+    interest2:"Learning new things",
+    interest3:"Deep thinking and ideas",
+    interest4:"Peaceful nature",
+    interest5:"Spending quiet time alone",
+    personalityTitle:"My Personality",
+    personalityText:"I enjoy silence and peaceful surroundings. I especially like quiet nights, moonlight and moments when I can think without disturbance. Loud noise and very bright lights are not my preference.",
+    strengthTitle:"My Strength & Weakness",
+    strengthLabel:"My Strength:",
+    strengthText:"I try to understand other people's feelings. I do not like making anyone feel insulted or uncomfortable. I like helping others.",
+    weaknessLabel:"My Weakness:",
+    weaknessText:"Sometimes I trust people too quickly and consider others very close to me.",
+    philosophyTitle:"My Philosophy",
+    philosophyText:"I believe in treating people with respect. I want to help others without making them feel small. Everyone deserves happiness, peace and freedom.",
+    lifestyleTitle:"My Lifestyle",
+    lifestyleText:"I prefer a simple and peaceful lifestyle. Sitting under a tree, spending time near a pond or river, and enjoying the calmness of nature make me happy.",
+    animalsTitle:"Animals I Like",
+    animalsText:"I like animals and birds. Some of my favourites are horses, dogs, cats, birds, goats, hens and cows. I appreciate the beauty of every living creature.",
+    momentsTitle:"My Favourite Moments",
+    momentsText:"My favourite moments depend on my mood. A quiet afternoon under a tree, a peaceful evening near water and a beautiful moonlit night are special to me.",
+    dreamTitle:"My Dream Lifestyle",
+    dreamText:"I dream of a simple and peaceful home close to nature, surrounded by trees, open space and animals. A life with freedom, comfort and happiness.",
+    visionTitle:"My Vision",
+    vision1:"Build my own identity",
+    vision2:"Become financially independent",
+    vision3:"Become a successful entrepreneur",
+    vision4:"Explore technology",
+    vision5:"Explore new opportunities",
+    vision6:"Gain more knowledge",
+    vision7:"Live with freedom",
+    vision8:"Help humanity",
+    vision9:"Achieve success through hard work",
+    backHome:"← Back to Home",
+    footerText:"All Rights Reserved."
+},
+
+roman: {
+    heroSubtitle:"SAPNE • BANAO • HAASIL KARO",
+    heroIntro:"Meri personal website mein aapka swagat hai. Yahan main apni journey, soch, pasand, yaadein aur zindagi ke khaas lamhe share karta hoon.",
+    pageTitle:"MERE BAARE MEIN",
+    pageSubtitle:"Meri zindagi ka ek chhota sa parichay",
+    introTitle:"Mera Parichay",
+    introText:"Main SK Talib hoon. Mera maanna hai ki har insaan ki apni ek alag journey hoti hai aur har experience humein kuch sikhata hai. Yeh website meri zindagi, soch aur sapno ki ek chhoti si jhalak hai.",
+    profileTitle:"Meri Personal Profile",
+    nameLabel:"Naam:",
+    locationLabel:"Jagah:",
+    colorLabel:"Pasandida Rang:",
+    foodLabel:"Pasandida Khana:",
+    myselfTitle:"Mere Baare Mein",
+    myselfText:"Mujhe gehrai se sochna, zindagi ko samajhna aur
