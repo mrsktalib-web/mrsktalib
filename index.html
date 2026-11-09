@@ -4,502 +4,640 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="theme-color" content="#050505">
 <title>SK TALIB | Personal Website</title>
 
 <style>
-:root {
-  --bg:#070707;
-  --card:#141414;
+:root{
+  --bg:#050505;
+  --card:#111111;
   --text:#ffffff;
-  --muted:#aaaaaa;
-  --gold:#f3bd35;
-  --border:#453719;
+  --muted:#bdbdbd;
+  --gold:#f5bd28;
+  --border:#59451b;
+  --shadow:rgba(245,189,40,.2);
 }
 
-body.light {
-  --bg:#f5f8ff;
+body.light{
+  --bg:#f4f7ff;
   --card:#ffffff;
   --text:#111827;
-  --muted:#667085;
-  --gold:#d99b00;
-  --border:#dce3ef;
+  --muted:#526078;
+  --gold:#1765cf;
+  --border:#d4deef;
+  --shadow:rgba(23,101,207,.15);
 }
 
-* {
+*{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
-html {
-  scroll-behavior:smooth;
-}
-
-body {
+body{
   background:var(--bg);
   color:var(--text);
-  font-family:Arial,sans-serif;
-  transition:0.3s;
+  font-family:Arial,Helvetica,sans-serif;
+  transition:background .3s,color .3s;
 }
 
-/* HEADER */
-
-header {
+header{
+  height:75px;
+  padding:10px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--border);
   position:sticky;
   top:0;
   z-index:100;
   background:var(--bg);
-  border-bottom:1px solid var(--border);
-  padding:15px 18px;
 }
 
-.header {
+.brand{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:10px;
+  gap:9px;
 }
 
-.logo {
-  font-size:22px;
-  font-weight:bold;
+.brand-crown{
+  font-size:38px;
 }
 
-.logo span {
+.brand h2{
+  font-size:23px;
+  letter-spacing:.3px;
+}
+
+.brand p{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.gold{
   color:var(--gold);
 }
 
-.controls {
+.controls{
   display:flex;
   align-items:center;
-  gap:7px;
+  gap:9px;
 }
 
-.controls button,
-.controls select {
+.language{
   background:var(--card);
   color:var(--text);
   border:1px solid var(--border);
-  border-radius:9px;
-  padding:9px;
-  font-size:14px;
+  border-radius:14px;
+  padding:12px 10px;
+  font-size:15px;
+  outline:none;
+  max-width:110px;
 }
 
-nav {
-  display:flex;
-  gap:18px;
-  overflow-x:auto;
-  padding-top:15px;
-  scrollbar-width:none;
-}
-
-nav a {
-  text-decoration:none;
-  color:var(--muted);
-  font-size:13px;
-  white-space:nowrap;
-}
-
-nav a:hover {
-  color:var(--gold);
-}
-
-/* MAIN */
-
-main {
-  max-width:1050px;
-  margin:auto;
-  padding:20px 16px;
-}
-
-/* HERO */
-
-.hero {
-  text-align:center;
-  padding:45px 10px 35px;
-}
-
-.profile {
-  width:175px;
-  height:175px;
-  border-radius:50%;
-  object-fit:cover;
-  border:4px solid var(--gold);
-  box-shadow:0 0 25px #eab52d55;
-}
-
-.crown {
-  color:var(--gold);
-  font-size:35px;
-  margin-top:15px;
-}
-
-.hero h1 {
-  font-size:38px;
-  margin:7px 0;
-}
-
-.hero h1 span {
-  color:var(--gold);
-}
-
-.hero .subtitle {
-  font-size:18px;
-  color:var(--muted);
-}
-
-.hero .welcome {
-  color:var(--muted);
-  line-height:1.7;
-  max-width:500px;
-  margin:15px auto;
-}
-
-/* GOLD LINE */
-
-.gold-line {
-  width:100px;
-  height:3px;
-  background:var(--gold);
-  margin:20px auto 30px;
-  border-radius:10px;
-}
-
-/* SECTION */
-
-.section-heading {
-  text-align:center;
+.icon-btn{
+  width:49px;
+  height:49px;
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:14px;
   font-size:23px;
-  margin:25px 0;
+  cursor:pointer;
 }
 
-.section-heading span {
-  color:var(--gold);
+.menu-btn{
+  font-size:26px;
 }
 
-/* CARDS */
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:13px;
-}
-
-.tile {
-  min-height:135px;
+.menu{
+  display:none;
+  position:absolute;
+  top:75px;
+  right:4%;
+  width:230px;
   background:var(--card);
   border:1px solid var(--border);
   border-radius:15px;
+  padding:12px;
+  box-shadow:0 8px 25px var(--shadow);
+  z-index:200;
+}
+
+.menu.show{
   display:flex;
   flex-direction:column;
+}
+
+.menu a{
+  color:var(--text);
+  text-decoration:none;
+  padding:13px;
+  border-bottom:1px solid var(--border);
+  font-size:15px;
+}
+
+.menu a:last-child{
+  border-bottom:none;
+}
+
+.menu a:hover{
+  color:var(--gold);
+}
+
+.hero{
+  text-align:center;
+  padding:35px 18px 10px;
+}
+
+.profile-wrap{
+  width:260px;
+  height:260px;
+  margin:0 auto 20px;
+  border-radius:50%;
+  padding:5px;
+  border:3px solid var(--gold);
+  box-shadow:0 0 30px var(--shadow);
+  overflow:hidden;
+}
+
+.profile-wrap img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+}
+
+.hero-crown{
+  font-size:43px;
+  margin:8px 0;
+}
+
+.hero h1{
+  font-size:44px;
+  margin:8px 0;
+  font-weight:800;
+}
+
+.subtitle{
+  font-size:21px;
+  color:var(--muted);
+}
+
+.divider{
+  width:125px;
+  height:3px;
+  background:var(--gold);
+  margin:20px auto;
+  border-radius:5px;
+}
+
+.intro{
+  max-width:620px;
+  margin:22px auto 0;
+  font-size:17px;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+.section-title{
+  text-align:center;
+  font-size:28px;
+  margin:45px 0 25px;
+}
+
+.cards{
+  width:100%;
+  max-width:950px;
+  margin:0 auto;
+  padding:0 20px 35px;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:17px;
+}
+
+.card{
+  min-height:145px;
+  padding:18px 8px;
+  display:flex;
   align-items:center;
   justify-content:center;
-  gap:13px;
+  flex-direction:column;
+  gap:12px;
+  text-align:center;
   text-decoration:none;
   color:var(--text);
-  padding:15px 8px;
-  text-align:center;
-  transition:0.25s;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:21px;
+  transition:.25s;
 }
 
-.tile:hover {
+.card:hover{
+  transform:translateY(-5px);
   border-color:var(--gold);
-  transform:translateY(-4px);
-  box-shadow:0 5px 20px #eab52d22;
+  box-shadow:0 0 22px var(--shadow);
 }
 
-.tile .icon {
-  font-size:32px;
-  color:var(--gold);
+.card-icon{
+  font-size:42px;
 }
 
-.tile h3 {
-  font-size:15px;
-  line-height:1.4;
+.card h3{
+  font-size:17px;
+  font-weight:700;
 }
 
-/* FOOTER DESIGN */
-
-.wave {
-  margin-top:50px;
-  height:65px;
+.wave{
+  height:35px;
+  margin:0 20px 20px;
   border-top:3px solid var(--gold);
-  border-radius:50% 50% 0 0;
+  border-radius:50%;
   opacity:.7;
+  transform:skewY(-2deg);
 }
 
-footer {
+footer{
   text-align:center;
+  padding:22px 10px;
   color:var(--muted);
-  padding:20px 10px 30px;
-  font-size:13px;
+  border-top:1px solid var(--border);
+  font-size:14px;
 }
 
-footer span {
-  color:var(--gold);
+[dir="rtl"] .intro{
+  direction:rtl;
 }
 
-/* DESKTOP */
+@media(max-width:600px){
 
-@media(min-width:700px) {
-
-  .grid {
-    grid-template-columns:repeat(3,1fr);
+  header{
+    padding:9px 4%;
+    height:72px;
   }
 
-  .tile {
-    min-height:170px;
+  .brand-crown{
+    font-size:32px;
   }
 
-  .hero {
-    padding:60px 10px 45px;
+  .brand h2{
+    font-size:20px;
   }
 
-  .profile {
-    width:200px;
-    height:200px;
+  .brand p{
+    font-size:10px;
   }
 
-  .hero h1 {
-    font-size:48px;
+  .controls{
+    gap:6px;
   }
 
-  main {
-    padding:35px 25px;
+  .language{
+    max-width:90px;
+    padding:10px 6px;
+    font-size:13px;
   }
+
+  .icon-btn{
+    width:43px;
+    height:43px;
+    font-size:20px;
+  }
+
+  .menu{
+    top:72px;
+  }
+
+  .hero{
+    padding-top:28px;
+  }
+
+  .profile-wrap{
+    width:215px;
+    height:215px;
+  }
+
+  .hero-crown{
+    font-size:37px;
+  }
+
+  .hero h1{
+    font-size:37px;
+  }
+
+  .subtitle{
+    font-size:19px;
+  }
+
+  .intro{
+    font-size:16px;
+    padding:0 12px;
+  }
+
+  .section-title{
+    font-size:25px;
+    margin:38px 0 23px;
+  }
+
+  .cards{
+    gap:12px;
+    padding:0 15px 30px;
+  }
+
+  .card{
+    min-height:125px;
+    border-radius:18px;
+    padding:12px 5px;
+  }
+
+  .card-icon{
+    font-size:36px;
+  }
+
+  .card h3{
+    font-size:14px;
+  }
+}
+
+@media(max-width:350px){
+  .brand h2{font-size:17px}
+  .brand-crown{font-size:27px}
+  .language{max-width:75px}
+  .cards{gap:8px;padding-left:9px;padding-right:9px}
+  .card h3{font-size:12px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-
 <header>
 
-<div class="header">
-
-  <div class="logo">
-    👑 SK <span>TALIB</span>
+  <div class="brand">
+    <div class="brand-crown">👑</div>
+    <div>
+      <h2>SK <span class="gold">TALIB</span></h2>
+      <p data-i18n="personal">Personal Website</p>
+    </div>
   </div>
 
   <div class="controls">
 
-    <select id="language" onchange="changeLanguage()">
+    <select class="language" id="language" onchange="changeLanguage(this.value)">
       <option value="en">EN</option>
-      <option value="hi">हिंदी</option>
+      <option value="hi">हिन्दी</option>
+      <option value="ur">اردو</option>
+      <option value="or">ଓଡ଼ିଆ</option>
     </select>
 
-    <button onclick="toggleTheme()" id="themeBtn">
+    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Change theme">
       ☀️
+    </button>
+
+    <button class="icon-btn menu-btn" onclick="toggleMenu()" aria-label="Open menu">
+      ☰
     </button>
 
   </div>
 
-</div>
-
-<nav>
-
-  <a href="index.html">Home</a>
-  <a href="about.html">About Me</a>
-  <a href="story.html">My Story</a>
-  <a href="study.html">My Study</a>
-  <a href="movies.html">Movies</a>
-  <a href="products.html">Products</a>
-  <a href="book.html">My Book</a>
-  <a href="gallery.html">Gallery</a>
-  <a href="social.html">Social Media</a>
-  <a href="contact.html">Contact</a>
-
-</nav>
-
 </header>
 
-<main>
+<div class="menu" id="menu">
 
-<!-- PROFILE SECTION -->
+  <a href="index.html" data-i18n="home">Home</a>
+  <a href="about.html" data-i18n="about">About Me</a>
+  <a href="story.html" data-i18n="story">My Story</a>
+  <a href="study.html" data-i18n="study">My Study</a>
+  <a href="movies.html" data-i18n="movies">My Movies</a>
+  <a href="products.html" data-i18n="products">My Products</a>
+  <a href="book.html" data-i18n="book">My Book</a>
+  <a href="gallery.html" data-i18n="gallery">Gallery</a>
+  <a href="social.html" data-i18n="social">My Social Media</a>
+  <a href="contact.html" data-i18n="contact">My Contact</a>
 
-<div class="hero">
+</div>
 
-  <!-- Later upload your photo as profile.jpg -->
+<section class="hero">
 
-  <img
-    src="profile.jpg"
-    class="profile"
-    alt="SK Talib"
-    onerror="this.style.display='none'"
-  >
+  <div class="profile-wrap">
+    <img src="profile.jpg.jpg" alt="SK TALIB Profile Photo">
+  </div>
 
-  <div class="crown">♛</div>
+  <div class="hero-crown">👑</div>
 
-  <h1>
-    I'm <span>SK TALIB</span>
-  </h1>
+  <h1>SK <span class="gold">TALIB</span></h1>
 
-  <p class="subtitle">
+  <p class="subtitle" data-i18n="personal">
     Personal Website
   </p>
 
-  <div class="gold-line"></div>
+  <div class="divider"></div>
 
-  <p class="welcome">
-    Welcome to my personal website.
-    A place where I share my life,
-    education, interests, memories
-    and everything about me.
+  <p class="intro" data-i18n="intro">
+    Welcome to my personal website. A place where I share my life,
+    education, interests, memories and everything about me.
   </p>
 
-</div>
+</section>
 
-<!-- PERSONAL PAGES -->
-
-<h2 class="section-heading">
-  Explore <span>My World</span>
+<h2 class="section-title">
+  <span data-i18n="explore">Explore</span>
+  <span class="gold" data-i18n="world">My World</span>
 </h2>
 
-<div class="grid">
+<section class="cards">
 
-  <a href="about.html" class="tile">
-    <span class="icon">👤</span>
-    <h3>About Me</h3>
+  <a class="card" href="study.html">
+    <div class="card-icon">🎓</div>
+    <h3 data-i18n="study">My Study</h3>
   </a>
 
-  <a href="story.html" class="tile">
-    <span class="icon">📖</span>
-    <h3>My Story</h3>
+  <a class="card" href="movies.html">
+    <div class="card-icon">🎬</div>
+    <h3 data-i18n="movies">My Movies</h3>
   </a>
 
-  <a href="study.html" class="tile">
-    <span class="icon">🎓</span>
-    <h3>My Study</h3>
+  <a class="card" href="products.html">
+    <div class="card-icon">📦</div>
+    <h3 data-i18n="products">My Products</h3>
   </a>
 
-  <a href="movies.html" class="tile">
-    <span class="icon">🎬</span>
-    <h3>Movies I've Watched</h3>
+  <a class="card" href="gallery.html">
+    <div class="card-icon">🖼️</div>
+    <h3 data-i18n="gallery">Gallery</h3>
   </a>
 
-  <a href="products.html" class="tile">
-    <span class="icon">📦</span>
-    <h3>Products I Use</h3>
+  <a class="card" href="social.html">
+    <div class="card-icon">🔗</div>
+    <h3 data-i18n="social">My Social Media</h3>
   </a>
 
-  <a href="book.html" class="tile">
-    <span class="icon">✍️</span>
-    <h3>My Book</h3>
+  <a class="card" href="contact.html">
+    <div class="card-icon">✉️</div>
+    <h3 data-i18n="contact">My Contact</h3>
   </a>
 
-  <a href="gallery.html" class="tile">
-    <span class="icon">🖼️</span>
-    <h3>Gallery</h3>
-  </a>
-
-  <a href="social.html" class="tile">
-    <span class="icon">🔗</span>
-    <h3>My Social Media</h3>
-  </a>
-
-  <a href="contact.html" class="tile">
-    <span class="icon">✉️</span>
-    <h3>My Contact</h3>
-  </a>
-
-</div>
+</section>
 
 <div class="wave"></div>
 
-</main>
-
 <footer>
-
-  © 2026 <span>SK TALIB</span>
-  <br><br>
-  Personal Website | All Rights Reserved
-
+  © 2026 SK TALIB |
+  <span data-i18n="personal">Personal Website</span>
 </footer>
 
 <script>
 
-/* DARK AND WHITE MODE */
-
-function toggleTheme() {
-
-  document.body.classList.toggle("light");
-
-  let isLight =
-    document.body.classList.contains("light");
-
-  document.getElementById("themeBtn").textContent =
-    isLight ? "🌙" : "☀️";
-
-  localStorage.setItem(
-    "sk-theme",
-    isLight ? "light" : "dark"
-  );
-}
-
-/* SAVE THEME */
-
-if(localStorage.getItem("sk-theme")==="light") {
-
-  document.body.classList.add("light");
-
-  document.getElementById("themeBtn").textContent="🌙";
-}
-
-/* LANGUAGE */
-
 const translations = {
 
-  "Home":"होम",
-  "About Me":"मेरे बारे में",
-  "My Story":"मेरी कहानी",
-  "My Study":"मेरी पढ़ाई",
-  "Movies":"फिल्में",
-  "Movies I've Watched":"मेरी देखी हुई फिल्में",
-  "Products":"प्रोडक्ट",
-  "Products I Use":"मेरे इस्तेमाल के प्रोडक्ट",
-  "My Book":"मेरी किताब",
-  "Gallery":"गैलरी",
-  "Social Media":"सोशल मीडिया",
-  "My Social Media":"मेरे सोशल मीडिया",
-  "Contact":"संपर्क",
-  "My Contact":"मेरा संपर्क",
-  "Explore My World":"मेरी दुनिया देखें",
-  "Personal Website":"व्यक्तिगत वेबसाइट"
+en:{
+personal:"Personal Website",
+home:"Home",
+about:"About Me",
+story:"My Story",
+study:"My Study",
+movies:"My Movies",
+products:"My Products",
+book:"My Book",
+gallery:"Gallery",
+social:"My Social Media",
+contact:"My Contact",
+explore:"Explore",
+world:"My World",
+intro:"Welcome to my personal website. A place where I share my life, education, interests, memories and everything about me."
+},
+
+hi:{
+personal:"मेरी व्यक्तिगत वेबसाइट",
+home:"मुखपृष्ठ",
+about:"मेरे बारे में",
+story:"मेरी कहानी",
+study:"मेरी पढ़ाई",
+movies:"मेरी देखी हुई फिल्में",
+products:"मेरे उपयोग के उत्पाद",
+book:"मेरी किताब",
+gallery:"फोटो गैलरी",
+social:"मेरे सोशल मीडिया",
+contact:"मेरा संपर्क",
+explore:"देखें",
+world:"मेरी दुनिया",
+intro:"मेरी व्यक्तिगत वेबसाइट पर आपका स्वागत है। यहाँ मैं अपनी जिंदगी, पढ़ाई, रुचियाँ, यादें और अपने बारे में जानकारी साझा करता हूँ।"
+},
+
+ur:{
+personal:"میری ذاتی ویب سائٹ",
+home:"صفحۂ اول",
+about:"میرے بارے میں",
+story:"میری کہانی",
+study:"میری تعلیم",
+movies:"میری دیکھی ہوئی فلمیں",
+products:"میری استعمال کی چیزیں",
+book:"میری کتاب",
+gallery:"تصویری گیلری",
+social:"میرے سوشل میڈیا",
+contact:"رابطہ",
+explore:"دیکھیے",
+world:"میری دنیا",
+intro:"میری ذاتی ویب سائٹ پر خوش آمدید۔ یہاں میں اپنی زندگی، تعلیم، دلچسپیوں، یادوں اور اپنے بارے میں معلومات شیئر کرتا ہوں۔"
+},
+
+or:{
+personal:"ମୋର ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟ୍",
+home:"ମୁଖ୍ୟ ପୃଷ୍ଠା",
+about:"ମୋ ବିଷୟରେ",
+story:"ମୋ କାହାଣୀ",
+study:"ମୋ ପାଠପଢ଼ା",
+movies:"ମୁଁ ଦେଖିଥିବା ଚଳଚ୍ଚିତ୍ର",
+products:"ମୋ ବ୍ୟବହାର ସାମଗ୍ରୀ",
+book:"ମୋ ବହି",
+gallery:"ଫଟୋ ଗ୍ୟାଲେରୀ",
+social:"ମୋ ସୋସିଆଲ ମିଡିଆ",
+contact:"ମୋ ସହ ଯୋଗାଯୋଗ",
+explore:"ଦେଖନ୍ତୁ",
+world:"ମୋ ଦୁନିଆ",
+intro:"ମୋର ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟକୁ ସ୍ୱାଗତ। ଏଠାରେ ମୁଁ ମୋ ଜୀବନ, ଶିକ୍ଷା, ଆଗ୍ରହ, ସ୍ମୃତି ଏବଂ ନିଜ ବିଷୟରେ ସୂଚନା ସେୟାର କରେ।"
+}
+
 };
 
-function changeLanguage() {
+function changeLanguage(lang){
 
-  const lang =
-    document.getElementById("language").value;
+  const words=translations[lang];
 
-  document.querySelectorAll("nav a, .tile h3, .hero .subtitle").forEach(el => {
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ur"?"rtl":"ltr";
 
-    if(!el.dataset.original) {
-      el.dataset.original = el.textContent;
+  document.querySelectorAll("[data-i18n]").forEach(element=>{
+
+    const key=element.getAttribute("data-i18n");
+
+    if(words[key]){
+      element.textContent=words[key];
     }
-
-    el.textContent =
-      lang === "hi"
-      ? (translations[el.dataset.original] || el.dataset.original)
-      : el.dataset.original;
 
   });
 
-  const heading = document.querySelector(".section-heading");
+  document.getElementById("language").value=lang;
 
-  if(lang === "hi") {
-    heading.innerHTML = 'मेरी <span>दुनिया देखें</span>';
-  } else {
-    heading.innerHTML = 'Explore <span>My World</span>';
-  }
+  try{
+    localStorage.setItem("siteLanguage",lang);
+  }catch(e){}
 
 }
+
+function toggleTheme(){
+
+  document.body.classList.toggle("light");
+
+  const light=document.body.classList.contains("light");
+
+  document.getElementById("themeBtn").textContent=light?"🌙":"☀️";
+
+  try{
+    localStorage.setItem("siteTheme",light?"light":"dark");
+  }catch(e){}
+
+}
+
+function toggleMenu(){
+
+  document.getElementById("menu").classList.toggle("show");
+
+}
+
+document.addEventListener("click",function(event){
+
+  const menu=document.getElementById("menu");
+
+  if(!menu.contains(event.target) &&
+     !event.target.closest(".menu-btn")){
+
+    menu.classList.remove("show");
+
+  }
+
+});
+
+try{
+
+  const savedTheme=localStorage.getItem("siteTheme");
+
+  if(savedTheme==="light"){
+    document.body.classList.add("light");
+    document.getElementById("themeBtn").textContent="🌙";
+  }
+
+  const savedLanguage=localStorage.getItem("siteLanguage");
+
+  if(savedLanguage && translations[savedLanguage]){
+    changeLanguage(savedLanguage);
+  }
+
+}catch(e){}
 
 </script>
 
 </body>
-  </html>
-    
+</html>
