@@ -206,7 +206,7 @@ header{
 
 .hero-main{
   display:grid;
-  grid-template-columns: minmax(0, .9fr) minmax(0, 1.2fr);
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);
   align-items:center;
   gap:17px;
 }
@@ -376,7 +376,6 @@ footer{
   letter-spacing:.5px;
 }
 
-/* Small mobile screens */
 @media(max-width:380px){
 
   header{
@@ -473,7 +472,6 @@ footer{
   }
 }
 
-/* Short screen height */
 @media(max-height:780px) and (max-width:600px){
 
   .hero{
@@ -512,6 +510,7 @@ footer{
 }
 
 @media(min-width:600px){
+
   .hero{
     padding-top:35px;
   }
@@ -572,13 +571,11 @@ footer{
     </button>
 
     <button class="theme-btn" id="themeBtn"
-      onclick="toggleTheme()" aria-label="Change theme">☀</button>
+      onclick="toggleTheme" aria-label="Change theme">☀</button>
 
   </div>
 
 </header>
-
-<!-- CUSTOM DARK LANGUAGE POPUP -->
 
 <div class="language-overlay" id="languageOverlay"
   onclick="outsideClose(event)">
@@ -653,7 +650,16 @@ footer{
 
 <section class="cards">
 
-  <!-- 1 STUDY -->
+  <!-- 1 ABOUT ME -->
+  <a class="card" href="about.html">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="4"/>
+      <path d="M4 21a8 8 0 0 1 16 0"/>
+    </svg>
+    <h3 data-i18n="about">About Me</h3>
+  </a>
+
+  <!-- 2 MY STUDY -->
   <a class="card" href="study.html">
     <svg viewBox="0 0 24 24">
       <path d="M2 10l10-6 10 6-10 6z"/>
@@ -663,35 +669,7 @@ footer{
     <h3 data-i18n="study">My Study</h3>
   </a>
 
-  <!-- 2 MOVIES -->
-  <a class="card" href="movies.html">
-    <svg viewBox="0 0 24 24">
-      <rect x="3" y="4" width="18" height="16" rx="2"/>
-      <path d="M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4"/>
-    </svg>
-    <h3 data-i18n="movies">Movies I've Watched</h3>
-  </a>
-
-  <!-- 3 PRODUCTS -->
-  <a class="card" href="products.html">
-    <svg viewBox="0 0 24 24">
-      <path d="M4 7h16l1 13H3z"/>
-      <path d="M9 7a3 3 0 0 1 6 0"/>
-    </svg>
-    <h3 data-i18n="products">My Products</h3>
-  </a>
-
-  <!-- 4 GALLERY -->
-  <a class="card" href="gallery.html">
-    <svg viewBox="0 0 24 24">
-      <rect x="3" y="3" width="18" height="18" rx="2"/>
-      <circle cx="8.5" cy="8.5" r="1.5"/>
-      <path d="M21 15l-5-5L5 21"/>
-    </svg>
-    <h3 data-i18n="gallery">Gallery</h3>
-  </a>
-
-  <!-- 5 SOCIAL -->
+  <!-- 3 MY SOCIAL MEDIA -->
   <a class="card" href="social.html">
     <svg viewBox="0 0 24 24">
       <circle cx="18" cy="5" r="3"/>
@@ -702,25 +680,7 @@ footer{
     <h3 data-i18n="social">My Social Media</h3>
   </a>
 
-  <!-- 6 CONTACT -->
-  <a class="card" href="contact.html">
-    <svg viewBox="0 0 24 24">
-      <rect x="3" y="5" width="18" height="14" rx="2"/>
-      <path d="m3 7 9 6 9-6"/>
-    </svg>
-    <h3 data-i18n="contact">My Contact</h3>
-  </a>
-
-  <!-- 7 ABOUT -->
-  <a class="card" href="about.html">
-    <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="4"/>
-      <path d="M4 21a8 8 0 0 1 16 0"/>
-    </svg>
-    <h3 data-i18n="about">About Me</h3>
-  </a>
-
-  <!-- 8 STORY -->
+  <!-- 4 MY STORY -->
   <a class="card" href="story.html">
     <svg viewBox="0 0 24 24">
       <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
@@ -730,7 +690,44 @@ footer{
     <h3 data-i18n="story">My Story</h3>
   </a>
 
-  <!-- 9 BOOK -->
+  <!-- 5 MOVIES I HAVE WATCHED -->
+  <a class="card" href="movies.html">
+    <svg viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="16" rx="2"/>
+      <path d="M7 4v16M17 4v16M3 9h4M17 9h4M3 15h4M17 15h4"/>
+    </svg>
+    <h3 data-i18n="movies">Movies I've Watched</h3>
+  </a>
+
+  <!-- 6 GALLERY -->
+  <a class="card" href="gallery.html">
+    <svg viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="2"/>
+      <circle cx="8.5" cy="8.5" r="1.5"/>
+      <path d="M21 15l-5-5L5 21"/>
+    </svg>
+    <h3 data-i18n="gallery">Gallery</h3>
+  </a>
+
+  <!-- 7 MY PRODUCTS -->
+  <a class="card" href="products.html">
+    <svg viewBox="0 0 24 24">
+      <path d="M4 7h16l1 13H3z"/>
+      <path d="M9 7a3 3 0 0 1 6 0"/>
+    </svg>
+    <h3 data-i18n="products">My Products</h3>
+  </a>
+
+  <!-- 8 CONTACT -->
+  <a class="card" href="contact.html">
+    <svg viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="2"/>
+      <path d="m3 7 9 6 9-6"/>
+    </svg>
+    <h3 data-i18n="contact">Contact</h3>
+  </a>
+
+  <!-- 9 MY BOOK -->
   <a class="card" href="book.html">
     <svg viewBox="0 0 24 24">
       <path d="M3 5.5A2.5 2.5 0 0 1 5.5 3H20v18H5.5A2.5 2.5 0 0 1 3 18.5z"/>
@@ -761,14 +758,14 @@ quote:"A Journey of Dreams and Possibilities",
 welcome:"Welcome to my world. A place where I share my journey, interests, memories and moments.",
 explore:"Explore",
 world:"My World",
-study:"My Study",
-movies:"Movies I've Watched",
-products:"My Products",
-gallery:"Gallery",
-social:"My Social Media",
-contact:"My Contact",
 about:"About Me",
+study:"My Study",
+social:"My Social Media",
 story:"My Story",
+movies:"Movies I've Watched",
+gallery:"Gallery",
+products:"My Products",
+contact:"Contact",
 book:"My Book"
 },
 
@@ -780,14 +777,14 @@ quote:"सपनों और संभावनाओं का एक सफ�
 welcome:"मेरी दुनिया में आपका स्वागत है। यहाँ मैं अपने सफर, रुचियों, यादों और खास पलों को साझा करता हूँ।",
 explore:"देखें",
 world:"मेरी दुनिया",
-study:"मेरी पढ़ाई",
-movies:"मेरी देखी हुई फिल्में",
-products:"मेरे उत्पाद",
-gallery:"फोटो गैलरी",
-social:"मेरे सोशल मीडिया",
-contact:"मेरा संपर्क",
 about:"मेरे बारे में",
+study:"मेरी पढ़ाई",
+social:"मेरे सोशल मीडिया",
 story:"मेरी कहानी",
+movies:"मेरी देखी हुई फिल्में",
+gallery:"फोटो गैलरी",
+products:"मेरे उत्पाद",
+contact:"संपर्क",
 book:"मेरी किताब"
 },
 
@@ -799,14 +796,14 @@ quote:"خوابوں اور امکانات کا ایک سفر",
 welcome:"میری دنیا میں خوش آمدید۔ یہاں میں اپنا سفر، دلچسپیاں، یادیں اور خاص لمحات شیئر کرتا ہوں۔",
 explore:"دیکھیے",
 world:"میری دنیا",
-study:"میری تعلیم",
-movies:"میری دیکھی ہوئی فلمیں",
-products:"میری مصنوعات",
-gallery:"تصویری گیلری",
-social:"میرے سوشل میڈیا",
-contact:"رابطہ",
 about:"میرے بارے میں",
+study:"میری تعلیم",
+social:"میرے سوشل میڈیا",
 story:"میری کہانی",
+movies:"میری دیکھی ہوئی فلمیں",
+gallery:"تصویری گیلری",
+products:"میری مصنوعات",
+contact:"رابطہ",
 book:"میری کتاب"
 },
 
@@ -818,14 +815,14 @@ quote:"ସ୍ୱପ୍ନ ଓ ସମ୍ଭାବନାର ଏକ ଯାତ୍ର
 welcome:"ମୋ ଦୁନିଆକୁ ସ୍ୱାଗତ। ଏଠାରେ ମୁଁ ମୋର ଯାତ୍ରା, ଆଗ୍ରହ, ସ୍ମୃତି ଏବଂ ବିଶେଷ ମୁହୂର୍ତ୍ତ ସେୟାର କରେ।",
 explore:"ଦେଖନ୍ତୁ",
 world:"ମୋ ଦୁନିଆ",
-study:"ମୋ ପାଠପଢ଼ା",
-movies:"ମୁଁ ଦେଖିଥିବା ଚଳଚ୍ଚିତ୍ର",
-products:"ମୋ ଉତ୍ପାଦ",
-gallery:"ଫଟୋ ଗ୍ୟାଲେରୀ",
-social:"ମୋ ସୋସିଆଲ ମିଡିଆ",
-contact:"ମୋ ସହ ଯୋଗାଯୋଗ",
 about:"ମୋ ବିଷୟରେ",
+study:"ମୋ ପାଠପଢ଼ା",
+social:"ମୋ ସୋସିଆଲ ମିଡିଆ",
 story:"ମୋ କାହାଣୀ",
+movies:"ମୁଁ ଦେଖିଥିବା ଚଳଚ୍ଚିତ୍ର",
+gallery:"ଫଟୋ ଗ୍ୟାଲେରୀ",
+products:"ମୋ ଉତ୍ପାଦ",
+contact:"ଯୋଗାଯୋଗ",
 book:"ମୋ ବହି"
 }
 
