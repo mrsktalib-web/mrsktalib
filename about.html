@@ -3,995 +3,477 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Me | SK TALIB</title>
 
 <style>
-:root{
---bg:#080808;
---card:#111;
---text:#eee;
---muted:#aaa;
---gold:#c9a85b;
---border:#40351f;
---header:#080808;
+:root {
+  --bg:#080808;
+  --panel:#111111;
+  --text:#eeeeee;
+  --muted:#a6a6a6;
+  --gold:#b99a59;
+  --line:#4b3c20;
 }
 
-body.light{
---bg:#f4f6fa;
---card:#fff;
---text:#182235;
---muted:#64748b;
---gold:#315c9b;
---border:#dce3ed;
---header:#fff;
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial, sans-serif;
+  transition:.25s;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-background:var(--bg);
-color:var(--text);
-font-family:Georgia,'Times New Roman',serif;
-line-height:1.8;
-transition:.25s;
+body.light {
+  --bg:#f4f5f7;
+  --panel:#ffffff;
+  --text:#172033;
+  --muted:#667085;
+  --gold:#315b91;
+  --line:#cbd5e1;
 }
 
-header{
-position:sticky;
-top:0;
-z-index:100;
-background:var(--header);
-border-bottom:1px solid var(--border);
+header {
+  min-height:112px;
+  padding:22px 4%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:1px solid var(--line);
 }
 
-.nav{
-max-width:1100px;
-margin:auto;
-padding:14px 18px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:10px;
-font-family:Arial,sans-serif;
+.brand {
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:2px;
 }
 
-.brand h2{
-font-size:20px;
-letter-spacing:2px;
-font-weight:700;
-color:var(--text);
+.brand span { color:var(--gold); }
+
+.subtitle {
+  margin-top:12px;
+  font-size:12px;
+  letter-spacing:5px;
+  color:var(--muted);
 }
 
-.brand h2 span{color:var(--gold)}
-
-.brand small{
-font-size:10px;
-letter-spacing:3px;
-color:var(--muted);
+.controls {
+  display:flex;
+  gap:10px;
+  align-items:center;
 }
 
-.controls{
-display:flex;
-align-items:center;
-gap:9px;
+.control {
+  background:var(--panel);
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:13px 15px;
+  font-size:14px;
+  cursor:pointer;
 }
 
-.control-btn{
-background:var(--card);
-color:var(--text);
-border:1px solid var(--border);
-border-radius:12px;
-padding:12px 15px;
-font-size:13px;
-cursor:pointer;
+.container {
+  width:min(1000px,92%);
+  margin:28px auto;
 }
 
-.language-wrap{position:relative}
-
-.language-menu{
-display:none;
-position:absolute;
-right:0;
-top:48px;
-width:175px;
-background:#151515;
-border:1px solid #554729;
-border-radius:10px;
-padding:6px;
-box-shadow:0 8px 25px #0009;
+.masthead {
+  text-align:center;
+  padding:22px 10px;
+  border-top:1px solid var(--gold);
+  border-bottom:3px double var(--gold);
+  margin-bottom:25px;
 }
 
-.language-menu.show{display:block}
-
-.language-menu button{
-display:block;
-width:100%;
-padding:11px;
-border:0;
-background:transparent;
-color:#eee;
-text-align:left;
-border-radius:6px;
-font-size:13px;
-cursor:pointer;
+.masthead small {
+  color:var(--gold);
+  letter-spacing:4px;
+  font-size:11px;
 }
 
-.language-menu button:hover,
-.language-menu button.active{
-background:#302817;
-color:#e1bd68;
+.masthead h1 {
+  font-family:Georgia,serif;
+  font-size:clamp(36px,8vw,68px);
+  margin:12px 0;
+  letter-spacing:2px;
 }
 
-body.light .language-menu{
-background:#fff;
-border-color:#ddd;
+.masthead p {
+  color:var(--muted);
+  letter-spacing:3px;
+  font-size:11px;
 }
 
-body.light .language-menu button{color:#182235}
-body.light .language-menu button:hover{background:#edf2f9;color:#315c9b}
-
-.container{
-width:min(100% - 30px,900px);
-margin:auto;
+.intro {
+  display:grid;
+  grid-template-columns:190px 1fr;
+  gap:25px;
+  align-items:center;
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
 }
 
-.masthead{
-margin-top:18px;
-padding:32px 15px;
-text-align:center;
-border-top:5px double var(--gold);
-border-bottom:5px double var(--gold);
-font-family:Georgia,serif;
+.portrait {
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  border:4px solid var(--panel);
+  outline:1px solid var(--gold);
 }
 
-.masthead .edition{
-font-family:Arial,sans-serif;
-font-size:12px;
-letter-spacing:5px;
-color:var(--muted);
+.kicker {
+  color:var(--gold);
+  letter-spacing:3px;
+  font-size:11px;
+  text-transform:uppercase;
 }
 
-.masthead h1{
-font-size:clamp(34px,8vw,55px);
-margin:10px 0;
-letter-spacing:2px;
+.intro h2 {
+  font-family:Georgia,serif;
+  font-size:clamp(27px,5vw,42px);
+  margin:12px 0;
 }
 
-.masthead h1 span{color:var(--gold)}
-
-.masthead p{
-font-size:clamp(17px,4vw,25px);
-font-style:italic;
-color:var(--muted);
+.intro p, .article p {
+  color:var(--muted);
+  line-height:1.8;
+  font-size:15px;
 }
 
-.masthead .line{
-width:80%;
-height:1px;
-background:var(--gold);
-margin:20px auto 0;
+.signature {
+  color:var(--gold);
+  font-family:cursive;
+  font-size:28px;
+  margin-top:18px;
 }
 
-.newspaper{
-margin:25px 0;
-padding:23px;
-background:var(--card);
-border:1px solid var(--border);
+.article {
+  padding:24px 0;
+  border-bottom:1px solid var(--line);
 }
 
-.page-label{
-font-family:Arial,sans-serif;
-font-size:12px;
-letter-spacing:3px;
-color:var(--gold);
-text-transform:uppercase;
+.article h2 {
+  font-family:Georgia,serif;
+  font-size:27px;
+  margin:0 0 12px;
 }
 
-.newspaper h2{
-font-size:clamp(25px,5vw,38px);
-line-height:1.3;
-margin:12px 0 22px;
+.article-number {
+  color:var(--gold);
+  font-size:11px;
+  letter-spacing:3px;
+  margin-bottom:10px;
 }
 
-.newspaper img{
-width:100%;
-height:auto;
-max-height:520px;
-object-fit:cover;
-display:block;
-border:3px solid var(--gold);
-border-radius:7px;
-margin:15px 0 20px;
+.facts {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:15px;
 }
 
-.newspaper p{
-font-size:clamp(16px,3.8vw,21px);
-line-height:1.9;
-color:var(--muted);
-text-align:justify;
+.fact {
+  background:var(--panel);
+  border:1px solid var(--line);
+  padding:15px;
+  border-radius:8px;
 }
 
-.newspaper ul{
-padding-left:23px;
-color:var(--muted);
-font-size:17px;
+.fact small {
+  display:block;
+  color:var(--gold);
+  margin-bottom:7px;
+  letter-spacing:1px;
 }
 
-.newspaper li{margin:7px 0}
-
-.profile-list{
-list-style:none;
-padding:0!important;
+.fact strong {
+  font-size:15px;
+  font-weight:600;
 }
 
-.profile-list li{
-padding:9px 0;
-border-bottom:1px solid var(--border);
+.quote {
+  margin:25px 0;
+  padding:22px;
+  border-left:3px solid var(--gold);
+  background:var(--panel);
+  font-family:Georgia,serif;
+  font-size:22px;
+  line-height:1.5;
 }
 
-.profile-list strong{color:var(--text)}
-
-.vision-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-margin-top:15px;
+.back {
+  display:inline-block;
+  margin:25px 0;
+  color:var(--gold);
+  text-decoration:none;
+  border:1px solid var(--line);
+  padding:12px 17px;
+  border-radius:8px;
 }
 
-.vision-item{
-border:1px solid var(--border);
-padding:10px;
-font-size:14px;
-color:var(--muted);
+footer {
+  text-align:center;
+  border-top:1px solid var(--line);
+  padding:25px 10px;
+  color:var(--muted);
+  font-size:13px;
 }
 
-.back-wrap{text-align:center;margin:25px 0}
-
-.back-link{
-display:inline-block;
-text-decoration:none;
-color:var(--gold);
-border:1px solid var(--gold);
-padding:10px 22px;
-border-radius:6px;
-font-family:Arial,sans-serif;
+@media(max-width:600px) {
+  header { padding:18px 4%; }
+  .brand { font-size:23px; }
+  .subtitle { letter-spacing:3px; font-size:10px; }
+  .control { padding:11px 10px; font-size:12px; }
+  .intro { grid-template-columns:115px 1fr; gap:16px; }
+  .intro p, .article p { font-size:14px; }
+  .article h2 { font-size:24px; }
+  .facts { gap:8px; }
+  .fact { padding:11px; }
+  .fact strong { font-size:13px; }
 }
 
-footer{
-text-align:center;
-padding:22px;
-border-top:1px solid var(--border);
-color:var(--muted);
-font-family:Arial,sans-serif;
-font-size:12px;
-}
-
-[dir="rtl"] .newspaper ul{
-padding-right:23px;
-padding-left:0;
-}
-
-@media(max-width:600px){
-.nav{padding:13px 16px}
-.brand h2{font-size:18px}
-.control-btn{padding:10px}
-.newspaper{padding:17px}
-.newspaper img{max-height:none}
-.vision-grid{grid-template-columns:1fr 1fr}
-}
+[dir="rtl"] body { text-align:right; }
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="nav">
+  <div>
+    <div class="brand">SK <span>TALIB</span></div>
+    <div class="subtitle">PERSONAL WEBSITE</div>
+  </div>
 
-<div class="brand">
-<h2>SK <span>TALIB</span></h2>
-<small>PERSONAL WEBSITE</small>
-</div>
-
-<div class="controls">
-
-<div class="language-wrap">
-<button class="control-btn" id="languageName" type="button">
-English ▼
-</button>
-
-<div class="language-menu" id="languageMenu">
-<button type="button" data-lang="en">English</button>
-<button type="button" data-lang="roman">Roman Hindi</button>
-<button type="button" data-lang="ur">Urdu</button>
-<button type="button" data-lang="hi">Hindi</button>
-<button type="button" data-lang="or">Odia</button>
-</div>
-</div>
-
-<button class="control-btn" id="themeButton" type="button">
-☼
-</button>
-
-</div>
-</div>
+  <div class="controls">
+    <button class="control" id="languageButton" onclick="showLanguages()">
+      <span id="languageLabel">English</span> ▼
+    </button>
+    <button class="control" onclick="toggleTheme()" aria-label="Change theme">☼</button>
+  </div>
 </header>
+
+<div id="languageMenu" style="display:none;position:absolute;right:4%;top:95px;z-index:10;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px;min-width:160px;">
+  <button class="control" style="display:block;width:100%;margin:3px 0" onclick="changeLanguage('en')">English</button>
+  <button class="control" style="display:block;width:100%;margin:3px 0" onclick="changeLanguage('roman')">Roman Hindi</button>
+  <button class="control" style="display:block;width:100%;margin:3px 0" onclick="changeLanguage('ur')">Urdu</button>
+  <button class="control" style="display:block;width:100%;margin:3px 0" onclick="changeLanguage('hi')">Hindi</button>
+  <button class="control" style="display:block;width:100%;margin:3px 0" onclick="changeLanguage('or')">Odia</button>
+</div>
 
 <main class="container">
 
-<section class="masthead">
-<div class="edition" data-i18n="edition">THE PERSONAL EDITION</div>
-<h1>SK <span>TALIB</span></h1>
-<p data-i18n="tagline">A little introduction to who I am</p>
-<div class="line"></div>
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page1Label">THE FIRST PAGE</div>
-
-<h2 data-i18n="page1Title">A Quiet Mind, A World of Thoughts</h2>
-
-<img src="about_banner.jpg" alt="A Quiet Mind">
-
-<p data-i18n="page1Text">
-Every person has a different way of seeing the world.
-This page is a small introduction to my thoughts,
-my nature, the things I like and the values I believe in.
-</p>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page2Label">PERSONAL PROFILE</div>
-
-<h2 data-i18n="page2Title">The Person Behind The Name</h2>
-
-<img src="about_profile.jpg" alt="Personal Profile">
-
-<ul class="profile-list">
-<li><strong data-i18n="nameLabel">Name:</strong> SK Talib</li>
-<li><strong data-i18n="locationLabel">Location:</strong> Kendrapara, Odisha, India</li>
-<li><strong data-i18n="colorLabel">Favourite Colours:</strong> Black &amp; White</li>
-<li><strong data-i18n="foodLabel">Favourite Food:</strong> Depends on my mood</li>
-</ul>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page3Label">MYSELF</div>
-
-<h2 data-i18n="page3Title">A Little About Myself</h2>
-
-<img src="about_myself.jpg" alt="About Myself">
-
-<p data-i18n="page3Text">
-I enjoy thinking deeply, observing life and understanding
-different perspectives. I value honesty, personal freedom
-and meaningful moments.
-</p>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page4Label">MY INTERESTS</div>
-
-<h2 data-i18n="page4Title">Things That Catch My Attention</h2>
-
-<img src="about_interests.jpg" alt="My Interests">
-
-<ul>
-<li data-i18n="interest1">Technology and computers</li>
-<li data-i18n="interest2">Learning new things</li>
-<li data-i18n="interest3">Deep thinking and ideas</li>
-<li data-i18n="interest4">Peaceful nature</li>
-<li data-i18n="interest5">Spending quiet time alone</li>
-</ul>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page5Label">PERSONALITY</div>
-
-<h2 data-i18n="page5Title">Silence Is My Comfort</h2>
-
-<img src="about_personality.jpg" alt="My Personality">
-
-<p data-i18n="page5Text">
-I enjoy silence and peaceful surroundings. I especially
-like quiet nights, moonlight and moments when I can think
-without disturbance. Loud noise and very bright lights
-are not my preference.
-</p>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page6Label">STRENGTH &amp; WEAKNESS</div>
-
-<h2 data-i18n="page6Title">The Strong And The Sensitive Side</h2>
-
-<img src="about_strength_weakness.jpg" alt="Strength and Weakness">
-
-<p>
-<strong data-i18n="strengthLabel">My Strength:</strong>
-<span data-i18n="strengthText">
-I try to understand other people's feelings. I do not like
-making anyone feel insulted or uncomfortable. I like helping others.
-</span>
-</p>
-
-<br>
-
-<p>
-<strong data-i18n="weaknessLabel">My Weakness:</strong>
-<span data-i18n="weaknessText">
-Sometimes I trust people too quickly and consider others
-very close to me.
-</span>
-</p>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page7Label">MY PHILOSOPHY</div>
-
-<h2 data-i18n="page7Title">Respect, Kindness And Freedom</h2>
-
-<img src="about_philosophy.jpg" alt="My Philosophy">
-
-<p data-i18n="page7Text">
-I believe in treating people with respect. I want to help
-others without making them feel small. Everyone deserves
-happiness, peace and freedom.
-</p>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page8Label">MY LIFESTYLE</div>
-
-<h2 data-i18n="page8Title">Simple Things, Beautiful Life</h2>
-
-<img src="about_lifestyle.jpg" alt="My Lifestyle">
-
-<p data-i18n="page8Text">
-I prefer a simple and peaceful lifestyle. Sitting under a tree,
-spending time near a pond or river, and enjoying the calmness
-of nature make me happy.
-</p>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page9Label">ANIMALS</div>
-
-<h2 data-i18n="page9Title">Creatures I Like</h2>
-
-<img src="about_animals.jpg" alt="Animals I Like">
-
-<p data-i18n="page9Text">
-I like animals and birds. Some of my favourites are horses,
-dogs, cats, birds, goats, hens and cows. I appreciate the
-beauty of every living creature.
-</p>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page10Label">FAVOURITE MOMENTS</div>
-
-<h2 data-i18n="page10Title">Moments That Stay With Me</h2>
-
-<img src="about_moments.jpg" alt="Favourite Moments">
-
-<p data-i18n="page10Text">
-My favourite moments depend on my mood. A quiet afternoon
-under a tree, a peaceful evening near water and a beautiful
-moonlit night are special to me.
-</p>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page11Label">DREAM LIFESTYLE</div>
-
-<h2 data-i18n="page11Title">A Peaceful Life Close To Nature</h2>
-
-<img src="about_dream_lifestyle.jpg" alt="Dream Lifestyle">
-
-<p data-i18n="page11Text">
-I dream of a simple and peaceful home close to nature,
-surrounded by trees, open space and animals.
-A life with freedom, comfort and happiness.
-</p>
-
-</section>
-
-<section class="newspaper">
-
-<div class="page-label" data-i18n="page12Label">MY VISION</div>
-
-<h2 data-i18n="page12Title">Dreams I Want To Turn Into Reality</h2>
-
-<img src="about_vision.jpg" alt="My Vision">
-
-<div class="vision-grid">
-<div class="vision-item" data-i18n="vision1">Build my own identity</div>
-<div class="vision-item" data-i18n="vision2">Become financially independent</div>
-<div class="vision-item" data-i18n="vision3">Become a successful entrepreneur</div>
-<div class="vision-item" data-i18n="vision4">Explore technology</div>
-<div class="vision-item" data-i18n="vision5">Explore new opportunities</div>
-<div class="vision-item" data-i18n="vision6">Gain more knowledge</div>
-<div class="vision-item" data-i18n="vision7">Live with freedom</div>
-<div class="vision-item" data-i18n="vision8">Help humanity</div>
-<div class="vision-item" data-i18n="vision9">Achieve success through hard work</div>
-</div>
-
-</section>
-
-<div class="back-wrap">
-<a href="index.html" class="back-link" data-i18n="backHome">
-← Back to Home
-</a>
-</div>
+  <section class="masthead">
+    <small>THE PERSONAL EDITION</small>
+    <h1>ABOUT ME</h1>
+    <p>A LIFE • A JOURNEY • A STORY</p>
+  </section>
+
+  <section class="intro">
+    <img class="portrait" src="profile.jpg.jpg" alt="SK TALIB">
+    <div>
+      <div class="kicker" data-i18n="welcome">WELCOME TO MY WORLD</div>
+      <h2>SK TALIB</h2>
+      <p data-i18n="introText">A collection of my journey, thoughts, interests, memories and the moments that make life meaningful.</p>
+      <div class="signature">SK Talib</div>
+    </div>
+  </section>
+
+  <section class="article">
+    <div class="article-number">01 — INTRODUCTION</div>
+    <h2 data-i18n="whoTitle">Who Am I?</h2>
+    <p data-i18n="whoText">I am SK Talib. I believe every person has a story worth telling. This website is a small space where I share my identity, experiences, interests and personal journey.</p>
+  </section>
+
+  <section class="article">
+    <div class="article-number">02 — PERSONAL DETAILS</div>
+    <h2 data-i18n="detailsTitle">A Few Details</h2>
+    <div class="facts">
+      <div class="fact"><small data-i18n="nameLabel">NAME</small><strong>SK TALIB</strong></div>
+      <div class="fact"><small data-i18n="locationLabel">LOCATION</small><strong>Kendrapara, Odisha, India</strong></div>
+      <div class="fact"><small data-i18n="dreamLabel">MY MOTTO</small><strong>DREAM • CREATE • ACHIEVE</strong></div>
+      <div class="fact"><small data-i18n="websiteLabel">WEBSITE</small><strong>Personal Edition</strong></div>
+    </div>
+  </section>
+
+  <section class="article">
+    <div class="article-number">03 — MY JOURNEY</div>
+    <h2 data-i18n="journeyTitle">The Journey So Far</h2>
+    <p data-i18n="journeyText">Life is a continuous journey of experiences, challenges and new beginnings. Every chapter teaches something, and every step creates a new possibility.</p>
+  </section>
+
+  <section class="article">
+    <div class="article-number">04 — EDUCATION</div>
+    <h2 data-i18n="educationTitle">Education & Growth</h2>
+    <p data-i18n="educationText">I am pursuing a Diploma in Electrical and Electronics Engineering. I enjoy exploring technology and developing practical skills that can help turn ideas into reality.</p>
+  </section>
+
+  <section class="article">
+    <div class="article-number">05 — INTERESTS</div>
+    <h2 data-i18n="interestTitle">My Interests</h2>
+    <p data-i18n="interestText">Technology, websites, creative ideas, electronics, design and discovering new things are some of the subjects that interest me.</p>
+  </section>
+
+  <section class="quote" data-i18n="quoteText">
+    “Your story is still being written. Make every chapter count.”
+  </section>
+
+  <section class="article">
+    <div class="article-number">06 — MY VISION</div>
+    <h2 data-i18n="visionTitle">Dreams & Vision</h2>
+    <p data-i18n="visionText">My goal is to keep improving, build useful things, gain knowledge and create a future through patience, consistency and hard work.</p>
+  </section>
+
+  <section class="article">
+    <div class="article-number">07 — A PERSONAL NOTE</div>
+    <h2 data-i18n="noteTitle">A Note to Visitors</h2>
+    <p data-i18n="noteText">Thank you for visiting my personal website. Explore the different sections to discover more about my interests, stories, gallery and projects.</p>
+  </section>
+
+  <a class="back" href="index.html" data-i18n="backHome">← Back to Home</a>
 
 </main>
 
 <footer>
-© <span id="year"></span> SK TALIB.
-<span data-i18n="footerText">All Rights Reserved.</span>
+  © 2026 SK TALIB. <span data-i18n="footerText">All Rights Reserved.</span>
 </footer>
 
 <script>
 const translations = {
-
+    
 en: {
-edition:"THE PERSONAL EDITION",
-tagline:"A little introduction to who I am",
-page1Label:"THE FIRST PAGE",
-page1Title:"A Quiet Mind, A World of Thoughts",
-page1Text:"Every person has a different way of seeing the world. This page is a small introduction to my thoughts, my nature, the things I like and the values I believe in.",
-page2Label:"PERSONAL PROFILE",
-page2Title:"The Person Behind The Name",
-page3Label:"MYSELF",
-page3Title:"A Little About Myself",
-page3Text:"I enjoy thinking deeply, observing life and understanding different perspectives. I value honesty, personal freedom and meaningful moments.",
-page4Label:"MY INTERESTS",
-page4Title:"Things That Catch My Attention",
-page5Label:"PERSONALITY",
-page5Title:"Silence Is My Comfort",
-page5Text:"I enjoy silence and peaceful surroundings. I especially like quiet nights, moonlight and moments when I can think without disturbance. Loud noise and very bright lights are not my preference.",
-page6Label:"STRENGTH & WEAKNESS",
-page6Title:"The Strong And The Sensitive Side",
-page7Label:"MY PHILOSOPHY",
-page7Title:"Respect, Kindness And Freedom",
-page7Text:"I believe in treating people with respect. I want to help others without making them feel small. Everyone deserves happiness, peace and freedom.",
-page8Label:"MY LIFESTYLE",
-page8Title:"Simple Things, Beautiful Life",
-page8Text:"I prefer a simple and peaceful lifestyle. Sitting under a tree, spending time near a pond or river, and enjoying the calmness of nature make me happy.",
-page9Label:"ANIMALS",
-page9Title:"Creatures I Like",
-page9Text:"I like animals and birds. Some of my favourites are horses, dogs, cats, birds, goats, hens and cows. I appreciate the beauty of every living creature.",
-page10Label:"FAVOURITE MOMENTS",
-page10Title:"Moments That Stay With Me",
-page10Text:"My favourite moments depend on my mood. A quiet afternoon under a tree, a peaceful evening near water and a beautiful moonlit night are special to me.",
-page11Label:"DREAM LIFESTYLE",
-page11Title:"A Peaceful Life Close To Nature",
-page11Text:"I dream of a simple and peaceful home close to nature, surrounded by trees, open space and animals. A life with freedom, comfort and happiness.",
-page12Label:"MY VISION",
-page12Title:"Dreams I Want To Turn Into Reality",
-nameLabel:"Name:",
-locationLabel:"Location:",
-colorLabel:"Favourite Colours:",
-foodLabel:"Favourite Food:",
-interest1:"Technology and computers",
-interest2:"Learning new things",
-interest3:"Deep thinking and ideas",
-interest4:"Peaceful nature",
-interest5:"Spending quiet time alone",
-strengthLabel:"My Strength:",
-strengthText:"I try to understand other people's feelings. I do not like making anyone feel insulted or uncomfortable. I like helping others.",
-weaknessLabel:"My Weakness:",
-weaknessText:"Sometimes I trust people too quickly and consider others very close to me.",
-vision1:"Build my own identity",
-vision2:"Become financially independent",
-vision3:"Become a successful entrepreneur",
-vision4:"Explore technology",
-vision5:"Explore new opportunities",
-vision6:"Gain more knowledge",
-vision7:"Live with freedom",
-vision8:"Help humanity",
-vision9:"Achieve success through hard work",
-backHome:"← Back to Home",
-footerText:"All Rights Reserved."
+  welcome:"WELCOME TO MY WORLD",
+  introText:"A collection of my journey, thoughts, interests, memories and the moments that make life meaningful.",
+  whoTitle:"Who Am I?",
+  whoText:"I am SK Talib. I believe every person has a story worth telling. This website is a small space where I share my identity, experiences, interests and personal journey.",
+  detailsTitle:"A Few Details",
+  nameLabel:"NAME",
+  locationLabel:"LOCATION",
+  dreamLabel:"MY MOTTO",
+  websiteLabel:"WEBSITE",
+  journeyTitle:"The Journey So Far",
+  journeyText:"Life is a continuous journey of experiences, challenges and new beginnings. Every chapter teaches something, and every step creates a new possibility.",
+  educationTitle:"Education & Growth",
+  educationText:"I am pursuing a Diploma in Electrical and Electronics Engineering. I enjoy exploring technology and developing practical skills that can help turn ideas into reality.",
+  interestTitle:"My Interests",
+  interestText:"Technology, websites, creative ideas, electronics, design and discovering new things are some of the subjects that interest me.",
+  quoteText:"Your story is still being written. Make every chapter count.",
+  visionTitle:"Dreams & Vision",
+  visionText:"My goal is to keep improving, build useful things, gain knowledge and create a future through patience, consistency and hard work.",
+  noteTitle:"A Note to Visitors",
+  noteText:"Thank you for visiting my personal website. Explore the different sections to discover more about my interests, stories, gallery and projects.",
+  backHome:"← Back to Home",
+  footerText:"All Rights Reserved."
 },
 
 roman: {
-edition:"MERI PERSONAL DUNIYA",
-tagline:"Mera ek chhota sa parichay",
-page1Label:"PEHLA SAFHA",
-page1Title:"Ek Khamosh Dimag, Sochon Ki Duniya",
-page1Text:"Har insaan duniya ko apne alag nazariye se dekhta hai. Yeh page meri soch, meri fitrat, meri pasand aur mere usoolon ka chhota sa parichay hai.",
-page2Label:"PERSONAL PROFILE",
-page2Title:"Naam Ke Peechhe Ka Insaan",
-page3Label:"MAIN KHUD",
-page3Title:"Mere Baare Mein Kuch Baatein",
-page3Text:"Mujhe gehrai se sochna, zindagi ko samajhna aur alag nazariye dekhna pasand hai. Main imaandari, apni azaadi aur khaas lamhon ko ahmiyat deta hoon.",
-page4Label:"MERI PASAND",
-page4Title:"Woh Cheezein Jo Mujhe Pasand Hain",
-page5Label:"MERI PERSONALITY",
-page5Title:"Khamoshi Mera Sukoon Hai",
-page5Text:"Mujhe khamoshi aur sukoon pasand hai. Khaas taur par shaant raatein, chaandni aur aise lamhe pasand hain jab main bina pareshani ke soch sakun. Zyada shor aur tez roshni mujhe pasand nahi.",
-page6Label:"KHOOBI AUR KAMZORI",
-page6Title:"Mera Mazboot Aur Naram Pehlu",
-page7Label:"MERI SOCH",
-page7Title:"Izzat, Achhai Aur Azaadi",
-page7Text:"Mera maanna hai ki har insaan ke saath izzat se pesh aana chahiye. Main doosron ki madad karna chahta hoon bina unhe chhota mehsoos karwaye. Har kisi ko khushi, sukoon aur azaadi milni chahiye.",
-page8Label:"MERI ZINDAGI",
-page8Title:"Chhoti Khushiyan, Khoobsurat Zindagi",
-page8Text:"Mujhe simple aur sukoon bhari zindagi pasand hai. Ped ke neeche baithna, talab ya nadi ke paas waqt bitana aur nature ki khamoshi mehsoos karna mujhe khushi deta hai.",
-page9Label:"JANWAR",
-page9Title:"Mujhe Pasand Janwar",
-page9Text:"Mujhe janwar aur parinde pasand hain. Mere pasandida janwaron mein ghoda, kutta, billi, parinde, bakri, murgi aur gaay shamil hain.",
-page10Label:"PASANDIDA LAMHE",
-page10Title:"Woh Lamhe Jo Yaad Rehte Hain",
-page10Text:"Mere pasandida lamhe mere mood par depend karte hain. Ped ke neeche shaant dopahar, paani ke paas sukoon bhari shaam aur chaandni raat mere liye khaas hain.",
-page11Label:"SAPNO KI ZINDAGI",
-page11Title:"Nature Ke Paas Ek Sukoon Bhari Zindagi",
-page11Text:"Mera sapna hai ki nature ke paas ek simple aur shaant ghar ho, jahan ped, khuli jagah aur janwar hon. Ek aisi zindagi jismein azaadi, sukoon aur khushi ho.",
-page12Label:"MERA VISION",
-page12Title:"Sapne Jinhe Haqeeqat Banana Hai",
-nameLabel:"Naam:",
-locationLabel:"Jagah:",
-colorLabel:"Pasandida Rang:",
-foodLabel:"Pasandida Khana:",
-interest1:"Technology aur computers",
-interest2:"Nayi cheezein seekhna",
-interest3:"Gehri soch aur naye ideas",
-interest4:"Sukoon bhari nature",
-interest5:"Akele shaant waqt bitana",
-strengthLabel:"Meri Khoobi:",
-strengthText:"Main doosron ki feelings samajhne ki koshish karta hoon. Main kisi ko bura ya beizzat mehsoos nahi karwana chahta. Main doosron ki madad karna chahta hoon.",
-weaknessLabel:"Meri Kamzori:",
-weaknessText:"Kabhi-kabhi main logon par jaldi bharosa kar leta hoon aur unhe apna samajhne lagta hoon.",
-vision1:"Apni pehchaan banana",
-vision2:"Financially independent banna",
-vision3:"Successful entrepreneur banna",
-vision4:"Technology explore karna",
-vision5:"Naye mauke talash karna",
-vision6:"Zyada knowledge hasil karna",
-vision7:"Azaadi ke saath jeena",
-vision8:"Insaniyat ki madad karna",
-vision9:"Mehnat se kamyabi hasil karna",
-backHome:"← Home Page Par Wapas",
-footerText:"Sabhi Adhikaar Surakshit Hain."
+  welcome:"MERI DUNIYA MEIN AAPKA SWAGAT HAI",
+  introText:"Meri zindagi ka safar, mere khayalat, pasand, yaadein aur khaas lamhon ka ek chhota sa collection.",
+  whoTitle:"Main Kaun Hoon?",
+  whoText:"Main SK Talib hoon. Mera maanna hai ki har insaan ki apni ek kahani hoti hai. Is website par main apni pehchaan, tajurbe, pasand aur apna safar share karta hoon.",
+  detailsTitle:"Kuch Zaroori Baatein",
+  nameLabel:"NAAM",
+  locationLabel:"JAGAH",
+  dreamLabel:"MERA USOOL",
+  websiteLabel:"WEBSITE",
+  journeyTitle:"Ab Tak Ka Safar",
+  journeyText:"Zindagi tajurbon, mushkilon aur naye shuruaat ka safar hai. Har chapter kuch sikhata hai aur har kadam ek nayi possibility banata hai.",
+  educationTitle:"Taleem Aur Taraqqi",
+  educationText:"Main Electrical and Electronics Engineering mein Diploma kar raha hoon. Mujhe technology aur practical skills seekhna pasand hai.",
+  interestTitle:"Meri Pasand",
+  interestText:"Technology, websites, creative ideas, electronics, design aur nayi cheezein discover karna mujhe pasand hai.",
+  quoteText:"Tumhari kahani abhi likhi ja rahi hai. Har chapter ko khaas banao.",
+  visionTitle:"Mere Sapne Aur Nazar",
+  visionText:"Mera maqsad khud ko behtar banana, useful cheezein banana, knowledge hasil karna aur mehnat se apna future banana hai.",
+  noteTitle:"Visitors Ke Naam Ek Paigham",
+  noteText:"Meri personal website par aane ke liye shukriya. Mere interests, stories, gallery aur projects dekhne ke liye alag-alag sections explore karein.",
+  backHome:"← Home Page Par Wapas Jayein",
+  footerText:"Sabhi Adhikaar Surakshit Hain."
 },
 
 ur: {
-edition:"میری ذاتی دنیا",
-tagline:"میرا ایک مختصر تعارف",
-page1Label:"پہلا صفحہ",
-page1Title:"ایک خاموش ذہن، خیالات کی دنیا",
-page1Text:"ہر انسان دنیا کو اپنے الگ انداز سے دیکھتا ہے۔ یہ صفحہ میری سوچ، میری فطرت، میری پسند اور میرے اصولوں کا ایک مختصر تعارف ہے۔",
-page2Label:"ذاتی پروفائل",
-page2Title:"نام کے پیچھے ایک انسان",
-page3Label:"میں خود",
-page3Title:"میرے بارے میں",
-page3Text:"مجھے گہرائی سے سوچنا، زندگی کا مشاہدہ کرنا اور مختلف نظریات کو سمجھنا پسند ہے۔",
-page4Label:"میری دلچسپیاں",
-page4Title:"وہ چیزیں جو مجھے پسند ہیں",
-page5Label:"شخصیت",
-page5Title:"خاموشی میرا سکون ہے",
-page5Text:"مجھے خاموشی، پُرسکون راتیں اور چاندنی پسند ہے۔ شور اور تیز روشنی مجھے پسند نہیں۔",
-page6Label:"خوبی اور کمزوری",
-page6Title:"میرا مضبوط اور حساس پہلو",
-page7Label:"میرا فلسفہ",
-page7Title:"عزت، مہربانی اور آزادی",
-page7Text:"میرا یقین ہے کہ ہر انسان کے ساتھ عزت سے پیش آنا چاہیے۔ ہر کسی کو خوشی، سکون اور آزادی ملنی چاہیے۔",
-page8Label:"میرا طرز زندگی",
-page8Title:"سادہ زندگی، خوبصورت لمحات",
-page8Text:"مجھے سادہ اور پُرسکون زندگی پسند ہے۔ درخت کے نیچے بیٹھنا اور فطرت کے قریب وقت گزارنا مجھے خوشی دیتا ہے۔",
-page9Label:"جانور",
-page9Title:"مجھے پسند جانور",
-page9Text:"مجھے گھوڑے، کتے، بلیاں، پرندے، بکریاں، مرغیاں اور گائیں پسند ہیں۔",
-page10Label:"پسندیدہ لمحات",
-page10Title:"وہ لمحات جو یاد رہتے ہیں",
-page10Text:"درخت کے نیچے خاموش دوپہر، پانی کے قریب پُرسکون شام اور چاندنی رات میرے لیے خاص ہیں۔",
-page11Label:"خوابوں کی زندگی",
-page11Title:"فطرت کے قریب ایک پُرسکون زندگی",
-page11Text:"میرا خواب ہے کہ فطرت کے قریب ایک سادہ اور پُرسکون گھر ہو۔",
-page12Label:"میرا وژن",
-page12Title:"وہ خواب جنہیں حقیقت بنانا ہے",
-nameLabel:"نام:",
-locationLabel:"مقام:",
-colorLabel:"پسندیدہ رنگ:",
-foodLabel:"پسندیدہ کھانا:",
-interest1:"ٹیکنالوجی اور کمپیوٹر",
-interest2:"نئی چیزیں سیکھنا",
-interest3:"گہری سوچ اور خیالات",
-interest4:"پُرسکون فطرت",
-interest5:"تنہائی میں وقت گزارنا",
-strengthLabel:"میری خوبی:",
-strengthText:"میں دوسروں کے احساسات سمجھنے کی کوشش کرتا ہوں اور ان کی مدد کرنا پسند کرتا ہوں۔",
-weaknessLabel:"میری کمزوری:",
-weaknessText:"کبھی کبھی میں لوگوں پر جلدی بھروسہ کر لیتا ہوں۔",
-vision1:"اپنی پہچان بنانا",
-vision2:"مالی طور پر خود مختار بننا",
-vision3:"کامیاب کاروباری بننا",
-vision4:"ٹیکنالوجی کو سمجھنا",
-vision5:"نئے مواقع تلاش کرنا",
-vision6:"زیادہ علم حاصل کرنا",
-vision7:"آزادی سے جینا",
-vision8:"انسانیت کی مدد کرنا",
-vision9:"محنت سے کامیابی حاصل کرنا",
-backHome:"← ہوم پیج پر واپس",
-footerText:"تمام حقوق محفوظ ہیں۔"
-},
-
-hi: {
-edition:"मेरी व्यक्तिगत दुनिया",
-tagline:"मेरा एक छोटा सा परिचय",
-page1Label:"पहला पृष्ठ",
-page1Title:"एक शांत मन, विचारों की दुनिया",
-page1Text:"हर इंसान दुनिया को अपने अलग नजरिए से देखता है। यह पेज मेरी सोच, स्वभाव, पसंद और उसूलों का छोटा सा परिचय है।",
-page2Label:"व्यक्तिगत प्रोफाइल",
-page2Title:"नाम के पीछे का इंसान",
-page3Label:"मैं खुद",
-page3Title:"मेरे बारे में",
-page3Text:"मुझे गहराई से सोचना, जिंदगी को समझना और अलग-अलग नजरिए जानना पसंद है।",
-page4Label:"मेरी पसंद",
-page4Title:"वे चीजें जो मुझे पसंद हैं",
-page5Label:"मेरा व्यक्तित्व",
-page5Title:"खामोशी मेरा सुकून है",
-page5Text:"मुझे खामोशी, शांत रातें और चांदनी पसंद है। ज्यादा शोर और तेज रोशनी मुझे पसंद नहीं।",
-page6Label:"खूबी और कमजोरी",
-page6Title:"मेरा मजबूत और संवेदनशील पहलू",
-page7Label:"मेरी सोच",
-page7Title:"इज्जत, अच्छाई और आजादी",
-page7Text:"मेरा मानना है कि हर इंसान के साथ इज्जत से पेश आना चाहिए। हर किसी को खुशी, शांति और आजादी मिलनी चाहिए।",
-page8Label:"मेरी जीवनशैली",
-page8Title:"छोटी खुशियां, खूबसूरत जिंदगी",
-page8Text:"मुझे सरल और शांत जीवन पसंद है। पेड़ के नीचे बैठना और प्रकृति के पास समय बिताना मुझे खुशी देता है।",
-page9Label:"जानवर",
-page9Title:"मुझे पसंद जानवर",
-page9Text:"मुझे घोड़े, कुत्ते, बिल्लियां, पक्षी, बकरियां, मुर्गियां और गाय पसंद हैं।",
-page10Label:"पसंदीदा पल",
-page10Title:"वे पल जो याद रहते हैं",
-page10Text:"पेड़ के नीचे शांत दोपहर, पानी के पास सुकून भरी शाम और चांदनी रात मेरे लिए खास हैं।",
-page11Label:"सपनों की जिंदगी",
-page11Title:"प्रकृति के पास एक शांत जीवन",
-page11Text:"मेरा सपना है कि प्रकृति के पास एक सरल और शांत घर हो।",
-page12Label:"मेरा लक्ष्य",
-page12Title:"वे सपने जिन्हें सच करना है",
-nameLabel:"नाम:",
-locationLabel:"स्थान:",
-colorLabel:"पसंदीदा रंग:",
-foodLabel:"पसंदीदा खाना:",
-interest1:"टेक्नोलॉजी और कंप्यूटर",
-interest2:"नई चीजें सीखना",
-interest3:"गहरी सोच और विचार",
-interest4:"शांत प्रकृति",
-interest5:"अकेले शांत समय बिताना",
-strengthLabel:"मेरी खूबी:",
-strengthText:"मैं दूसरों की भावनाएं समझने की कोशिश करता हूं और उनकी मदद करना पसंद करता हूं।",
-weaknessLabel:"मेरी कमजोरी:",
-weaknessText:"कभी-कभी मैं लोगों पर जल्दी भरोसा कर लेता हूं।",
-vision1:"अपनी पहचान बनाना",
-vision2:"आर्थिक रूप से आत्मनिर्भर बनना",
-vision3:"सफल उद्यमी बनना",
-vision4:"टेक्नोलॉजी को समझना",
-vision5:"नए अवसर तलाशना",
-vision6:"अधिक ज्ञान प्राप्त करना",
-vision7:"आजादी से जीना",
-vision8:"मानवता की मदद करना",
-vision9:"मेहनत से सफलता पाना",
-backHome:"← होम पेज पर वापस",
-footerText:"सर्वाधिकार सुरक्षित।"
-},
-
-or: {
-edition:"ମୋ ବ୍ୟକ୍ତିଗତ ଦୁନିଆ",
-tagline:"ମୋ ବିଷୟରେ ଏକ ଛୋଟ ପରିଚୟ",
-page1Label:"ପ୍ରଥମ ପୃଷ୍ଠା",
-page1Title:"ଏକ ଶାନ୍ତ ମନ, ଚିନ୍ତାର ଦୁନିଆ",
-page1Text:"ପ୍ରତ୍ୟେକ ମଣିଷ ଦୁନିଆକୁ ନିଜ ନଜରରେ ଦେଖେ। ଏହି ପୃଷ୍ଠା ମୋ ଚିନ୍ତାଧାରା, ସ୍ୱଭାବ ଓ ପସନ୍ଦର ଏକ ଛୋଟ ପରିଚୟ।",
-page2Label:"ବ୍ୟକ୍ତିଗତ ପ୍ରୋଫାଇଲ",
-page2Title:"ନାମ ପଛରେ ଥିବା ମଣିଷ",
-page3Label:"ମୁଁ ନିଜେ",
-page3Title:"ମୋ ବିଷୟରେ",
-page3Text:"ମୁଁ ଗଭୀର ଭାବେ ଚିନ୍ତା କରିବା, ଜୀବନକୁ ବୁଝିବା ଏବଂ ଭିନ୍ନ ମତ ଜାଣିବାକୁ ପସନ୍ଦ କରେ।",
-page4Label:"ମୋ ପସନ୍ଦ",
-page4Title:"ମୋତେ ଭଲ ଲାଗୁଥିବା ଜିନିଷ",
-page5Label:"ମୋ ସ୍ୱଭାବ",
-page5Title:"ନୀରବତା ମୋର ଶାନ୍ତି",
-page5Text:"ମୋତେ ନୀରବତା, ଶାନ୍ତ ରାତି ଏବଂ ଜହ୍ନ ଆଲୋକ ଭଲ ଲାଗେ। ଅଧିକ ଶବ୍ଦ ଓ ତୀବ୍ର ଆଲୋକ ମୋତେ ପସନ୍ଦ ନୁହେଁ।",
-page6Label:"ଗୁଣ ଓ ଦୁର୍ବଳତା",
-page6Title:"ମୋର ଶକ୍ତିଶାଳୀ ଓ ସମ୍ବେଦନଶୀଳ ପକ୍ଷ",
-page7Label:"ମୋ ଚିନ୍ତାଧାରା",
-page7Title:"ସମ୍ମାନ, ଦୟା ଓ ସ୍ୱାଧୀନତା",
-page7Text:"ମୋର ବିଶ୍ୱାସ ଯେ ସମସ୍ତଙ୍କୁ ସମ୍ମାନ ଦେବା ଉଚିତ। ପ୍ରତ୍ୟେକଙ୍କୁ ଖୁସି, ଶାନ୍ତି ଓ ସ୍ୱାଧୀନତା ମିଳିବା ଉଚିତ।",
-page8Label:"ମୋ ଜୀବନଶୈଳୀ",
-page8Title:"ଛୋଟ ଖୁସି, ସୁନ୍ଦର ଜୀବନ",
-page8Text:"ମୋତେ ସରଳ ଓ ଶାନ୍ତ ଜୀବନ ପସନ୍ଦ। ଗଛ ତଳେ ବସିବା ଏବଂ ପ୍ରକୃତି ପାଖରେ ସମୟ ବିତାଇବା ମୋତେ ଖୁସି ଦିଏ।",
-page9Label:"ପଶୁପକ୍ଷୀ",
-page9Title:"ମୋତେ ପସନ୍ଦ ପଶୁ",
-page9Text:"ମୋତେ ଘୋଡ଼ା, କୁକୁର, ବିଲେଇ, ପକ୍ଷୀ, ଛେଳି, କୁକୁଡ଼ା ଓ ଗାଈ ଭଲ ଲାଗେ।",
-page10Label:"ପ୍ରିୟ ମୁହୂର୍ତ୍ତ",
-page10Title:"ମନେ ରହିଯାଉଥିବା ମୁହୂର୍ତ୍ତ",
-page10Text:"ଗଛ ତଳେ ଶାନ୍ତ ଅପରାହ୍ନ, ପାଣି ପାଖରେ ସୁନ୍ଦର ସନ୍ଧ୍ୟା ଏବଂ ଜହ୍ନ ରାତି ମୋ ପାଇଁ ବିଶେଷ।",
-page11Label:"ସ୍ୱପ୍ନର ଜୀବନ",
-page11Title:"ପ୍ରକୃତି ପାଖରେ ଏକ ଶାନ୍ତ ଜୀବନ",
-page11Text:"ମୋର ସ୍ୱପ୍ନ ହେଉଛି ପ୍ରକୃତି ପାଖରେ ଏକ ସରଳ ଓ ଶାନ୍ତ ଘର।",
-page12Label:"ମୋର ଲକ୍ଷ୍ୟ",
-page12Title:"ଯେଉଁ ସ୍ୱପ୍ନକୁ ସତ କରିବାକୁ ଚାହେଁ",
-nameLabel:"ନାମ:",
-locationLabel:"ସ୍ଥାନ:",
-colorLabel:"ପସନ୍ଦର ରଙ୍ଗ:",
-foodLabel:"ପସନ୍ଦର ଖାଦ୍ୟ:",
-interest1:"ଟେକ୍ନୋଲୋଜି ଓ କମ୍ପ୍ୟୁଟର",
-interest2:"ନୂଆ ଜିନିଷ ଶିଖିବା",
-interest3:"ଗଭୀର ଚିନ୍ତା ଓ ଧାରଣା",
-interest4:"ଶାନ୍ତ ପ୍ରକୃତି",
-interest5:"ଏକୁଟିଆ ଶାନ୍ତ ସମୟ ବିତାଇବା",
-strengthLabel:"ମୋର ଗୁଣ:",
-strengthText:"ମୁଁ ଅନ୍ୟମାନଙ୍କ ଭାବନା ବୁଝିବାକୁ ଚେଷ୍ଟା କରେ ଏବଂ ସାହାଯ୍ୟ କରିବାକୁ ପସନ୍ଦ କରେ।",
-weaknessLabel:"ମୋର ଦୁର୍ବଳତା:",
-weaknessText:"କେବେ କେବେ ମୁଁ ଲୋକଙ୍କୁ ଶୀଘ୍ର ବିଶ୍ୱାସ କରିଦିଏ।",
-vision1:"ନିଜର ପରିଚୟ ତିଆରି କରିବା",
-vision2:"ଆର୍ଥିକ ଭାବେ ସ୍ୱାଧୀନ ହେବା",
-vision3:"ସଫଳ ଉଦ୍ୟୋଗୀ ହେବା",
-vision4:"ଟେକ୍ନୋଲୋଜି ଜାଣିବା",
-vision5:"ନୂଆ ସୁଯୋଗ ଖୋଜିବା",
-vision6:"ଅଧିକ ଜ୍ଞାନ ହାସଲ କରିବା",
-vision7:"ସ୍ୱାଧୀନ ଭାବେ ବଞ୍ଚିବା",
-vision8:"ମାନବତାର ସାହାଯ୍ୟ କରିବା",
-vision9:"ପରିଶ୍ରମରେ ସଫଳତା ପାଇବା",
-backHome:"← ହୋମ ପେଜକୁ ଫେରନ୍ତୁ",
-footerText:"ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।"
-}
-
-};
-
-const languageNames = {
-en:"English",
-roman:"Roman Hindi",
-ur:"Urdu",
-hi:"Hindi",
-or:"Odia"
-};
-
-function openLanguages(){
-document.getElementById("languageMenu").classList.toggle("show");
-}
-
-function changeLanguage(lang){
-const words = translations[lang];
-if(!words) return;
-
-document.querySelectorAll("[data-i18n]").forEach(element=>{
-const key = element.getAttribute("data-i18n");
-if(words[key] !== undefined){
-element.textContent = words[key];
-}
-});
-
-document.getElementById("languageName").textContent =
-languageNames[lang] + " ▼";
-
-document.querySelectorAll("#languageMenu button").forEach(button=>{
-button.classList.toggle("active",button.dataset.lang===lang);
-});
-
-document.documentElement.lang = lang==="roman" ? "hi" : lang;
-document.documentElement.dir = lang==="ur" ? "rtl" : "ltr";
-
-try{
-localStorage.setItem("siteLanguage",lang);
-}catch(error){}
-
-document.getElementById("languageMenu").classList.remove("show");
-}
-
-function toggleTheme(){
-document.body.classList.toggle("light");
-
-const isLight = document.body.classList.contains("light");
-
-document.getElementById("themeButton").textContent =
-isLight ? "☾" : "☼";
-
-try{
-localStorage.setItem("siteTheme",isLight ? "light" : "dark");
-}catch(error){}
-}
-
-document.getElementById("year").textContent =
-new Date().getFullYear();
-
-document.addEventListener("click",function(event){
-const wrap = document.querySelector(".language-wrap");
-if(!wrap.contains(event.target)){
-document.getElementById("languageMenu").classList.remove("show");
-}
-});
-
-window.addEventListener("DOMContentLoaded",function(){
-let savedTheme = "dark";
-let savedLanguage = "en";
-
-try{
-savedTheme = localStorage.getItem("siteTheme") || "dark";
-savedLanguage = localStorage.getItem("siteLanguage") || "en";
-}catch(error){}
-
-if(savedTheme==="light"){
-document.body.classList.add("light");
-document.getElementById("themeButton").textContent="☾";
-}
-
-changeLanguage(savedLanguage);
-});
-</script>
-
-</body>
-    </html>
-    
-ur: {
-  pageTitle:"میرا تعارف | SK TALIB",
-  home:"ہوم",
-  about:"میرے بارے میں",
-  footerText:"تمام حقوق محفوظ ہیں۔",
-  backHome:"ہوم پیج پر واپس جائیں",
-  interestTitle:"میرے مشاغل",
-  storyTitle:"میری کہانی",
-  contactTitle:"رابطہ کریں",
+  welcome:"میری دنیا میں خوش آمدید",
+  introText:"میری زندگی کا سفر، خیالات، دلچسپیاں، یادیں اور خاص لمحات کا ایک مجموعہ۔",
+  whoTitle:"میں کون ہوں؟",
+  whoText:"میں SK Talib ہوں۔ میرا ماننا ہے کہ ہر انسان کی اپنی ایک کہانی ہوتی ہے۔ اس ویب سائٹ پر میں اپنی پہچان، تجربات اور دلچسپیاں شیئر کرتا ہوں۔",
+  detailsTitle:"چند اہم تفصیلات",
   nameLabel:"نام",
   locationLabel:"مقام",
-  colourLabel:"پسندیدہ رنگ",
-  foodLabel:"پسندیدہ کھانا"
+  dreamLabel:"میرا اصول",
+  websiteLabel:"ویب سائٹ",
+  journeyTitle:"اب تک کا سفر",
+  journeyText:"زندگی تجربات، مشکلات اور نئی شروعات کا سفر ہے۔ ہر باب کچھ سکھاتا ہے اور ہر قدم ایک نیا امکان پیدا کرتا ہے۔",
+  educationTitle:"تعلیم اور ترقی",
+  educationText:"میں الیکٹریکل اینڈ الیکٹرانکس انجینئرنگ میں ڈپلومہ کر رہا ہوں۔ مجھے ٹیکنالوجی اور عملی مہارتیں سیکھنا پسند ہے۔",
+  interestTitle:"میری دلچسپیاں",
+  interestText:"ٹیکنالوجی، ویب سائٹس، تخلیقی خیالات، الیکٹرانکس، ڈیزائن اور نئی چیزیں دریافت کرنا میری دلچسپیوں میں شامل ہیں۔",
+  quoteText:"تمہاری کہانی ابھی لکھی جا رہی ہے۔ ہر باب کو خاص بناؤ۔",
+  visionTitle:"میرے خواب اور مقصد",
+  visionText:"میرا مقصد خود کو بہتر بنانا، مفید چیزیں بنانا، علم حاصل کرنا اور محنت سے اپنا مستقبل بنانا ہے۔",
+  noteTitle:"آنے والوں کے نام پیغام",
+  noteText:"میری ذاتی ویب سائٹ پر آنے کا شکریہ۔ میری دلچسپیوں، کہانیوں، گیلری اور منصوبوں کو دیکھنے کے لیے مختلف حصے کھولیں۔",
+  backHome:"← ہوم پیج پر واپس جائیں",
+  footerText:"تمام حقوق محفوظ ہیں۔"
 },
 
 hi: {
-  pageTitle:"मेरे बारे में | SK TALIB",
-  home:"होम",
-  about:"मेरे बारे में",
-  footerText:"सभी अधिकार सुरक्षित हैं।",
-  backHome:"होम पेज पर वापस जाएं",
-  interestTitle:"मेरे शौक",
-  storyTitle:"मेरी कहानी",
-  contactTitle:"संपर्क करें",
+  welcome:"मेरी दुनिया में आपका स्वागत है",
+  introText:"मेरी जिंदगी का सफर, विचार, पसंद, यादें और खास पलों का एक छोटा सा संग्रह।",
+  whoTitle:"मैं कौन हूँ?",
+  whoText:"मैं SK Talib हूँ। मेरा मानना है कि हर इंसान की अपनी एक कहानी होती है। इस वेबसाइट पर मैं अपनी पहचान, अनुभव और पसंद साझा करता हूँ।",
+  detailsTitle:"कुछ जरूरी बातें",
   nameLabel:"नाम",
   locationLabel:"स्थान",
-  colourLabel:"पसंदीदा रंग",
-  foodLabel:"पसंदीदा खाना"
+  dreamLabel:"मेरा उसूल",
+  websiteLabel:"वेबसाइट",
+  journeyTitle:"अब तक का सफर",
+  journeyText:"जिंदगी अनुभवों, मुश्किलों और नई शुरुआत का सफर है। हर अध्याय कुछ सिखाता है और हर कदम एक नई संभावना बनाता है।",
+  educationTitle:"शिक्षा और विकास",
+  educationText:"मैं इलेक्ट्रिकल और इलेक्ट्रॉनिक्स इंजीनियरिंग में डिप्लोमा कर रहा हूँ। मुझे टेक्नोलॉजी और प्रैक्टिकल स्किल्स सीखना पसंद है।",
+  interestTitle:"मेरी पसंद",
+  interestText:"टेक्नोलॉजी, वेबसाइट, नए विचार, इलेक्ट्रॉनिक्स, डिजाइन और नई चीजें खोजना मुझे पसंद है।",
+  quoteText:"तुम्हारी कहानी अभी लिखी जा रही है। हर अध्याय को खास बनाओ।",
+  visionTitle:"मेरे सपने और लक्ष्य",
+  visionText:"मेरा लक्ष्य खुद को बेहतर बनाना, उपयोगी चीजें बनाना, ज्ञान हासिल करना और मेहनत से अपना भविष्य बनाना है।",
+  noteTitle:"आने वालों के लिए संदेश",
+  noteText:"मेरी निजी वेबसाइट पर आने के लिए धन्यवाद। मेरी पसंद, कहानियां, गैलरी और प्रोजेक्ट देखने के लिए अलग-अलग सेक्शन देखें।",
+  backHome:"← होम पेज पर वापस जाएं",
+  footerText:"सभी अधिकार सुरक्षित हैं।"
 },
 
 or: {
-  pageTitle:"ମୋ ବିଷୟରେ | SK TALIB",
-  home:"ହୋମ୍",
-  about:"ମୋ ବିଷୟରେ",
-  footerText:"ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।",
-  backHome:"ହୋମ୍ ପେଜକୁ ଫେରନ୍ତୁ",
-  interestTitle:"ମୋର ଆଗ୍ରହ",
-  storyTitle:"ମୋ କାହାଣୀ",
-  contactTitle:"ଯୋଗାଯୋଗ କରନ୍ତୁ",
+  welcome:"ମୋ ଦୁନିଆକୁ ସ୍ୱାଗତ",
+  introText:"ମୋ ଜୀବନର ଯାତ୍ରା, ଚିନ୍ତାଧାରା, ରୁଚି, ସ୍ମୃତି ଏବଂ ବିଶେଷ ମୁହୂର୍ତ୍ତଗୁଡ଼ିକର ଏକ ସଂଗ୍ରହ।",
+  whoTitle:"ମୁଁ କିଏ?",
+  whoText:"ମୁଁ SK Talib। ମୋର ବିଶ୍ୱାସ ଯେ ପ୍ରତ୍ୟେକ ମଣିଷର ନିଜର ଏକ କାହାଣୀ ଅଛି। ଏହି ୱେବସାଇଟରେ ମୁଁ ମୋର ପରିଚୟ, ଅନୁଭୂତି ଏବଂ ରୁଚି ବିଷୟରେ ଲେଖିଛି।",
+  detailsTitle:"କିଛି ଜରୁରୀ ତଥ୍ୟ",
   nameLabel:"ନାମ",
   locationLabel:"ସ୍ଥାନ",
-  colourLabel:"ପ୍ରିୟ ରଙ୍ଗ",
-  foodLabel:"ପ୍ରିୟ ଖାଦ୍ୟ"
+  dreamLabel:"ମୋର ଲକ୍ଷ୍ୟ",
+  websiteLabel:"ୱେବସାଇଟ",
+  journeyTitle:"ଏପର୍ଯ୍ୟନ୍ତର ଯାତ୍ରା",
+  journeyText:"ଜୀବନ ହେଉଛି ଅନୁଭୂତି, ସମସ୍ୟା ଏବଂ ନୂତନ ଆରମ୍ଭର ଏକ ଯାତ୍ରା। ପ୍ରତ୍ୟେକ ଅଧ୍ୟାୟ ଆମକୁ କିଛି ଶିଖାଏ।",
+  educationTitle:"ଶିକ୍ଷା ଏବଂ ବିକାଶ",
+  educationText:"ମୁଁ ଇଲେକ୍ଟ୍ରିକାଲ ଏବଂ ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଇଞ୍ଜିନିୟରିଂରେ ଡିପ୍ଲୋମା କରୁଛି। ମୋତେ ଟେକ୍ନୋଲୋଜି ଏବଂ ପ୍ରାକ୍ଟିକାଲ ଦକ୍ଷତା ଶିଖିବାକୁ ଭଲ ଲାଗେ।",
+  interestTitle:"ମୋର ଆଗ୍ରହ",
+  interestText:"ଟେକ୍ନୋଲୋଜି, ୱେବସାଇଟ, ନୂତନ ଚିନ୍ତାଧାରା, ଇଲେକ୍ଟ୍ରୋନିକ୍ସ, ଡିଜାଇନ ଏବଂ ନୂଆ ଜିନିଷ ଜାଣିବା ମୋତେ ଭଲ ଲାଗେ।",
+  quoteText:"ତୁମର କାହାଣୀ ଏବେ ମଧ୍ୟ ଲେଖାଯାଉଛି। ପ୍ରତ୍ୟେକ ଅଧ୍ୟାୟକୁ ସ୍ୱତନ୍ତ୍ର କର।",
+  visionTitle:"ମୋର ସ୍ୱପ୍ନ ଏବଂ ଲକ୍ଷ୍ୟ",
+  visionText:"ମୋର ଲକ୍ଷ୍ୟ ହେଉଛି ନିଜକୁ ଉନ୍ନତ କରିବା, ଉପଯୋଗୀ ଜିନିଷ ତିଆରି କରିବା ଏବଂ ପରିଶ୍ରମ ଦ୍ୱାରା ଭବିଷ୍ୟତ ଗଢ଼ିବା।",
+  noteTitle:"ଦର୍ଶକମାନଙ୍କ ପାଇଁ ବାର୍ତ୍ତା",
+  noteText:"ମୋର ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟକୁ ଆସିଥିବାରୁ ଧନ୍ୟବାଦ। ମୋର ଆଗ୍ରହ, କାହାଣୀ, ଗ୍ୟାଲେରୀ ଏବଂ ପ୍ରୋଜେକ୍ଟ ଦେଖନ୍ତୁ।",
+  backHome:"← ହୋମ୍ ପେଜକୁ ଫେରନ୍ତୁ",
+  footerText:"ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।"
 }
 };
+
+function showLanguages() {
+  const menu = document.getElementById("languageMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
 
 function changeLanguage(lang) {
   const selected = translations[lang];
@@ -1007,19 +489,18 @@ function changeLanguage(lang) {
     }
   });
 
-  localStorage.setItem("siteLanguage", lang);
+  const names = {
+    en:"English",
+    roman:"Roman Hindi",
+    ur:"Urdu",
+    hi:"Hindi",
+    or:"Odia"
+  };
 
-  const label = document.getElementById("languageLabel");
-  if (label) {
-    const names = {
-      en:"English",
-      roman:"Roman Hindi",
-      ur:"Urdu",
-      hi:"Hindi",
-      or:"Odia"
-    };
-    label.textContent = names[lang] || "English";
-  }
+  document.getElementById("languageLabel").textContent = names[lang];
+  document.getElementById("languageMenu").style.display = "none";
+
+  localStorage.setItem("siteLanguage", lang);
 }
 
 function toggleTheme() {
@@ -1033,21 +514,21 @@ function toggleTheme() {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  try {
-    const savedTheme = localStorage.getItem("siteTheme");
-    const savedLanguage = localStorage.getItem("siteLanguage");
+  const savedTheme = localStorage.getItem("siteTheme");
+  const savedLanguage = localStorage.getItem("siteLanguage");
 
-    if (savedTheme === "light") {
-      document.body.classList.add("light");
-    }
+  if (savedTheme === "light") {
+    document.body.classList.add("light");
+  }
 
-    if (savedLanguage && translations[savedLanguage]) {
-      changeLanguage(savedLanguage);
-    }
-  } catch (error) {
-    console.log("Settings could not be loaded.");
+  if (savedLanguage && translations[savedLanguage]) {
+    changeLanguage(savedLanguage);
   }
 });
 </script>
+
 </body>
 </html>
+
+    
+          
