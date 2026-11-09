@@ -7,489 +7,655 @@
 <title>About Me | SK TALIB</title>
 
 <style>
-:root {
+:root{
   --bg:#080808;
-  --panel:#111111;
-  --text:#eeeeee;
-  --muted:#a6a6a6;
-  --gold:#b99a59;
-  --line:#4b3c20;
+  --paper:#101010;
+  --panel:#151515;
+  --text:#eeeeea;
+  --muted:#aaa69d;
+  --gold:#b99b60;
+  --line:#51432a;
+  --soft:#28231a;
 }
-
-* { box-sizing:border-box; }
-
-body {
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:Arial, sans-serif;
-  transition:.25s;
+  font-family:Arial,Helvetica,sans-serif;
+  transition:background .25s,color .25s;
 }
-
-body.light {
-  --bg:#f4f5f7;
-  --panel:#ffffff;
-  --text:#172033;
-  --muted:#667085;
-  --gold:#315b91;
-  --line:#cbd5e1;
+body.light{
+  --bg:#f1efe9;
+  --paper:#fffdf8;
+  --panel:#f7f3e9;
+  --text:#202020;
+  --muted:#65615a;
+  --gold:#8b6b32;
+  --line:#c9b991;
+  --soft:#e9e1d0;
 }
-
-header {
-  min-height:112px;
-  padding:22px 4%;
+button{font:inherit}
+.site-header{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:15px;
+  align-items:center;
+  gap:18px;
+  padding:24px 4%;
   border-bottom:1px solid var(--line);
+  background:var(--bg);
 }
-
-.brand {
+.brand-name{
   font-size:28px;
   font-weight:800;
   letter-spacing:2px;
 }
-
-.brand span { color:var(--gold); }
-
-.subtitle {
-  margin-top:12px;
-  font-size:12px;
+.brand-name span{color:var(--gold)}
+.brand-sub{
+  margin-top:10px;
+  font-size:11px;
   letter-spacing:5px;
   color:var(--muted);
 }
-
-.controls {
+.header-actions{
   display:flex;
   gap:10px;
   align-items:center;
 }
-
-.control {
+.header-btn{
+  border:1px solid var(--line);
   background:var(--panel);
   color:var(--text);
-  border:1px solid var(--line);
-  border-radius:15px;
+  border-radius:14px;
   padding:13px 15px;
-  font-size:14px;
   cursor:pointer;
 }
-
-.container {
-  width:min(1000px,92%);
-  margin:28px auto;
+.language-wrap{position:relative}
+.language-menu{
+  display:none;
+  position:absolute;
+  z-index:20;
+  right:0;
+  top:55px;
+  min-width:165px;
+  padding:8px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--paper);
+  box-shadow:0 12px 30px #0008;
 }
-
-.masthead {
-  text-align:center;
-  padding:22px 10px;
-  border-top:1px solid var(--gold);
-  border-bottom:3px double var(--gold);
-  margin-bottom:25px;
-}
-
-.masthead small {
-  color:var(--gold);
-  letter-spacing:4px;
-  font-size:11px;
-}
-
-.masthead h1 {
-  font-family:Georgia,serif;
-  font-size:clamp(36px,8vw,68px);
-  margin:12px 0;
-  letter-spacing:2px;
-}
-
-.masthead p {
-  color:var(--muted);
-  letter-spacing:3px;
-  font-size:11px;
-}
-
-.intro {
-  display:grid;
-  grid-template-columns:190px 1fr;
-  gap:25px;
-  align-items:center;
-  padding:22px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.portrait {
+.language-menu button{
+  display:block;
   width:100%;
-  aspect-ratio:4/5;
-  object-fit:cover;
-  border:4px solid var(--panel);
-  outline:1px solid var(--gold);
+  padding:11px;
+  margin:2px 0;
+  border:0;
+  border-radius:7px;
+  text-align:left;
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
 }
-
-.kicker {
-  color:var(--gold);
-  letter-spacing:3px;
-  font-size:11px;
+.language-menu button:hover{background:var(--soft)}
+.page{
+  width:min(1080px,92%);
+  margin:35px auto;
+}
+.newspaper{
+  background:var(--paper);
+  border:1px solid var(--line);
+  padding:clamp(16px,4vw,38px);
+}
+.paper-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line);
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:2px;
   text-transform:uppercase;
 }
-
-.intro h2 {
-  font-family:Georgia,serif;
-  font-size:clamp(27px,5vw,42px);
-  margin:12px 0;
+.paper-masthead{
+  text-align:center;
+  padding:25px 8px 22px;
+  border-bottom:4px double var(--gold);
 }
-
-.intro p, .article p {
-  color:var(--muted);
-  line-height:1.8;
-  font-size:15px;
-}
-
-.signature {
-  color:var(--gold);
-  font-family:cursive;
-  font-size:28px;
-  margin-top:18px;
-}
-
-.article {
-  padding:24px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.article h2 {
-  font-family:Georgia,serif;
-  font-size:27px;
-  margin:0 0 12px;
-}
-
-.article-number {
+.paper-masthead .edition{
   color:var(--gold);
   font-size:11px;
-  letter-spacing:3px;
-  margin-bottom:10px;
+  letter-spacing:5px;
 }
-
-.facts {
+.paper-masthead h1{
+  margin:13px 0 8px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(40px,8vw,76px);
+  line-height:1;
+  letter-spacing:2px;
+}
+.paper-masthead p{
+  margin:12px 0 0;
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:4px;
+}
+.lead-grid{
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  gap:26px;
+  padding:28px 0;
+  border-bottom:1px solid var(--line);
+}
+.lead-photo-wrap{min-width:0}
+.lead-photo{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:310px;
+  max-height:430px;
+  object-fit:cover;
+  object-position:center;
+  filter:grayscale(100%);
+  border:5px solid var(--panel);
+  outline:1px solid var(--gold);
+}
+.photo-caption{
+  margin-top:10px;
+  color:var(--muted);
+  font-family:Georgia,serif;
+  font-size:12px;
+  font-style:italic;
+  text-align:center;
+}
+.lead-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.category{
+  color:var(--gold);
+  font-size:10px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+.lead-copy h2{
+  margin:13px 0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(34px,5vw,54px);
+  line-height:1.05;
+}
+.lead-copy .deck{
+  color:var(--muted);
+  font-family:Georgia,serif;
+  font-size:19px;
+  line-height:1.55;
+}
+.byline{
+  margin-top:20px;
+  padding-top:13px;
+  border-top:1px solid var(--line);
+  color:var(--gold);
+  font-size:11px;
+  letter-spacing:2px;
+}
+.headline-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+  padding:25px 0;
+  border-bottom:1px solid var(--line);
+}
+.story{
+  min-width:0;
+}
+.story + .story{
+  border-left:1px solid var(--line);
+  padding-left:25px;
+}
+.story h2{
+  margin:10px 0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:27px;
+  line-height:1.15;
+}
+.story p{
+  margin:0;
+  color:var(--muted);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:15px;
+  line-height:1.85;
+}
+.wide-feature{
+  padding:26px 0;
+  border-bottom:1px solid var(--line);
+}
+.wide-feature h2{
+  margin:10px 0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:31px;
+}
+.wide-feature p{
+  max-width:850px;
+  color:var(--muted);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:16px;
+  line-height:1.9;
+}
+.pullquote{
+  margin:26px 0;
+  padding:22px 25px;
+  border-top:1px solid var(--gold);
+  border-bottom:1px solid var(--gold);
+  color:var(--text);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(22px,4vw,32px);
+  line-height:1.4;
+  text-align:center;
+}
+.facts-heading{
+  margin:26px 0 15px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--gold);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:28px;
+}
+.facts-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 22px;
+}
+.fact{
+  display:flex;
+  justify-content:space-between;
   gap:12px;
-  margin-top:15px;
+  padding:13px 0;
+  border-bottom:1px dotted var(--line);
+  font-size:13px;
 }
-
-.fact {
-  background:var(--panel);
-  border:1px solid var(--line);
-  padding:15px;
-  border-radius:8px;
+.fact span{color:var(--muted)}
+.fact strong{text-align:right;font-weight:600}
+.closing{
+  padding:27px 0 10px;
+  text-align:center;
 }
-
-.fact small {
-  display:block;
-  color:var(--gold);
-  margin-bottom:7px;
-  letter-spacing:1px;
+.closing h2{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:30px;
 }
-
-.fact strong {
-  font-size:15px;
-  font-weight:600;
+.closing p{
+  color:var(--muted);
+  line-height:1.8;
 }
-
-.quote {
-  margin:25px 0;
-  padding:22px;
-  border-left:3px solid var(--gold);
-  background:var(--panel);
-  font-family:Georgia,serif;
-  font-size:22px;
-  line-height:1.5;
-}
-
-.back {
+.back-link{
   display:inline-block;
-  margin:25px 0;
+  margin-top:18px;
+  padding:12px 20px;
   color:var(--gold);
   text-decoration:none;
   border:1px solid var(--line);
-  padding:12px 17px;
-  border-radius:8px;
+  border-radius:7px;
 }
-
-footer {
+.paper-footer{
+  margin-top:25px;
+  padding:18px 10px 0;
+  border-top:3px double var(--gold);
   text-align:center;
-  border-top:1px solid var(--line);
-  padding:25px 10px;
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
+  letter-spacing:1px;
 }
-
-@media(max-width:600px) {
-  header { padding:18px 4%; }
-  .brand { font-size:23px; }
-  .subtitle { letter-spacing:3px; font-size:10px; }
-  .control { padding:11px 10px; font-size:12px; }
-  .intro { grid-template-columns:115px 1fr; gap:16px; }
-  .intro p, .article p { font-size:14px; }
-  .article h2 { font-size:24px; }
-  .facts { gap:8px; }
-  .fact { padding:11px; }
-  .fact strong { font-size:13px; }
+@media(max-width:650px){
+  .site-header{padding:20px 4%;gap:8px}
+  .brand-name{font-size:23px}
+  .brand-sub{font-size:9px;letter-spacing:3px}
+  .header-actions{gap:7px}
+  .header-btn{padding:11px 9px;font-size:12px}
+  .page{width:94%;margin:18px auto}
+  .newspaper{padding:15px}
+  .paper-top{font-size:8px;letter-spacing:1px}
+  .paper-masthead{padding:22px 4px}
+  .paper-masthead .edition{letter-spacing:3px}
+  .paper-masthead p{letter-spacing:2px}
+  .lead-grid{grid-template-columns:1fr;gap:20px;padding:22px 0}
+  .lead-photo{height:330px;min-height:0}
+  .lead-copy h2{font-size:39px}
+  .lead-copy .deck{font-size:17px}
+  .headline-row{grid-template-columns:1fr;gap:20px}
+  .story + .story{
+    border-left:0;
+    border-top:1px solid var(--line);
+    padding:20px 0 0;
+  }
+  .story h2{font-size:25px}
+  .wide-feature h2{font-size:27px}
+  .facts-grid{grid-template-columns:1fr}
+  .fact{font-size:13px}
 }
-
-[dir="rtl"] body { text-align:right; }
 </style>
 </head>
 
 <body>
 
-<header>
+<header class="site-header">
   <div>
-    <div class="brand">SK <span>TALIB</span></div>
-    <div class="subtitle">PERSONAL WEBSITE</div>
+    <div class="brand-name">SK <span>TALIB</span></div>
+    <div class="brand-sub">PERSONAL WEBSITE</div>
   </div>
 
-  <div class="controls">
-    <button class="control" id="languageButton" onclick="showLanguages()">
-      <span id="languageLabel">English</span> ▼
-    </button>
-    <button class="control" onclick="toggleTheme()" aria-label="Change theme">☼</button>
+  <div class="header-actions">
+    <div class="language-wrap">
+      <button class="header-btn" onclick="toggleLanguageMenu()">
+        <span id="languageLabel">English</span> ▼
+      </button>
+      <div class="language-menu" id="languageMenu">
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('roman')">Roman Hindi</button>
+        <button onclick="changeLanguage('ur')">Urdu</button>
+        <button onclick="changeLanguage('hi')">Hindi</button>
+        <button onclick="changeLanguage('or')">Odia</button>
+      </div>
+    </div>
+    <button class="header-btn" onclick="toggleTheme()" aria-label="Toggle theme">☼</button>
   </div>
 </header>
 
-<div id="languageMenu" style="display:none;position:absolute;right:4%;top:95px;z-index:10;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px;min-width:160px;">
-  <button class="control" style="display:block;width:100%;margin:3px 0" onclick="changeLanguage('en')">English</button>
-  <button class="control" style="display:block;width:100%;margin:3px 0" onclick="changeLanguage('roman')">Roman Hindi</button>
-  <button class="control" style="display:block;width:100%;margin:3px 0" onclick="changeLanguage('ur')">Urdu</button>
-  <button class="control" style="display:block;width:100%;margin:3px 0" onclick="changeLanguage('hi')">Hindi</button>
-  <button class="control" style="display:block;width:100%;margin:3px 0" onclick="changeLanguage('or')">Odia</button>
-</div>
+<main class="page">
+<div class="newspaper">
 
-<main class="container">
+  <div class="paper-top">
+    <span>THE PERSONAL EDITION</span>
+    <span>EST. 2026</span>
+    <span>VOL. 01</span>
+  </div>
 
-  <section class="masthead">
-    <small>THE PERSONAL EDITION</small>
-    <h1>ABOUT ME</h1>
-    <p>A LIFE • A JOURNEY • A STORY</p>
+  <section class="paper-masthead">
+    <div class="edition" data-i18n="edition">A LIFE • A JOURNEY • A STORY</div>
+    <h1 data-i18n="mainTitle">ABOUT ME</h1>
+    <p data-i18n="mainSubtitle">A PERSONAL PORTRAIT OF SK TALIB</p>
   </section>
 
-  <section class="intro">
-    <img class="portrait" src="profile.jpg.jpg" alt="SK TALIB">
-    <div>
-      <div class="kicker" data-i18n="welcome">WELCOME TO MY WORLD</div>
+  <section class="lead-grid">
+    <div class="lead-photo-wrap">
+      <img class="lead-photo" src="profile.jpg.jpg" alt="SK TALIB portrait">
+      <div class="photo-caption" data-i18n="photoCaption">A portrait of SK Talib</div>
+    </div>
+
+    <div class="lead-copy">
+      <div class="category" data-i18n="leadCategory">THE COVER STORY</div>
       <h2>SK TALIB</h2>
-      <p data-i18n="introText">A collection of my journey, thoughts, interests, memories and the moments that make life meaningful.</p>
-      <div class="signature">SK Talib</div>
+      <p class="deck" data-i18n="leadText">A journey shaped by curiosity, ambition, creativity and the courage to keep moving forward.</p>
+      <div class="byline" data-i18n="byline">PERSONAL PROFILE • 2026 EDITION</div>
     </div>
   </section>
 
-  <section class="article">
-    <div class="article-number">01 — INTRODUCTION</div>
-    <h2 data-i18n="whoTitle">Who Am I?</h2>
-    <p data-i18n="whoText">I am SK Talib. I believe every person has a story worth telling. This website is a small space where I share my identity, experiences, interests and personal journey.</p>
+  <section class="headline-row">
+    <article class="story">
+      <div class="category">01 — <span data-i18n="storyOneLabel">INTRODUCTION</span></div>
+      <h2 data-i18n="storyOneTitle">Every Life Has a Story</h2>
+      <p data-i18n="storyOneText">I am SK Talib. I believe every person has a story worth telling. This website is my personal space to share my identity, experiences, interests and the moments that shape my journey.</p>
+    </article>
+
+    <article class="story">
+      <div class="category">02 — <span data-i18n="storyTwoLabel">MY JOURNEY</span></div>
+      <h2 data-i18n="storyTwoTitle">The Road So Far</h2>
+      <p data-i18n="storyTwoText">Life is a journey of experiences, challenges and new beginnings. Every chapter brings a lesson, and every step opens the door to another possibility.</p>
+    </article>
   </section>
 
-  <section class="article">
-    <div class="article-number">02 — PERSONAL DETAILS</div>
-    <h2 data-i18n="detailsTitle">A Few Details</h2>
-    <div class="facts">
-      <div class="fact"><small data-i18n="nameLabel">NAME</small><strong>SK TALIB</strong></div>
-      <div class="fact"><small data-i18n="locationLabel">LOCATION</small><strong>Kendrapara, Odisha, India</strong></div>
-      <div class="fact"><small data-i18n="dreamLabel">MY MOTTO</small><strong>DREAM • CREATE • ACHIEVE</strong></div>
-      <div class="fact"><small data-i18n="websiteLabel">WEBSITE</small><strong>Personal Edition</strong></div>
-    </div>
+  <section class="wide-feature">
+    <div class="category">03 — <span data-i18n="storyThreeLabel">EDUCATION</span></div>
+    <h2 data-i18n="storyThreeTitle">Learning, Building and Growing</h2>
+    <p data-i18n="storyThreeText">I am pursuing a Diploma in Electrical and Electronics Engineering. I enjoy exploring technology, electronics and practical ideas. I believe learning becomes valuable when knowledge is put into action.</p>
   </section>
 
-  <section class="article">
-    <div class="article-number">03 — MY JOURNEY</div>
-    <h2 data-i18n="journeyTitle">The Journey So Far</h2>
-    <p data-i18n="journeyText">Life is a continuous journey of experiences, challenges and new beginnings. Every chapter teaches something, and every step creates a new possibility.</p>
+  <div class="pullquote" data-i18n="quote">
+    “Dream boldly. Create with purpose. Keep moving forward.”
+  </div>
+
+  <section class="headline-row">
+    <article class="story">
+      <div class="category">04 — <span data-i18n="storyFourLabel">INTERESTS</span></div>
+      <h2 data-i18n="storyFourTitle">Things That Inspire Me</h2>
+      <p data-i18n="storyFourText">Technology, website creation, electronics, design and creative ideas inspire me. I enjoy discovering how things work and finding ways to turn ideas into real projects.</p>
+    </article>
+
+    <article class="story">
+      <div class="category">05 — <span data-i18n="storyFiveLabel">MY VISION</span></div>
+      <h2 data-i18n="storyFiveTitle">Looking Ahead</h2>
+      <p data-i18n="storyFiveText">My goal is to keep improving, build useful things, gain knowledge and create a better future through patience, consistency and hard work.</p>
+    </article>
   </section>
 
-  <section class="article">
-    <div class="article-number">04 — EDUCATION</div>
-    <h2 data-i18n="educationTitle">Education & Growth</h2>
-    <p data-i18n="educationText">I am pursuing a Diploma in Electrical and Electronics Engineering. I enjoy exploring technology and developing practical skills that can help turn ideas into reality.</p>
+  <h2 class="facts-heading" data-i18n="factsTitle">A Few Personal Details</h2>
+
+  <section class="facts-grid">
+    <div class="fact"><span data-i18n="factName">Name</span><strong>SK TALIB</strong></div>
+    <div class="fact"><span data-i18n="factLocation">Location</span><strong>Kendrapara, Odisha, India</strong></div>
+    <div class="fact"><span data-i18n="factMotto">Personal motto</span><strong>DREAM • CREATE • ACHIEVE</strong></div>
+    <div class="fact"><span data-i18n="factField">Study field</span><strong>Electrical & Electronics</strong></div>
   </section>
 
-  <section class="article">
-    <div class="article-number">05 — INTERESTS</div>
-    <h2 data-i18n="interestTitle">My Interests</h2>
-    <p data-i18n="interestText">Technology, websites, creative ideas, electronics, design and discovering new things are some of the subjects that interest me.</p>
+  <section class="closing">
+    <div class="category" data-i18n="closingLabel">A NOTE TO VISITORS</div>
+    <h2 data-i18n="closingTitle">Thank You for Being Here</h2>
+    <p data-i18n="closingText">Thank you for visiting my personal website. Explore the other sections to discover more about my stories, interests, gallery and projects.</p>
+    <a href="index.html" class="back-link" data-i18n="backHome">← Back to Home</a>
   </section>
 
-  <section class="quote" data-i18n="quoteText">
-    “Your story is still being written. Make every chapter count.”
-  </section>
+  <footer class="paper-footer">
+    © 2026 SK TALIB • <span data-i18n="footerText">ALL RIGHTS RESERVED</span>
+  </footer>
 
-  <section class="article">
-    <div class="article-number">06 — MY VISION</div>
-    <h2 data-i18n="visionTitle">Dreams & Vision</h2>
-    <p data-i18n="visionText">My goal is to keep improving, build useful things, gain knowledge and create a future through patience, consistency and hard work.</p>
-  </section>
-
-  <section class="article">
-    <div class="article-number">07 — A PERSONAL NOTE</div>
-    <h2 data-i18n="noteTitle">A Note to Visitors</h2>
-    <p data-i18n="noteText">Thank you for visiting my personal website. Explore the different sections to discover more about my interests, stories, gallery and projects.</p>
-  </section>
-
-  <a class="back" href="index.html" data-i18n="backHome">← Back to Home</a>
-
+</div>
 </main>
-
-<footer>
-  © 2026 SK TALIB. <span data-i18n="footerText">All Rights Reserved.</span>
-</footer>
 
 <script>
 const translations = {
-    
+  
 en: {
-  welcome:"WELCOME TO MY WORLD",
-  introText:"A collection of my journey, thoughts, interests, memories and the moments that make life meaningful.",
-  whoTitle:"Who Am I?",
-  whoText:"I am SK Talib. I believe every person has a story worth telling. This website is a small space where I share my identity, experiences, interests and personal journey.",
-  detailsTitle:"A Few Details",
-  nameLabel:"NAME",
-  locationLabel:"LOCATION",
-  dreamLabel:"MY MOTTO",
-  websiteLabel:"WEBSITE",
-  journeyTitle:"The Journey So Far",
-  journeyText:"Life is a continuous journey of experiences, challenges and new beginnings. Every chapter teaches something, and every step creates a new possibility.",
-  educationTitle:"Education & Growth",
-  educationText:"I am pursuing a Diploma in Electrical and Electronics Engineering. I enjoy exploring technology and developing practical skills that can help turn ideas into reality.",
-  interestTitle:"My Interests",
-  interestText:"Technology, websites, creative ideas, electronics, design and discovering new things are some of the subjects that interest me.",
-  quoteText:"Your story is still being written. Make every chapter count.",
-  visionTitle:"Dreams & Vision",
-  visionText:"My goal is to keep improving, build useful things, gain knowledge and create a future through patience, consistency and hard work.",
-  noteTitle:"A Note to Visitors",
-  noteText:"Thank you for visiting my personal website. Explore the different sections to discover more about my interests, stories, gallery and projects.",
+  edition:"A LIFE • A JOURNEY • A STORY",
+  mainTitle:"ABOUT ME",
+  mainSubtitle:"A PERSONAL PORTRAIT OF SK TALIB",
+  photoCaption:"A portrait of SK Talib",
+  leadCategory:"THE COVER STORY",
+  leadText:"A journey shaped by curiosity, ambition, creativity and the courage to keep moving forward.",
+  byline:"PERSONAL PROFILE • 2026 EDITION",
+  storyOneLabel:"INTRODUCTION",
+  storyOneTitle:"Every Life Has a Story",
+  storyOneText:"I am SK Talib. I believe every person has a story worth telling. This website is my personal space to share my identity, experiences, interests and the moments that shape my journey.",
+  storyTwoLabel:"MY JOURNEY",
+  storyTwoTitle:"The Road So Far",
+  storyTwoText:"Life is a journey of experiences, challenges and new beginnings. Every chapter brings a lesson, and every step opens the door to another possibility.",
+  storyThreeLabel:"EDUCATION",
+  storyThreeTitle:"Learning, Building and Growing",
+  storyThreeText:"I am pursuing a Diploma in Electrical and Electronics Engineering. I enjoy exploring technology, electronics and practical ideas. I believe learning becomes valuable when knowledge is put into action.",
+  quote:"Dream boldly. Create with purpose. Keep moving forward.",
+  storyFourLabel:"INTERESTS",
+  storyFourTitle:"Things That Inspire Me",
+  storyFourText:"Technology, website creation, electronics, design and creative ideas inspire me. I enjoy discovering how things work and finding ways to turn ideas into real projects.",
+  storyFiveLabel:"MY VISION",
+  storyFiveTitle:"Looking Ahead",
+  storyFiveText:"My goal is to keep improving, build useful things, gain knowledge and create a better future through patience, consistency and hard work.",
+  factsTitle:"A Few Personal Details",
+  factName:"Name",
+  factLocation:"Location",
+  factMotto:"Personal motto",
+  factField:"Study field",
+  closingLabel:"A NOTE TO VISITORS",
+  closingTitle:"Thank You for Being Here",
+  closingText:"Thank you for visiting my personal website. Explore the other sections to discover more about my stories, interests, gallery and projects.",
   backHome:"← Back to Home",
-  footerText:"All Rights Reserved."
+  footerText:"ALL RIGHTS RESERVED"
 },
 
 roman: {
-  welcome:"MERI DUNIYA MEIN AAPKA SWAGAT HAI",
-  introText:"Meri zindagi ka safar, mere khayalat, pasand, yaadein aur khaas lamhon ka ek chhota sa collection.",
-  whoTitle:"Main Kaun Hoon?",
-  whoText:"Main SK Talib hoon. Mera maanna hai ki har insaan ki apni ek kahani hoti hai. Is website par main apni pehchaan, tajurbe, pasand aur apna safar share karta hoon.",
-  detailsTitle:"Kuch Zaroori Baatein",
-  nameLabel:"NAAM",
-  locationLabel:"JAGAH",
-  dreamLabel:"MERA USOOL",
-  websiteLabel:"WEBSITE",
-  journeyTitle:"Ab Tak Ka Safar",
-  journeyText:"Zindagi tajurbon, mushkilon aur naye shuruaat ka safar hai. Har chapter kuch sikhata hai aur har kadam ek nayi possibility banata hai.",
-  educationTitle:"Taleem Aur Taraqqi",
-  educationText:"Main Electrical and Electronics Engineering mein Diploma kar raha hoon. Mujhe technology aur practical skills seekhna pasand hai.",
-  interestTitle:"Meri Pasand",
-  interestText:"Technology, websites, creative ideas, electronics, design aur nayi cheezein discover karna mujhe pasand hai.",
-  quoteText:"Tumhari kahani abhi likhi ja rahi hai. Har chapter ko khaas banao.",
-  visionTitle:"Mere Sapne Aur Nazar",
-  visionText:"Mera maqsad khud ko behtar banana, useful cheezein banana, knowledge hasil karna aur mehnat se apna future banana hai.",
-  noteTitle:"Visitors Ke Naam Ek Paigham",
-  noteText:"Meri personal website par aane ke liye shukriya. Mere interests, stories, gallery aur projects dekhne ke liye alag-alag sections explore karein.",
+  edition:"EK ZINDAGI • EK SAFAR • EK KAHANI",
+  mainTitle:"MERE BAARE MEIN",
+  mainSubtitle:"SK TALIB KI EK PERSONAL KAHANI",
+  photoCaption:"SK Talib ki tasveer",
+  leadCategory:"MERI KAHANI",
+  leadText:"Jigyasa, khwab, creativity aur aage badhte rehne ke jazbe se bana mera safar.",
+  byline:"PERSONAL PROFILE • 2026 EDITION",
+  storyOneLabel:"PARICHAY",
+  storyOneTitle:"Har Zindagi Ki Ek Kahani Hoti Hai",
+  storyOneText:"Main SK Talib hoon. Mera maanna hai ki har insaan ki ek kahani hoti hai. Ye website meri pehchaan, tajurbe, pasand aur zindagi ke safar ko share karne ki meri personal jagah hai.",
+  storyTwoLabel:"MERA SAFAR",
+  storyTwoTitle:"Ab Tak Ka Raasta",
+  storyTwoText:"Zindagi tajurbon, mushkilon aur nayi shuruaat ka safar hai. Har chapter ek sabaq deta hai aur har kadam ek naya mauka kholta hai.",
+  storyThreeLabel:"TALEEM",
+  storyThreeTitle:"Seekhna, Banana Aur Aage Badhna",
+  storyThreeText:"Main Electrical and Electronics Engineering mein Diploma kar raha hoon. Mujhe technology, electronics aur practical ideas explore karna pasand hai. Mere liye knowledge tab kaam ki hoti hai jab use amal mein laya jaye.",
+  quote:"Bade khwab dekho. Maqsad ke saath banao. Aage badhte raho.",
+  storyFourLabel:"MERI PASAND",
+  storyFourTitle:"Jo Mujhe Inspire Karta Hai",
+  storyFourText:"Technology, website banana, electronics, design aur creative ideas mujhe inspire karte hain. Mujhe cheezon ko samajhna aur ideas ko real projects mein badalna pasand hai.",
+  storyFiveLabel:"MERA VISION",
+  storyFiveTitle:"Aane Wala Kal",
+  storyFiveText:"Mera maqsad khud ko behtar banana, useful cheezein banana, knowledge hasil karna aur sabr, consistency aur mehnat se apna future banana hai.",
+  factsTitle:"Mere Baare Mein Kuch Baatein",
+  factName:"Naam",
+  factLocation:"Jagah",
+  factMotto:"Mera usool",
+  factField:"Padhai ka field",
+  closingLabel:"VISITORS KE LIYE PAIGHAM",
+  closingTitle:"Yahan Aane Ke Liye Shukriya",
+  closingText:"Meri personal website par aane ke liye shukriya. Meri kahani, pasand, gallery aur projects jaanne ke liye doosre sections bhi dekhein.",
   backHome:"← Home Page Par Wapas Jayein",
-  footerText:"Sabhi Adhikaar Surakshit Hain."
+  footerText:"SABHI ADHIKAAR SURAKSHIT HAIN"
 },
 
 ur: {
-  welcome:"میری دنیا میں خوش آمدید",
-  introText:"میری زندگی کا سفر، خیالات، دلچسپیاں، یادیں اور خاص لمحات کا ایک مجموعہ۔",
-  whoTitle:"میں کون ہوں؟",
-  whoText:"میں SK Talib ہوں۔ میرا ماننا ہے کہ ہر انسان کی اپنی ایک کہانی ہوتی ہے۔ اس ویب سائٹ پر میں اپنی پہچان، تجربات اور دلچسپیاں شیئر کرتا ہوں۔",
-  detailsTitle:"چند اہم تفصیلات",
-  nameLabel:"نام",
-  locationLabel:"مقام",
-  dreamLabel:"میرا اصول",
-  websiteLabel:"ویب سائٹ",
-  journeyTitle:"اب تک کا سفر",
-  journeyText:"زندگی تجربات، مشکلات اور نئی شروعات کا سفر ہے۔ ہر باب کچھ سکھاتا ہے اور ہر قدم ایک نیا امکان پیدا کرتا ہے۔",
-  educationTitle:"تعلیم اور ترقی",
-  educationText:"میں الیکٹریکل اینڈ الیکٹرانکس انجینئرنگ میں ڈپلومہ کر رہا ہوں۔ مجھے ٹیکنالوجی اور عملی مہارتیں سیکھنا پسند ہے۔",
-  interestTitle:"میری دلچسپیاں",
-  interestText:"ٹیکنالوجی، ویب سائٹس، تخلیقی خیالات، الیکٹرانکس، ڈیزائن اور نئی چیزیں دریافت کرنا میری دلچسپیوں میں شامل ہیں۔",
-  quoteText:"تمہاری کہانی ابھی لکھی جا رہی ہے۔ ہر باب کو خاص بناؤ۔",
-  visionTitle:"میرے خواب اور مقصد",
-  visionText:"میرا مقصد خود کو بہتر بنانا، مفید چیزیں بنانا، علم حاصل کرنا اور محنت سے اپنا مستقبل بنانا ہے۔",
-  noteTitle:"آنے والوں کے نام پیغام",
-  noteText:"میری ذاتی ویب سائٹ پر آنے کا شکریہ۔ میری دلچسپیوں، کہانیوں، گیلری اور منصوبوں کو دیکھنے کے لیے مختلف حصے کھولیں۔",
+  edition:"ایک زندگی • ایک سفر • ایک کہانی",
+  mainTitle:"میرے بارے میں",
+  mainSubtitle:"ایس کے طالب کی ذاتی کہانی",
+  photoCaption:"ایس کے طالب کی تصویر",
+  leadCategory:"میری کہانی",
+  leadText:"تجسس، خوابوں، تخلیقی صلاحیتوں اور آگے بڑھنے کے حوصلے سے بنا میرا سفر۔",
+  byline:"ذاتی تعارف • 2026 ایڈیشن",
+  storyOneLabel:"تعارف",
+  storyOneTitle:"ہر زندگی کی ایک کہانی ہوتی ہے",
+  storyOneText:"میں SK Talib ہوں۔ میرا ماننا ہے کہ ہر انسان کی اپنی ایک کہانی ہوتی ہے۔ یہ ویب سائٹ میری پہچان، تجربات، دلچسپیوں اور زندگی کے سفر کو شیئر کرنے کی ذاتی جگہ ہے۔",
+  storyTwoLabel:"میرا سفر",
+  storyTwoTitle:"اب تک کا راستہ",
+  storyTwoText:"زندگی تجربات، مشکلات اور نئی شروعات کا سفر ہے۔ ہر باب ایک سبق دیتا ہے اور ہر قدم ایک نیا موقع پیدا کرتا ہے۔",
+  storyThreeLabel:"تعلیم",
+  storyThreeTitle:"سیکھنا، بنانا اور آگے بڑھنا",
+  storyThreeText:"میں الیکٹریکل اینڈ الیکٹرانکس انجینئرنگ میں ڈپلومہ کر رہا ہوں۔ مجھے ٹیکنالوجی، الیکٹرانکس اور عملی خیالات کو سمجھنا پسند ہے۔",
+  quote:"بڑے خواب دیکھو۔ مقصد کے ساتھ تخلیق کرو۔ آگے بڑھتے رہو۔",
+  storyFourLabel:"دلچسپیاں",
+  storyFourTitle:"وہ چیزیں جو مجھے متاثر کرتی ہیں",
+  storyFourText:"ٹیکنالوجی، ویب سائٹ بنانا، الیکٹرانکس، ڈیزائن اور تخلیقی خیالات مجھے متاثر کرتے ہیں۔",
+  storyFiveLabel:"میرا مقصد",
+  storyFiveTitle:"آنے والا کل",
+  storyFiveText:"میرا مقصد خود کو بہتر بنانا، مفید چیزیں بنانا، علم حاصل کرنا اور محنت سے اپنا مستقبل سنوارنا ہے۔",
+  factsTitle:"میرے بارے میں چند باتیں",
+  factName:"نام",
+  factLocation:"مقام",
+  factMotto:"میرا اصول",
+  factField:"تعلیم کا شعبہ",
+  closingLabel:"آنے والوں کے لیے پیغام",
+  closingTitle:"یہاں آنے کا شکریہ",
+  closingText:"میری ذاتی ویب سائٹ پر آنے کا شکریہ۔ میری کہانیوں، دلچسپیوں، گیلری اور منصوبوں کو جاننے کے لیے دوسرے حصے بھی دیکھیں۔",
   backHome:"← ہوم پیج پر واپس جائیں",
-  footerText:"تمام حقوق محفوظ ہیں۔"
+  footerText:"تمام حقوق محفوظ ہیں"
 },
 
 hi: {
-  welcome:"मेरी दुनिया में आपका स्वागत है",
-  introText:"मेरी जिंदगी का सफर, विचार, पसंद, यादें और खास पलों का एक छोटा सा संग्रह।",
-  whoTitle:"मैं कौन हूँ?",
-  whoText:"मैं SK Talib हूँ। मेरा मानना है कि हर इंसान की अपनी एक कहानी होती है। इस वेबसाइट पर मैं अपनी पहचान, अनुभव और पसंद साझा करता हूँ।",
-  detailsTitle:"कुछ जरूरी बातें",
-  nameLabel:"नाम",
-  locationLabel:"स्थान",
-  dreamLabel:"मेरा उसूल",
-  websiteLabel:"वेबसाइट",
-  journeyTitle:"अब तक का सफर",
-  journeyText:"जिंदगी अनुभवों, मुश्किलों और नई शुरुआत का सफर है। हर अध्याय कुछ सिखाता है और हर कदम एक नई संभावना बनाता है।",
-  educationTitle:"शिक्षा और विकास",
-  educationText:"मैं इलेक्ट्रिकल और इलेक्ट्रॉनिक्स इंजीनियरिंग में डिप्लोमा कर रहा हूँ। मुझे टेक्नोलॉजी और प्रैक्टिकल स्किल्स सीखना पसंद है।",
-  interestTitle:"मेरी पसंद",
-  interestText:"टेक्नोलॉजी, वेबसाइट, नए विचार, इलेक्ट्रॉनिक्स, डिजाइन और नई चीजें खोजना मुझे पसंद है।",
-  quoteText:"तुम्हारी कहानी अभी लिखी जा रही है। हर अध्याय को खास बनाओ।",
-  visionTitle:"मेरे सपने और लक्ष्य",
-  visionText:"मेरा लक्ष्य खुद को बेहतर बनाना, उपयोगी चीजें बनाना, ज्ञान हासिल करना और मेहनत से अपना भविष्य बनाना है।",
-  noteTitle:"आने वालों के लिए संदेश",
-  noteText:"मेरी निजी वेबसाइट पर आने के लिए धन्यवाद। मेरी पसंद, कहानियां, गैलरी और प्रोजेक्ट देखने के लिए अलग-अलग सेक्शन देखें।",
+  edition:"एक जिंदगी • एक सफर • एक कहानी",
+  mainTitle:"मेरे बारे में",
+  mainSubtitle:"SK TALIB की एक निजी कहानी",
+  photoCaption:"SK Talib की तस्वीर",
+  leadCategory:"मेरी कहानी",
+  leadText:"जिज्ञासा, सपनों, रचनात्मकता और आगे बढ़ते रहने के हौसले से बना मेरा सफर।",
+  byline:"व्यक्तिगत परिचय • 2026 संस्करण",
+  storyOneLabel:"परिचय",
+  storyOneTitle:"हर जिंदगी की एक कहानी होती है",
+  storyOneText:"मैं SK Talib हूँ। मेरा मानना है कि हर इंसान की अपनी एक कहानी होती है। यह वेबसाइट मेरी पहचान, अनुभव, पसंद और जीवन के सफर को साझा करने की मेरी निजी जगह है।",
+  storyTwoLabel:"मेरा सफर",
+  storyTwoTitle:"अब तक का रास्ता",
+  storyTwoText:"जिंदगी अनुभवों, मुश्किलों और नई शुरुआत का सफर है। हर अध्याय एक सीख देता है और हर कदम एक नया मौका खोलता है।",
+  storyThreeLabel:"शिक्षा",
+  storyThreeTitle:"सीखना, बनाना और आगे बढ़ना",
+  storyThreeText:"मैं इलेक्ट्रिकल और इलेक्ट्रॉनिक्स इंजीनियरिंग में डिप्लोमा कर रहा हूँ। मुझे टेक्नोलॉजी, इलेक्ट्रॉनिक्स और व्यावहारिक विचारों को समझना पसंद है।",
+  quote:"बड़े सपने देखो। उद्देश्य के साथ बनाओ। आगे बढ़ते रहो।",
+  storyFourLabel:"मेरी पसंद",
+  storyFourTitle:"वे चीजें जो मुझे प्रेरित करती हैं",
+  storyFourText:"टेक्नोलॉजी, वेबसाइट बनाना, इलेक्ट्रॉनिक्स, डिजाइन और नए विचार मुझे प्रेरित करते हैं।",
+  storyFiveLabel:"मेरा लक्ष्य",
+  storyFiveTitle:"आने वाला कल",
+  storyFiveText:"मेरा लक्ष्य खुद को बेहतर बनाना, उपयोगी चीजें बनाना, ज्ञान हासिल करना और मेहनत से अपना भविष्य बनाना है।",
+  factsTitle:"मेरे बारे में कुछ बातें",
+  factName:"नाम",
+  factLocation:"स्थान",
+  factMotto:"मेरा उसूल",
+  factField:"पढ़ाई का क्षेत्र",
+  closingLabel:"आने वालों के लिए संदेश",
+  closingTitle:"यहाँ आने के लिए धन्यवाद",
+  closingText:"मेरी निजी वेबसाइट पर आने के लिए धन्यवाद। मेरी कहानियों, पसंद, गैलरी और प्रोजेक्ट के बारे में जानने के लिए दूसरे सेक्शन भी देखें।",
   backHome:"← होम पेज पर वापस जाएं",
-  footerText:"सभी अधिकार सुरक्षित हैं।"
+  footerText:"सभी अधिकार सुरक्षित हैं"
 },
 
 or: {
-  welcome:"ମୋ ଦୁନିଆକୁ ସ୍ୱାଗତ",
-  introText:"ମୋ ଜୀବନର ଯାତ୍ରା, ଚିନ୍ତାଧାରା, ରୁଚି, ସ୍ମୃତି ଏବଂ ବିଶେଷ ମୁହୂର୍ତ୍ତଗୁଡ଼ିକର ଏକ ସଂଗ୍ରହ।",
-  whoTitle:"ମୁଁ କିଏ?",
-  whoText:"ମୁଁ SK Talib। ମୋର ବିଶ୍ୱାସ ଯେ ପ୍ରତ୍ୟେକ ମଣିଷର ନିଜର ଏକ କାହାଣୀ ଅଛି। ଏହି ୱେବସାଇଟରେ ମୁଁ ମୋର ପରିଚୟ, ଅନୁଭୂତି ଏବଂ ରୁଚି ବିଷୟରେ ଲେଖିଛି।",
-  detailsTitle:"କିଛି ଜରୁରୀ ତଥ୍ୟ",
-  nameLabel:"ନାମ",
-  locationLabel:"ସ୍ଥାନ",
-  dreamLabel:"ମୋର ଲକ୍ଷ୍ୟ",
-  websiteLabel:"ୱେବସାଇଟ",
-  journeyTitle:"ଏପର୍ଯ୍ୟନ୍ତର ଯାତ୍ରା",
-  journeyText:"ଜୀବନ ହେଉଛି ଅନୁଭୂତି, ସମସ୍ୟା ଏବଂ ନୂତନ ଆରମ୍ଭର ଏକ ଯାତ୍ରା। ପ୍ରତ୍ୟେକ ଅଧ୍ୟାୟ ଆମକୁ କିଛି ଶିଖାଏ।",
-  educationTitle:"ଶିକ୍ଷା ଏବଂ ବିକାଶ",
-  educationText:"ମୁଁ ଇଲେକ୍ଟ୍ରିକାଲ ଏବଂ ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଇଞ୍ଜିନିୟରିଂରେ ଡିପ୍ଲୋମା କରୁଛି। ମୋତେ ଟେକ୍ନୋଲୋଜି ଏବଂ ପ୍ରାକ୍ଟିକାଲ ଦକ୍ଷତା ଶିଖିବାକୁ ଭଲ ଲାଗେ।",
-  interestTitle:"ମୋର ଆଗ୍ରହ",
-  interestText:"ଟେକ୍ନୋଲୋଜି, ୱେବସାଇଟ, ନୂତନ ଚିନ୍ତାଧାରା, ଇଲେକ୍ଟ୍ରୋନିକ୍ସ, ଡିଜାଇନ ଏବଂ ନୂଆ ଜିନିଷ ଜାଣିବା ମୋତେ ଭଲ ଲାଗେ।",
-  quoteText:"ତୁମର କାହାଣୀ ଏବେ ମଧ୍ୟ ଲେଖାଯାଉଛି। ପ୍ରତ୍ୟେକ ଅଧ୍ୟାୟକୁ ସ୍ୱତନ୍ତ୍ର କର।",
-  visionTitle:"ମୋର ସ୍ୱପ୍ନ ଏବଂ ଲକ୍ଷ୍ୟ",
-  visionText:"ମୋର ଲକ୍ଷ୍ୟ ହେଉଛି ନିଜକୁ ଉନ୍ନତ କରିବା, ଉପଯୋଗୀ ଜିନିଷ ତିଆରି କରିବା ଏବଂ ପରିଶ୍ରମ ଦ୍ୱାରା ଭବିଷ୍ୟତ ଗଢ଼ିବା।",
-  noteTitle:"ଦର୍ଶକମାନଙ୍କ ପାଇଁ ବାର୍ତ୍ତା",
-  noteText:"ମୋର ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟକୁ ଆସିଥିବାରୁ ଧନ୍ୟବାଦ। ମୋର ଆଗ୍ରହ, କାହାଣୀ, ଗ୍ୟାଲେରୀ ଏବଂ ପ୍ରୋଜେକ୍ଟ ଦେଖନ୍ତୁ।",
+  edition:"ଏକ ଜୀବନ • ଏକ ଯାତ୍ରା • ଏକ କାହାଣୀ",
+  mainTitle:"ମୋ ବିଷୟରେ",
+  mainSubtitle:"SK TALIB ଙ୍କ ବ୍ୟକ୍ତିଗତ କାହାଣୀ",
+  photoCaption:"SK Talib ଙ୍କ ଫଟୋ",
+  leadCategory:"ମୋ କାହାଣୀ",
+  leadText:"ଜିଜ୍ଞାସା, ସ୍ୱପ୍ନ, ସୃଜନଶୀଳତା ଏବଂ ଆଗକୁ ବଢ଼ିବାର ସାହସରେ ଗଢ଼ା ମୋର ଯାତ୍ରା।",
+  byline:"ବ୍ୟକ୍ତିଗତ ପରିଚୟ • 2026 ସଂସ୍କରଣ",
+  storyOneLabel:"ପରିଚୟ",
+  storyOneTitle:"ପ୍ରତ୍ୟେକ ଜୀବନର ଏକ କାହାଣୀ ଅଛି",
+  storyOneText:"ମୁଁ SK Talib। ମୋର ବିଶ୍ୱାସ ଯେ ପ୍ରତ୍ୟେକ ମଣିଷର ନିଜର ଏକ କାହାଣୀ ଅଛି। ଏହି ୱେବସାଇଟ୍ ମୋର ପରିଚୟ, ଅନୁଭୂତି ଏବଂ ଜୀବନ ଯାତ୍ରାକୁ ସେୟାର କରିବାର ଏକ ବ୍ୟକ୍ତିଗତ ସ୍ଥାନ।",
+  storyTwoLabel:"ମୋର ଯାତ୍ରା",
+  storyTwoTitle:"ଏପର୍ଯ୍ୟନ୍ତର ରାସ୍ତା",
+  storyTwoText:"ଜୀବନ ହେଉଛି ଅନୁଭୂତି, ସମସ୍ୟା ଏବଂ ନୂତନ ଆରମ୍ଭର ଯାତ୍ରା। ପ୍ରତ୍ୟେକ ଅଧ୍ୟାୟ ଆମକୁ କିଛି ଶିଖାଏ।",
+  storyThreeLabel:"ଶିକ୍ଷା",
+  storyThreeTitle:"ଶିଖିବା, ଗଢ଼ିବା ଏବଂ ଆଗକୁ ବଢ଼ିବା",
+  storyThreeText:"ମୁଁ ଇଲେକ୍ଟ୍ରିକାଲ ଏବଂ ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଇଞ୍ଜିନିୟରିଂରେ ଡିପ୍ଲୋମା କରୁଛି। ମୋତେ ଟେକ୍ନୋଲୋଜି, ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଏବଂ ପ୍ରାୟୋଗିକ ଧାରଣା ଶିଖିବାକୁ ଭଲ ଲାଗେ।",
+  quote:"ବଡ଼ ସ୍ୱପ୍ନ ଦେଖ। ଉଦ୍ଦେଶ୍ୟ ସହିତ ସୃଷ୍ଟି କର। ଆଗକୁ ବଢ଼ି ଚାଲ।",
+  storyFourLabel:"ମୋର ଆଗ୍ରହ",
+  storyFourTitle:"ଯାହା ମୋତେ ପ୍ରେରଣା ଦିଏ",
+  storyFourText:"ଟେକ୍ନୋଲୋଜି, ୱେବସାଇଟ୍ ତିଆରି, ଇଲେକ୍ଟ୍ରୋନିକ୍ସ, ଡିଜାଇନ ଏବଂ ନୂତନ ଚିନ୍ତାଧାରା ମୋତେ ପ୍ରେରଣା ଦିଏ।",
+  storyFiveLabel:"ମୋର ଲକ୍ଷ୍ୟ",
+  storyFiveTitle:"ଆଗାମୀ ଦିନ",
+  storyFiveText:"ମୋର ଲକ୍ଷ୍ୟ ହେଉଛି ନିଜକୁ ଉନ୍ନତ କରିବା, ଉପଯୋଗୀ ଜିନିଷ ତିଆରି କରିବା, ଜ୍ଞାନ ହାସଲ କରିବା ଏବଂ ପରିଶ୍ରମ ଦ୍ୱାରା ଭବିଷ୍ୟତ ଗଢ଼ିବା।",
+  factsTitle:"ମୋ ବିଷୟରେ କିଛି ତଥ୍ୟ",
+  factName:"ନାମ",
+  factLocation:"ସ୍ଥାନ",
+  factMotto:"ମୋର ଲକ୍ଷ୍ୟ",
+  factField:"ପାଠପଢ଼ା ବିଭାଗ",
+  closingLabel:"ଦର୍ଶକମାନଙ୍କ ପାଇଁ ବାର୍ତ୍ତା",
+  closingTitle:"ଏଠାକୁ ଆସିଥିବାରୁ ଧନ୍ୟବାଦ",
+  closingText:"ମୋର ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟକୁ ଆସିଥିବାରୁ ଧନ୍ୟବାଦ। ମୋର କାହାଣୀ, ଆଗ୍ରହ, ଗ୍ୟାଲେରୀ ଏବଂ ପ୍ରୋଜେକ୍ଟ ଜାଣିବା ପାଇଁ ଅନ୍ୟ ବିଭାଗଗୁଡ଼ିକୁ ଦେଖନ୍ତୁ।",
   backHome:"← ହୋମ୍ ପେଜକୁ ଫେରନ୍ତୁ",
-  footerText:"ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।"
+  footerText:"ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ"
 }
 };
 
-function showLanguages() {
-  const menu = document.getElementById("languageMenu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
+function toggleLanguageMenu(){
+  const menu=document.getElementById("languageMenu");
+  menu.style.display=menu.style.display==="block"?"none":"block";
 }
 
-function changeLanguage(lang) {
-  const selected = translations[lang];
-  if (!selected) return;
+function changeLanguage(lang){
+  const data=translations[lang];
+  if(!data)return;
 
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === "ur" ? "rtl" : "ltr";
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ur"?"rtl":"ltr";
 
-  document.querySelectorAll("[data-i18n]").forEach(element => {
-    const key = element.getAttribute("data-i18n");
-    if (selected[key] !== undefined) {
-      element.textContent = selected[key];
+  document.querySelectorAll("[data-i18n]").forEach(element=>{
+    const key=element.getAttribute("data-i18n");
+    if(data[key]!==undefined){
+      element.textContent=data[key];
     }
   });
 
-  const names = {
+  const names={
     en:"English",
     roman:"Roman Hindi",
     ur:"Urdu",
@@ -497,38 +663,39 @@ function changeLanguage(lang) {
     or:"Odia"
   };
 
-  document.getElementById("languageLabel").textContent = names[lang];
-  document.getElementById("languageMenu").style.display = "none";
+  document.getElementById("languageLabel").textContent=names[lang];
+  document.getElementById("languageMenu").style.display="none";
 
-  localStorage.setItem("siteLanguage", lang);
+  try{
+    localStorage.setItem("siteLanguage",lang);
+  }catch(error){}
 }
 
-function toggleTheme() {
+function toggleTheme(){
   document.body.classList.toggle("light");
+  const theme=document.body.classList.contains("light")?"light":"dark";
 
-  const theme = document.body.classList.contains("light")
-    ? "light"
-    : "dark";
-
-  localStorage.setItem("siteTheme", theme);
+  try{
+    localStorage.setItem("siteTheme",theme);
+  }catch(error){}
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  const savedTheme = localStorage.getItem("siteTheme");
-  const savedLanguage = localStorage.getItem("siteLanguage");
+document.addEventListener("DOMContentLoaded",()=>{
+  try{
+    const savedTheme=localStorage.getItem("siteTheme");
+    const savedLanguage=localStorage.getItem("siteLanguage");
 
-  if (savedTheme === "light") {
-    document.body.classList.add("light");
-  }
+    if(savedTheme==="light"){
+      document.body.classList.add("light");
+    }
 
-  if (savedLanguage && translations[savedLanguage]) {
-    changeLanguage(savedLanguage);
+    if(savedLanguage && translations[savedLanguage]){
+      changeLanguage(savedLanguage);
+    }
+  }catch(error){
+    console.log("Saved settings could not be loaded.");
   }
 });
 </script>
-
 </body>
 </html>
-
-    
-          
