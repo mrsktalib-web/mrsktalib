@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>My Products | SK TALIB</title>
+
+<style>
+:root{
+  --bg:#080808;
+  --card:#111;
+  --text:#f5f5f5;
+  --muted:#aaa;
+  --gold:#d4af37;
+  --line:#493b18;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  transition:.25s;
+}
+body.light{
+  --bg:#f5f5f5;
+  --card:#fff;
+  --text:#171717;
+  --muted:#666;
+  --line:#d8bd70;
+}
+header{
+  padding:17px 16px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.logo{
+  color:var(--gold);
+  font-size:19px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+.controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.control{
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:9px 11px;
+  font-size:12px;
+  cursor:pointer;
+}
+.lang-wrap{position:relative}
+.lang-menu{
+  display:none;
+  position:absolute;
+  right:0;
+  top:43px;
+  width:155px;
+  background:var(--card);
+  border:1px solid var(--gold);
+  border-radius:9px;
+  z-index:10;
+  overflow:hidden;
+}
+.lang-menu.show{display:block}
+.lang-menu button{
+  width:100%;
+  display:block;
+  text-align:left;
+  padding:11px;
+  background:none;
+  color:var(--text);
+  border:0;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+}
+main{
+  width:100%;
+  max-width:750px;
+  margin:auto;
+  padding:45px 16px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.heading{
+  text-align:center;
+  margin-bottom:30px;
+}
+.heading h1{
+  color:var(--gold);
+  font-size:29px;
+  margin:0 0 9px;
+  letter-spacing:1px;
+}
+.heading p{
+  color:var(--muted);
+  font-size:14px;
+  margin:0;
+}
+.product-area{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:28px 18px;
+  text-align:center;
+}
+.product-icon{
+  font-size:42px;
+  margin-bottom:16px;
+}
+.view-btn{
+  display:inline-block;
+  background:var(--gold);
+  color:#080808;
+  border:1px solid var(--gold);
+  border-radius:8px;
+  padding:13px 28px;
+  font-size:14px;
+  font-weight:bold;
+  letter-spacing:.6px;
+  cursor:pointer;
+}
+.notice{
+  margin-top:22px;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:rgba(212,175,55,.06);
+}
+.notice-title{
+  color:var(--gold);
+  font-size:14px;
+  font-weight:bold;
+  margin-bottom:9px;
+}
+.notice p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+  margin:0;
+}
+.coming{
+  display:inline-block;
+  margin-top:12px;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  border-radius:20px;
+  padding:6px 13px;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+.back{
+  display:block;
+  width:max-content;
+  margin:30px auto 0;
+  padding:11px 22px;
+  border:1px solid var(--gold);
+  border-radius:8px;
+  color:var(--gold);
+  text-decoration:none;
+  font-size:14px;
+}
+footer{
+  text-align:center;
+  padding:18px 10px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:12px;
+}
+@media(max-width:520px){
+  header{padding:13px 11px}
+  .logo{font-size:16px}
+  .control{padding:8px;font-size:11px}
+  main{padding:35px 13px}
+  .heading h1{font-size:25px}
+  .product-area{padding:23px 13px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">SK TALIB</div>
+
+  <div class="controls">
+    <button class="control" id="themeBtn" onclick="toggleTheme()">
+      ☾ DARK MODE
+    </button>
+
+    <div class="lang-wrap">
+      <button class="control" onclick="toggleLang()" id="langBtn">
+        ENGLISH ▾
+      </button>
+
+      <div class="lang-menu" id="langMenu">
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('rh')">Roman Hindi</button>
+        <button onclick="setLanguage('ur')">Urdu</button>
+        <button onclick="setLanguage('hi')">हिन्दी</button>
+        <button onclick="setLanguage('or')">ଓଡ଼ିଆ</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="heading">
+    <h1 id="pageTitle">MY PRODUCTS</h1>
+    <p id="pageSubtitle">Explore my product collection</p>
+  </div>
+
+  <div class="product-area">
+
+    <div class="product-icon">🛍️</div>
+
+    <button class="view-btn" id="viewBtn" onclick="showNotice()">
+      VIEW PRODUCTS
+    </button>
+
+    <div class="notice">
+      <div class="notice-title" id="noticeTitle">
+        PRODUCT AVAILABILITY
+      </div>
+
+      <p id="noticeText">
+        No products are currently listed. Our product collection
+        will be available soon. Please check back later.
+      </p>
+
+      <div class="coming" id="comingText">
+        COMING SOON
+      </div>
+    </div>
+
+  </div>
+
+  <a class="back" href="index.html" id="backBtn">
+    ← Back to Home
+  </a>
+
+</main>
+
+<footer id="footerText">
+  © 2026 SK TALIB. All Rights Reserved.
+</footer>
+
+<script>
+const translations = {
+  en:{
+    title:"MY PRODUCTS",
+    subtitle:"Explore my product collection",
+    view:"VIEW PRODUCTS",
+    noticeTitle:"PRODUCT AVAILABILITY",
+    notice:"No products are currently listed. Our product collection will be available soon. Please check back later.",
+    coming:"COMING SOON",
+    back:"← Back to Home",
+    footer:"© 2026 SK TALIB. All Rights Reserved.",
+    lang:"ENGLISH"
+  },
+  rh:{
+    title:"MERE PRODUCTS",
+    subtitle:"Mere products ki collection dekhein",
+    view:"PRODUCTS DEKHEIN",
+    noticeTitle:"PRODUCT KI UPLABDHATA",
+    notice:"Abhi koi product list nahi kiya gaya hai. Hamari product collection bahut jald available hogi. Kripya baad mein dobara check karein.",
+    coming:"BAHUT JALD AAYEGA",
+    back:"← Home par wapas",
+    footer:"© 2026 SK TALIB. Sabhi adhikar surakshit.",
+    lang:"ROMAN HINDI"
+  },
+  ur:{
+    title:"میری مصنوعات",
+    subtitle:"میری مصنوعات کی کلیکشن دیکھیں",
+    view:"مصنوعات دیکھیں",
+    noticeTitle:"مصنوعات کی دستیابی",
+    notice:"فی الحال کوئی پروڈکٹ لسٹ نہیں کی گئی ہے۔ ہماری پروڈکٹ کلیکشن بہت جلد دستیاب ہوگی۔ براہ کرم بعد میں دوبارہ چیک کریں۔",
+    coming:"جلد آ رہا ہے",
+    back:"← ہوم پر واپس",
+    footer:"© 2026 SK TALIB. جملہ حقوق محفوظ ہیں۔",
+    lang:"اردو"
+  },
+  hi:{
+    title:"मेरे प्रोडक्ट्स",
+    subtitle:"मेरे प्रोडक्ट्स की कलेक्शन देखें",
+    view:"प्रोडक्ट्स देखें",
+    noticeTitle:"प्रोडक्ट की उपलब्धता",
+    notice:"अभी कोई प्रोडक्ट लिस्ट नहीं किया गया है। हमारी प्रोडक्ट कलेक्शन बहुत जल्द उपलब्ध होगी। कृपया बाद में दोबारा चेक करें।",
+    coming:"बहुत जल्द आ रहा है",
+    back:"← होम पर वापस",
+    footer:"© 2026 SK TALIB. सर्वाधिकार सुरक्षित।",
+    lang:"हिन्दी"
+  },
+  or:{
+    title:"ମୋ ପ୍ରଡକ୍ଟ",
+    subtitle:"ମୋ ପ୍ରଡକ୍ଟ କଲେକ୍ସନ୍ ଦେଖନ୍ତୁ",
+    view:"ପ୍ରଡକ୍ଟ ଦେଖନ୍ତୁ",
+    noticeTitle:"ପ୍ରଡକ୍ଟ ଉପଲବ୍ଧତା",
+    notice:"ବର୍ତ୍ତମାନ କୌଣସି ପ୍ରଡକ୍ଟ ତାଲିକାଭୁକ୍ତ ହୋଇନାହିଁ। ଆମର ପ୍ରଡକ୍ଟ କଲେକ୍ସନ୍ ଖୁବ୍ ଶୀଘ୍ର ଉପଲବ୍ଧ ହେବ।",
+    coming:"ଖୁବ୍ ଶୀଘ୍ର ଆସୁଛି",
+    back:"← ହୋମକୁ ଫେରନ୍ତୁ",
+    footer:"© 2026 SK TALIB. ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।",
+    lang:"ଓଡ଼ିଆ"
+  }
+};
+
+function setLanguage(lang){
+  const t=translations[lang] || translations.en;
+  document.getElementById("pageTitle").textContent=t.title;
+  document.getElementById("pageSubtitle").textContent=t.subtitle;
+  document.getElementById("viewBtn").textContent=t.view;
+  document.getElementById("noticeTitle").textContent=t.noticeTitle;
+  document.getElementById("noticeText").textContent=t.notice;
+  document.getElementById("comingText").textContent=t.coming;
+  document.getElementById("backBtn").textContent=t.back;
+  document.getElementById("footerText").textContent=t.footer;
+  document.getElementById("langBtn").textContent=t.lang+" ▾";
+  localStorage.setItem("siteLanguage",lang);
+  document.getElementById("langMenu").classList.remove("show");
+}
+
+function toggleLang(){
+  document.getElementById("langMenu").classList.toggle("show");
+}
+
+function showNotice(){
+  document.querySelector(".notice").scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
+}
+
+function toggleTheme(){
+  document.body.classList.toggle("light");
+  const light=document.body.classList.contains("light");
+  localStorage.setItem("siteTheme",light?"light":"dark");
+  updateTheme();
+}
+
+function updateTheme(){
+  const light=document.body.classList.contains("light");
+  document.getElementById("themeBtn").textContent=
+    light?"☀ LIGHT MODE":"☾ DARK MODE";
+  document.querySelector('meta[name="theme-color"]')
+    .setAttribute("content",light?"#f5f5f5":"#080808");
+}
+
+if(localStorage.getItem("siteTheme")==="light"){
+  document.body.classList.add("light");
+}
+updateTheme();
+
+const savedLanguage=localStorage.getItem("siteLanguage") || "en";
+setLanguage(savedLanguage);
+
+document.addEventListener("click",function(e){
+  if(!e.target.closest(".lang-wrap")){
+    document.getElementById("langMenu").classList.remove("show");
+  }
+});
+</script>
+
+</body>
+</html>
