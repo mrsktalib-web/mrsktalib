@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>My Story | SK TALIB</title>
+
+<style>
+:root{
+  --bg:#080808;
+  --surface:#111111;
+  --surface2:#171717;
+  --gold:#c9a85b;
+  --gold2:#a88a45;
+  --text:#eee9df;
+  --muted:#aaa397;
+  --line:#39301f;
+  --shadow:rgba(0,0,0,.35);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7;
+  transition:background .3s,color .3s;
+}
+
+body.light{
+  --bg:#f5f5f2;
+  --surface:#ffffff;
+  --surface2:#eeeeea;
+  --gold:#98752e;
+  --gold2:#806020;
+  --text:#202020;
+  --muted:#66645f;
+  --line:#ded8c9;
+  --shadow:rgba(0,0,0,.08);
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
+
+.container{
+  width:92%;
+  max-width:1100px;
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  width:100%;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 4px 18px var(--shadow);
+}
+
+.header-inner{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.brand{
+  display:flex;
+  flex-direction:column;
+  line-height:1.25;
+}
+
+.brand strong{
+  font-size:21px;
+  letter-spacing:2px;
+  color:var(--gold);
+}
+
+.brand small{
+  font-size:9px;
+  letter-spacing:2.5px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.header-btn{
+  min-height:38px;
+  padding:8px 12px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:var(--surface2);
+  color:var(--text);
+  font-size:12px;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  transition:.2s;
+}
+
+.header-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+#themeButton{
+  min-width:105px;
+}
+
+/* LANGUAGE MENU */
+
+.language-wrap{
+  position:relative;
+}
+
+.language-menu{
+  display:none;
+  position:absolute;
+  top:47px;
+  right:0;
+  width:155px;
+  padding:6px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:9px;
+  box-shadow:0 10px 25px var(--shadow);
+  z-index:2000;
+}
+
+.language-menu.show{
+  display:block;
+}
+
+.language-option{
+  display:block;
+  width:100%;
+  padding:10px;
+  text-align:left;
+  border:0;
+  border-radius:5px;
+  background:transparent;
+  color:var(--text);
+  font-size:13px;
+}
+
+.language-option:hover,
+.language-option.active{
+  background:var(--surface2);
+  color:var(--gold);
+}
+
+/* STORY HERO */
+
+.story-hero{
+  position:relative;
+  overflow:hidden;
+  min-height:390px;
+  padding:65px 5% 55px;
+  display:flex;
+  align-items:center;
+  background:
+    radial-gradient(ellipse at 76% 55%,
+      rgba(255,139,36,.75) 0%,
+      rgba(172,75,26,.35) 19%,
+      transparent 48%),
+    linear-gradient(180deg,
+      #090b12 0%,
+      #17121a 35%,
+      #4b241e 67%,
+      #100e12 100%);
+  border-bottom:1px solid var(--line);
+}
+
+.story-hero::before{
+  content:"";
+  position:absolute;
+  left:-5%;
+  right:-5%;
+  bottom:0;
+  height:43%;
+  background:
+    linear-gradient(145deg,transparent 38%,#17151a 39%),
+    linear-gradient(35deg,#090b10 48%,transparent 49%);
+  clip-path:polygon(
+    0 75%,12% 40%,23% 68%,37% 25%,
+    49% 70%,63% 34%,77% 66%,89% 28%,
+    100% 65%,100% 100%,0 100%
+  );
+  opacity:.95;
+}
+
+.story-hero::after{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:#ffd36b;
+  box-shadow:0 0 22px 10px rgba(255,163,54,.55);
+  right:27%;
+  bottom:29%;
+}
+
+.story-hero-content{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:1100px;
+  margin:auto;
+}
+
+.story-kicker{
+  color:#f3c75f;
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:5px;
+  margin-bottom:15px;
+}
+
+.story-title{
+  font-family:Georgia,serif;
+  font-size:clamp(45px,8vw,82px);
+  line-height:1.1;
+  letter-spacing:2px;
+  color:#f5f0e8;
+}
+
+.story-title span{
+  color:#f2c344;
+  font-style:italic;
+}
+
+.story-subtitle{
+  color:#eee6df;
+  font-size:clamp(14px,2vw,19px);
+  font-style:italic;
+  margin-top:20px;
+}
+  /* STORY PANEL */
+
+.story-section{
+  position:relative;
+  padding:55px 0 65px;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(201,168,91,.09),
+      transparent 70%),
+    var(--bg);
+}
+
+.story-panel{
+  position:relative;
+  overflow:hidden;
+  width:100%;
+  padding:55px 35px 40px;
+  text-align:center;
+  border:2px solid var(--gold2);
+  border-radius:32px;
+  background:
+    linear-gradient(145deg,
+      rgba(201,168,91,.10),
+      transparent 35%),
+    var(--surface);
+  box-shadow:
+    0 0 15px rgba(201,168,91,.13),
+    inset 0 0 25px rgba(201,168,91,.04);
+}
+
+.story-panel::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border:1px solid rgba(201,168,91,.20);
+  border-radius:24px;
+  pointer-events:none;
+}
+
+.book-decoration{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  margin:-68px auto 20px;
+  z-index:2;
+}
+
+.book-decoration::before,
+.book-decoration::after{
+  content:"";
+  width:24%;
+  height:2px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    var(--gold)
+  );
+}
+
+.book-icon{
+  width:68px;
+  height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f4c84e;
+  font-size:43px;
+  background:var(--surface);
+  border:2px solid var(--gold);
+  border-radius:50%;
+  box-shadow:0 0 16px rgba(201,168,91,.20);
+}
+
+.story-message{
+  position:relative;
+  z-index:2;
+  margin-top:15px;
+}
+
+.story-message h2{
+  font-family:Georgia,serif;
+  font-size:clamp(25px,4vw,42px);
+  line-height:1.35;
+  font-style:italic;
+  color:var(--text);
+  margin-bottom:18px;
+}
+
+.story-message h2 span{
+  color:var(--gold);
+}
+
+.story-message p{
+  max-width:760px;
+  margin:0 auto;
+  color:var(--muted);
+  font-size:clamp(14px,2vw,18px);
+  line-height:1.9;
+}
+
+/* COMING SOON BUTTON */
+
+.coming-soon-wrap{
+  margin:32px 0;
+  position:relative;
+  z-index:2;
+}
+
+.coming-soon-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:12px 25px;
+  border:2px solid var(--gold);
+  border-radius:50px;
+  color:var(--gold);
+  background:transparent;
+  font-family:Georgia,serif;
+  font-size:clamp(15px,2.5vw,22px);
+  font-weight:bold;
+  font-style:italic;
+  box-shadow:0 0 14px rgba(201,168,91,.12);
+}
+
+.coming-soon-button .calendar-icon{
+  font-size:23px;
+}
+
+/* GOLD QUOTE */
+
+.story-quote{
+  position:relative;
+  z-index:2;
+  max-width:680px;
+  margin:28px auto 35px;
+  padding:18px 15px;
+  background:linear-gradient(
+    100deg,
+    transparent,
+    rgba(201,168,91,.85),
+    rgba(245,195,65,.95),
+    rgba(201,168,91,.85),
+    transparent
+  );
+  color:#17120a;
+  font-family:Georgia,serif;
+  font-size:clamp(17px,3vw,25px);
+  font-weight:bold;
+  font-style:italic;
+  line-height:1.5;
+  transform:rotate(-1deg);
+}
+
+.story-signature{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  color:var(--text);
+  font-family:Georgia,serif;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.story-signature::before,
+.story-signature::after{
+  content:"";
+  width:55px;
+  height:2px;
+  background:var(--gold);
+}
+
+/* BACK TO HOME */
+
+.back-home-wrap{
+  text-align:center;
+  padding:25px 0 40px;
+}
+
+.back-home{
+  display:inline-block;
+  padding:11px 22px;
+  border:1px solid var(--gold);
+  border-radius:10px;
+  color:var(--gold);
+  background:var(--surface);
+  font-size:14px;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.back-home:hover{
+  background:var(--gold);
+  color:#080808;
+  }
+  /* FOOTER */
+
+footer{
+  padding:25px 12px;
+  text-align:center;
+  background:var(--surface);
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+footer strong{
+  display:block;
+  color:var(--gold);
+  font-size:16px;
+  letter-spacing:2px;
+  margin-bottom:5px;
+}
+
+/* LIGHT MODE STORY HERO */
+
+body.light .story-hero{
+  background:
+    radial-gradient(ellipse at 76% 55%,
+      rgba(255,173,74,.65),
+      transparent 48%),
+    linear-gradient(180deg,
+      #e7e8e9,
+      #c6a18b 65%,
+      #5b4942);
+}
+
+body.light .story-title,
+body.light .story-subtitle{
+  color:#ffffff;
+}
+
+body.light .story-hero::before{
+  opacity:.85;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width:600px){
+
+  .container{
+    width:92%;
+  }
+
+  .header-inner{
+    min-height:68px;
+    gap:7px;
+  }
+
+  .brand strong{
+    font-size:17px;
+    letter-spacing:1.5px;
+  }
+
+  .brand small{
+    font-size:8px;
+    letter-spacing:1.5px;
+  }
+
+  .header-actions{
+    gap:6px;
+  }
+
+  .header-btn{
+    min-height:36px;
+    padding:7px 8px;
+    font-size:11px;
+  }
+
+  #themeButton{
+    min-width:92px;
+  }
+
+  .language-menu{
+    width:145px;
+  }
+
+  .story-hero{
+    min-height:320px;
+    padding:55px 5% 45px;
+  }
+
+  .story-kicker{
+    font-size:10px;
+    letter-spacing:3px;
+  }
+
+  .story-title{
+    font-size:48px;
+  }
+
+  .story-subtitle{
+    font-size:14px;
+    max-width:290px;
+  }
+
+  .story-section{
+    padding:48px 0;
+  }
+
+  .story-panel{
+    padding:48px 17px 30px;
+    border-radius:23px;
+  }
+
+  .story-panel::before{
+    border-radius:17px;
+  }
+
+  .book-decoration{
+    margin-top:-61px;
+    gap:10px;
+  }
+
+  .book-icon{
+    width:58px;
+    height:58px;
+    font-size:35px;
+  }
+
+  .story-message h2{
+    font-size:26px;
+  }
+
+  .story-message p{
+    font-size:14px;
+  }
+
+  .coming-soon-button{
+    padding:11px 16px;
+    font-size:15px;
+  }
+
+  .story-quote{
+    font-size:17px;
+    padding:15px 10px;
+  }
+
+  .story-signature{
+    font-size:13px;
+    gap:8px;
+  }
+
+  .story-signature::before,
+  .story-signature::after{
+    width:25px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <div class="container header-inner">
+
+    <a href="index.html" class="brand">
+      <strong>SK TALIB</strong>
+      <small>PERSONAL WEBSITE</small>
+    </a>
+
+    <div class="header-actions">
+
+      <!-- LANGUAGE SELECTOR -->
+
+      <div class="language-wrap">
+
+        <button class="header-btn"
+                id="languageButton"
+                onclick="toggleLanguageMenu()">
+
+          <span id="languageLabel">English</span>
+          <span>▾</span>
+
+        </button>
+
+        <div class="language-menu" id="languageMenu">
+
+          <button class="language-option"
+                  data-language="en"
+                  onclick="changeLanguage('en')">
+            English
+          </button>
+
+          <button class="language-option"
+                  data-language="hi-en"
+                  onclick="changeLanguage('hi-en')">
+            Roman Hindi
+          </button>
+
+          <button class="language-option"
+                  data-language="ur"
+                  onclick="changeLanguage('ur')">
+            Urdu
+          </button>
+
+          <button class="language-option"
+                  data-language="hi"
+                  onclick="changeLanguage('hi')">
+            Hindi
+          </button>
+
+          <button class="language-option"
+                  data-language="or"
+                  onclick="changeLanguage('or')">
+            Odia
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- DARK / LIGHT BUTTON -->
+
+      <button class="header-btn"
+              id="themeButton"
+              onclick="toggleTheme()">
+
+        <span id="themeIcon">☼</span>
+        <span id="themeLabel">DARK MODE</span>
+
+      </button>
+
+    </div>
+  </div>
+</header>
+<!-- STORY HERO -->
+
+<section class="story-hero">
+
+  <div class="story-hero-content">
+
+    <div class="story-kicker" data-i18n="storyKicker">
+      EVERY LIFE HAS A STORY
+    </div>
+
+    <h1 class="story-title">
+      <span class="title-white" data-i18n="titleWhite">MY</span>
+      <span data-i18n="titleGold">STORY</span>
+      <span class="feather">✒</span>
+    </h1>
+
+    <p class="story-subtitle" data-i18n="storySubtitle">
+      A journey of dreams, struggles and possibilities.
+    </p>
+
+  </div>
+
+  <!-- CSS MOUNTAIN LANDSCAPE -->
+
+  <div class="mountain mountain-back"></div>
+  <div class="mountain mountain-front"></div>
+
+  <!-- CSS PERSON SILHOUETTE -->
+
+  <div class="person-silhouette">
+
+    <div class="person-head"></div>
+
+    <div class="person-body"></div>
+
+    <div class="person-leg leg-one"></div>
+    <div class="person-leg leg-two"></div>
+
+    <div class="person-backpack"></div>
+
+  </div>
+
+</section>
+/* HERO TITLE DETAILS */
+
+.title-white{
+  color:#ffffff;
+}
+
+.feather{
+  display:inline-block;
+  color:#f2c344;
+  font-size:.65em;
+  transform:rotate(-25deg);
+  text-shadow:0 0 15px rgba(242,195,68,.5);
+}
+
+/* MOUNTAIN LANDSCAPE */
+
+.mountain{
+  position:absolute;
+  bottom:0;
+  pointer-events:none;
+}
+
+.mountain-back{
+  left:0;
+  width:100%;
+  height:38%;
+  background:#17151b;
+  clip-path:polygon(
+    0 75%,15% 35%,27% 70%,42% 25%,
+    55% 72%,70% 35%,85% 75%,100% 40%,
+    100% 100%,0 100%
+  );
+  opacity:.85;
+}
+
+.mountain-front{
+  left:0;
+  width:100%;
+  height:25%;
+  background:#090b10;
+  clip-path:polygon(
+    0 55%,18% 25%,32% 65%,48% 35%,
+    65% 70%,80% 30%,100% 60%,
+    100% 100%,0 100%
+  );
+}
+
+/* PERSON SILHOUETTE */
+
+.person-silhouette{
+  position:absolute;
+  z-index:1;
+  right:13%;
+  bottom:0;
+  width:145px;
+  height:235px;
+  pointer-events:none;
+}
+
+.person-head{
+  position:absolute;
+  top:5px;
+  left:49px;
+  width:52px;
+  height:62px;
+  border-radius:48% 48% 42% 42%;
+  background:#080808;
+}
+
+.person-body{
+  position:absolute;
+  top:58px;
+  left:26px;
+  width:100px;
+  height:112px;
+  border-radius:38px 38px 12px 12px;
+  background:#080808;
+  transform:rotate(-5deg);
+}
+
+.person-leg{
+  position:absolute;
+  bottom:0;
+  height:65px;
+  width:43px;
+  border-radius:15px 15px 5px 5px;
+  background:#080808;
+}
+
+.leg-one{
+  left:29px;
+  transform:rotate(15deg);
+}
+
+.leg-two{
+  left:76px;
+  transform:rotate(-15deg);
+}
+
+/* BACKPACK */
+
+.person-backpack{
+  position:absolute;
+  top:72px;
+  left:14px;
+  width:45px;
+  height:76px;
+  border-radius:15px 10px 10px 15px;
+  background:#101014;
+  border:2px solid #242124;
+  transform:rotate(-8deg);
+}
+
+/* LIGHT MODE LANDSCAPE */
+
+body.light .mountain-back{
+  background:#6c5047;
+}
+
+body.light .mountain-front{
+  background:#403b3a;
+}
+
+/* MOBILE HERO */
+
+@media(max-width:600px){
+
+  .person-silhouette{
+    right:4%;
+    transform:scale(.72);
+    transform-origin:bottom right;
+    opacity:.9;
+  }
+
+  .story-hero-content{
+    padding-right:30px;
+  }
+
+  .story-title{
+    position:relative;
+    z-index:3;
+  }
+
+  .story-subtitle{
+    position:relative;
+    z-index:3;
+  }
+
+}
+  <!-- MAIN STORY PANEL -->
+
+<main class="container">
+
+  <section class="story-section">
+
+    <div class="story-panel">
+
+      <!-- BOOK ICON -->
+
+      <div class="book-decoration">
+        <div class="book-icon">📖</div>
+      </div>
+
+      <!-- STORY MESSAGE -->
+
+      <div class="story-message">
+
+        <h2 data-i18n="writingTitle">
+          My story is still being
+          <span>written...</span>
+        </h2>
+
+        <p data-i18n="storyDescription">
+          Every experience has a lesson, every challenge makes me stronger,
+          and every dream gives me a reason to move forward.
+        </p>
+
+      </div>
+
+      <!-- COMING SOON -->
+
+      <div class="coming-soon-wrap">
+
+        <div class="coming-soon-button">
+          <span class="calendar-icon">◷</span>
+          <span data-i18n="comingSoonTitle">
+            Full Story Coming Soon
+          </span>
+        </div>
+
+      </div>
+
+      <!-- GOLDEN QUOTE -->
+
+      <div class="story-quote" data-i18n="storyQuote">
+        “This is not the end of my story.
+        This is just the beginning.”
+      </div>
+
+      <!-- SIGNATURE -->
+
+      <div class="story-signature">
+        <span data-i18n="signatureText">
+          A personal journey by SK TALIB
+        </span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- BACK TO HOME -->
+
+  <div class="back-home-wrap">
+
+    <a href="index.html"
+       class="back-home"
+       data-i18n="homeLink">
+      ← Back to Home
+    </a>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  <strong>SK TALIB</strong>
+  <p data-i18n="footerText">
+    © 2026 SK TALIB | PERSONAL WEBSITE
+  </p>
+    </footer>
+    <script>
+
+/* LANGUAGE TRANSLATIONS */
+
+const translations = {
+
+  en:{
+    languageName:"English",
+    storyKicker:"EVERY LIFE HAS A STORY",
+    titleWhite:"MY",
+    titleGold:"STORY",
+    storySubtitle:"A journey of dreams, struggles and possibilities.",
+    writingTitle:"My story is still being",
+    writingHighlight:"written...",
+    storyDescription:"Every experience has a lesson, every challenge makes me stronger, and every dream gives me a reason to move forward.",
+    comingSoonTitle:"Full Story Coming Soon",
+    storyQuote:"This is not the end of my story. This is just the beginning.",
+    signatureText:"A personal journey by SK TALIB",
+    homeLink:"← Back to Home",
+    footerText:"© 2026 SK TALIB | PERSONAL WEBSITE",
+    darkMode:"DARK MODE",
+    lightMode:"LIGHT MODE"
+  },
+
+  "hi-en":{
+    languageName:"Roman Hindi",
+    storyKicker:"HAR ZINDAGI KI EK KAHANI HOTI HAI",
+    titleWhite:"MERI",
+    titleGold:"KAHANI",
+    storySubtitle:"Sapno, mushkilon aur umeedon ka safar.",
+    writingTitle:"Meri kahani abhi likhi ja rahi hai",
+    writingHighlight:"...",
+    storyDescription:"Har tajurba mujhe kuch sikhata hai, har mushkil mujhe mazboot banati hai, aur har sapna mujhe aage badhne ki wajah deta hai.",
+    comingSoonTitle:"Puri Kahani Jald Aa Rahi Hai",
+    storyQuote:"Ye meri kahani ka ant nahi hai. Ye to sirf shuruaat hai.",
+    signatureText:"SK TALIB ka ek zaati safar",
+    homeLink:"← Home Page Par Jayein",
+    footerText:"© 2026 SK TALIB | PERSONAL WEBSITE",
+    darkMode:"DARK MODE",
+    lightMode:"LIGHT MODE"
+  },
+    ur:{
+    languageName:"اردو",
+    storyKicker:"ہر زندگی کی ایک کہانی ہوتی ہے",
+    titleWhite:"میری",
+    titleGold:"کہانی",
+    storySubtitle:"خوابوں، مشکلات اور امیدوں کا سفر۔",
+    writingTitle:"میری کہانی ابھی لکھی جا رہی ہے",
+    writingHighlight:"...",
+    storyDescription:"ہر تجربہ مجھے کچھ سکھاتا ہے، ہر مشکل مجھے مضبوط بناتی ہے، اور ہر خواب مجھے آگے بڑھنے کی وجہ دیتا ہے۔",
+    comingSoonTitle:"مکمل کہانی جلد آرہی ہے",
+    storyQuote:"یہ میری کہانی کا اختتام نہیں ہے۔ یہ تو صرف شروعات ہے۔",
+    signatureText:"SK TALIB کا ذاتی سفر",
+    homeLink:"← ہوم پیج پر جائیں",
+    footerText:"© 2026 SK TALIB | ذاتی ویب سائٹ",
+    darkMode:"ڈارک موڈ",
+    lightMode:"لائٹ موڈ"
+  },
+
+  hi:{
+    languageName:"Hindi",
+    storyKicker:"हर ज़िंदगी की एक कहानी होती है",
+    titleWhite:"मेरी",
+    titleGold:"कहानी",
+    storySubtitle:"सपनों, संघर्षों और संभावनाओं का सफर।",
+    writingTitle:"मेरी कहानी अभी लिखी जा रही है",
+    writingHighlight:"...",
+    storyDescription:"हर अनुभव मुझे कुछ सिखाता है, हर चुनौती मुझे मजबूत बनाती है और हर सपना मुझे आगे बढ़ने की वजह देता है।",
+    comingSoonTitle:"पूरी कहानी जल्द आ रही है",
+    storyQuote:"यह मेरी कहानी का अंत नहीं है। यह तो सिर्फ शुरुआत है।",
+    signatureText:"SK TALIB का व्यक्तिगत सफर",
+    homeLink:"← होम पेज पर जाएं",
+    footerText:"© 2026 SK TALIB | व्यक्तिगत वेबसाइट",
+    darkMode:"डार्क मोड",
+    lightMode:"लाइट मोड"
+  },
+
+  or:{
+    languageName:"Odia",
+    storyKicker:"ପ୍ରତ୍ୟେକ ଜୀବନର ଏକ କାହାଣୀ ଅଛି",
+    titleWhite:"ମୋ",
+    titleGold:"କାହାଣୀ",
+    storySubtitle:"ସ୍ୱପ୍ନ, ସଂଘର୍ଷ ଓ ସମ୍ଭାବନାର ଯାତ୍ରା।",
+    writingTitle:"ମୋ କାହାଣୀ ଏବେ ଲେଖାଯାଉଛି",
+    writingHighlight:"...",
+    storyDescription:"ପ୍ରତ୍ୟେକ ଅନୁଭବ ମୋତେ କିଛି ଶିଖାଏ, ପ୍ରତ୍ୟେକ ଚ୍ୟାଲେଞ୍ଜ ମୋତେ ଶକ୍ତିଶାଳୀ କରେ ଏବଂ ପ୍ରତ୍ୟେକ ସ୍ୱପ୍ନ ମୋତେ ଆଗକୁ ବଢ଼ିବାର କାରଣ ଦିଏ।",
+    comingSoonTitle:"ସମ୍ପୂର୍ଣ୍ଣ କାହାଣୀ ଶୀଘ୍ର ଆସୁଛି",
+    storyQuote:"ଏହା ମୋ କାହାଣୀର ଶେଷ ନୁହେଁ। ଏହା କେବଳ ଆରମ୍ଭ।",
+    signatureText:"SK TALIB ଙ୍କ ବ୍ୟକ୍ତିଗତ ଯାତ୍ରା",
+    homeLink:"← ହୋମ ପେଜକୁ ଯାଆନ୍ତୁ",
+    footerText:"© 2026 SK TALIB | ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟ",
+    darkMode:"ଡାର୍କ ମୋଡ୍",
+    lightMode:"ଲାଇଟ୍ ମୋଡ୍"
+  },
+  };
+
+/* CURRENT LANGUAGE */
+
+let currentLanguage =
+  localStorage.getItem("siteLanguage") || "en";
+
+/* UPDATE PAGE LANGUAGE */
+
+function changeLanguage(language){
+
+  if(!translations[language]) return;
+
+  currentLanguage = language;
+
+  localStorage.setItem("siteLanguage", language);
+
+  document.documentElement.lang = language;
+
+  document.documentElement.dir =
+    language === "ur" ? "rtl" : "ltr";
+
+  const t = translations[language];
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+
+    const key = element.getAttribute("data-i18n");
+
+    if(key === "writingTitle"){
+
+      element.innerHTML =
+        t.writingTitle + ' <span>' +
+        t.writingHighlight + '</span>';
+
+    }else if(t[key] !== undefined){
+
+      element.textContent = t[key];
+
+    }
+
+  });
+
+  const languageLabel =
+    document.getElementById("languageLabel");
+
+  if(languageLabel){
+    languageLabel.textContent = t.languageName;
+  }
+
+  document.querySelectorAll(".language-option").forEach(button => {
+
+    button.classList.toggle(
+      "active",
+      button.dataset.language === language
+    );
+
+  });
+
+  const menu = document.getElementById("languageMenu");
+
+  if(menu) menu.classList.remove("show");
+
+  updateThemeLabel();
+}
+
+/* LANGUAGE POPUP */
+
+function toggleLanguageMenu(){
+
+  const menu = document.getElementById("languageMenu");
+
+  if(menu){
+    menu.classList.toggle("show");
+  }
+
+}
+
+/* UPDATE THEME BUTTON */
+
+function updateThemeLabel(){
+
+  const t = translations[currentLanguage];
+
+  const icon = document.getElementById("themeIcon");
+  const label = document.getElementById("themeLabel");
+
+  const isLight = document.body.classList.contains("light");
+
+  if(icon){
+    icon.textContent = isLight ? "☾" : "☼";
+  }
+
+  if(label){
+    label.textContent = isLight ? t.lightMode : t.darkMode;
+  }
+
+}
+
+/* UPDATE BROWSER ADDRESS BAR COLOR */
+
+function updateThemeColor(){
+
+  const meta = document.querySelector(
+    'meta[name="theme-color"]'
+  );
+
+  if(meta){
+
+    meta.setAttribute(
+      "content",
+      document.body.classList.contains("light")
+        ? "#f5f5f2"
+        : "#080808"
+    );
+
+  }
+
+}
+
+/* TOGGLE DARK / LIGHT MODE */
+
+function toggleTheme(){
+
+  const isLight =
+    document.body.classList.toggle("light");
+
+  const theme = isLight ? "light" : "dark";
+
+  localStorage.setItem("siteTheme", theme);
+
+  updateThemeLabel();
+  updateThemeColor();
+
+}
+
+/* LOAD SAVED THEME */
+
+function loadTheme(){
+
+  const savedTheme =
+    localStorage.getItem("siteTheme") || "dark";
+
+  document.body.classList.toggle(
+    "light",
+    savedTheme === "light"
+  );
+
+  updateThemeLabel();
+  updateThemeColor();
+
+}
+
+/* INITIALIZE PAGE */
+
+changeLanguage(currentLanguage);
+loadTheme();
+
+</script>
+</body>
+</html>
