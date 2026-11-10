@@ -9,13 +9,13 @@
 <style>
 :root{
   --bg:#080808;
-  --surface:#111111;
-  --surface2:#191610;
-  --gold:#d6ad48;
-  --gold2:#a98432;
-  --text:#f3eee5;
+  --surface:#11100d;
+  --surface2:#19160f;
+  --gold:#d5ae4e;
+  --gold2:#f2d078;
+  --text:#eeeae1;
   --muted:#aaa397;
-  --line:#49391b;
+  --line:#40351f;
 }
 
 *{box-sizing:border-box}
@@ -25,58 +25,50 @@ body{
   background:var(--bg);
   color:var(--text);
   font-family:Arial,sans-serif;
-  transition:.25s;
 }
 
 body.light{
   --bg:#f5f3ee;
   --surface:#ffffff;
-  --surface2:#eee9df;
-  --text:#191919;
-  --muted:#66615a;
-  --line:#d6bd80;
-}
-
-.container{
-  width:min(1100px,94%);
-  margin:auto;
+  --surface2:#eeeae1;
+  --gold:#a77b20;
+  --gold2:#c29331;
+  --text:#24211b;
+  --muted:#68635a;
+  --line:#d8c99f;
 }
 
 header{
-  background:var(--surface);
-  border-bottom:1px solid var(--line);
   position:sticky;
   top:0;
-  z-index:20;
+  z-index:50;
+  background:var(--bg);
+  border-bottom:1px solid var(--line);
 }
 
 .header-inner{
-  min-height:76px;
+  max-width:1100px;
+  margin:auto;
+  padding:17px 20px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:12px;
-  padding:12px 0;
-}
-
-.brand{
-  text-decoration:none;
-  color:var(--gold);
-  display:flex;
-  flex-direction:column;
-  flex-shrink:0;
 }
 
 .brand strong{
-  font-size:23px;
+  display:block;
+  color:var(--gold);
+  font-size:27px;
   letter-spacing:2px;
 }
 
 .brand small{
+  display:block;
+  margin-top:5px;
   color:var(--muted);
-  font-size:10px;
-  letter-spacing:2px;
-  margin-top:4px;
+  font-size:11px;
+  letter-spacing:3px;
 }
 
 .header-actions{
@@ -86,15 +78,14 @@ header{
 }
 
 .header-btn{
-  background:var(--surface2);
-  color:var(--text);
   border:1px solid var(--line);
-  border-radius:12px;
-  padding:12px 13px;
-  font-size:13px;
+  border-radius:16px;
+  background:var(--surface);
+  color:var(--text);
+  padding:13px 14px;
+  font-size:14px;
   font-weight:bold;
   cursor:pointer;
-  white-space:nowrap;
 }
 
 .language-wrap{position:relative}
@@ -103,14 +94,13 @@ header{
   display:none;
   position:absolute;
   right:0;
-  top:calc(100% + 9px);
-  width:165px;
-  background:#15130f;
+  top:55px;
+  width:155px;
+  background:var(--surface);
   border:1px solid var(--gold);
   border-radius:12px;
-  padding:6px;
-  z-index:30;
-  box-shadow:0 8px 25px #0009;
+  overflow:hidden;
+  z-index:100;
 }
 
 .language-menu.show{display:block}
@@ -118,77 +108,75 @@ header{
 .language-option{
   display:block;
   width:100%;
-  text-align:left;
-  background:transparent;
-  color:#eee;
+  padding:12px;
   border:0;
-  padding:11px;
-  border-radius:8px;
-  font-size:13px;
-  cursor:pointer;
+  border-bottom:1px solid var(--line);
+  background:transparent;
+  color:var(--text);
+  text-align:left;
+  font-size:14px;
 }
 
-.language-option.active,
-.language-option:hover{
-  background:#49391b;
-  color:#ffd66b;
+.language-option.active{
+  color:var(--gold);
+  font-weight:bold;
 }
 
 .hero{
   text-align:center;
-  padding:45px 12px 35px;
+  padding:48px 18px 35px;
   background:
-    radial-gradient(ellipse at 50% 100%,#493015 0%,transparent 60%),
-    linear-gradient(180deg,#17100a,#080808);
+    radial-gradient(ellipse at center,
+    rgba(160,105,20,.20),transparent 70%);
   border-bottom:1px solid var(--line);
 }
 
-body.light .hero{
-  background:linear-gradient(180deg,#f3e8cc,#f5f3ee);
-}
-
 .hero h1{
-  font-family:Georgia,serif;
-  font-size:clamp(32px,7vw,62px);
-  font-style:italic;
-  color:var(--gold);
   margin:0;
+  color:var(--gold2);
+  font-family:Georgia,serif;
+  font-size:clamp(34px,7vw,55px);
+  font-style:italic;
 }
 
 .hero p{
+  margin:16px 0 0;
   color:var(--muted);
-  font-size:15px;
-  margin:15px 0 0;
+  font-size:16px;
+  line-height:1.6;
 }
 
-.gold-line{
+.hero-line{
   width:180px;
   height:2px;
+  margin:24px auto 0;
   background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  margin:20px auto 0;
 }
 
-main{padding:25px 0 10px}
-
-.category{
-  margin-bottom:30px;
+.container{
+  width:min(100%,1050px);
+  margin:auto;
+  padding:0 18px;
 }
 
-.category-heading{
+.movie-section{
+  margin:35px 0;
+}
+
+.section-heading{
   display:flex;
   align-items:center;
   gap:13px;
-  margin-bottom:15px;
+  margin-bottom:18px;
 }
 
-.category-icon{
+.section-icon{
   color:var(--gold);
   font-size:27px;
-  width:35px;
-  text-align:center;
+  line-height:1;
 }
 
-.category-heading h2{
+.section-heading h2{
   margin:0;
   font-size:25px;
   white-space:nowrap;
@@ -200,132 +188,148 @@ main{padding:25px 0 10px}
   background:linear-gradient(90deg,var(--gold),transparent);
 }
 
-.media-list{
+.movie-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
-  padding:12px;
-  border:1px solid var(--line);
-  border-radius:22px;
-  background:var(--surface);
 }
 
-.media-card{
+.movie-card{
   display:flex;
   align-items:center;
-  gap:13px;
+  gap:12px;
   min-width:0;
-  min-height:86px;
-  padding:9px;
+  padding:11px;
   border:1px solid var(--line);
-  border-radius:15px;
-  background:var(--surface2);
+  border-radius:19px;
+  background:var(--surface);
   color:var(--text);
   text-decoration:none;
   transition:.2s;
 }
 
-.media-card:hover{
-  border-color:var(--gold);
-  transform:translateY(-2px);
+.movie-card:active{
+  transform:scale(.98);
 }
 
 .poster{
-  width:130px;
-  height:80px;
+  width:82px;
+  height:112px;
   flex-shrink:0;
   object-fit:cover;
-  object-position:center;
   border:1px solid var(--gold);
   border-radius:12px;
-  background:#292116;
+  background:var(--surface2);
 }
 
-.media-name{
-  font-size:16px;
-  font-weight:bold;
-  line-height:1.35;
-  flex:1;
-}
-
-.media-arrow{
-  color:var(--gold);
-  font-size:27px;
-  padding-right:3px;
-}
-
-.more-card{
-  border-color:var(--gold);
-  color:var(--gold);
-  font-weight:bold;
-}
-
-.more-icon{
-  width:130px;
-  height:64px;
-  flex-shrink:0;
+.poster-fallback{
   display:flex;
   align-items:center;
   justify-content:center;
+  width:82px;
+  height:112px;
+  flex-shrink:0;
+  border:1px solid var(--gold);
+  border-radius:12px;
+  background:linear-gradient(145deg,#28301e,#111);
+  color:var(--gold2);
+  font-size:12px;
+  font-weight:bold;
+  text-align:center;
+  padding:5px;
+}
+
+.movie-info{
+  flex:1;
+  min-width:0;
+}
+
+.movie-info h3{
+  margin:0;
+  font-size:15px;
+  line-height:1.4;
+}
+
+.movie-info p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.arrow{
   color:var(--gold);
-  font-size:30px;
+  font-size:25px;
+  font-weight:bold;
+}
+
+.more-card{
+  min-height:88px;
+  justify-content:center;
+  border-color:var(--gold);
+  color:var(--gold);
+  font-weight:bold;
+  text-align:center;
+}
+
+.more-card .section-icon{
+  font-size:26px;
+}
+
+.serial-card .poster{
+  height:105px;
 }
 
 .back-home-wrap{
   text-align:center;
-  padding:20px 0 35px;
+  padding:35px 15px 55px;
 }
 
 .back-home{
   display:inline-block;
-  text-decoration:none;
-  padding:13px 24px;
+  padding:14px 27px;
   border:1px solid var(--gold);
-  border-radius:30px;
+  border-radius:40px;
   background:var(--surface);
   color:var(--gold);
+  text-decoration:none;
+  font-size:16px;
   font-weight:bold;
-  font-size:15px;
 }
 
 footer{
-  text-align:center;
   border-top:1px solid var(--line);
-  padding:22px 10px;
-  color:var(--muted);
-  font-size:13px;
-  letter-spacing:.5px;
+  text-align:center;
+  padding:28px 15px;
 }
 
 footer strong{
-  color:var(--gold);
   display:block;
-  font-size:17px;
-  letter-spacing:2px;
-  margin-bottom:7px;
+  color:var(--gold);
+  font-size:25px;
+  letter-spacing:3px;
 }
 
-@media(max-width:650px){
-  .header-inner{min-height:68px}
-  .brand strong{font-size:19px}
-  .brand small{font-size:8px}
+footer p{
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+@media(max-width:600px){
+  .header-inner{padding:14px 12px}
+  .brand strong{font-size:23px}
+  .brand small{font-size:9px;letter-spacing:2px}
   .header-actions{gap:6px}
-  .header-btn{padding:11px 9px;font-size:11px}
-  .hero{padding:38px 8px 28px}
-  .hero h1{font-size:35px}
-  .hero p{font-size:13px}
-  .category-heading h2{font-size:22px}
-  .media-list{grid-template-columns:1fr;gap:10px;padding:9px}
-  .media-card{min-height:78px}
-  .poster{width:100px;height:70px}
-  .more-icon{width:100px;height:60px}
-  .media-name{font-size:15px}
+  .header-btn{padding:12px 10px;font-size:12px}
+  .hero{padding:38px 14px 28px}
+  .movie-section{margin:28px 0}
+  .movie-grid{grid-template-columns:1fr}
+  .poster{width:88px;height:105px}
+  .movie-info h3{font-size:16px}
 }
 
-@media(max-width:360px){
-  .brand strong{font-size:16px}
-  .header-btn{font-size:10px;padding:10px 7px}
-  .poster,.more-icon{width:82px}
+@media(min-width:601px){
+  .movie-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 </style>
 </head>
@@ -333,30 +337,47 @@ footer strong{
 <body>
 
 <header>
-  <div class="container header-inner">
+  <div class="header-inner">
 
-    <a href="index.html" class="brand">
+    <div class="brand">
       <strong>SK TALIB</strong>
       <small>PERSONAL WEBSITE</small>
-    </a>
+    </div>
 
     <div class="header-actions">
 
       <div class="language-wrap">
-        <button class="header-btn" onclick="toggleLanguageMenu()">
+        <button class="header-btn"
+          onclick="toggleLanguageMenu()">
           <span id="languageLabel">English</span> ▾
         </button>
 
         <div class="language-menu" id="languageMenu">
-          <button class="language-option" data-language="en" onclick="changeLanguage('en')">English</button>
-          <button class="language-option" data-language="hi-en" onclick="changeLanguage('hi-en')">Roman Hindi</button>
-          <button class="language-option" data-language="ur" onclick="changeLanguage('ur')">Urdu</button>
-          <button class="language-option" data-language="hi" onclick="changeLanguage('hi')">Hindi</button>
-          <button class="language-option" data-language="or" onclick="changeLanguage('or')">Odia</button>
+          <button class="language-option"
+            data-language="en"
+            onclick="changeLanguage('en')">English</button>
+
+          <button class="language-option"
+            data-language="hi-en"
+            onclick="changeLanguage('hi-en')">Roman Hindi</button>
+
+          <button class="language-option"
+            data-language="ur"
+            onclick="changeLanguage('ur')">Urdu</button>
+
+          <button class="language-option"
+            data-language="hi"
+            onclick="changeLanguage('hi')">Hindi</button>
+
+          <button class="language-option"
+            data-language="or"
+            onclick="changeLanguage('or')">Odia</button>
         </div>
       </div>
 
-      <button class="header-btn" id="themeButton" onclick="toggleTheme()">
+      <button class="header-btn"
+        id="themeButton"
+        onclick="toggleTheme()">
         <span id="themeIcon">☼</span>
         <span id="themeLabel">DARK MODE</span>
       </button>
@@ -365,197 +386,200 @@ footer strong{
   </div>
 </header>
 
-<div class="hero">
+<section class="hero">
   <h1 data-i18n="pageTitle">Movies I've Watched</h1>
-  <p data-i18n="pageSubtitle">Movies, TV Shows and Serials that I've Watched.</p>
-  <div class="gold-line"></div>
-</div>
+  <p data-i18n="pageSubtitle">
+    Movies, TV Shows and Serials that I've Watched.
+  </p>
+  <div class="hero-line"></div>
+</section>
 
 <main class="container">
 
   <!-- TV SHOWS -->
-  <section class="category">
-    <div class="category-heading">
-      <span class="category-icon">▣</span>
+
+  <section class="movie-section">
+
+    <div class="section-heading">
+      <span class="section-icon">🎥</span>
       <h2 data-i18n="tvShows">TV Shows</h2>
       <div class="heading-line"></div>
     </div>
 
-    <div class="media-list">
-      <!-- TV SHOW 1 -->
-      <a class="media-card" href="javascript:void(0)">
-        <div class="poster poster-fallback">🌿</div>
-        <span class="media-name" data-i18n="legend">Legend of the Jungle</span>
-        <span class="media-arrow">›</span>
-      </a>
+    <div class="movie-grid">
 
-      <!-- TV SHOW 2 -->
-      <a class="media-card" href="javascript:void(0)">
-        <div class="poster poster-fallback natgeo">NATIONAL<br>GEOGRAPHIC</div>
-        <span class="media-name" data-i18n="national">National Geographic</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card">
+        <img class="poster"
+          src="https://image.tmdb.org/t/p/w342/placeholder.jpg"
+          alt="Legend of the Jungle poster">
+        <div class="movie-info">
+          <h3>Legend of the Jungle</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
 
-      <!-- TV SHOW 3 -->
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt0944947/img" alt="Game of Thrones poster" loading="lazy">
-        <span class="media-name">Game of Thrones</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card">
+        <div class="poster-fallback natgeo">NATIONAL<br>GEOGRAPHIC</div>
+        <div class="movie-info">
+          <h3>National Geographic</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
 
-      <!-- TV SHOW 4 -->
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt0325980/img" alt="Pirates of the Caribbean poster" loading="lazy">
-        <span class="media-name">Pirates of the Caribbean</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card">
+        <img class="poster"
+          src="https://image.tmdb.org/t/p/w342/1XS1non...jpg"
+          alt="Game of Thrones poster">
+        <div class="movie-info">
+          <h3>Game of Thrones</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
 
-      <!-- TV SHOW 5 -->
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt6468322/img" alt="Money Heist poster" loading="lazy">
-        <span class="media-name">Money Heist</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card">
+        <div class="poster-fallback">PIRATES OF THE CARIBBEAN</div>
+        <div class="movie-info">
+          <h3>Pirates of the Caribbean</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
 
-      <!-- TV SHOW 6 -->
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt0241527/img" alt="Harry Potter poster" loading="lazy">
-        <span class="media-name">Harry Potter</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card">
+        <div class="poster-fallback">MONEY HEIST</div>
+        <div class="movie-info">
+          <h3>Money Heist</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
 
-      <!-- TV SHOW 7 -->
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt1099212/img" alt="Twilight poster" loading="lazy">
-        <span class="media-name">Twilight</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card">
+        <div class="poster-fallback">HARRY POTTER</div>
+        <div class="movie-info">
+          <h3>Harry Potter</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
 
-      <!-- TV SHOW 8 -->
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt27497448/img" alt="A Knight of the Seven Kingdoms poster" loading="lazy">
-        <span class="media-name">A Knight of the Seven Kingdoms</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card">
+        <div class="poster-fallback">TWILIGHT</div>
+        <div class="movie-info">
+          <h3>Twilight</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
+
+      <div class="movie-card">
+        <div class="poster-fallback">A KNIGHT OF THE SEVEN KINGDOMS</div>
+        <div class="movie-info">
+          <h3>A Knight of the Seven Kingdoms</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
+
     </div>
   </section>
 
-
   <!-- MOVIES -->
-  <section class="category">
-    <div class="category-heading">
-      <span class="category-icon">▤</span>
+
+  <section class="movie-section">
+
+    <div class="section-heading">
+      <span class="section-icon">🎥</span>
       <h2 data-i18n="movies">Movies</h2>
       <div class="heading-line"></div>
     </div>
 
-    <div class="media-list">
+    <div class="movie-grid">
 
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt0120338/img" alt="Titanic poster" loading="lazy">
-        <span class="media-name">Titanic</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card">
+        <div class="poster-fallback">TITANIC</div>
+        <div class="movie-info">
+          <h3>Titanic</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
 
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt0993846/img" alt="The Wolf of Wall Street poster" loading="lazy">
-        <span class="media-name">The Wolf of Wall Street</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card">
+        <div class="poster-fallback">THE WOLF OF WALL STREET</div>
+        <div class="movie-info">
+          <h3>The Wolf of Wall Street</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
 
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt28607951/img" alt="Anora poster" loading="lazy">
-        <span class="media-name">Anora</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card">
+        <div class="poster-fallback">ANORA</div>
+        <div class="movie-info">
+          <h3>Anora</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
 
-      <div class="media-card more-card">
-        <div class="more-icon">▣</div>
-        <span class="media-name" data-i18n="moreMovies">+ Many More Hollywood & Bollywood Movies</span>
-        <span class="media-arrow">›</span>
+      <div class="movie-card more-card">
+        <span class="section-icon">🎥</span>
+        <span data-i18n="moreMovies">
+          + Many More Hollywood & Bollywood Movies
+        </span>
+        <span class="arrow">›</span>
       </div>
 
     </div>
   </section>
 
-
   <!-- SERIALS -->
-  <section class="category">
-    <div class="category-heading">
-      <span class="category-icon">▱</span>
+
+  <section class="movie-section">
+
+    <div class="section-heading">
+      <span class="section-icon">🎥</span>
       <h2 data-i18n="serials">Serials</h2>
       <div class="heading-line"></div>
     </div>
 
-    <div class="media-list">
+    <div class="movie-grid">
 
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt5737800/img" alt="Pyaar Lafzon Mein Kahan poster" loading="lazy">
-        <span class="media-name">Pyaar Lafzon Mein Kahan</span>
-        <span class="media-arrow">›</span>
-      </a>
+      <div class="movie-card serial-card">
+        <div class="poster-fallback">PYAAR LAFZON MEIN KAHAN</div>
+        <div class="movie-info">
+          <h3>Pyaar Lafzon Mein Kahan</h3>
+        </div>
+        <span class="arrow">›</span>
+      </div>
 
-      <a class="media-card" href="javascript:void(0)">
-        <img class="poster" src="https://images.metahub.space/poster/small/tt1437106/img" alt="Prophet Yusuf poster" loading="lazy">
-        <span class="media-name">
-          <span data-i18n="prophet">Prophet Yusuf</span>
-          <small class="watched-label" data-i18n="allEpisodes">(All Episodes Watched)</small>
+      <div class="movie-card serial-card">
+        <div class="poster-fallback">PROPHET YUSUF</div>
+        <div class="movie-info">
+          <h3 data-i18n="prophet">Prophet Yusuf</h3>
+          <p data-i18n="allEpisodes">(All Episodes Watched)</p>
+        </div>
+        <span class="arrow">›</span>
+      </div>
+
+      <div class="movie-card more-card">
+        <span class="section-icon">🎥</span>
+        <span data-i18n="moreSerials">
+          + Many More TV Serials Watched
         </span>
-        <span class="media-arrow">›</span>
-      </a>
-
-      <div class="media-card more-card">
-        <div class="more-icon">▣</div>
-        <span class="media-name" data-i18n="moreSerials">+ Many More TV Serials Watched</span>
-        <span class="media-arrow">›</span>
+        <span class="arrow">›</span>
       </div>
 
     </div>
   </section>
 
-
-  <!-- BACK TO HOME -->
   <div class="back-home-wrap">
-    <a href="index.html" class="back-home" data-i18n="homeLink">
-      ← Back to Home
-    </a>
+    <a href="index.html" class="back-home"
+      data-i18n="homeLink">← Back to Home</a>
   </div>
 
 </main>
 
 <footer>
   <strong>SK TALIB</strong>
-  <span data-i18n="footerText">© 2026 SK TALIB | PERSONAL WEBSITE</span>
-</footer>
-<style>
-.poster-fallback{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#e3bd56;
-  font-size:32px;
-  text-align:center;
-  font-weight:bold;
-  background:linear-gradient(135deg,#24351d,#111);
-}
-
-.natgeo{
-  font-size:12px;
-  letter-spacing:1px;
-  border-left:7px solid #e6bd35;
-  padding-left:7px;
-}
-
-.watched-label{
-  display:block;
-  color:var(--muted);
-  font-size:12px;
-  font-weight:normal;
-  margin-top:5px;
-}
-</style>
-
-<script>
+  <p data-i18n="footerText">
+    © 2026 SK TALIB | PERSONAL WEBSITE
+  </p>
+  </footer>
+  <script>
 const translations = {
 
   en:{
@@ -563,11 +587,9 @@ const translations = {
     pageTitle:"Movies I've Watched",
     pageSubtitle:"Movies, TV Shows and Serials that I've Watched.",
     tvShows:"TV Shows",
-    legend:"Legend of the Jungle",
-    national:"National Geographic",
     movies:"Movies",
-    moreMovies:"+ Many More Hollywood & Bollywood Movies",
     serials:"Serials",
+    moreMovies:"+ Many More Hollywood & Bollywood Movies",
     prophet:"Prophet Yusuf",
     allEpisodes:"(All Episodes Watched)",
     moreSerials:"+ Many More TV Serials Watched",
@@ -580,13 +602,11 @@ const translations = {
   "hi-en":{
     languageName:"Roman Hindi",
     pageTitle:"Maine Jo Movies Dekhi Hain",
-    pageSubtitle:"Meri Dekhi Hui Movies, TV Shows aur Serials.",
+    pageSubtitle:"Meri dekhi hui Movies, TV Shows aur Serials.",
     tvShows:"TV Shows",
-    legend:"Legend of the Jungle",
-    national:"National Geographic",
     movies:"Movies",
-    moreMovies:"+ Aur Bhi Hollywood aur Bollywood Movies",
     serials:"Serials",
+    moreMovies:"+ Aur Bhi Hollywood aur Bollywood Movies",
     prophet:"Prophet Yusuf",
     allEpisodes:"(Saare Episodes Dekhe Hain)",
     moreSerials:"+ Aur Bhi TV Serials Dekhe Hain",
@@ -601,11 +621,9 @@ const translations = {
     pageTitle:"وہ فلمیں جو میں نے دیکھی ہیں",
     pageSubtitle:"میری دیکھی ہوئی فلمیں، ٹی وی شوز اور سیریلز۔",
     tvShows:"ٹی وی شوز",
-    legend:"Legend of the Jungle",
-    national:"National Geographic",
     movies:"فلمیں",
-    moreMovies:"+ مزید ہالی ووڈ اور بالی ووڈ فلمیں",
     serials:"سیریلز",
+    moreMovies:"+ مزید ہالی ووڈ اور بالی ووڈ فلمیں",
     prophet:"حضرت یوسف",
     allEpisodes:"(تمام اقساط دیکھی ہیں)",
     moreSerials:"+ مزید ٹی وی سیریلز بھی دیکھے ہیں",
@@ -620,11 +638,9 @@ const translations = {
     pageTitle:"मेरी देखी हुई फिल्में",
     pageSubtitle:"मेरी देखी हुई फिल्में, टीवी शो और सीरियल।",
     tvShows:"टीवी शो",
-    legend:"Legend of the Jungle",
-    national:"National Geographic",
     movies:"फिल्में",
-    moreMovies:"+ और भी हॉलीवुड और बॉलीवुड फिल्में",
     serials:"सीरियल",
+    moreMovies:"+ और भी हॉलीवुड और बॉलीवुड फिल्में",
     prophet:"हज़रत यूसुफ",
     allEpisodes:"(सभी एपिसोड देखे हैं)",
     moreSerials:"+ और भी टीवी सीरियल देखे हैं",
@@ -639,11 +655,9 @@ const translations = {
     pageTitle:"ମୁଁ ଦେଖିଥିବା ଚଳଚ୍ଚିତ୍ର",
     pageSubtitle:"ମୁଁ ଦେଖିଥିବା ଚଳଚ୍ଚିତ୍ର, ଟିଭି ଶୋ ଏବଂ ଧାରାବାହିକ।",
     tvShows:"ଟିଭି ଶୋ",
-    legend:"Legend of the Jungle",
-    national:"National Geographic",
     movies:"ଚଳଚ୍ଚିତ୍ର",
-    moreMovies:"+ ଆହୁରି ଅନେକ ହଲିଉଡ୍ ଓ ବଲିଉଡ୍ ଚଳଚ୍ଚିତ୍ର",
     serials:"ଧାରାବାହିକ",
+    moreMovies:"+ ଆହୁରି ଅନେକ ହଲିଉଡ୍ ଓ ବଲିଉଡ୍ ଚଳଚ୍ଚିତ୍ର",
     prophet:"ହଜରତ ୟୁସୁଫ",
     allEpisodes:"(ସମସ୍ତ ଏପିସୋଡ୍ ଦେଖିଛି)",
     moreSerials:"+ ଆହୁରି ଅନେକ ଟିଭି ଧାରାବାହିକ ଦେଖିଛି",
@@ -658,10 +672,16 @@ const translations = {
 let currentLanguage =
   localStorage.getItem("siteLanguage") || "en";
 
+
+/* LANGUAGE MENU */
+
 function toggleLanguageMenu(){
   document.getElementById("languageMenu")
     .classList.toggle("show");
 }
+
+
+/* CHANGE LANGUAGE */
 
 function changeLanguage(language){
 
@@ -676,21 +696,25 @@ function changeLanguage(language){
   const words=translations[language];
 
   document.querySelectorAll("[data-i18n]").forEach(element=>{
+
     const key=element.getAttribute("data-i18n");
 
     if(words[key]!==undefined){
       element.textContent=words[key];
     }
+
   });
 
   document.getElementById("languageLabel").textContent =
     words.languageName;
 
   document.querySelectorAll(".language-option").forEach(button=>{
+
     button.classList.toggle(
       "active",
       button.dataset.language===language
     );
+
   });
 
   document.documentElement.lang=language;
@@ -704,9 +728,13 @@ function changeLanguage(language){
   updateThemeLabel();
 }
 
+
+/* THEME LABEL */
+
 function updateThemeLabel(){
 
-  const light=document.body.classList.contains("light");
+  const light =
+    document.body.classList.contains("light");
 
   document.getElementById("themeIcon").textContent =
     light ? "☾" : "☼";
@@ -717,25 +745,34 @@ function updateThemeLabel(){
       : translations[currentLanguage].darkMode;
 }
 
+
+/* BROWSER TOP BAR COLOR */
+
 function updateThemeColor(){
 
-  const light=document.body.classList.contains("light");
+  const light =
+    document.body.classList.contains("light");
 
-  const meta=document.querySelector(
-    'meta[name="theme-color"]'
-  );
+  const meta =
+    document.querySelector('meta[name="theme-color"]');
 
   if(meta){
+
     meta.setAttribute(
       "content",
       light ? "#f5f3ee" : "#080808"
     );
+
   }
 }
 
+
+/* TOGGLE DARK / LIGHT */
+
 function toggleTheme(){
 
-  const light=document.body.classList.toggle("light");
+  const light =
+    document.body.classList.toggle("light");
 
   localStorage.setItem(
     "siteTheme",
@@ -745,6 +782,9 @@ function toggleTheme(){
   updateThemeLabel();
   updateThemeColor();
 }
+
+
+/* LOAD SAVED THEME */
 
 function loadTheme(){
 
@@ -760,25 +800,37 @@ function loadTheme(){
   updateThemeColor();
 }
 
+
+/* CLOSE LANGUAGE MENU */
+
 document.addEventListener("click",function(event){
 
-  const menu=document.getElementById("languageMenu");
-  const wrap=document.querySelector(".language-wrap");
+  const menu =
+    document.getElementById("languageMenu");
+
+  const wrap =
+    document.querySelector(".language-wrap");
 
   if(!wrap.contains(event.target)){
     menu.classList.remove("show");
   }
+
 });
 
-/* POSTER FALLBACK */
-document.querySelectorAll(".poster:not(.poster-fallback)").forEach(img=>{
+
+/* POSTER IMAGE FALLBACK */
+
+document.querySelectorAll(".poster").forEach(img=>{
 
   img.addEventListener("error",function(){
 
-    const fallback=document.createElement("div");
+    const fallback =
+      document.createElement("div");
 
-    fallback.className="poster poster-fallback";
-    fallback.textContent=this.alt.replace(" poster","");
+    fallback.className="poster-fallback";
+
+    fallback.textContent =
+      this.alt.replace(" poster","");
 
     this.replaceWith(fallback);
 
@@ -786,7 +838,9 @@ document.querySelectorAll(".poster:not(.poster-fallback)").forEach(img=>{
 
 });
 
-/* INITIALIZE */
+
+/* INITIALIZE PAGE */
+
 changeLanguage(currentLanguage);
 loadTheme();
 
