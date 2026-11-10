@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>My Social Media | SK TALIB</title>
+
+<style>
+:root{
+  --bg:#080808;
+  --surface:#111111;
+  --surface2:#171717;
+  --gold:#c9a85b;
+  --gold2:#a88a45;
+  --text:#eee9df;
+  --muted:#aaa397;
+  --line:#39301f;
+  --shadow:rgba(0,0,0,.35);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.7;
+  transition:background .3s,color .3s;
+}
+
+body.light{
+  --bg:#f5f5f2;
+  --surface:#ffffff;
+  --surface2:#eeeeea;
+  --gold:#98752e;
+  --gold2:#806020;
+  --text:#202020;
+  --muted:#66645f;
+  --line:#ded8c9;
+  --shadow:rgba(0,0,0,.08);
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
+
+.container{
+  width:92%;
+  max-width:1050px;
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  width:100%;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 4px 18px var(--shadow);
+}
+
+.header-inner{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.brand{
+  display:flex;
+  flex-direction:column;
+  line-height:1.25;
+}
+
+.brand strong{
+  font-size:21px;
+  letter-spacing:2px;
+  color:var(--gold);
+}
+
+.brand small{
+  font-size:9px;
+  letter-spacing:2.5px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.header-btn{
+  min-height:38px;
+  padding:8px 12px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:var(--surface2);
+  color:var(--text);
+  font-size:12px;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  transition:.2s;
+}
+
+.header-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+#themeButton{
+  min-width:105px;
+}
+
+/* LANGUAGE MENU */
+
+.language-wrap{
+  position:relative;
+}
+
+.language-menu{
+  display:none;
+  position:absolute;
+  top:47px;
+  right:0;
+  width:155px;
+  padding:6px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:9px;
+  box-shadow:0 10px 25px var(--shadow);
+  z-index:2000;
+}
+
+.language-menu.show{
+  display:block;
+}
+
+.language-option{
+  display:block;
+  width:100%;
+  padding:10px;
+  text-align:left;
+  border:0;
+  border-radius:5px;
+  background:transparent;
+  color:var(--text);
+  font-size:13px;
+}
+
+.language-option:hover,
+.language-option.active{
+  background:var(--surface2);
+  color:var(--gold);
+}
+
+/* HERO SECTION */
+
+.masthead{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  padding:65px 15px 55px;
+  border-bottom:1px solid var(--line);
+}
+
+.masthead-label{
+  color:var(--gold);
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:4px;
+  margin-bottom:17px;
+}
+
+.masthead h1{
+  font-size:clamp(32px,7vw,55px);
+  letter-spacing:3px;
+  line-height:1.2;
+  margin-bottom:15px;
+}
+
+.masthead h1 span{
+  color:var(--gold);
+}
+
+.masthead p{
+  color:var(--muted);
+  font-size:15px;
+}
+
+.hero-line{
+  width:75px;
+  height:4px;
+  background:var(--gold);
+  border-radius:5px;
+  margin:25px auto 0;
+}
+
+/* SOCIAL MEDIA LIST */
+
+main{
+  padding:40px 0 30px;
+}
+
+.social-list{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.social-card{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  min-height:125px;
+  padding:20px;
+  background:var(--surface);
+  border:1px solid var(--gold2);
+  border-radius:20px;
+  box-shadow:0 5px 18px var(--shadow);
+  transition:transform .2s,border-color .2s;
+}
+
+.social-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--gold);
+}
+
+.social-icon{
+  width:82px;
+  height:82px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.social-icon svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.social-info{
+  flex:1;
+  min-width:0;
+  border-left:3px solid var(--gold);
+  padding-left:18px;
+}
+
+.social-info h2{
+  font-size:21px;
+  color:var(--text);
+  margin-bottom:3px;
+}
+
+.social-info p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+}
+
+.social-action{
+  display:inline-block;
+  flex-shrink:0;
+  padding:10px 16px;
+  border:2px solid var(--gold);
+  border-radius:12px;
+  color:var(--text);
+  font-size:13px;
+  font-weight:bold;
+  text-align:center;
+  transition:.2s;
+}
+
+.social-action:hover{
+  background:var(--gold);
+  color:#080808;
+}
+
+.coming-soon{
+  display:inline-block;
+  flex-shrink:0;
+  padding:10px 16px;
+  border:1px solid var(--gold2);
+  border-radius:12px;
+  background:var(--surface2);
+  color:var(--gold);
+  font-size:13px;
+  font-weight:bold;
+  text-align:center;
+}
+/* RESPONSIVE */
+
+@media(max-width:700px){
+
+  .header-inner{
+    min-height:68px;
+  }
+
+  .brand strong{
+    font-size:18px;
+  }
+
+  .brand small{
+    font-size:8px;
+  }
+
+  .header-actions{
+    gap:6px;
+  }
+
+  .header-btn{
+    padding:8px 9px;
+    font-size:11px;
+  }
+
+  #themeButton{
+    min-width:88px;
+  }
+
+  .masthead{
+    padding:48px 12px 40px;
+  }
+
+  .masthead h1{
+    font-size:34px;
+  }
+
+  .social-card{
+    gap:12px;
+    min-height:105px;
+    padding:13px;
+    border-radius:15px;
+  }
+
+  .social-icon{
+    width:58px;
+    height:58px;
+    border-radius:13px;
+  }
+
+  .social-info{
+    padding-left:11px;
+  }
+
+  .social-info h2{
+    font-size:16px;
+  }
+
+  .social-info p{
+    font-size:11px;
+  }
+
+  .social-action,
+  .coming-soon{
+    padding:8px 9px;
+    font-size:10px;
+    border-radius:9px;
+  }
+
+}
+
+@media(max-width:390px){
+
+  .social-card{
+    flex-wrap:wrap;
+  }
+
+  .social-action,
+  .coming-soon{
+    margin-left:70px;
+  }
+
+}
+
+/* BACK TO HOME */
+
+.back-home-wrap{
+  text-align:center;
+  padding:35px 0 20px;
+}
+
+.back-home{
+  display:inline-block;
+  padding:12px 24px;
+  border:2px solid var(--gold);
+  border-radius:30px;
+  background:var(--surface);
+  color:var(--text);
+  font-size:14px;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.back-home:hover{
+  background:var(--gold);
+  color:#080808;
+}
+
+/* FOOTER */
+
+footer{
+  position:relative;
+  background:var(--surface);
+  border-top:1px solid var(--line);
+  text-align:center;
+  padding:28px 15px;
+  margin-top:25px;
+}
+
+footer strong{
+  color:var(--gold);
+  letter-spacing:3px;
+  font-size:17px;
+}
+
+footer p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:7px;
+}
+
+/* RTL SUPPORT */
+
+html[dir="rtl"] body{
+  direction:rtl;
+  text-align:right;
+}
+
+html[dir="rtl"] .language-menu{
+  right:auto;
+  left:0;
+}
+
+html[dir="rtl"] .social-info{
+  border-left:0;
+  border-right:3px solid var(--gold);
+  padding-left:0;
+  padding-right:18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-inner">
+
+    <a href="index.html" class="brand">
+      <strong>SK TALIB</strong>
+      <small>PERSONAL WEBSITE</small>
+    </a>
+
+    <div class="header-actions">
+
+      <div class="language-wrap">
+
+        <button class="header-btn" id="languageButton"
+          onclick="toggleLanguageMenu()">
+          <span id="languageLabel">English</span> ▾
+        </button>
+
+        <div class="language-menu" id="languageMenu">
+
+          <button class="language-option" data-language="en"
+            onclick="changeLanguage('en')">English</button>
+
+          <button class="language-option" data-language="hi-en"
+            onclick="changeLanguage('hi-en')">Roman Hindi</button>
+
+          <button class="language-option" data-language="ur"
+            onclick="changeLanguage('ur')">Urdu</button>
+
+          <button class="language-option" data-language="hi"
+            onclick="changeLanguage('hi')">Hindi</button>
+
+          <button class="language-option" data-language="or"
+            onclick="changeLanguage('or')">Odia</button>
+
+        </div>
+      </div>
+
+      <button class="header-btn" id="themeButton"
+        onclick="toggleTheme()">
+        <span id="themeIcon">☼</span>
+        <span id="themeLabel">DARK MODE</span>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<!-- PAGE INTRO -->
+
+<div class="masthead">
+
+  <div class="masthead-label" data-i18n="mastheadLabel">
+    THE SOCIAL EDITION
+  </div>
+
+  <h1>
+    <span data-i18n="titleWhite">MY SOCIAL</span>
+    <span data-i18n="titleGold">MEDIA</span>
+  </h1>
+
+  <p data-i18n="subtitle">
+    Connect With Me on My Official Platforms
+  </p>
+
+  <div class="hero-line"></div>
+
+</div>
+
+<main class="container">
+
+  <div class="social-list">
+<!-- YOUTUBE -->
+
+<div class="social-card">
+
+  <div class="social-icon youtube">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="5" y="18" width="90" height="64" rx="20" fill="#FF0000"/>
+      <path d="M42 34 L42 66 L69 50 Z" fill="#FFFFFF"/>
+    </svg>
+  </div>
+
+  <div class="social-info">
+    <h2>YouTube</h2>
+    <p>@mrsktalib</p>
+    <p data-i18n="youtubeText">Watch my videos, projects and more.</p>
+  </div>
+
+  <a class="social-action"
+     href="https://youtube.com/@mrsktalib?si=aeUA3n1o9k0pJNGo"
+     target="_blank" rel="noopener"
+     data-i18n="youtubeButton">
+    Visit Channel ↗
+  </a>
+
+</div>
+
+<!-- INSTAGRAM -->
+
+<div class="social-card">
+
+  <div class="social-icon instagram">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="instaGradient" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stop-color="#FFDC80"/>
+          <stop offset="35%" stop-color="#FCAF45"/>
+          <stop offset="65%" stop-color="#DD2A7B"/>
+          <stop offset="100%" stop-color="#8134AF"/>
+        </linearGradient>
+      </defs>
+      <rect x="4" y="4" width="92" height="92" rx="24" fill="url(#instaGradient)"/>
+      <rect x="23" y="23" width="54" height="54" rx="16"
+            fill="none" stroke="white" stroke-width="7"/>
+      <circle cx="50" cy="50" r="13" fill="none"
+              stroke="white" stroke-width="7"/>
+      <circle cx="70" cy="30" r="5" fill="white"/>
+    </svg>
+  </div>
+
+  <div class="social-info">
+    <h2>Instagram</h2>
+    <p>@mrsktalib</p>
+    <p data-i18n="instagramText">See my photos, updates and stories.</p>
+  </div>
+
+  <a class="social-action"
+     href="https://www.instagram.com/mrsktalib?srtk=MTllZ2s4ZDkyb3Y1bQ=="
+     target="_blank" rel="noopener"
+     data-i18n="profileButton">
+    Visit Profile ↗
+  </a>
+
+</div>
+
+<!-- FACEBOOK -->
+
+<div class="social-card">
+
+  <div class="social-icon facebook">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="4" width="92" height="92" rx="20" fill="#1877F2"/>
+      <path d="M58 92 V55 H71 L73 40 H58 V31
+               C58 26 60 23 67 23 H74 V9
+               C70 8 65 8 60 8
+               C44 8 36 17 36 33 V40 H24 V55 H36 V92 Z"
+            fill="white"/>
+    </svg>
+  </div>
+
+  <div class="social-info">
+    <h2>Facebook</h2>
+    <p data-i18n="facebookProfile">My Facebook Profile</p>
+    <p data-i18n="facebookText">Follow my updates and posts.</p>
+  </div>
+
+  <a class="social-action"
+     href="https://www.facebook.com/share/1H13BJSW27/"
+     target="_blank" rel="noopener"
+     data-i18n="profileButton">
+    Visit Profile ↗
+  </a>
+
+</div>
+<!-- WHATSAPP CHANNEL -->
+
+<div class="social-card">
+
+  <div class="social-icon whatsapp">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="4" width="92" height="92" rx="22" fill="#25D366"/>
+      <path d="M50 19 C33 19 20 32 20 49 C20 55 22 61 25 66
+               L21 81 L37 77 C41 79 45 80 50 80
+               C67 80 80 67 80 50 C80 33 67 19 50 19Z"
+            fill="none" stroke="white" stroke-width="5"/>
+      <path d="M39 34 C36 34 34 39 34 42 C34 52 48 66 59 66
+               C63 66 68 62 68 59 C68 57 59 53 57 53
+               C55 53 54 57 51 57 C47 56 43 52 41 48
+               C41 46 45 45 44 42 C43 40 41 34 39 34Z"
+            fill="white"/>
+    </svg>
+  </div>
+
+  <div class="social-info">
+    <h2>WhatsApp Channel</h2>
+    <p data-i18n="whatsappProfile">My Official Channel</p>
+    <p data-i18n="whatsappText">Get important updates and announcements.</p>
+  </div>
+
+  <a class="social-action"
+     href="https://whatsapp.com/channel/0029VbBgkZf4dTnB6Nwoaj2B"
+     target="_blank" rel="noopener"
+     data-i18n="whatsappButton">
+    Follow Channel ↗
+  </a>
+
+</div>
+
+<!-- X / TWITTER -->
+
+<div class="social-card">
+
+  <div class="social-icon x-logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="4" width="92" height="92" rx="20" fill="#000000"/>
+      <path d="M24 23 H40 L76 77 H60 Z" fill="white"/>
+      <path d="M75 23 L42 59 L35 67 L25 77 H36 L46 66 L78 23 Z"
+            fill="none" stroke="white" stroke-width="5"/>
+    </svg>
+  </div>
+
+  <div class="social-info">
+    <h2>X (Twitter)</h2>
+    <p>@mrsktalib</p>
+    <p data-i18n="xText">Follow my thoughts and latest updates.</p>
+  </div>
+
+  <a class="social-action"
+     href="https://x.com/mrsktalib"
+     target="_blank" rel="noopener"
+     data-i18n="profileButton">
+    Visit Profile ↗
+  </a>
+
+</div>
+
+<!-- TELEGRAM CHANNEL -->
+
+<div class="social-card">
+
+  <div class="social-icon telegram">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="4" width="92" height="92" rx="22" fill="#229ED9"/>
+      <path d="M78 26 L67 75 C66 79 63 80 59 77
+               L44 65 L36 73 C34 75 32 74 32 71
+               L33 57 L65 33 C66 32 64 31 62 32
+               L23 51 L9 47 C5 46 5 43 10 41
+               L73 17 C78 15 81 19 78 26Z"
+            fill="white"/>
+    </svg>
+  </div>
+
+  <div class="social-info">
+    <h2>Telegram Channel</h2>
+    <p data-i18n="telegramText">Channel coming soon.</p>
+    <p data-i18n="comingDescription">I will share the link here after launch.</p>
+  </div>
+
+  <span class="coming-soon" data-i18n="comingSoon">
+    Coming Soon
+  </span>
+
+</div>
+<!-- LINKEDIN -->
+
+<div class="social-card">
+
+  <div class="social-icon linkedin">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="4" y="4" width="92" height="92" rx="20" fill="#0A66C2"/>
+      <circle cx="29" cy="32" r="7" fill="white"/>
+      <path d="M23 44 H35 V77 H23 Z" fill="white"/>
+      <path d="M44 44 H56 V49
+               C60 42 76 41 78 54
+               V77 H66 V57
+               C66 48 56 49 56 57
+               V77 H44 Z" fill="white"/>
+    </svg>
+  </div>
+
+  <div class="social-info">
+    <h2>LinkedIn</h2>
+    <p data-i18n="linkedinText">Profile coming soon.</p>
+    <p data-i18n="comingDescription">
+      I will share the link here after launch.
+    </p>
+  </div>
+
+  <span class="coming-soon" data-i18n="comingSoon">
+    Coming Soon
+  </span>
+
+</div>
+
+  </div>
+
+  <!-- BACK TO HOME -->
+
+  <div class="back-home-wrap">
+    <a href="index.html" class="back-home" data-i18n="homeLink">
+      ← Back to Home
+    </a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  <strong>SK TALIB</strong>
+  <p data-i18n="footerText">
+    © 2026 SK TALIB | PERSONAL WEBSITE
+  </p>
+</footer>
+<script>
+
+/* ALL LANGUAGE TRANSLATIONS */
+
+const translations = {
+
+  en:{
+    languageName:"English",
+    mastheadLabel:"THE SOCIAL EDITION",
+    titleWhite:"MY SOCIAL",
+    titleGold:"MEDIA",
+    subtitle:"Connect With Me on My Official Platforms",
+    youtubeText:"Watch my videos, projects and more.",
+    youtubeButton:"Visit Channel ↗",
+    instagramText:"See my photos, updates and stories.",
+    profileButton:"Visit Profile ↗",
+    facebookProfile:"My Facebook Profile",
+    facebookText:"Follow my updates and posts.",
+    whatsappProfile:"My Official Channel",
+    whatsappText:"Get important updates and announcements.",
+    whatsappButton:"Follow Channel ↗",
+    xText:"Follow my thoughts and latest updates.",
+    telegramText:"Channel coming soon.",
+    linkedinText:"Profile coming soon.",
+    comingDescription:"I will share the link here after launch.",
+    comingSoon:"Coming Soon",
+    homeLink:"← Back to Home",
+    footerText:"© 2026 SK TALIB | PERSONAL WEBSITE",
+    darkMode:"DARK MODE",
+    lightMode:"LIGHT MODE"
+  },
+
+  "hi-en":{
+    languageName:"Roman Hindi",
+    mastheadLabel:"SOCIAL MEDIA EDITION",
+    titleWhite:"MERI SOCIAL",
+    titleGold:"MEDIA",
+    subtitle:"Mere Official Social Media Platforms Se Judein",
+    youtubeText:"Mere videos, projects aur aur bhi bahut kuch dekhein.",
+    youtubeButton:"Channel Dekhein ↗",
+    instagramText:"Meri photos, updates aur stories dekhein.",
+    profileButton:"Profile Dekhein ↗",
+    facebookProfile:"Meri Facebook Profile",
+    facebookText:"Mere updates aur posts follow karein.",
+    whatsappProfile:"Mera Official Channel",
+    whatsappText:"Important updates aur announcements paayein.",
+    whatsappButton:"Channel Follow Karein ↗",
+    xText:"Mere thoughts aur latest updates follow karein.",
+    telegramText:"Channel jald aa raha hai.",
+    linkedinText:"Profile jald aa rahi hai.",
+    comingDescription:"Launch ke baad yahan link share karunga.",
+    comingSoon:"Jald Aa Raha Hai",
+    homeLink:"← Home Page Par Jayein",
+    footerText:"© 2026 SK TALIB | PERSONAL WEBSITE",
+    darkMode:"DARK MODE",
+    lightMode:"LIGHT MODE"
+  },
+
+  ur:{
+    languageName:"Urdu",
+    mastheadLabel:"سوشل میڈیا ایڈیشن",
+    titleWhite:"میرا سوشل",
+    titleGold:"میڈیا",
+    subtitle:"میرے آفیشل سوشل میڈیا پلیٹ فارمز سے جڑیں",
+    youtubeText:"میری ویڈیوز اور پروجیکٹس دیکھیں۔",
+    youtubeButton:"چینل دیکھیں ↗",
+    instagramText:"میری تصاویر اور اپڈیٹس دیکھیں۔",
+    profileButton:"پروفائل دیکھیں ↗",
+    facebookProfile:"میری فیس بک پروفائل",
+    facebookText:"میری پوسٹس اور اپڈیٹس دیکھیں۔",
+    whatsappProfile:"میرا آفیشل چینل",
+    whatsappText:"اہم اپڈیٹس اور اعلانات حاصل کریں۔",
+    whatsappButton:"چینل فالو کریں ↗",
+    xText:"میرے خیالات اور تازہ اپڈیٹس دیکھیں۔",
+    telegramText:"چینل جلد آرہا ہے۔",
+    linkedinText:"پروفائل جلد آرہی ہے۔",
+    comingDescription:"لانچ کے بعد یہاں لنک شیئر کروں گا۔",
+    comingSoon:"جلد آرہا ہے",
+    homeLink:"← ہوم پیج پر جائیں",
+    footerText:"© 2026 SK TALIB | ذاتی ویب سائٹ",
+    darkMode:"ڈارک موڈ",
+    lightMode:"لائٹ موڈ"
+  },
+
+  hi:{
+    languageName:"Hindi",
+    mastheadLabel:"सोशल मीडिया संस्करण",
+    titleWhite:"मेरा सोशल",
+    titleGold:"मीडिया",
+    subtitle:"मेरे आधिकारिक सोशल मीडिया प्लेटफॉर्म से जुड़ें",
+    youtubeText:"मेरे वीडियो और प्रोजेक्ट देखें।",
+    youtubeButton:"चैनल देखें ↗",
+    instagramText:"मेरी तस्वीरें और अपडेट देखें।",
+    profileButton:"प्रोफाइल देखें ↗",
+    facebookProfile:"मेरी फेसबुक प्रोफाइल",
+    facebookText:"मेरी पोस्ट और अपडेट देखें।",
+    whatsappProfile:"मेरा आधिकारिक चैनल",
+    whatsappText:"महत्वपूर्ण अपडेट और घोषणाएं पाएं।",
+    whatsappButton:"चैनल फॉलो करें ↗",
+    xText:"मेरे विचार और नए अपडेट देखें।",
+    telegramText:"चैनल जल्द आ रहा है।",
+    linkedinText:"प्रोफाइल जल्द आ रही है।",
+    comingDescription:"लॉन्च के बाद यहां लिंक शेयर करूंगा।",
+    comingSoon:"जल्द आ रहा है",
+    homeLink:"← होम पेज पर जाएं",
+    footerText:"© 2026 SK TALIB | व्यक्तिगत वेबसाइट",
+    darkMode:"डार्क मोड",
+    lightMode:"लाइट मोड"
+  },
+
+  or:{
+    languageName:"Odia",
+    mastheadLabel:"ସୋସିଆଲ୍ ମିଡିଆ ସଂସ୍କରଣ",
+    titleWhite:"ମୋର ସୋସିଆଲ୍",
+    titleGold:"ମିଡିଆ",
+    subtitle:"ମୋର ଅଫିସିଆଲ୍ ସୋସିଆଲ୍ ମିଡିଆ ସହିତ ଯୋଡ଼ି ହୁଅନ୍ତୁ",
+    youtubeText:"ମୋର ଭିଡିଓ ଏବଂ ପ୍ରୋଜେକ୍ଟ ଦେଖନ୍ତୁ।",
+    youtubeButton:"ଚ୍ୟାନେଲ୍ ଦେଖନ୍ତୁ ↗",
+    instagramText:"ମୋର ଫଟୋ ଏବଂ ଅପଡେଟ୍ ଦେଖନ୍ତୁ।",
+    profileButton:"ପ୍ରୋଫାଇଲ୍ ଦେଖନ୍ତୁ ↗",
+    facebookProfile:"ମୋର ଫେସବୁକ୍ ପ୍ରୋଫାଇଲ୍",
+    facebookText:"ମୋର ପୋଷ୍ଟ ଏବଂ ଅପଡେଟ୍ ଦେଖନ୍ତୁ।",
+    whatsappProfile:"ମୋର ଅଫିସିଆଲ୍ ଚ୍ୟାନେଲ୍",
+    whatsappText:"ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଅପଡେଟ୍ ପାଆନ୍ତୁ।",
+    whatsappButton:"ଚ୍ୟାନେଲ୍ ଫଲୋ କରନ୍ତୁ ↗",
+    xText:"ମୋର ଚିନ୍ତାଧାରା ଏବଂ ନୂଆ ଅପଡେଟ୍ ଦେଖନ୍ତୁ।",
+    telegramText:"ଚ୍ୟାନେଲ୍ ଶୀଘ୍ର ଆସୁଛି।",
+    linkedinText:"ପ୍ରୋଫାଇଲ୍ ଶୀଘ୍ର ଆସୁଛି।",
+    comingDescription:"ଲଞ୍ଚ ପରେ ଏଠାରେ ଲିଙ୍କ୍ ଦିଆଯିବ।",
+    comingSoon:"ଶୀଘ୍ର ଆସୁଛି",
+    homeLink:"← ହୋମ୍ ପେଜ୍‌କୁ ଯାଆନ୍ତୁ",
+    footerText:"© 2026 SK TALIB | ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟ୍",
+    darkMode:"ଡାର୍କ ମୋଡ୍",
+    lightMode:"ଲାଇଟ୍ ମୋଡ୍"
+  }
+
+};
+
+
+/* CURRENT LANGUAGE */
+
+let currentLanguage =
+  localStorage.getItem("siteLanguage") || "en";
+
+if(!translations[currentLanguage]){
+  currentLanguage = "en";
+}
+
+
+/* CHANGE LANGUAGE */
+
+function changeLanguage(language){
+
+  if(!translations[language]) return;
+
+  currentLanguage = language;
+
+  localStorage.setItem("siteLanguage",language);
+
+  document.documentElement.lang =
+    language === "hi-en" ? "en" : language;
+
+  document.documentElement.dir =
+    language === "ur" ? "rtl" : "ltr";
+
+  document.querySelectorAll("[data-i18n]").forEach(element=>{
+
+    const key = element.getAttribute("data-i18n");
+
+    if(translations[language][key]){
+      element.textContent = translations[language][key];
+    }
+
+  });
+
+  document.getElementById("languageLabel").textContent =
+    translations[language].languageName;
+
+  document.querySelectorAll(".language-option").forEach(button=>{
+    button.classList.toggle(
+      "active",
+      button.dataset.language === language
+    );
+  });
+
+  updateThemeLabel();
+
+  document.getElementById("languageMenu")
+    .classList.remove("show");
+
+}
+
+
+/* LANGUAGE MENU */
+
+function toggleLanguageMenu(){
+
+  document.getElementById("languageMenu")
+    .classList.toggle("show");
+
+}
+
+
+/* CLOSE MENU WHEN CLICKING OUTSIDE */
+
+document.addEventListener("click",function(event){
+
+  const menu = document.getElementById("languageMenu");
+  const wrap = document.querySelector(".language-wrap");
+
+  if(!wrap.contains(event.target)){
+    menu.classList.remove("show");
+  }
+
+});
+
+
+/* UPDATE THEME LABEL */
+
+function updateThemeLabel(){
+
+  const isLight =
+    document.body.classList.contains("light");
+
+  document.getElementById("themeIcon").textContent =
+    isLight ? "☾" : "☼";
+
+  document.getElementById("themeLabel").textContent =
+    isLight
+      ? translations[currentLanguage].lightMode
+      : translations[currentLanguage].darkMode;
+
+}
+
+
+/* UPDATE BROWSER THEME COLOR */
+
+function updateThemeColor(){
+
+  const isLight =
+    document.body.classList.contains("light");
+
+  const color =
+    isLight ? "#f5f5f2" : "#080808";
+
+  document.querySelector('meta[name="theme-color"]')
+    .setAttribute("content",color);
+
+}
+
+
+/* TOGGLE THEME */
+
+function toggleTheme(){
+
+  document.body.classList.toggle("light");
+
+  const theme =
+    document.body.classList.contains("light")
+      ? "light"
+      : "dark";
+
+  localStorage.setItem("siteTheme",theme);
+
+  updateThemeLabel();
+  updateThemeColor();
+
+}
+
+
+/* LOAD SAVED THEME */
+
+function loadTheme(){
+
+  const savedTheme =
+    localStorage.getItem("siteTheme") || "dark";
+
+  document.body.classList.toggle(
+    "light",
+    savedTheme === "light"
+  );
+
+  updateThemeLabel();
+  updateThemeColor();
+
+}
+
+
+/* INITIALIZE PAGE */
+
+changeLanguage(currentLanguage);
+loadTheme();
+
+</script>
+
+</body>
+</html>
