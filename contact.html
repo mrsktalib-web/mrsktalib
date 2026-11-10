@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>Contact | SK TALIB</title>
+
+<style>
+:root{
+  --bg:#080808;
+  --card:#111;
+  --text:#f5f5f5;
+  --muted:#aaa;
+  --gold:#d4af37;
+  --line:#493b18;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  transition:.25s;
+}
+body.light{
+  --bg:#f5f5f5;
+  --card:#fff;
+  --text:#171717;
+  --muted:#666;
+  --line:#d8bd70;
+}
+header{
+  padding:17px 16px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.logo{
+  color:var(--gold);
+  font-size:19px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+.controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.control{
+  background:var(--card);
+  color:var(--text);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:9px 11px;
+  font-size:12px;
+  cursor:pointer;
+}
+.lang-wrap{position:relative}
+.lang-menu{
+  display:none;
+  position:absolute;
+  right:0;
+  top:43px;
+  width:155px;
+  background:var(--card);
+  border:1px solid var(--gold);
+  border-radius:9px;
+  z-index:10;
+  overflow:hidden;
+}
+.lang-menu.show{display:block}
+.lang-menu button{
+  width:100%;
+  display:block;
+  text-align:left;
+  padding:11px;
+  background:none;
+  color:var(--text);
+  border:0;
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+}
+main{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+  padding:40px 16px;
+  flex:1;
+}
+.heading{
+  text-align:center;
+  margin-bottom:30px;
+}
+.heading h1{
+  color:var(--gold);
+  font-size:29px;
+  margin:0 0 9px;
+  letter-spacing:1px;
+}
+.heading p{
+  color:var(--muted);
+  font-size:14px;
+  margin:0;
+}
+.contact-box{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.contact-icon{
+  width:48px;
+  height:48px;
+  border:1px solid var(--gold);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  font-size:23px;
+  flex-shrink:0;
+}
+.contact-info{
+  min-width:0;
+  flex:1;
+}
+.contact-info h3{
+  color:var(--gold);
+  font-size:15px;
+  margin:0 0 7px;
+}
+.contact-info p{
+  color:var(--muted);
+  font-size:13px;
+  margin:0;
+  overflow-wrap:anywhere;
+}
+.contact-btn{
+  display:inline-block;
+  margin-top:12px;
+  padding:9px 14px;
+  background:var(--gold);
+  color:#080808;
+  text-decoration:none;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:.5px;
+}
+.back{
+  display:block;
+  width:max-content;
+  margin:30px auto 0;
+  padding:11px 22px;
+  border:1px solid var(--gold);
+  border-radius:8px;
+  color:var(--gold);
+  text-decoration:none;
+  font-size:14px;
+}
+footer{
+  text-align:center;
+  padding:18px 10px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:12px;
+}
+@media(max-width:520px){
+  header{padding:13px 11px}
+  .logo{font-size:16px}
+  .control{padding:8px;font-size:11px}
+  main{padding:32px 13px}
+  .heading h1{font-size:25px}
+  .contact-box{padding:16px;gap:12px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">SK TALIB</div>
+
+  <div class="controls">
+    <button class="control" id="themeBtn" onclick="toggleTheme()">
+      ☾ DARK MODE
+    </button>
+
+    <div class="lang-wrap">
+      <button class="control" onclick="toggleLang()" id="langBtn">
+        ENGLISH ▾
+      </button>
+
+      <div class="lang-menu" id="langMenu">
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('rh')">Roman Hindi</button>
+        <button onclick="setLanguage('ur')">Urdu</button>
+        <button onclick="setLanguage('hi')">हिन्दी</button>
+        <button onclick="setLanguage('or')">ଓଡ଼ିଆ</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="heading">
+    <h1 id="pageTitle">CONTACT ME</h1>
+    <p id="pageSubtitle">Feel free to get in touch with me</p>
+  </div>
+
+  <div class="contact-box">
+    <div class="contact-icon">✉</div>
+
+    <div class="contact-info">
+      <h3 id="emailTitle">EMAIL</h3>
+      <p>mrsktalib@gmail.com</p>
+
+      <a class="contact-btn"
+         href="mailto:mrsktalib@gmail.com"
+         id="emailBtn">
+        EMAIL ME
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-box">
+    <div class="contact-icon">➤</div>
+
+    <div class="contact-info">
+      <h3 id="telegramTitle">TELEGRAM</h3>
+      <p>t.me/mrsktalib</p>
+
+      <a class="contact-btn"
+         href="https://t.me/mrsktalib"
+         target="_blank"
+         rel="noopener"
+         id="telegramBtn">
+        CONTACT ON TELEGRAM
+      </a>
+    </div>
+  </div>
+
+  <a class="back" href="index.html" id="backBtn">
+    ← Back to Home
+  </a>
+
+</main>
+
+<footer id="footerText">
+  © 2026 SK TALIB. All Rights Reserved.
+</footer>
+
+<script>
+const translations = {
+  en:{
+    title:"CONTACT ME",
+    subtitle:"Feel free to get in touch with me",
+    email:"EMAIL",
+    emailBtn:"EMAIL ME",
+    telegram:"TELEGRAM",
+    telegramBtn:"CONTACT ON TELEGRAM",
+    back:"← Back to Home",
+    footer:"© 2026 SK TALIB. All Rights Reserved.",
+    lang:"ENGLISH"
+  },
+  rh:{
+    title:"MUJHSE SAMPARK KAREIN",
+    subtitle:"Aap mujhse bejhijhak sampark kar sakte hain",
+    email:"EMAIL",
+    emailBtn:"EMAIL KAREIN",
+    telegram:"TELEGRAM",
+    telegramBtn:"TELEGRAM PAR SAMPARK KAREIN",
+    back:"← Home par wapas",
+    footer:"© 2026 SK TALIB. Sabhi adhikar surakshit.",
+    lang:"ROMAN HINDI"
+  },
+  ur:{
+    title:"مجھ سے رابطہ کریں",
+    subtitle:"آپ بلا جھجھک مجھ سے رابطہ کر سکتے ہیں",
+    email:"ای میل",
+    emailBtn:"ای میل کریں",
+    telegram:"ٹیلیگرام",
+    telegramBtn:"ٹیلیگرام پر رابطہ کریں",
+    back:"← ہوم پر واپس",
+    footer:"© 2026 SK TALIB. جملہ حقوق محفوظ ہیں۔",
+    lang:"اردو"
+  },
+  hi:{
+    title:"मुझसे संपर्क करें",
+    subtitle:"आप बेझिझक मुझसे संपर्क कर सकते हैं",
+    email:"ईमेल",
+    emailBtn:"ईमेल करें",
+    telegram:"टेलीग्राम",
+    telegramBtn:"टेलीग्राम पर संपर्क करें",
+    back:"← होम पर वापस",
+    footer:"© 2026 SK TALIB. सर्वाधिकार सुरक्षित।",
+    lang:"हिन्दी"
+  },
+  or:{
+    title:"ମୋ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ",
+    subtitle:"ନିଃସଙ୍କୋଚରେ ମୋ ସହ ଯୋଗାଯୋଗ କରନ୍ତୁ",
+    email:"ଇମେଲ୍",
+    emailBtn:"ଇମେଲ୍ କରନ୍ତୁ",
+    telegram:"ଟେଲିଗ୍ରାମ",
+    telegramBtn:"ଟେଲିଗ୍ରାମରେ ଯୋଗାଯୋଗ କରନ୍ତୁ",
+    back:"← ହୋମକୁ ଫେରନ୍ତୁ",
+    footer:"© 2026 SK TALIB. ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।",
+    lang:"ଓଡ଼ିଆ"
+  }
+};
+
+function setLanguage(lang){
+  const t=translations[lang] || translations.en;
+  document.getElementById("pageTitle").textContent=t.title;
+  document.getElementById("pageSubtitle").textContent=t.subtitle;
+  document.getElementById("emailTitle").textContent=t.email;
+  document.getElementById("emailBtn").textContent=t.emailBtn;
+  document.getElementById("telegramTitle").textContent=t.telegram;
+  document.getElementById("telegramBtn").textContent=t.telegramBtn;
+  document.getElementById("backBtn").textContent=t.back;
+  document.getElementById("footerText").textContent=t.footer;
+  document.getElementById("langBtn").textContent=t.lang+" ▾";
+  localStorage.setItem("siteLanguage",lang);
+  document.getElementById("langMenu").classList.remove("show");
+}
+
+function toggleLang(){
+  document.getElementById("langMenu").classList.toggle("show");
+}
+
+function toggleTheme(){
+  document.body.classList.toggle("light");
+  const light=document.body.classList.contains("light");
+  localStorage.setItem("siteTheme",light?"light":"dark");
+  updateTheme();
+}
+
+function updateTheme(){
+  const light=document.body.classList.contains("light");
+  document.getElementById("themeBtn").textContent=
+    light?"☀ LIGHT MODE":"☾ DARK MODE";
+  document.querySelector('meta[name="theme-color"]')
+    .setAttribute("content",light?"#f5f5f5":"#080808");
+}
+
+if(localStorage.getItem("siteTheme")==="light"){
+  document.body.classList.add("light");
+}
+updateTheme();
+
+const savedLanguage=localStorage.getItem("siteLanguage") || "en";
+setLanguage(savedLanguage);
+
+document.addEventListener("click",function(e){
+  if(!e.target.closest(".lang-wrap")){
+    document.getElementById("langMenu").classList.remove("show");
+  }
+});
+</script>
+
+</body>
+</html>
