@@ -3,19 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
 <title>About Me | SK TALIB</title>
 
 <style>
 :root{
-  --bg:#080808;
+  --bg:#090909;
   --surface:#111111;
   --surface2:#191919;
+  --surface3:#211f1a;
   --gold:#c9a85b;
-  --gold2:#a88a45;
+  --gold2:#a98a48;
   --text:#eee9df;
   --muted:#aaa397;
-  --line:#39301f;
-  --shadow:rgba(0,0,0,.35);
+  --line:#3b3222;
+  --shadow:rgba(0,0,0,.30);
+}
+
+body.light{
+  --bg:#f4f6f9;
+  --surface:#ffffff;
+  --surface2:#f0f3f7;
+  --surface3:#e8edf4;
+  --gold:#315d8a;
+  --gold2:#547da8;
+  --text:#202a36;
+  --muted:#657181;
+  --line:#d5deea;
+  --shadow:rgba(35,55,80,.08);
 }
 
 *{
@@ -24,24 +39,17 @@
   box-sizing:border-box;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   background:var(--bg);
   color:var(--text);
   font-family:Georgia,"Times New Roman",serif;
   line-height:1.7;
-  transition:background .25s,color .25s;
-}
-
-body.light{
-  --bg:#f5f5f2;
-  --surface:#ffffff;
-  --surface2:#eeeeea;
-  --gold:#8a6a24;
-  --gold2:#a17d31;
-  --text:#202020;
-  --muted:#686868;
-  --line:#d8c99f;
-  --shadow:rgba(0,0,0,.08);
+  min-height:100vh;
+  transition:background .25s ease,color .25s ease;
 }
 
 button{
@@ -49,9 +57,13 @@ button{
   cursor:pointer;
 }
 
+a{
+  color:inherit;
+}
+
 .container{
-  width:min(100% - 30px,1000px);
-  margin:auto;
+  width:min(100% - 32px,1000px);
+  margin-inline:auto;
 }
 
 /* HEADER */
@@ -59,20 +71,22 @@ button{
 header{
   background:var(--surface);
   border-bottom:1px solid var(--line);
+  position:relative;
+  z-index:20;
 }
 
 .header-inner{
-  min-height:76px;
+  min-height:78px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
+  gap:14px;
 }
 
 .brand{
   text-decoration:none;
-  color:var(--text);
-  line-height:1.2;
+  line-height:1.15;
+  flex-shrink:0;
 }
 
 .brand strong{
@@ -80,33 +94,56 @@ header{
   color:var(--gold);
   font-family:Arial,sans-serif;
   font-size:23px;
+  font-weight:800;
   letter-spacing:2px;
 }
 
 .brand small{
+  display:block;
+  margin-top:5px;
+  color:var(--muted);
   font-family:Arial,sans-serif;
   font-size:9px;
-  letter-spacing:2px;
-  color:var(--muted);
+  letter-spacing:2.2px;
 }
+
+/* HEADER CONTROLS */
 
 .header-actions{
   display:flex;
   align-items:center;
-  gap:8px;
+  justify-content:flex-end;
+  gap:9px;
 }
 
-.header-btn{
+.control-btn{
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:7px 11px;
   border:1px solid var(--line);
+  border-radius:7px;
   background:var(--surface2);
   color:var(--text);
-  border-radius:7px;
-  padding:8px 11px;
   font-family:Arial,sans-serif;
-  font-size:12px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.5px;
+  transition:background .2s,border .2s;
 }
 
-/* LANGUAGE MENU */
+.control-btn:hover{
+  border-color:var(--gold);
+}
+
+.control-icon{
+  color:var(--gold);
+  font-size:15px;
+}
+
+/* LANGUAGE POPUP */
 
 .language-wrap{
   position:relative;
@@ -115,15 +152,15 @@ header{
 .language-menu{
   display:none;
   position:absolute;
-  top:43px;
+  top:46px;
   right:0;
-  z-index:50;
-  width:165px;
-  background:var(--surface);
+  width:175px;
+  padding:7px;
   border:1px solid var(--line);
   border-radius:9px;
-  padding:6px;
-  box-shadow:0 10px 30px var(--shadow);
+  background:var(--surface);
+  box-shadow:0 12px 30px var(--shadow);
+  z-index:100;
 }
 
 .language-menu.show{
@@ -133,7 +170,7 @@ header{
 .language-option{
   display:block;
   width:100%;
-  padding:9px 10px;
+  padding:10px 11px;
   border:0;
   border-radius:6px;
   background:transparent;
@@ -141,6 +178,7 @@ header{
   text-align:left;
   font-family:Arial,sans-serif;
   font-size:13px;
+  transition:background .2s,color .2s;
 }
 
 .language-option:hover,
@@ -149,24 +187,10 @@ header{
   color:var(--gold);
 }
 
-/* NAVIGATION */
-
-.navline{
-  padding:10px 0;
-  border-bottom:1px solid var(--line);
-  font-family:Arial,sans-serif;
-  font-size:12px;
-}
-
-.navline a{
-  color:var(--gold);
-  text-decoration:none;
-}
-
-/* PROFILE MASTHEAD */
+/* INTRODUCTION */
 
 .masthead{
-  padding:42px 15px 30px;
+  padding:48px 18px 35px;
   text-align:center;
   border-bottom:1px solid var(--line);
 }
@@ -175,141 +199,102 @@ header{
   color:var(--gold);
   font-family:Arial,sans-serif;
   font-size:10px;
+  font-weight:700;
   letter-spacing:4px;
   text-transform:uppercase;
 }
 
 .masthead h1{
-  margin:10px 0 3px;
-  font-size:clamp(38px,8vw,66px);
+  margin:12px 0 3px;
+  color:var(--text);
+  font-size:clamp(40px,8vw,68px);
+  font-weight:700;
+  letter-spacing:4px;
   line-height:1.2;
-  letter-spacing:3px;
 }
 
-.nickname{
+.masthead .nickname{
   color:var(--gold);
   font-size:17px;
   font-style:italic;
 }
 
 .masthead-description{
-  max-width:520px;
-  margin:13px auto 0;
+  max-width:560px;
+  margin:14px auto 0;
   color:var(--muted);
-  font-size:14px;
+  font-size:15px;
+  line-height:1.9;
 }
 
 .gold-line{
   width:65px;
   height:2px;
+  margin:22px auto 0;
   background:var(--gold);
-  margin:20px auto 0;
 }
 
-/* PROFILE SUMMARY */
+/* MAIN CONTENT */
 
-.profile-summary{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin:24px 0;
+main{
+  padding:30px 0 45px;
 }
 
-.summary-item{
-  padding:15px 8px;
-  text-align:center;
-  background:var(--surface);
+.section{
+  margin-bottom:20px;
+  padding:23px;
   border:1px solid var(--line);
-  border-radius:5px;
+  border-radius:8px;
+  background:var(--surface);
+  box-shadow:0 5px 20px var(--shadow);
+  transition:background .25s,border .25s;
 }
 
-.summary-item strong{
-  display:block;
+.section-heading{
+  margin-bottom:19px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line);
+}
+
+.section-heading h2{
   color:var(--gold);
-  font-size:20px;
+  font-size:23px;
+  font-weight:700;
   line-height:1.4;
 }
 
-.summary-item span{
-  display:block;
+.section-subtitle{
   margin-top:3px;
   color:var(--muted);
   font-family:Arial,sans-serif;
   font-size:10px;
-  letter-spacing:1px;
+  letter-spacing:1.5px;
   text-transform:uppercase;
 }
 
-/* MAIN SECTIONS */
-
-main{
-  padding:5px 0 45px;
-}
-
-.section{
-  margin-bottom:19px;
-  padding:22px;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:5px;
-  box-shadow:0 5px 18px var(--shadow);
-}
-
-.section-heading{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:17px;
-}
-
-.section-number{
-  display:grid;
-  place-items:center;
-  flex-shrink:0;
-  width:37px;
-  height:37px;
-  border:1px solid var(--gold2);
-  color:var(--gold);
-  font-family:Arial,sans-serif;
-  font-size:12px;
-}
-
-.section-heading h2{
-  font-size:22px;
-  line-height:1.3;
-}
-
-.section-subtitle{
-  margin-top:2px;
-  color:var(--muted);
-  font-family:Arial,sans-serif;
-  font-size:10px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-/* DETAIL GRID */
+/* INFORMATION CARDS */
 
 .detail-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
+  gap:11px;
 }
 
 .detail-item{
   min-width:0;
-  padding:12px;
-  background:var(--surface2);
+  padding:13px;
   border:1px solid var(--line);
-  border-radius:4px;
+  border-radius:6px;
+  background:var(--surface2);
 }
 
 .detail-label{
   display:block;
-  margin-bottom:3px;
+  margin-bottom:4px;
   color:var(--muted);
   font-family:Arial,sans-serif;
   font-size:10px;
+  font-weight:600;
   letter-spacing:1px;
   text-transform:uppercase;
 }
@@ -317,108 +302,205 @@ main{
 .detail-value{
   color:var(--text);
   font-size:15px;
-  font-weight:bold;
+  font-weight:700;
   overflow-wrap:anywhere;
 }
 
-/* PERSONALITY TAGS */
+/* RELATIONSHIP CARD */
+
+.relationship-card{
+  padding:21px;
+  border:1px solid var(--gold2);
+  border-radius:8px;
+  background:var(--surface2);
+  text-align:center;
+}
+
+.relationship-title{
+  color:var(--gold);
+  font-size:22px;
+  font-weight:700;
+}
+
+.relationship-tagline{
+  margin-top:7px;
+  color:var(--text);
+  font-size:17px;
+  font-style:italic;
+}
+
+.relationship-description{
+  max-width:550px;
+  margin:8px auto 0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+}
+
+/* TEXT AND PERSONALITY */
+
+.profile-text{
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.95;
+}
 
 .tag-list{
   display:flex;
   flex-wrap:wrap;
   gap:9px;
+  margin-top:15px;
 }
 
 .tag{
   padding:7px 12px;
-  color:var(--gold);
-  background:var(--surface2);
   border:1px solid var(--line);
   border-radius:30px;
+  background:var(--surface2);
+  color:var(--gold);
   font-family:Arial,sans-serif;
   font-size:12px;
 }
 
-/* TEXT PANELS */
-
-.profile-text{
-  color:var(--muted);
-  font-size:15px;
-  line-height:1.9;
-}
+/* PHILOSOPHY */
 
 .quote-panel{
-  padding:20px;
-  background:var(--surface2);
+  padding:21px;
   border-left:3px solid var(--gold);
+  border-radius:5px;
+  background:var(--surface2);
   color:var(--text);
   font-size:17px;
   font-style:italic;
-  line-height:1.8;
+  line-height:1.9;
 }
 
 .quote-credit{
-  margin-top:10px;
+  margin-top:11px;
   color:var(--gold);
   font-family:Arial,sans-serif;
   font-size:10px;
-  letter-spacing:1px;
+  font-style:normal;
+  font-weight:700;
+  letter-spacing:1.5px;
   text-transform:uppercase;
 }
-  /* RESPONSIVE DESIGN */
+
+/* FOOTER */
+
+.site-footer{
+  padding:27px 12px 20px;
+  border-top:1px solid var(--line);
+  text-align:center;
+}
+
+.footer-brand{
+  color:var(--gold);
+  font-family:Arial,sans-serif;
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:3px;
+}
+
+.footer-text{
+  margin-top:7px;
+  color:var(--muted);
+  font-family:Arial,sans-serif;
+  font-size:11px;
+}
+
+.footer-copy{
+  margin-top:12px;
+  color:var(--muted);
+  font-family:Arial,sans-serif;
+  font-size:10px;
+}
+
+/* BACK TO HOME */
+
+.back-home{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:18px;
+  padding:10px 18px;
+  border:1px solid var(--gold2);
+  border-radius:6px;
+  background:var(--surface2);
+  color:var(--gold);
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  font-weight:700;
+  text-decoration:none;
+  transition:background .2s;
+}
+
+.back-home:hover{
+  background:var(--surface3);
+}
+
+/* RESPONSIVE */
 
 @media(max-width:600px){
+
   .container{
     width:min(100% - 22px,1000px);
   }
 
   .header-inner{
-    min-height:68px;
+    min-height:70px;
+    gap:7px;
   }
 
   .brand strong{
-    font-size:19px;
+    font-size:18px;
+    letter-spacing:1.5px;
   }
 
   .brand small{
     font-size:8px;
+    letter-spacing:1.5px;
   }
 
   .header-actions{
     gap:5px;
   }
 
-  .header-btn{
-    padding:7px 8px;
-    font-size:11px;
+  .control-btn{
+    min-height:35px;
+    gap:5px;
+    padding:6px 8px;
+    font-size:10px;
+  }
+
+  .control-icon{
+    font-size:13px;
   }
 
   .masthead{
-    padding:32px 8px 24px;
+    padding:35px 10px 27px;
   }
 
-  .profile-summary{
-    gap:7px;
+  .masthead h1{
+    font-size:43px;
   }
 
-  .summary-item{
-    padding:12px 4px;
+  .masthead-description{
+    font-size:13px;
   }
 
-  .summary-item strong{
-    font-size:17px;
-  }
-
-  .summary-item span{
-    font-size:9px;
+  main{
+    padding-top:21px;
   }
 
   .section{
-    padding:16px;
+    padding:17px;
+    margin-bottom:15px;
   }
 
   .section-heading h2{
-    font-size:19px;
+    font-size:20px;
   }
 
   .detail-grid{
@@ -439,1041 +521,1579 @@ main{
 }
 
 @media(max-width:360px){
+
   .brand strong{
     font-size:16px;
-    letter-spacing:1px;
   }
 
-  .header-btn{
+  .brand small{
+    font-size:7px;
+  }
+
+  .control-btn{
     padding:6px;
-    font-size:10px;
+    font-size:9px;
   }
 
   .detail-grid{
     grid-template-columns:1fr;
   }
+
 }
-</style>
-</head>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<title>About Me | SK TALIB</title>
 
-<body>
+<style>
+:root{
+  --bg:#090909;
+  --surface:#111111;
+  --surface2:#191919;
+  --surface3:#211f1a;
+  --gold:#c9a85b;
+  --gold2:#a98a48;
+  --text:#eee9df;
+  --muted:#aaa397;
+  --line:#3b3222;
+  --shadow:rgba(0,0,0,.30);
+}
 
-<header>
-  <div class="container header-inner">
+body.light{
+  --bg:#f4f6f9;
+  --surface:#ffffff;
+  --surface2:#f0f3f7;
+  --surface3:#e8edf4;
+  --gold:#315d8a;
+  --gold2:#547da8;
+  --text:#202a36;
+  --muted:#657181;
+  --line:#d5deea;
+  --shadow:rgba(35,55,80,.08);
+}
 
-    <a class="brand" href="index.html">
-      <strong>SK TALIB</strong>
-      <small>PERSONAL WEBSITE</small>
-    </a>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    <div class="header-actions">
+html{
+  scroll-behavior:smooth;
+}
 
-      <div class="language-wrap">
-        <button class="header-btn" id="languageButton"
-          onclick="toggleLanguageMenu()">
-          <span id="languageLabel">EN</span> ▾
-        </button>
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Georgia,"Times New Roman",serif;
+  line-height:1.7;
+  min-height:100vh;
+  transition:background .25s ease,color .25s ease;
+}
 
-        <div class="language-menu" id="languageMenu">
-          <button class="language-option active"
-            onclick="changeLanguage('en')">English</button>
+button{
+  font:inherit;
+  cursor:pointer;
+}
 
-          <button class="language-option"
-            onclick="changeLanguage('hi-en')">Roman Hindi</button>
+a{
+  color:inherit;
+}
 
-          <button class="language-option"
-            onclick="changeLanguage('ur')">Urdu</button>
+.container{
+  width:min(100% - 32px,1000px);
+  margin-inline:auto;
+}
 
-          <button class="language-option"
-            onclick="changeLanguage('hi')">Hindi</button>
+/* HEADER */
 
-          <button class="language-option"
-            onclick="changeLanguage('or')">Odia</button>
+header{
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  position:relative;
+  z-index:20;
+}
+
+.header-inner{
+  min-height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.brand{
+  text-decoration:none;
+  line-height:1.15;
+  flex-shrink:0;
+}
+
+.brand strong{
+  display:block;
+  color:var(--gold);
+  font-family:Arial,sans-serif;
+  font-size:23px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+.brand small{
+  display:block;
+  margin-top:5px;
+  color:var(--muted);
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  letter-spacing:2.2px;
+}
+
+/* HEADER CONTROLS */
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:9px;
+}
+
+.control-btn{
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:7px 11px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:var(--surface2);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.5px;
+  transition:background .2s,border .2s;
+}
+
+.control-btn:hover{
+  border-color:var(--gold);
+}
+
+.control-icon{
+  color:var(--gold);
+  font-size:15px;
+}
+
+/* LANGUAGE POPUP */
+
+.language-wrap{
+  position:relative;
+}
+
+.language-menu{
+  display:none;
+  position:absolute;
+  top:46px;
+  right:0;
+  width:175px;
+  padding:7px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:var(--surface);
+  box-shadow:0 12px 30px var(--shadow);
+  z-index:100;
+}
+
+.language-menu.show{
+  display:block;
+}
+
+.language-option{
+  display:block;
+  width:100%;
+  padding:10px 11px;
+  border:0;
+  border-radius:6px;
+  background:transparent;
+  color:var(--text);
+  text-align:left;
+  font-family:Arial,sans-serif;
+  font-size:13px;
+  transition:background .2s,color .2s;
+}
+
+.language-option:hover,
+.language-option.active{
+  background:var(--surface2);
+  color:var(--gold);
+}
+
+/* INTRODUCTION */
+
+.masthead{
+  padding:48px 18px 35px;
+  text-align:center;
+  border-bottom:1px solid var(--line);
+}
+
+.eyebrow{
+  color:var(--gold);
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:4px;
+  text-transform:uppercase;
+}
+
+.masthead h1{
+  margin:12px 0 3px;
+  color:var(--text);
+  font-size:clamp(40px,8vw,68px);
+  font-weight:700;
+  letter-spacing:4px;
+  line-height:1.2;
+}
+
+.masthead .nickname{
+  color:var(--gold);
+  font-size:17px;
+  font-style:italic;
+}
+
+.masthead-description{
+  max-width:560px;
+  margin:14px auto 0;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.9;
+}
+
+.gold-line{
+  width:65px;
+  height:2px;
+  margin:22px auto 0;
+  background:var(--gold);
+}
+
+/* MAIN CONTENT */
+
+main{
+  padding:30px 0 45px;
+}
+
+.section{
+  margin-bottom:20px;
+  padding:23px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:var(--surface);
+  box-shadow:0 5px 20px var(--shadow);
+  transition:background .25s,border .25s;
+}
+
+.section-heading{
+  margin-bottom:19px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--line);
+}
+
+.section-heading h2{
+  color:var(--gold);
+  font-size:23px;
+  font-weight:700;
+  line-height:1.4;
+}
+
+.section-subtitle{
+  margin-top:3px;
+  color:var(--muted);
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+/* INFORMATION CARDS */
+
+.detail-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:11px;
+}
+
+.detail-item{
+  min-width:0;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:var(--surface2);
+}
+
+.detail-label{
+  display:block;
+  margin-bottom:4px;
+  color:var(--muted);
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.detail-value{
+  color:var(--text);
+  font-size:15px;
+  font-weight:700;
+  overflow-wrap:anywhere;
+}
+
+/* RELATIONSHIP CARD */
+
+.relationship-card{
+  padding:21px;
+  border:1px solid var(--gold2);
+  border-radius:8px;
+  background:var(--surface2);
+  text-align:center;
+}
+
+.relationship-title{
+  color:var(--gold);
+  font-size:22px;
+  font-weight:700;
+}
+
+.relationship-tagline{
+  margin-top:7px;
+  color:var(--text);
+  font-size:17px;
+  font-style:italic;
+}
+
+.relationship-description{
+  max-width:550px;
+  margin:8px auto 0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.8;
+}
+
+/* TEXT AND PERSONALITY */
+
+.profile-text{
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.95;
+}
+
+.tag-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:15px;
+}
+
+.tag{
+  padding:7px 12px;
+  border:1px solid var(--line);
+  border-radius:30px;
+  background:var(--surface2);
+  color:var(--gold);
+  font-family:Arial,sans-serif;
+  font-size:12px;
+}
+
+/* PHILOSOPHY */
+
+.quote-panel{
+  padding:21px;
+  border-left:3px solid var(--gold);
+  border-radius:5px;
+  background:var(--surface2);
+  color:var(--text);
+  font-size:17px;
+  font-style:italic;
+  line-height:1.9;
+}
+
+.quote-credit{
+  margin-top:11px;
+  color:var(--gold);
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  font-style:normal;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+/* FOOTER */
+
+.site-footer{
+  padding:27px 12px 20px;
+  border-top:1px solid var(--line);
+  text-align:center;
+}
+
+.footer-brand{
+  color:var(--gold);
+  font-family:Arial,sans-serif;
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:3px;
+}
+
+.footer-text{
+  margin-top:7px;
+  color:var(--muted);
+  font-family:Arial,sans-serif;
+  font-size:11px;
+}
+
+.footer-copy{
+  margin-top:12px;
+  color:var(--muted);
+  font-family:Arial,sans-serif;
+  font-size:10px;
+}
+
+/* BACK TO HOME */
+
+.back-home{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:18px;
+  padding:10px 18px;
+  border:1px solid var(--gold2);
+  border-radius:6px;
+  background:var(--surface2);
+  color:var(--gold);
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  font-weight:700;
+  text-decoration:none;
+  transition:background .2s;
+}
+
+.back-home:hover{
+  background:var(--surface3);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+
+  .container{
+    width:min(100% - 22px,1000px);
+  }
+
+  .header-inner{
+    min-height:70px;
+    gap:7px;
+  }
+
+  .brand strong{
+    font-size:18px;
+    letter-spacing:1.5px;
+  }
+
+  .brand small{
+    font-size:8px;
+    letter-spacing:1.5px;
+  }
+
+  .header-actions{
+    gap:5px;
+  }
+
+  .control-btn{
+    min-height:35px;
+    gap:5px;
+    padding:6px 8px;
+    font-size:10px;
+  }
+
+  .control-icon{
+    font-size:13px;
+  }
+
+  .masthead{
+    padding:35px 10px 27px;
+  }
+
+  .masthead h1{
+    font-size:43px;
+  }
+
+  .masthead-description{
+    font-size:13px;
+  }
+
+  main{
+    padding-top:21px;
+  }
+
+  .section{
+    padding:17px;
+    margin-bottom:15px;
+  }
+
+  .section-heading h2{
+    font-size:20px;
+  }
+
+  .detail-grid{
+    gap:8px;
+  }
+
+  .detail-item{
+    padding:10px;
+  }
+
+  .detail-value{
+    font-size:13px;
+  }
+
+  .profile-text{
+    font-size:14px;
+  }
+}
+
+@media(max-width:360px){
+
+  .brand strong{
+    font-size:16px;
+  }
+
+  .brand small{
+    font-size:7px;
+  }
+
+  .control-btn{
+    padding:6px;
+    font-size:9px;
+  }
+
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+  }
+  <!-- PHYSICAL APPEARANCE -->
+<section class="section" id="appearance">
+    <div class="section-heading">
+        <h2 data-i18n="appearanceTitle">Physical Appearance</h2>
+        <p class="section-subtitle" data-i18n="appearanceSub">A few details about my appearance</p>
+    </div>
+
+    <div class="detail-grid">
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="height">Height</div>
+            <div class="detail-value">5 feet 6 inches (5'6", 168 cm)</div>
         </div>
-      </div>
-
-      <button class="header-btn" id="themeButton"
-        onclick="toggleTheme()">☼</button>
-
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="weight">Weight</div>
+            <div class="detail-value">50 kg</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="bodyType">Body Type</div>
+            <div class="detail-value" data-i18n="slim">Slim</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="skinTone">Skin Tone</div>
+            <div class="detail-value" data-i18n="wheatish">Wheatish</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="eyeColour">Eye Colour</div>
+            <div class="detail-value" data-i18n="black">Black</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="hairColour">Hair Colour</div>
+            <div class="detail-value" data-i18n="black">Black</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="beardStyle">Beard Style</div>
+            <div class="detail-value" data-i18n="lightBeard">Light Beard</div>
+        </div>
     </div>
-  </div>
-</header>
-
-<div class="container">
-  <div class="navline">
-    <a href="index.html" data-i18n="backHome">← Back to Home</a>
-    <span style="color:var(--muted)"> / </span>
-    <span data-i18n="pageName">About Me</span>
-  </div>
-</div>
-
-<section class="masthead">
-  <div class="container">
-
-    <div class="eyebrow" data-i18n="eyebrow">
-      THE PERSON BEHIND THE NAME
-    </div>
-
-    <h1>SK TALIB</h1>
-
-    <div class="nickname" data-i18n="nickname">
-      Simply Talib
-    </div>
-
-    <p class="masthead-description" data-i18n="intro">
-      An independent thinker with a curious mind, a creative spirit
-      and a vision to live life in my own way.
-    </p>
-
-    <div class="gold-line"></div>
-
-  </div>
 </section>
 
-<main class="container">
-
-  <div class="profile-summary">
-
-    <div class="summary-item">
-      <strong id="ageValue">21</strong>
-      <span data-i18n="yearsOld">Years Old</span>
-    </div>
-
-    <div class="summary-item">
-      <strong data-i18n="countryValue">India</strong>
-      <span data-i18n="nationality">Nationality</span>
-    </div>
-
-    <div class="summary-item">
-      <strong data-i18n="hometownValue">Odisha</strong>
-      <span data-i18n="hometown">Hometown</span>
-    </div>
-
-  </div>
-
-  <!-- BASIC INFORMATION -->
-
-  <section class="section">
-
+<!-- MY PERSONALITY -->
+<section class="section" id="personality">
     <div class="section-heading">
-      <div class="section-number">01</div>
-      <div>
-        <h2 data-i18n="basicTitle">Basic Information</h2>
-        <div class="section-subtitle" data-i18n="basicSub">
-          A little introduction
-        </div>
-      </div>
+        <h2 data-i18n="personalityTitle">My Personality</h2>
+        <p class="section-subtitle" data-i18n="personalitySub">The qualities that describe me</p>
     </div>
 
-    <div class="detail-grid">
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="fullName">Full Name</span>
-        <div class="detail-value">SK Talib</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="nicknameLabel">Nickname</span>
-        <div class="detail-value">Talib</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="dateBirth">Date of Birth</span>
-        <div class="detail-value">29 January 2005</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="gender">Gender</span>
-        <div class="detail-value" data-i18n="male">Male</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="nationality">Nationality</span>
-        <div class="detail-value" data-i18n="indian">Indian</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="hometown">Hometown</span>
-        <div class="detail-value">Kendrapara, Odisha</div>
-      </div>
-
+    <div class="profile-text" data-i18n="personalityDescription">
+        I am an independent and curious person who enjoys exploring new ideas and learning new things. I value kindness, honesty and thoughtful conversations. I can be quiet and reserved, but I care deeply about the people and things that matter to me. I believe in thinking independently and treating everyone with respect.
     </div>
-  </section>
-
-  <!-- PHYSICAL PROFILE -->
-
-  <section class="section">
-
-    <div class="section-heading">
-      <div class="section-number">02</div>
-      <div>
-        <h2 data-i18n="physicalTitle">Physical Profile</h2>
-        <div class="section-subtitle" data-i18n="physicalSub">
-          Personal appearance
-        </div>
-      </div>
-    </div>
-
-    <div class="detail-grid">
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="height">Height</span>
-        <div class="detail-value">5'6" (168 cm)</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="weight">Weight</span>
-        <div class="detail-value">50 kg</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="bodyType">Body Type</span>
-        <div class="detail-value" data-i18n="slim">Slim</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="skinTone">Skin Tone</span>
-        <div class="detail-value" data-i18n="wheatish">Wheatish</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="eyeColour">Eye Colour</span>
-        <div class="detail-value" data-i18n="black">Black</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="hairColour">Hair Colour</span>
-        <div class="detail-value" data-i18n="black">Black</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="beardStyle">Beard Style</span>
-        <div class="detail-value" data-i18n="lightBeard">Light Beard</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PERSONALITY -->
-
-  <section class="section">
-
-    <div class="section-heading">
-      <div class="section-number">03</div>
-      <div>
-        <h2 data-i18n="personalityTitle">Personality</h2>
-        <div class="section-subtitle" data-i18n="personalitySub">
-          What makes me, me
-        </div>
-      </div>
-    </div>
-
-    <p class="profile-text" data-i18n="personalityText">
-      I value independent thinking, personal freedom and meaningful
-      conversations. I enjoy exploring new ideas, understanding
-      different perspectives and discovering more about myself.
-    </p>
-
-    <div style="height:15px"></div>
 
     <div class="tag-list">
-      <span class="tag" data-i18n="tagIndependent">Independent</span>
-      <span class="tag" data-i18n="tagCreative">Creative</span>
-      <span class="tag" data-i18n="tagCurious">Curious</span>
-      <span class="tag" data-i18n="tagThoughtful">Thoughtful</span>
-      <span class="tag" data-i18n="tagOpen">Open-minded</span>
-      <span class="tag" data-i18n="tagKind">Kind-hearted</span>
+        <span class="tag" data-i18n="independent">Independent</span>
+        <span class="tag" data-i18n="creative">Creative</span>
+        <span class="tag" data-i18n="curious">Curious</span>
+        <span class="tag" data-i18n="thoughtful">Thoughtful</span>
+        <span class="tag" data-i18n="openMinded">Open-minded</span>
+        <span class="tag" data-i18n="kindHearted">Kind-hearted</span>
+        <span class="tag" data-i18n="caring">Caring</span>
+        <span class="tag" data-i18n="quietReserved">Quiet and Reserved</span>
     </div>
+</section>
 
-  </section>
-
-  <!-- FAVOURITES -->
-
-  <section class="section">
-
+<!-- MY FAVOURITES -->
+<section class="section" id="favourites">
     <div class="section-heading">
-      <div class="section-number">04</div>
-      <div>
         <h2 data-i18n="favouritesTitle">My Favourites</h2>
-        <div class="section-subtitle" data-i18n="favouritesSub">
-          Things I enjoy
-        </div>
-      </div>
+        <p class="section-subtitle" data-i18n="favouritesSub">Little things I enjoy</p>
     </div>
 
     <div class="detail-grid">
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="favColours">Favourite Colours</span>
-        <div class="detail-value" data-i18n="blackWhite">Black & White</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="favFood">Favourite Food</span>
-        <div class="detail-value" data-i18n="moodFood">Depends on my mood</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="favDrink">Favourite Drink</span>
-        <div class="detail-value" data-i18n="fruitJuice">Fruit Juice</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="favTime">Favourite Time</span>
-        <div class="detail-value" data-i18n="night">Night</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="favAtmosphere">Favourite Atmosphere</span>
-        <div class="detail-value" data-i18n="peaceful">Peaceful & Quiet</div>
-      </div>
-
-      <div class="detail-item">
-        <span class="detail-label" data-i18n="favView">Favourite View</span>
-        <div class="detail-value" data-i18n="moonlight">Moonlight</div>
-      </div>
-
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="favouriteColours">Favourite Colours</div>
+            <div class="detail-value" data-i18n="blackWhite">Black &amp; White</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="favouriteFood">Favourite Food</div>
+            <div class="detail-value" data-i18n="dependsMood">Depends on my mood</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="favouriteDrink">Favourite Drink</div>
+            <div class="detail-value" data-i18n="fruitJuice">Fruit Juice</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="favouriteTime">Favourite Time</div>
+            <div class="detail-value" data-i18n="night">Night</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="favouriteAtmosphere">Favourite Atmosphere</div>
+            <div class="detail-value" data-i18n="peacefulQuiet">Peaceful &amp; Quiet</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label" data-i18n="favouriteView">Favourite View</div>
+            <div class="detail-value" data-i18n="moonlight">Moonlight</div>
+        </div>
     </div>
-  </section>
-    <!-- LIFESTYLE -->
+</section>
 
-  <section class="section">
-
+<!-- MY LIFESTYLE -->
+<section class="section" id="lifestyle">
     <div class="section-heading">
-      <div class="section-number">05</div>
-      <div>
         <h2 data-i18n="lifestyleTitle">My Lifestyle</h2>
-        <div class="section-subtitle" data-i18n="lifestyleSub">
-          My way of living
-        </div>
-      </div>
+        <p class="section-subtitle" data-i18n="lifestyleSub">The way I prefer to live</p>
     </div>
 
-    <p class="profile-text" data-i18n="lifestyleText">
-      I enjoy peaceful surroundings, quiet nights and having time
-      for myself. I appreciate privacy, simplicity and the freedom
-      to make my own choices.
-    </p>
-
-    <div style="height:15px"></div>
+    <div class="profile-text" data-i18n="lifestyleDescription">
+        I prefer a simple and peaceful lifestyle. I enjoy quiet surroundings, especially at night, and value having personal freedom and privacy. I like spending time with myself, thinking about life and focusing on things that bring meaning to my days.
+    </div>
 
     <div class="tag-list">
-      <span class="tag" data-i18n="tagPeace">Peace</span>
-      <span class="tag" data-i18n="tagFreedom">Freedom</span>
-      <span class="tag" data-i18n="tagPrivacy">Privacy</span>
-      <span class="tag" data-i18n="tagSimplicity">Simplicity</span>
+        <span class="tag" data-i18n="peacefulSurroundings">Peaceful surroundings</span>
+        <span class="tag" data-i18n="quietNights">Quiet nights</span>
+        <span class="tag" data-i18n="personalFreedom">Personal freedom</span>
+        <span class="tag" data-i18n="privacy">Privacy</span>
+        <span class="tag" data-i18n="simpleLiving">Simple lifestyle</span>
+        <span class="tag" data-i18n="timeForMyself">Time for myself</span>
     </div>
+</section>
 
-  </section>
-
-  <!-- VALUES -->
-
-  <section class="section">
-
+<!-- MY VALUES -->
+<section class="section" id="values">
     <div class="section-heading">
-      <div class="section-number">06</div>
-      <div>
         <h2 data-i18n="valuesTitle">My Values</h2>
-        <div class="section-subtitle" data-i18n="valuesSub">
-          What matters to me
-        </div>
-      </div>
+        <p class="section-subtitle" data-i18n="valuesSub">Principles that matter to me</p>
     </div>
 
-    <p class="profile-text" data-i18n="valuesText">
-      I believe in humanity, kindness, equality and mutual respect.
-      Everyone deserves to be treated with dignity. I value the
-      freedom to think, question and form my own opinions.
-    </p>
-
-    <div style="height:15px"></div>
+    <div class="profile-text" data-i18n="valuesDescription">
+        I believe in humanity, kindness and equality. Everyone deserves respect, regardless of their background or opinions. I value independent thinking, understanding different perspectives and the freedom to make personal choices.
+    </div>
 
     <div class="tag-list">
-      <span class="tag" data-i18n="tagHumanity">Humanity</span>
-      <span class="tag" data-i18n="tagKindness">Kindness</span>
-      <span class="tag" data-i18n="tagRespect">Respect</span>
-      <span class="tag" data-i18n="tagEquality">Equality</span>
-      <span class="tag" data-i18n="tagThinking">Independent Thinking</span>
+        <span class="tag" data-i18n="humanity">Humanity</span>
+        <span class="tag" data-i18n="kindness">Kindness</span>
+        <span class="tag" data-i18n="equality">Equality</span>
+        <span class="tag" data-i18n="mutualRespect">Mutual respect</span>
+        <span class="tag" data-i18n="independentThinking">Independent thinking</span>
+        <span class="tag" data-i18n="freedomOfChoice">Freedom of choice</span>
     </div>
+</section>
 
-  </section>
-
-  <!-- LIKES -->
-
-  <section class="section">
-
+<!-- THINGS I LIKE -->
+<section class="section" id="things-i-like">
     <div class="section-heading">
-      <div class="section-number">07</div>
-      <div>
         <h2 data-i18n="likesTitle">Things I Like</h2>
-        <div class="section-subtitle" data-i18n="likesSub">
-          Little things that make life special
-        </div>
-      </div>
+        <p class="section-subtitle" data-i18n="likesSub">Things that make me feel good</p>
     </div>
 
     <div class="tag-list">
-      <span class="tag" data-i18n="likePeace">Peaceful moments</span>
-      <span class="tag" data-i18n="likeNight">Quiet nights</span>
-      <span class="tag" data-i18n="likeIdeas">New ideas</span>
-      <span class="tag" data-i18n="likeConversations">Meaningful conversations</span>
-      <span class="tag" data-i18n="likeFreedom">Personal freedom</span>
-      <span class="tag" data-i18n="likeNature">Moonlit skies</span>
-      <span class="tag" data-i18n="likePrivacy">Personal space</span>
+        <span class="tag" data-i18n="peacefulMoments">Peaceful moments</span>
+        <span class="tag" data-i18n="quietNights">Quiet nights</span>
+        <span class="tag" data-i18n="newIdeas">New ideas</span>
+        <span class="tag" data-i18n="meaningfulConversations">Meaningful conversations</span>
+        <span class="tag" data-i18n="personalFreedom">Personal freedom</span>
+        <span class="tag" data-i18n="moonlitSkies">Moonlit skies</span>
+        <span class="tag" data-i18n="personalSpace">Personal space</span>
+        <span class="tag" data-i18n="creativeThinking">Creative thinking</span>
+    </div>
+</section>
+
+<!-- THINGS I DISLIKE -->
+<section class="section" id="things-i-dislike">
+    <div class="section-heading">
+        <h2 data-i18n="dislikesTitle">Things I Dislike</h2>
+        <p class="section-subtitle" data-i18n="dislikesSub">Things I prefer to stay away from</p>
     </div>
 
-  </section>
+    <div class="tag-list">
+        <span class="tag" data-i18n="unnecessaryArguments">Unnecessary arguments</span>
+        <span class="tag" data-i18n="disrespect">Disrespect</span>
+        <span class="tag" data-i18n="fakeBehaviour">Fake behaviour</span>
+        <span class="tag" data-i18n="judgingPeople">Judging people without understanding them</span>
+    </div>
+</section>
 
-  <!-- DREAMS -->
-
-  <section class="section">
-
+<!-- DREAMS AND VISION -->
+<section class="section" id="dreams">
     <div class="section-heading">
-      <div class="section-number">08</div>
-      <div>
-        <h2 data-i18n="dreamsTitle">My Dreams & Vision</h2>
-        <div class="section-subtitle" data-i18n="dreamsSub">
-          The life I want to build
-        </div>
-      </div>
+        <h2 data-i18n="dreamsTitle">My Dreams &amp; Vision</h2>
+        <p class="section-subtitle" data-i18n="dreamsSub">The future I want to build</p>
     </div>
 
-    <p class="profile-text" data-i18n="dreamsText">
-      I want to build a life with independence, peace and financial
-      freedom. I believe in personal growth, creating my own identity
-      and moving forward with confidence.
-    </p>
+    <div class="profile-text" data-i18n="dreamsDescription">
+        My dream is to build a peaceful and meaningful life with financial freedom and independence. I want to keep growing as a person, create my own identity and achieve goals that truly matter to me. I believe every small step can bring me closer to the future I imagine.
+    </div>
 
-  </section>
+    <div class="tag-list">
+        <span class="tag" data-i18n="peacefulLife">Peaceful life</span>
+        <span class="tag" data-i18n="financialFreedom">Financial freedom</span>
+        <span class="tag" data-i18n="independence">Independence</span>
+        <span class="tag" data-i18n="personalGrowth">Personal growth</span>
+        <span class="tag" data-i18n="ownIdentity">Building my own identity</span>
+        <span class="tag" data-i18n="meaningfulDreams">Meaningful dreams</span>
+    </div>
+</section>
 
-  <!-- PERSONAL PHILOSOPHY -->
-
-  <section class="section">
-
+<!-- MY PHILOSOPHY -->
+<section class="section" id="philosophy">
     <div class="section-heading">
-      <div class="section-number">09</div>
-      <div>
         <h2 data-i18n="philosophyTitle">My Philosophy</h2>
-        <div class="section-subtitle" data-i18n="philosophySub">
-          A thought to live by
-        </div>
-      </div>
+        <p class="section-subtitle" data-i18n="philosophySub">A thought I try to live by</p>
     </div>
 
     <div class="quote-panel">
-      <span data-i18n="myQuote">
-        "Live freely, think independently, respect everyone and
-        never stop discovering yourself."
-      </span>
-
-      <div class="quote-credit" data-i18n="quoteCredit">
-        — A Personal Thought
-      </div>
+        <div class="profile-text" data-i18n="philosophyQuote">
+            "Live freely, think independently, respect everyone and never stop discovering yourself."
+        </div>
+        <div class="quote-credit" data-i18n="quoteCredit">— SK TALIB</div>
     </div>
-
-  </section>
-
-  <!-- FOOTER -->
-
-  <footer style="
-    text-align:center;
-    padding:25px 12px 35px;
-    border-top:1px solid var(--line);
-  ">
-    <div style="
-      color:var(--gold);
-      font-size:20px;
-      letter-spacing:3px;
-      font-weight:bold;
-    ">SK TALIB</div>
-
-    <p style="
-      color:var(--muted);
-      font-family:Arial,sans-serif;
-      font-size:11px;
-      margin-top:7px;
-    " data-i18n="footerText">
-      A personal space — a story of my own.
-    </p>
-
-    <p style="
-      color:var(--muted);
-      font-family:Arial,sans-serif;
-      font-size:10px;
-      margin-top:12px;
-    ">
-      © <span id="currentYear">2026</span> SK TALIB.
-      <span data-i18n="rights">All Rights Reserved.</span>
-    </p>
-  </footer>
+</section>
 
 </main>
-<script>
-const translations = {
 
-en: {
-  backHome:"← Back to Home",
-  pageName:"About Me",
-  eyebrow:"THE PERSON BEHIND THE NAME",
-  nickname:"Simply Talib",
-  intro:"An independent thinker with a curious mind, a creative spirit and a vision to live life in my own way.",
-  yearsOld:"Years Old",
-  countryValue:"India",
-  nationality:"Nationality",
-  hometownValue:"Odisha",
-  hometown:"Hometown",
-  basicTitle:"Basic Information",
-  basicSub:"A little introduction",
-  fullName:"Full Name",
-  nicknameLabel:"Nickname",
-  dateBirth:"Date of Birth",
-  gender:"Gender",
-  male:"Male",
-  indian:"Indian",
-  physicalTitle:"Physical Profile",
-  physicalSub:"Personal appearance",
-  height:"Height",
-  weight:"Weight",
-  bodyType:"Body Type",
-  slim:"Slim",
-  skinTone:"Skin Tone",
-  wheatish:"Wheatish",
-  eyeColour:"Eye Colour",
-  hairColour:"Hair Colour",
-  black:"Black",
-  beardStyle:"Beard Style",
-  lightBeard:"Light Beard",
-  personalityTitle:"Personality",
-  personalitySub:"What makes me, me",
-  personalityText:"I value independent thinking, personal freedom and meaningful conversations. I enjoy exploring new ideas, understanding different perspectives and discovering more about myself.",
-  tagIndependent:"Independent",
-  tagCreative:"Creative",
-  tagCurious:"Curious",
-  tagThoughtful:"Thoughtful",
-  tagOpen:"Open-minded",
-  tagKind:"Kind-hearted",
-  favouritesTitle:"My Favourites",
-  favouritesSub:"Things I enjoy",
-  favColours:"Favourite Colours",
-  blackWhite:"Black & White",
-  favFood:"Favourite Food",
-  moodFood:"Depends on my mood",
-  favDrink:"Favourite Drink",
-  fruitJuice:"Fruit Juice",
-  favTime:"Favourite Time",
-  night:"Night",
-  favAtmosphere:"Favourite Atmosphere",
-  peaceful:"Peaceful & Quiet",
-  favView:"Favourite View",
-  moonlight:"Moonlight",
-  lifestyleTitle:"My Lifestyle",
-  lifestyleSub:"My way of living",
-  lifestyleText:"I enjoy peaceful surroundings, quiet nights and having time for myself. I appreciate privacy, simplicity and the freedom to make my own choices.",
-  tagPeace:"Peace",
-  tagFreedom:"Freedom",
-  tagPrivacy:"Privacy",
-  tagSimplicity:"Simplicity",
-  valuesTitle:"My Values",
-  valuesSub:"What matters to me",
-  valuesText:"I believe in humanity, kindness, equality and mutual respect. Everyone deserves to be treated with dignity. I value the freedom to think, question and form my own opinions.",
-  tagHumanity:"Humanity",
-  tagKindness:"Kindness",
-  tagRespect:"Respect",
-  tagEquality:"Equality",
-  tagThinking:"Independent Thinking",
-  likesTitle:"Things I Like",
-  likesSub:"Little things that make life special",
-  likePeace:"Peaceful moments",
-  likeNight:"Quiet nights",
-  likeIdeas:"New ideas",
-  likeConversations:"Meaningful conversations",
-  likeFreedom:"Personal freedom",
-  likeNature:"Moonlit skies",
-  likePrivacy:"Personal space",
-  dreamsTitle:"My Dreams & Vision",
-  dreamsSub:"The life I want to build",
-  dreamsText:"I want to build a life with independence, peace and financial freedom. I believe in personal growth, creating my own identity and moving forward with confidence.",
-  philosophyTitle:"My Philosophy",
-  philosophySub:"A thought to live by",
-  myQuote:"Live freely, think independently, respect everyone and never stop discovering yourself.",
-  quoteCredit:"— A Personal Thought",
-  footerText:"A personal space — a story of my own.",
-  rights:"All Rights Reserved."
-},
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="footer-brand">SK TALIB</div>
+    <p class="footer-text" data-i18n="footerText">
+        A personal space to share my journey, thoughts and identity.
+    </p>
+    <p class="footer-copy">
+        © <span id="footerYear">2026</span> SK TALIB.
+        <span data-i18n="allRights">All rights reserved.</span>
+    </p>
 
-"hi-en": {
-  backHome:"← Home par Wapas",
-  pageName:"Mere Baare Mein",
-  eyebrow:"IS NAAM KE PEECHE EK INSAAN",
-  nickname:"Bas Talib",
-  intro:"Ek azad soch rakhne wala insaan, jiske andar naye ideas jaanne ki curiosity aur apni zindagi apne tareeke se jeene ka vision hai.",
-  yearsOld:"Saal Umar",
-  countryValue:"India",
-  nationality:"Rashtriyata",
-  hometownValue:"Odisha",
-  hometown:"Apna Shehar",
-  basicTitle:"Basic Jankari",
-  basicSub:"Mera Chhota Sa Parichay",
-  fullName:"Poora Naam",
-  nicknameLabel:"Nickname",
-  dateBirth:"Janam Ki Tareekh",
-  gender:"Gender",
-  male:"Male",
-  indian:"Bhartiya",
-  physicalTitle:"Sharirik Jankari",
-  physicalSub:"Mera Huliya",
-  height:"Lambai",
-  weight:"Wazan",
-  bodyType:"Body Type",
-  slim:"Patla",
-  skinTone:"Skin Tone",
-  wheatish:"Gehua Rang",
-  eyeColour:"Aankhon Ka Rang",
-  hairColour:"Baalon Ka Rang",
-  black:"Kala",
-  beardStyle:"Dadhi Ka Style",
-  lightBeard:"Halki Dadhi",
-  personalityTitle:"Meri Personality",
-  personalitySub:"Meri Pehchaan",
-  personalityText:"Main apni azad soch, personal freedom aur achhi baatcheet ko ahmiyat deta hoon. Mujhe naye ideas jaan-na, alag nazariye samajhna aur khud ko behtar samajhna pasand hai.",
-  tagIndependent:"Azad Soch",
-  tagCreative:"Creative",
-  tagCurious:"Jigyasu",
-  tagThoughtful:"Samajhdar",
-  tagOpen:"Khule Vichaar",
-  tagKind:"Narm Dil",
-  favouritesTitle:"Meri Pasand",
-  favouritesSub:"Jo Mujhe Pasand Hai",
-  favColours:"Pasandida Rang",
-  blackWhite:"Kala Aur Safed",
-  favFood:"Pasandida Khana",
-  moodFood:"Mood Ke Hisaab Se",
-  favDrink:"Pasandida Drink",
-  fruitJuice:"Fruit Juice",
-  favTime:"Pasandida Waqt",
-  night:"Raat",
-  favAtmosphere:"Pasandida Mahol",
-  peaceful:"Shaant Aur Sukoon Bhara",
-  favView:"Pasandida Nazara",
-  moonlight:"Chaandni",
-  lifestyleTitle:"Mera Lifestyle",
-  lifestyleSub:"Jeene Ka Apna Andaaz",
-  lifestyleText:"Mujhe shaant jagah, sukoon bhari raatein aur apne liye waqt nikalna pasand hai. Main privacy, saadgi aur apni marzi se faisle lene ki azadi ko ahmiyat deta hoon.",
-  tagPeace:"Sukoon",
-  tagFreedom:"Azadi",
-  tagPrivacy:"Privacy",
-  tagSimplicity:"Saadgi",
-  valuesTitle:"Mere Usool",
-  valuesSub:"Mere Liye Kya Zaroori Hai",
-  valuesText:"Main insaniyat, neki, barabari aur ek doosre ki izzat par yakeen rakhta hoon. Har insaan izzat ka haqdar hai. Main sochne, sawaal karne aur apni rai banane ki azadi ko ahmiyat deta hoon.",
-  tagHumanity:"Insaniyat",
-  tagKindness:"Neki",
-  tagRespect:"Izzat",
-  tagEquality:"Barabari",
-  tagThinking:"Azad Soch",
-  likesTitle:"Mujhe Kya Pasand Hai",
-  likesSub:"Zindagi Ki Chhoti Khushiyan",
-  likePeace:"Sukoon Ke Pal",
-  likeNight:"Khamosh Raatein",
-  likeIdeas:"Naye Ideas",
-  likeConversations:"Achhi Baatcheet",
-  likeFreedom:"Apni Azadi",
-  likeNature:"Chaandni Raat",
-  likePrivacy:"Apna Waqt",
-  dreamsTitle:"Mere Sapne Aur Soch",
-  dreamsSub:"Main Kaisi Zindagi Banana Chahta Hoon",
-  dreamsText:"Main ek aisi zindagi banana chahta hoon jisme azadi, sukoon aur financial freedom ho. Main khud ko behtar banane, apni alag pehchaan banane aur confidence ke saath aage badhne mein yakeen rakhta hoon.",
-  philosophyTitle:"Meri Soch",
-  philosophySub:"Zindagi Jeene Ka Ek Khayal",
-  myQuote:"Azadi se jiyo, apni soch rakho, sabki izzat karo aur khud ko jaan-na kabhi band mat karo.",
-  quoteCredit:"— Meri Ek Soch",
-  footerText:"Ek apni jagah — meri apni kahani.",
-  rights:"Sabhi Adhikar Surakshit Hain."
-},
-
-ur: {
-  backHome:"← ہوم پر واپس",
-  pageName:"میرے بارے میں",
-  eyebrow:"اس نام کے پیچھے ایک انسان",
-  nickname:"بس طالب",
-  intro:"ایک آزاد سوچ رکھنے والا انسان، جس کے اندر نئے خیالات جاننے کا شوق اور اپنی زندگی اپنے انداز میں جینے کا خواب ہے۔",
-  yearsOld:"سال عمر",
-  countryValue:"بھارت",
-  nationality:"قومیت",
-  hometownValue:"اوڈیشہ",
-  hometown:"آبائی علاقہ",
-  basicTitle:"بنیادی معلومات",
-  basicSub:"میرا مختصر تعارف",
-  fullName:"پورا نام",
-  nicknameLabel:"عرفیت",
-  dateBirth:"تاریخ پیدائش",
-  gender:"جنس",
-  male:"مرد",
-  indian:"بھارتی",
-  physicalTitle:"جسمانی معلومات",
-  physicalSub:"ذاتی ظاہری شکل",
-  height:"قد",
-  weight:"وزن",
-  bodyType:"جسمانی ساخت",
-  slim:"دبلا پتلا",
-  skinTone:"رنگت",
-  wheatish:"گندمی",
-  eyeColour:"آنکھوں کا رنگ",
-  hairColour:"بالوں کا رنگ",
-  black:"کالا",
-  beardStyle:"داڑھی کا انداز",
-  lightBeard:"ہلکی داڑھی",
-  personalityTitle:"میری شخصیت",
-  personalitySub:"میری پہچان",
-  personalityText:"میں آزاد سوچ، ذاتی آزادی اور بامعنی گفتگو کو اہمیت دیتا ہوں۔ مجھے نئے خیالات جاننا، مختلف نظریات سمجھنا اور خود کو دریافت کرنا پسند ہے۔",
-  tagIndependent:"آزاد خیال",
-  tagCreative:"تخلیقی",
-  tagCurious:"جستجو کرنے والا",
-  tagThoughtful:"غور و فکر کرنے والا",
-  tagOpen:"وسیع النظر",
-  tagKind:"نرم دل",
-  favouritesTitle:"میری پسند",
-  favouritesSub:"وہ چیزیں جو مجھے پسند ہیں",
-  favColours:"پسندیدہ رنگ",
-  blackWhite:"کالا اور سفید",
-  favFood:"پسندیدہ کھانا",
-  moodFood:"موڈ کے مطابق",
-  favDrink:"پسندیدہ مشروب",
-  fruitJuice:"فروٹ جوس",
-  favTime:"پسندیدہ وقت",
-  night:"رات",
-  favAtmosphere:"پسندیدہ ماحول",
-  peaceful:"پرسکون اور خاموش",
-  favView:"پسندیدہ منظر",
-  moonlight:"چاندنی",
-  lifestyleTitle:"میرا طرز زندگی",
-  lifestyleSub:"میرا جینے کا انداز",
-  lifestyleText:"مجھے پرسکون ماحول، خاموش راتیں اور اپنے لیے وقت نکالنا پسند ہے۔ میں رازداری، سادگی اور اپنی مرضی سے فیصلے کرنے کی آزادی کو اہمیت دیتا ہوں۔",
-  tagPeace:"سکون",
-  tagFreedom:"آزادی",
-  tagPrivacy:"رازداری",
-  tagSimplicity:"سادگی",
-  valuesTitle:"میرے اصول",
-  valuesSub:"میرے لیے کیا اہم ہے",
-  valuesText:"میں انسانیت، مہربانی، برابری اور باہمی احترام پر یقین رکھتا ہوں۔ ہر انسان عزت کا حق دار ہے۔ میں سوچنے، سوال کرنے اور اپنی رائے بنانے کی آزادی کو اہمیت دیتا ہوں۔",
-  tagHumanity:"انسانیت",
-  tagKindness:"مہربانی",
-  tagRespect:"احترام",
-  tagEquality:"برابری",
-  tagThinking:"آزاد سوچ",
-  likesTitle:"میری پسندیدہ چیزیں",
-  likesSub:"زندگی کی چھوٹی خوشیاں",
-  likePeace:"پرسکون لمحات",
-  likeNight:"خاموش راتیں",
-  likeIdeas:"نئے خیالات",
-  likeConversations:"بامعنی گفتگو",
-  likeFreedom:"ذاتی آزادی",
-  likeNature:"چاندنی راتیں",
-  likePrivacy:"ذاتی وقت",
-  dreamsTitle:"میرے خواب اور نظریہ",
-  dreamsSub:"وہ زندگی جو میں بنانا چاہتا ہوں",
-  dreamsText:"میں ایسی زندگی بنانا چاہتا ہوں جس میں خود مختاری، سکون اور مالی آزادی ہو۔ میں اپنی شخصیت کو بہتر بنانے، اپنی الگ پہچان بنانے اور اعتماد کے ساتھ آگے بڑھنے پر یقین رکھتا ہوں۔",
-  philosophyTitle:"میرا فلسفہ",
-  philosophySub:"زندگی کا ایک خیال",
-  myQuote:"آزادی سے جیو، اپنی سوچ رکھو، سب کی عزت کرو اور خود کو دریافت کرنا کبھی بند نہ کرو۔",
-  quoteCredit:"— ایک ذاتی خیال",
-  footerText:"ایک ذاتی جگہ — میری اپنی کہانی۔",
-  rights:"جملہ حقوق محفوظ ہیں۔"
-},
-
-hi: {
-  backHome:"← होम पर वापस",
-  pageName:"मेरे बारे में",
-  eyebrow:"इस नाम के पीछे एक इंसान",
-  nickname:"बस तालिब",
-  intro:"एक स्वतंत्र सोच रखने वाला इंसान, जिसके अंदर नए विचार जानने की जिज्ञासा और अपनी जिंदगी अपने तरीके से जीने का सपना है।",
-  yearsOld:"साल उम्र",
-  countryValue:"भारत",
-  nationality:"राष्ट्रीयता",
-  hometownValue:"ओडिशा",
-  hometown:"गृहनगर",
-  basicTitle:"बुनियादी जानकारी",
-  basicSub:"मेरा छोटा सा परिचय",
-  fullName:"पूरा नाम",
-  nicknameLabel:"उपनाम",
-  dateBirth:"जन्म की तारीख",
-  gender:"लिंग",
-  male:"पुरुष",
-  indian:"भारतीय",
-  physicalTitle:"शारीरिक जानकारी",
-  physicalSub:"व्यक्तिगत रूप",
-  height:"लंबाई",
-  weight:"वजन",
-  bodyType:"शरीर का प्रकार",
-  slim:"पतला",
-  skinTone:"त्वचा का रंग",
-  wheatish:"गेहुँआ",
-  eyeColour:"आँखों का रंग",
-  hairColour:"बालों का रंग",
-  black:"काला",
-  beardStyle:"दाढ़ी का स्टाइल",
-  lightBeard:"हल्की दाढ़ी",
-  personalityTitle:"मेरा व्यक्तित्व",
-  personalitySub:"मेरी पहचान",
-  personalityText:"मैं स्वतंत्र सोच, व्यक्तिगत आजादी और सार्थक बातचीत को महत्व देता हूँ। मुझे नए विचार जानना, अलग-अलग नजरिए समझना और खुद को बेहतर जानना पसंद है।",
-  tagIndependent:"स्वतंत्र सोच",
-  tagCreative:"रचनात्मक",
-  tagCurious:"जिज्ञासु",
-  tagThoughtful:"विचारशील",
-  tagOpen:"खुले विचार",
-  tagKind:"दयालु",
-  favouritesTitle:"मेरी पसंद",
-  favouritesSub:"वे चीजें जो मुझे पसंद हैं",
-  favColours:"पसंदीदा रंग",
-  blackWhite:"काला और सफेद",
-  favFood:"पसंदीदा खाना",
-  moodFood:"मूड के अनुसार",
-  favDrink:"पसंदीदा पेय",
-  fruitJuice:"फ्रूट जूस",
-  favTime:"पसंदीदा समय",
-  night:"रात",
-  favAtmosphere:"पसंदीदा माहौल",
-  peaceful:"शांत और सुकून भरा",
-  favView:"पसंदीदा नजारा",
-  moonlight:"चाँदनी",
-  lifestyleTitle:"मेरी जीवनशैली",
-  lifestyleSub:"मेरे जीने का तरीका",
-  lifestyleText:"मुझे शांत माहौल, सुकून भरी रातें और अपने लिए समय निकालना पसंद है। मैं निजता, सादगी और अपनी पसंद से फैसले लेने की आजादी को महत्व देता हूँ।",
-  tagPeace:"सुकून",
-  tagFreedom:"आजादी",
-  tagPrivacy:"निजता",
-  tagSimplicity:"सादगी",
-  valuesTitle:"मेरे सिद्धांत",
-  valuesSub:"मेरे लिए क्या जरूरी है",
-  valuesText:"मैं इंसानियत, दया, समानता और आपसी सम्मान में विश्वास रखता हूँ। हर इंसान सम्मान का हकदार है। मैं सोचने, सवाल करने और अपनी राय बनाने की आजादी को महत्व देता हूँ।",
-  tagHumanity:"इंसानियत",
-  tagKindness:"दयालुता",
-  tagRespect:"सम्मान",
-  tagEquality:"समानता",
-  tagThinking:"स्वतंत्र सोच",
-  likesTitle:"मुझे क्या पसंद है",
-  likesSub:"जीवन की छोटी खुशियाँ",
-  likePeace:"शांत पल",
-  likeNight:"खामोश रातें",
-  likeIdeas:"नए विचार",
-  likeConversations:"अच्छी बातचीत",
-  likeFreedom:"व्यक्तिगत आजादी",
-  likeNature:"चाँदनी रातें",
-  likePrivacy:"अपना समय",
-  dreamsTitle:"मेरे सपने और लक्ष्य",
-  dreamsSub:"वह जिंदगी जो मैं बनाना चाहता हूँ",
-  dreamsText:"मैं ऐसी जिंदगी बनाना चाहता हूँ जिसमें स्वतंत्रता, शांति और आर्थिक आजादी हो। मैं खुद को बेहतर बनाने, अपनी अलग पहचान बनाने और आत्मविश्वास के साथ आगे बढ़ने में विश्वास रखता हूँ।",
-  philosophyTitle:"मेरा दर्शन",
-  philosophySub:"जीवन का एक विचार",
-  myQuote:"आजादी से जियो, स्वतंत्र सोच रखो, सबका सम्मान करो और खुद को जानना कभी बंद मत करो।",
-  quoteCredit:"— एक व्यक्तिगत विचार",
-  footerText:"एक अपनी जगह — मेरी अपनी कहानी।",
-  rights:"सर्वाधिकार सुरक्षित।"
-},
-
-or: {
-  backHome:"← ହୋମକୁ ଫେରନ୍ତୁ",
-  pageName:"ମୋ ବିଷୟରେ",
-  eyebrow:"ଏହି ନାମ ପଛରେ ଜଣେ ମଣିଷ",
-  nickname:"କେବଳ ତାଲିବ",
-  intro:"ନିଜସ୍ୱ ଚିନ୍ତାଧାରା ଥିବା ଜଣେ ମଣିଷ, ଯିଏ ନୂଆ କଥା ଜାଣିବାକୁ ଭଲ ପାଏ ଏବଂ ନିଜ ଢଙ୍ଗରେ ଜୀବନ ବଞ୍ଚିବାର ସ୍ୱପ୍ନ ଦେଖେ।",
-  yearsOld:"ବର୍ଷ ବୟସ",
-  countryValue:"ଭାରତ",
-  nationality:"ଜାତୀୟତା",
-  hometownValue:"ଓଡ଼ିଶା",
-  hometown:"ନିଜ ସହର",
-  basicTitle:"ମୌଳିକ ସୂଚନା",
-  basicSub:"ମୋର ଛୋଟ ପରିଚୟ",
-  fullName:"ପୂରା ନାମ",
-  nicknameLabel:"ଡାକ ନାମ",
-  dateBirth:"ଜନ୍ମ ତାରିଖ",
-  gender:"ଲିଙ୍ଗ",
-  male:"ପୁରୁଷ",
-  indian:"ଭାରତୀୟ",
-  physicalTitle:"ଶାରୀରିକ ବିବରଣୀ",
-  physicalSub:"ବ୍ୟକ୍ତିଗତ ରୂପ",
-  height:"ଉଚ୍ଚତା",
-  weight:"ଓଜନ",
-  bodyType:"ଶରୀରର ପ୍ରକାର",
-  slim:"ପତଳା",
-  skinTone:"ତ୍ୱଚାର ରଙ୍ଗ",
-  wheatish:"ଗହମ ରଙ୍ଗ",
-  eyeColour:"ଆଖିର ରଙ୍ଗ",
-  hairColour:"କେଶର ରଙ୍ଗ",
-  black:"କଳା",
-  beardStyle:"ଦାଢ଼ିର ଶୈଳୀ",
-  lightBeard:"ହାଲୁକା ଦାଢ଼ି",
-  personalityTitle:"ମୋର ବ୍ୟକ୍ତିତ୍ୱ",
-  personalitySub:"ମୋର ପରିଚୟ",
-  personalityText:"ମୁଁ ସ୍ୱାଧୀନ ଚିନ୍ତାଧାରା, ବ୍ୟକ୍ତିଗତ ସ୍ୱାଧୀନତା ଏବଂ ଅର୍ଥପୂର୍ଣ୍ଣ କଥାବାର୍ତ୍ତାକୁ ଗୁରୁତ୍ୱ ଦିଏ। ମୋତେ ନୂଆ ଭାବନା ଜାଣିବା ଏବଂ ନିଜକୁ ଆହୁରି ଭଲ ଭାବରେ ବୁଝିବା ଭଲ ଲାଗେ।",
-  tagIndependent:"ସ୍ୱାଧୀନ",
-  tagCreative:"ସୃଜନଶୀଳ",
-  tagCurious:"ଜିଜ୍ଞାସୁ",
-  tagThoughtful:"ଚିନ୍ତାଶୀଳ",
-  tagOpen:"ଉଦାର ମନୋଭାବ",
-  tagKind:"ଦୟାଳୁ",
-  favouritesTitle:"ମୋର ପସନ୍ଦ",
-  favouritesSub:"ମୋତେ ଯାହା ଭଲ ଲାଗେ",
-  favColours:"ପସନ୍ଦର ରଙ୍ଗ",
-  blackWhite:"କଳା ଏବଂ ଧଳା",
-  favFood:"ପସନ୍ଦର ଖାଦ୍ୟ",
-  moodFood:"ମନୋଭାବ ଅନୁସାରେ",
-  favDrink:"ପସନ୍ଦର ପାନୀୟ",
-  fruitJuice:"ଫଳ ରସ",
-  favTime:"ପସନ୍ଦର ସମୟ",
-  night:"ରାତି",
-  favAtmosphere:"ପସନ୍ଦର ପରିବେଶ",
-  peaceful:"ଶାନ୍ତ ଏବଂ ନିରବ",
-  favView:"ପସନ୍ଦର ଦୃଶ୍ୟ",
-  moonlight:"ଜହ୍ନ ଆଲୋକ",
-  lifestyleTitle:"ମୋର ଜୀବନଶୈଳୀ",
-  lifestyleSub:"ମୋର ଜୀବନ ବଞ୍ଚିବାର ଶୈଳୀ",
-  lifestyleText:"ମୋତେ ଶାନ୍ତ ପରିବେଶ, ନିରବ ରାତି ଏବଂ ନିଜ ପାଇଁ ସମୟ ବିତାଇବା ଭଲ ଲାଗେ। ମୁଁ ବ୍ୟକ୍ତିଗତ ସ୍ଥାନ, ସରଳତା ଏବଂ ନିଜ ନିଷ୍ପତ୍ତି ନେବାର ସ୍ୱାଧୀନତାକୁ ଗୁରୁତ୍ୱ ଦିଏ।",
-  tagPeace:"ଶାନ୍ତି",
-  tagFreedom:"ସ୍ୱାଧୀନତା",
-  tagPrivacy:"ବ୍ୟକ୍ତିଗତତା",
-  tagSimplicity:"ସରଳତା",
-  valuesTitle:"ମୋର ମୂଲ୍ୟବୋଧ",
-  valuesSub:"ମୋ ପାଇଁ କ'ଣ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ",
-  valuesText:"ମୁଁ ମାନବିକତା, ଦୟା, ସମାନତା ଏବଂ ପରସ୍ପର ସମ୍ମାନରେ ବିଶ୍ୱାସ କରେ। ପ୍ରତ୍ୟେକ ମଣିଷ ସମ୍ମାନ ପାଇବାର ଯୋଗ୍ୟ।",
-  tagHumanity:"ମାନବିକତା",
-  tagKindness:"ଦୟା",
-  tagRespect:"ସମ୍ମାନ",
-  tagEquality:"ସମାନତା",
-  tagThinking:"ସ୍ୱାଧୀନ ଚିନ୍ତା",
-  likesTitle:"ମୋତେ କ'ଣ ଭଲ ଲାଗେ",
-  likesSub:"ଜୀବନର ଛୋଟ ଖୁସି",
-  likePeace:"ଶାନ୍ତିର ମୁହୂର୍ତ୍ତ",
-  likeNight:"ନିରବ ରାତି",
-  likeIdeas:"ନୂଆ ଭାବନା",
-  likeConversations:"ଅର୍ଥପୂର୍ଣ୍ଣ କଥାବାର୍ତ୍ତା",
-  likeFreedom:"ବ୍ୟକ୍ତିଗତ ସ୍ୱାଧୀନତା",
-  likeNature:"ଜହ୍ନ ରାତି",
-  likePrivacy:"ନିଜ ପାଇଁ ସମୟ",
-  dreamsTitle:"ମୋର ସ୍ୱପ୍ନ ଏବଂ ଲକ୍ଷ୍ୟ",
-  dreamsSub:"ମୁଁ ଯେଉଁ ଜୀବନ ଗଢ଼ିବାକୁ ଚାହେଁ",
-  dreamsText:"ମୁଁ ସ୍ୱାଧୀନତା, ଶାନ୍ତି ଏବଂ ଆର୍ଥିକ ସ୍ୱାଧୀନତା ଥିବା ଜୀବନ ଗଢ଼ିବାକୁ ଚାହେଁ। ନିଜକୁ ଉନ୍ନତ କରିବା ଏବଂ ନିଜର ପରିଚୟ ସୃଷ୍ଟି କରିବାରେ ବିଶ୍ୱାସ କରେ।",
-  philosophyTitle:"ମୋର ଚିନ୍ତାଧାରା",
-  philosophySub:"ଜୀବନ ପାଇଁ ଏକ ଭାବନା",
-  myQuote:"ସ୍ୱାଧୀନ ଭାବରେ ବଞ୍ଚ, ନିଜେ ଚିନ୍ତା କର, ସମସ୍ତଙ୍କୁ ସମ୍ମାନ କର ଏବଂ ନିଜକୁ ଜାଣିବା ବନ୍ଦ କରନି।",
-  quoteCredit:"— ଏକ ବ୍ୟକ୍ତିଗତ ଭାବନା",
-  footerText:"ଏକ ନିଜସ୍ୱ ସ୍ଥାନ — ମୋର ନିଜ କାହାଣୀ।",
-  rights:"ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।"
-}
-
-};
+    <a href="index.html" class="back-home" data-i18n="backHome">
+        ← Back to Home
+    </a>
+</footer>
   <script>
+const translations = {
+    en: {
+        eyebrow: "GET TO KNOW ME",
+        introTagline: "A little about who I am",
+        intro: "Welcome to my personal space. Here you can learn more about my personality, interests, values and the things that make me who I am.",
+
+        basicTitle: "Basic Information",
+        basicSub: "A few details about me",
+        fullName: "Full Name",
+        dateBirth: "Date of Birth",
+        age: "Age",
+        yearsOld: "years old",
+        gender: "Gender",
+        male: "Male",
+        nationality: "Nationality",
+        indian: "Indian",
+        hometown: "Hometown",
+
+        relationshipTitle: "Relationship Status",
+        relationshipSub: "A special part of my life",
+        relationshipStatus: "♡ In a Relationship",
+        relationshipTagline: "One heart, one special connection.",
+        relationshipDescription: "Some connections make life more beautiful, and some people make every moment feel special.",
+
+        appearanceTitle: "Physical Appearance",
+        appearanceSub: "A few details about my appearance",
+        height: "Height",
+        weight: "Weight",
+        bodyType: "Body Type",
+        slim: "Slim",
+        skinTone: "Skin Tone",
+        wheatish: "Wheatish",
+        eyeColour: "Eye Colour",
+        black: "Black",
+        hairColour: "Hair Colour",
+        beardStyle: "Beard Style",
+        lightBeard: "Light Beard",
+
+        personalityTitle: "My Personality",
+        personalitySub: "The qualities that describe me",
+        personalityDescription: "I am an independent and curious person who enjoys exploring new ideas and learning new things. I value kindness, honesty and thoughtful conversations. I can be quiet and reserved, but I care deeply about the people and things that matter to me. I believe in thinking independently and treating everyone with respect.",
+        independent: "Independent",
+        creative: "Creative",
+        curious: "Curious",
+        thoughtful: "Thoughtful",
+        openMinded: "Open-minded",
+        kindHearted: "Kind-hearted",
+        caring: "Caring",
+        quietReserved: "Quiet and Reserved",
+
+        favouritesTitle: "My Favourites",
+        favouritesSub: "Little things I enjoy",
+        favouriteColours: "Favourite Colours",
+        blackWhite: "Black & White",
+        favouriteFood: "Favourite Food",
+        dependsMood: "Depends on my mood",
+        favouriteDrink: "Favourite Drink",
+        fruitJuice: "Fruit Juice",
+        favouriteTime: "Favourite Time",
+        night: "Night",
+        favouriteAtmosphere: "Favourite Atmosphere",
+        peacefulQuiet: "Peaceful & Quiet",
+        favouriteView: "Favourite View",
+        moonlight: "Moonlight",
+
+        lifestyleTitle: "My Lifestyle",
+        lifestyleSub: "The way I prefer to live",
+        lifestyleDescription: "I prefer a simple and peaceful lifestyle. I enjoy quiet surroundings, especially at night, and value having personal freedom and privacy. I like spending time with myself, thinking about life and focusing on things that bring meaning to my days.",
+        peacefulSurroundings: "Peaceful surroundings",
+        quietNights: "Quiet nights",
+        personalFreedom: "Personal freedom",
+        privacy: "Privacy",
+        simpleLiving: "Simple lifestyle",
+        timeForMyself: "Time for myself",
+
+        valuesTitle: "My Values",
+        valuesSub: "Principles that matter to me",
+        valuesDescription: "I believe in humanity, kindness and equality. Everyone deserves respect, regardless of their background or opinions. I value independent thinking, understanding different perspectives and the freedom to make personal choices.",
+        humanity: "Humanity",
+        kindness: "Kindness",
+        equality: "Equality",
+        mutualRespect: "Mutual respect",
+        independentThinking: "Independent thinking",
+        freedomOfChoice: "Freedom of choice",
+
+        likesTitle: "Things I Like",
+        likesSub: "Things that make me feel good",
+        peacefulMoments: "Peaceful moments",
+        newIdeas: "New ideas",
+        meaningfulConversations: "Meaningful conversations",
+        moonlitSkies: "Moonlit skies",
+        personalSpace: "Personal space",
+        creativeThinking: "Creative thinking",
+
+        dislikesTitle: "Things I Dislike",
+        dislikesSub: "Things I prefer to stay away from",
+        unnecessaryArguments: "Unnecessary arguments",
+        disrespect: "Disrespect",
+        fakeBehaviour: "Fake behaviour",
+        judgingPeople: "Judging people without understanding them",
+
+        dreamsTitle: "My Dreams & Vision",
+        dreamsSub: "The future I want to build",
+        dreamsDescription: "My dream is to build a peaceful and meaningful life with financial freedom and independence. I want to keep growing as a person, create my own identity and achieve goals that truly matter to me. I believe every small step can bring me closer to the future I imagine.",
+        peacefulLife: "Peaceful life",
+        financialFreedom: "Financial freedom",
+        personalGrowth: "Personal growth",
+        ownIdentity: "Building my own identity",
+        meaningfulDreams: "Meaningful dreams",
+
+        philosophyTitle: "My Philosophy",
+        philosophySub: "A thought I try to live by",
+        philosophyQuote: "\"Live freely, think independently, respect everyone and never stop discovering yourself.\"",
+        quoteCredit: "— SK TALIB",
+
+        footerText: "A personal space to share my journey, thoughts and identity.",
+        allRights: "All rights reserved.",
+        backHome: "← Back to Home",
+        darkMode: "DARK MODE",
+        lightMode: "LIGHT MODE",
+        languageLabel: "LANGUAGE"
+    },
+
+    "hi-en": {
+        eyebrow: "MUJHE JAANIYE",
+        introTagline: "Mere baare mein kuch baatein",
+        intro: "Meri personal website mein aapka swagat hai. Yahan aap meri personality, pasand, values aur meri zindagi se judi kuch khaas baatein jaan sakte hain.",
+
+        basicTitle: "Basic Information",
+        basicSub: "Mere baare mein kuch zaroori jaankari",
+        fullName: "Poora Naam",
+        dateBirth: "Janam Tithi",
+        age: "Umar",
+        yearsOld: "saal",
+        gender: "Gender",
+        male: "Purush",
+        nationality: "Rashtriyata",
+        indian: "Bhartiya",
+        hometown: "Grih Nagar",
+
+        relationshipTitle: "Relationship Status",
+        relationshipSub: "Meri zindagi ka ek khaas hissa",
+        relationshipStatus: "♡ Relationship Mein Hoon",
+        relationshipTagline: "Ek dil, ek khaas rishta.",
+        relationshipDescription: "Kuch rishte zindagi ko aur khoobsurat bana dete hain, aur kuch log har pal ko khaas bana dete hain.",
+
+        appearanceTitle: "Mera Sharirik Roop",
+        appearanceSub: "Mere dikhne se judi kuch baatein",
+        height: "Lambai",
+        weight: "Wazan",
+        bodyType: "Sharir ka Banawat",
+        slim: "Patla",
+        skinTone: "Rang",
+        wheatish: "Gehuaan",
+        eyeColour: "Aankhon ka Rang",
+        black: "Kala",
+        hairColour: "Baalon ka Rang",
+        beardStyle: "Dadhi ka Style",
+        lightBeard: "Halki Dadhi",
+
+        personalityTitle: "Meri Personality",
+        personalitySub: "Meri shakhsiyat ki kuch khoobiyaan",
+        personalityDescription: "Main ek independent aur curious insaan hoon, jise naye ideas explore karna aur nayi cheezein seekhna pasand hai. Main daya, imaandari aur samajhdari bhari baaton ko ahmiyat deta hoon. Main kabhi-kabhi shaant aur kam bolne wala ho sakta hoon, lekin jin logon aur cheezon ki mujhe parwah hai, unki dil se kadar karta hoon. Mera maanna hai ki apni soch khud banani chahiye aur har kisi ke saath izzat se pesh aana chahiye.",
+        independent: "Aatmanirbhar",
+        creative: "Rachnatmak",
+        curious: "Jigyasu",
+        thoughtful: "Samajhdar",
+        openMinded: "Khule Vichaar",
+        kindHearted: "Narm Dil",
+        caring: "Parwah Karne Wala",
+        quietReserved: "Shaant aur Kam Bolne Wala",
+
+        favouritesTitle: "Meri Pasandida Cheezein",
+        favouritesSub: "Chhoti-chhoti cheezein jo mujhe pasand hain",
+        favouriteColours: "Pasandida Rang",
+        blackWhite: "Kala aur Safed",
+        favouriteFood: "Pasandida Khana",
+        dependsMood: "Mere Mood Par Nirbhar",
+        favouriteDrink: "Pasandida Drink",
+        fruitJuice: "Fruit Juice",
+        favouriteTime: "Pasandida Samay",
+        night: "Raat",
+        favouriteAtmosphere: "Pasandida Mahol",
+        peacefulQuiet: "Shaant aur Sukoon Bhara",
+        favouriteView: "Pasandida Nazara",
+        moonlight: "Chandni",
+
+        lifestyleTitle: "Meri Lifestyle",
+        lifestyleSub: "Mujhe kis tarah jeena pasand hai",
+        lifestyleDescription: "Mujhe saadgi aur sukoon bhari zindagi pasand hai. Main shaant mahol mein rehna pasand karta hoon, khaaskar raat ke waqt. Mere liye personal freedom aur privacy bahut maayne rakhti hai. Mujhe khud ke saath waqt bitana, zindagi ke baare mein sochna aur apne din ko behtar banane wali cheezon par dhyan dena pasand hai.",
+        peacefulSurroundings: "Shaant Mahol",
+        quietNights: "Sukoon Bhari Raatein",
+        personalFreedom: "Apni Azaadi",
+        privacy: "Nijta",
+        simpleLiving: "Saada Jeevan",
+        timeForMyself: "Khud Ke Liye Waqt",
+
+        valuesTitle: "Mere Values",
+        valuesSub: "Woh Siddhant Jo Mere Liye Maayne Rakhte Hain",
+        valuesDescription: "Main insaniyat, daya aur barabari mein vishwas rakhta hoon. Har insaan izzat ka haqdar hai, chahe uska background ya soch kuch bhi ho. Main apni soch khud banane, doosron ke nazariye samajhne aur apni pasand se faisle lene ki azaadi ko ahmiyat deta hoon.",
+        humanity: "Insaniyat",
+        kindness: "Daya",
+        equality: "Barabari",
+        mutualRespect: "Ek Doosre Ki Izzat",
+        independentThinking: "Khud Ki Soch",
+        freedomOfChoice: "Chunav Ki Azaadi",
+
+        likesTitle: "Mujhe Kya Pasand Hai",
+        likesSub: "Woh cheezein jo mujhe achha mehsoos karati hain",
+        peacefulMoments: "Sukoon Bhare Pal",
+        newIdeas: "Naye Ideas",
+        meaningfulConversations: "Maayne Rakhne Wali Baatein",
+        moonlitSkies: "Chandni Bhara Aasmaan",
+        personalSpace: "Apni Jagah",
+        creativeThinking: "Rachnatmak Soch",
+
+        dislikesTitle: "Mujhe Kya Pasand Nahi",
+        dislikesSub: "Woh cheezein jinse main door rehna pasand karta hoon",
+        unnecessaryArguments: "Bina Baat Ki Behas",
+        disrespect: "Beizzati",
+        fakeBehaviour: "Dikhawa",
+        judgingPeople: "Bina Samjhe Kisi Ko Judge Karna",
+
+        dreamsTitle: "Mere Sapne Aur Lakshya",
+        dreamsSub: "Woh Bhavishya Jo Main Banana Chahta Hoon",
+        dreamsDescription: "Mera sapna ek shaant aur maayne bhari zindagi banana hai, jismein financial freedom aur independence ho. Main khud ko behtar banana, apni alag pehchaan banana aur aise lakshya haasil karna chahta hoon jo mere liye sach mein maayne rakhte hain. Mera maanna hai ki har chhota kadam mujhe mere sapnon ke kareeb le ja sakta hai.",
+        peacefulLife: "Sukoon Bhari Zindagi",
+        financialFreedom: "Financial Azaadi",
+        personalGrowth: "Khud Ka Vikas",
+        ownIdentity: "Apni Pehchaan Banana",
+        meaningfulDreams: "Maayne Bhare Sapne",
+
+        philosophyTitle: "Meri Soch",
+        philosophySub: "Ek soch jise main apni zindagi mein apnana chahta hoon",
+        philosophyQuote: "\"Azaadi se jiyo, apni soch khud banao, sabki izzat karo aur khud ko samajhna kabhi band mat karo.\"",
+        quoteCredit: "— SK TALIB",
+
+        footerText: "Meri zindagi, soch aur pehchaan ko jaanne ki ek personal jagah.",
+        allRights: "Sabhi adhikar surakshit hain.",
+        backHome: "← Home Page Par Wapas",
+        darkMode: "DARK MODE",
+        lightMode: "LIGHT MODE",
+        languageLabel: "BHASHA"
+    },
+
+    ur: {
+        eyebrow: "مجھے جانیے",
+        introTagline: "میرے بارے میں چند باتیں",
+        intro: "میری ذاتی ویب سائٹ میں خوش آمدید۔ یہاں آپ میری شخصیت، پسند، اقدار اور میری زندگی سے جڑی چند خاص باتیں جان سکتے ہیں۔",
+
+        basicTitle: "بنیادی معلومات",
+        basicSub: "میرے بارے میں چند ضروری معلومات",
+        fullName: "پورا نام",
+        dateBirth: "تاریخِ پیدائش",
+        age: "عمر",
+        yearsOld: "سال",
+        gender: "جنس",
+        male: "مرد",
+        nationality: "قومیت",
+        indian: "بھارتی",
+        hometown: "آبائی شہر",
+
+        relationshipTitle: "رشتے کی حیثیت",
+        relationshipSub: "میری زندگی کا ایک خاص حصہ",
+        relationshipStatus: "♡ ایک رشتے میں ہوں",
+        relationshipTagline: "ایک دل، ایک خاص تعلق۔",
+        relationshipDescription: "کچھ رشتے زندگی کو مزید خوبصورت بنا دیتے ہیں، اور کچھ لوگ ہر لمحے کو خاص بنا دیتے ہیں۔",
+
+        appearanceTitle: "ظاہری شکل",
+        appearanceSub: "میری ظاہری شخصیت کے بارے میں چند باتیں",
+        height: "قد",
+        weight: "وزن",
+        bodyType: "جسمانی ساخت",
+        slim: "دبلا پتلا",
+        skinTone: "رنگت",
+        wheatish: "گندمی",
+        eyeColour: "آنکھوں کا رنگ",
+        black: "سیاہ",
+        hairColour: "بالوں کا رنگ",
+        beardStyle: "داڑھی کا انداز",
+        lightBeard: "ہلکی داڑھی",
+
+        personalityTitle: "میری شخصیت",
+        personalitySub: "میری شخصیت کی چند خوبیاں",
+        personalityDescription: "میں ایک خودمختار اور متجسس انسان ہوں جسے نئے خیالات دریافت کرنا اور نئی چیزیں سیکھنا پسند ہے۔ میں مہربانی، ایمانداری اور بامعنی گفتگو کو اہمیت دیتا ہوں۔ میں کبھی کبھی خاموش اور کم گو رہتا ہوں، لیکن جن لوگوں اور چیزوں کی مجھے پرواہ ہے، ان کی دل سے قدر کرتا ہوں۔ میرا ماننا ہے کہ انسان کو اپنی سوچ خود بنانی چاہیے اور سب کے ساتھ عزت سے پیش آنا چاہیے۔",
+        independent: "خودمختار",
+        creative: "تخلیقی",
+        curious: "متجسس",
+        thoughtful: "غور و فکر کرنے والا",
+        openMinded: "وسیع النظر",
+        kindHearted: "نرم دل",
+        caring: "خیال رکھنے والا",
+        quietReserved: "خاموش اور کم گو",
+
+        favouritesTitle: "میری پسندیدہ چیزیں",
+        favouritesSub: "چھوٹی چھوٹی چیزیں جو مجھے پسند ہیں",
+        favouriteColours: "پسندیدہ رنگ",
+        blackWhite: "سیاہ اور سفید",
+        favouriteFood: "پسندیدہ کھانا",
+        dependsMood: "میرے مزاج پر منحصر",
+        favouriteDrink: "پسندیدہ مشروب",
+        fruitJuice: "پھلوں کا رس",
+        favouriteTime: "پسندیدہ وقت",
+        night: "رات",
+        favouriteAtmosphere: "پسندیدہ ماحول",
+        peacefulQuiet: "پرسکون اور خاموش",
+        favouriteView: "پسندیدہ منظر",
+        moonlight: "چاندنی",
+
+        lifestyleTitle: "میرا طرزِ زندگی",
+        lifestyleSub: "مجھے کس طرح زندگی گزارنا پسند ہے",
+        lifestyleDescription: "مجھے سادہ اور پُرسکون زندگی پسند ہے۔ میں خاموش ماحول میں رہنا پسند کرتا ہوں، خاص طور پر رات کے وقت۔ میرے لیے ذاتی آزادی اور رازداری بہت اہم ہیں۔ مجھے اپنے ساتھ وقت گزارنا، زندگی کے بارے میں سوچنا اور ان چیزوں پر توجہ دینا پسند ہے جو میرے دنوں کو بامعنی بناتی ہیں۔",
+        peacefulSurroundings: "پُرسکون ماحول",
+        quietNights: "خاموش راتیں",
+        personalFreedom: "ذاتی آزادی",
+        privacy: "رازداری",
+        simpleLiving: "سادہ زندگی",
+        timeForMyself: "اپنے لیے وقت",
+
+        valuesTitle: "میری اقدار",
+        valuesSub: "وہ اصول جو میرے لیے اہم ہیں",
+        valuesDescription: "میں انسانیت، مہربانی اور برابری پر یقین رکھتا ہوں۔ ہر انسان عزت کا مستحق ہے، چاہے اس کا پس منظر یا نظریہ کچھ بھی ہو۔ میں آزادانہ سوچ، مختلف نقطۂ نظر کو سمجھنے اور اپنی پسند کے فیصلے کرنے کی آزادی کو اہمیت دیتا ہوں۔",
+        humanity: "انسانیت",
+        kindness: "مہربانی",
+        equality: "برابری",
+        mutualRespect: "باہمی احترام",
+        independentThinking: "آزادانہ سوچ",
+        freedomOfChoice: "انتخاب کی آزادی",
+
+        likesTitle: "مجھے کیا پسند ہے",
+        likesSub: "وہ چیزیں جو مجھے خوشی دیتی ہیں",
+        peacefulMoments: "پُرسکون لمحات",
+        newIdeas: "نئے خیالات",
+        meaningfulConversations: "بامعنی گفتگو",
+        moonlitSkies: "چاندنی رات کا آسمان",
+        personalSpace: "ذاتی جگہ",
+        creativeThinking: "تخلیقی سوچ",
+
+        dislikesTitle: "مجھے کیا ناپسند ہے",
+        dislikesSub: "وہ چیزیں جن سے میں دور رہنا پسند کرتا ہوں",
+        unnecessaryArguments: "بلاوجہ بحث",
+        disrespect: "بے عزتی",
+        fakeBehaviour: "دکھاوا",
+        judgingPeople: "بغیر سمجھے لوگوں کے بارے میں رائے قائم کرنا",
+
+        dreamsTitle: "میرے خواب اور نظریات",
+        dreamsSub: "وہ مستقبل جو میں بنانا چاہتا ہوں",
+        dreamsDescription: "میرا خواب ایک پُرسکون اور بامعنی زندگی بنانا ہے، جس میں مالی آزادی اور خودمختاری ہو۔ میں اپنی شخصیت کو بہتر بنانا، اپنی الگ پہچان بنانا اور ایسے مقاصد حاصل کرنا چاہتا ہوں جو میرے لیے واقعی اہم ہیں۔ میرا یقین ہے کہ ہر چھوٹا قدم مجھے میرے تصور کے مستقبل کے قریب لے جا سکتا ہے۔",
+        peacefulLife: "پُرسکون زندگی",
+        financialFreedom: "مالی آزادی",
+        personalGrowth: "ذاتی ترقی",
+        ownIdentity: "اپنی پہچان بنانا",
+        meaningfulDreams: "بامعنی خواب",
+
+        philosophyTitle: "میرا فلسفہ",
+        philosophySub: "ایک خیال جس پر میں زندگی گزارنے کی کوشش کرتا ہوں",
+        philosophyQuote: "\"آزادی سے جیو، آزادانہ سوچو، سب کی عزت کرو اور خود کو دریافت کرنا کبھی بند نہ کرو۔\"",
+        quoteCredit: "— SK TALIB",
+
+        footerText: "میری زندگی، خیالات اور پہچان کو جاننے کی ایک ذاتی جگہ۔",
+        allRights: "جملہ حقوق محفوظ ہیں۔",
+        backHome: "← ہوم پیج پر واپس جائیں",
+        darkMode: "ڈارک موڈ",
+        lightMode: "لائٹ موڈ",
+        languageLabel: "زبان"
+    },
+      hi: {
+        eyebrow: "मुझे जानिए",
+        introTagline: "मेरे बारे में कुछ बातें",
+        intro: "मेरी निजी वेबसाइट में आपका स्वागत है। यहाँ आप मेरी सोच, पसंद, व्यक्तित्व और जीवन से जुड़ी कुछ खास बातें जान सकते हैं।",
+
+        basicTitle: "बुनियादी जानकारी",
+        basicSub: "मेरे बारे में कुछ जरूरी जानकारी",
+        fullName: "पूरा नाम",
+        dateBirth: "जन्म तिथि",
+        age: "उम्र",
+        yearsOld: "साल",
+        gender: "लिंग",
+        male: "पुरुष",
+        nationality: "राष्ट्रीयता",
+        indian: "भारतीय",
+        hometown: "गृहनगर",
+
+        relationshipTitle: "रिश्ते की स्थिति",
+        relationshipSub: "मेरी जिंदगी का एक खास हिस्सा",
+        relationshipStatus: "♡ एक रिश्ते में हूँ",
+        relationshipTagline: "एक दिल, एक खास रिश्ता।",
+        relationshipDescription: "कुछ रिश्ते जिंदगी को और खूबसूरत बना देते हैं, और कुछ लोग हर पल को खास बना देते हैं।",
+
+        appearanceTitle: "शारीरिक बनावट",
+        appearanceSub: "मेरे रूप-रंग से जुड़ी कुछ बातें",
+        height: "लंबाई",
+        weight: "वजन",
+        bodyType: "शरीर की बनावट",
+        slim: "पतला",
+        skinTone: "त्वचा का रंग",
+        wheatish: "गेहुँआ",
+        eyeColour: "आँखों का रंग",
+        black: "काला",
+        hairColour: "बालों का रंग",
+        beardStyle: "दाढ़ी का अंदाज",
+        lightBeard: "हल्की दाढ़ी",
+
+        personalityTitle: "मेरा व्यक्तित्व",
+        personalitySub: "मेरी शख्सियत की कुछ खूबियाँ",
+        personalityDescription: "मैं एक स्वतंत्र और जिज्ञासु इंसान हूँ, जिसे नए विचारों को जानना और नई चीजें सीखना पसंद है। मैं दयालुता, ईमानदारी और सोच-समझकर की गई बातचीत को महत्व देता हूँ। मैं कभी-कभी शांत और कम बोलने वाला हो सकता हूँ, लेकिन जिन लोगों और चीजों की मुझे परवाह है, उनकी दिल से कद्र करता हूँ। मेरा मानना है कि अपनी सोच खुद बनानी चाहिए और हर किसी के साथ सम्मान से पेश आना चाहिए।",
+        independent: "स्वतंत्र",
+        creative: "रचनात्मक",
+        curious: "जिज्ञासु",
+        thoughtful: "विचारशील",
+        openMinded: "खुले विचारों वाला",
+        kindHearted: "दयालु",
+        caring: "परवाह करने वाला",
+        quietReserved: "शांत और कम बोलने वाला",
+
+        favouritesTitle: "मेरी पसंदीदा चीजें",
+        favouritesSub: "छोटी-छोटी चीजें जो मुझे पसंद हैं",
+        favouriteColours: "पसंदीदा रंग",
+        blackWhite: "काला और सफेद",
+        favouriteFood: "पसंदीदा खाना",
+        dependsMood: "मेरे मूड पर निर्भर",
+        favouriteDrink: "पसंदीदा पेय",
+        fruitJuice: "फलों का जूस",
+        favouriteTime: "पसंदीदा समय",
+        night: "रात",
+        favouriteAtmosphere: "पसंदीदा माहौल",
+        peacefulQuiet: "शांत और सुकून भरा",
+        favouriteView: "पसंदीदा नज़ारा",
+        moonlight: "चाँदनी",
+
+        lifestyleTitle: "मेरी जीवनशैली",
+        lifestyleSub: "मुझे किस तरह जीना पसंद है",
+        lifestyleDescription: "मुझे सादा और शांतिपूर्ण जीवन पसंद है। मुझे शांत माहौल में रहना अच्छा लगता है, खासकर रात के समय। मेरे लिए व्यक्तिगत स्वतंत्रता और निजता बहुत मायने रखती हैं। मुझे खुद के साथ समय बिताना, जिंदगी के बारे में सोचना और उन चीजों पर ध्यान देना पसंद है जो मेरे दिनों को अर्थपूर्ण बनाती हैं।",
+        peacefulSurroundings: "शांत वातावरण",
+        quietNights: "सुकून भरी रातें",
+        personalFreedom: "व्यक्तिगत स्वतंत्रता",
+        privacy: "निजता",
+        simpleLiving: "सादा जीवन",
+        timeForMyself: "खुद के लिए समय",
+
+        valuesTitle: "मेरे मूल्य",
+        valuesSub: "वे सिद्धांत जो मेरे लिए महत्वपूर्ण हैं",
+        valuesDescription: "मैं इंसानियत, दयालुता और समानता में विश्वास रखता हूँ। हर इंसान सम्मान का हकदार है, चाहे उसकी पृष्ठभूमि या विचार कुछ भी हों। मैं स्वतंत्र सोच, अलग-अलग नजरियों को समझने और अपनी पसंद से फैसले लेने की आजादी को महत्व देता हूँ।",
+        humanity: "इंसानियत",
+        kindness: "दयालुता",
+        equality: "समानता",
+        mutualRespect: "आपसी सम्मान",
+        independentThinking: "स्वतंत्र सोच",
+        freedomOfChoice: "चुनाव की आजादी",
+
+        likesTitle: "मुझे क्या पसंद है",
+        likesSub: "वे चीजें जो मुझे अच्छा महसूस कराती हैं",
+        peacefulMoments: "सुकून भरे पल",
+        newIdeas: "नए विचार",
+        meaningfulConversations: "अर्थपूर्ण बातचीत",
+        moonlitSkies: "चाँदनी रात का आसमान",
+        personalSpace: "अपनी निजी जगह",
+        creativeThinking: "रचनात्मक सोच",
+
+        dislikesTitle: "मुझे क्या पसंद नहीं है",
+        dislikesSub: "वे चीजें जिनसे मैं दूर रहना पसंद करता हूँ",
+        unnecessaryArguments: "बेवजह की बहस",
+        disrespect: "अनादर",
+        fakeBehaviour: "दिखावा",
+        judgingPeople: "बिना समझे लोगों को परखना",
+
+        dreamsTitle: "मेरे सपने और लक्ष्य",
+        dreamsSub: "वह भविष्य जिसे मैं बनाना चाहता हूँ",
+        dreamsDescription: "मेरा सपना एक शांतिपूर्ण और अर्थपूर्ण जीवन बनाना है, जिसमें आर्थिक स्वतंत्रता और आत्मनिर्भरता हो। मैं एक बेहतर इंसान बनना, अपनी अलग पहचान बनाना और ऐसे लक्ष्य हासिल करना चाहता हूँ जो मेरे लिए सच में मायने रखते हैं। मेरा मानना है कि हर छोटा कदम मुझे अपने सपनों के करीब ले जा सकता है।",
+        peacefulLife: "शांतिपूर्ण जीवन",
+        financialFreedom: "आर्थिक स्वतंत्रता",
+        personalGrowth: "व्यक्तिगत विकास",
+        ownIdentity: "अपनी पहचान बनाना",
+        meaningfulDreams: "अर्थपूर्ण सपने",
+
+        philosophyTitle: "मेरा जीवन दर्शन",
+        philosophySub: "एक विचार जिसे मैं जीवन में अपनाना चाहता हूँ",
+        philosophyQuote: "\"आजादी से जियो, स्वतंत्र सोच रखो, सभी का सम्मान करो और खुद को जानना कभी बंद मत करो।\"",
+        quoteCredit: "— SK TALIB",
+
+        footerText: "मेरी जिंदगी, विचारों और पहचान को जानने की एक निजी जगह।",
+        allRights: "सर्वाधिकार सुरक्षित।",
+        backHome: "← होम पेज पर वापस जाएँ",
+        darkMode: "डार्क मोड",
+        lightMode: "लाइट मोड",
+        languageLabel: "भाषा"
+    },
+
+    or: {
+        eyebrow: "ମୋତେ ଜାଣନ୍ତୁ",
+        introTagline: "ମୋ ବିଷୟରେ କିଛି କଥା",
+        intro: "ମୋର ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟ୍‌କୁ ସ୍ୱାଗତ। ଏଠାରେ ଆପଣ ମୋର ବ୍ୟକ୍ତିତ୍ୱ, ପସନ୍ଦ, ମୂଲ୍ୟବୋଧ ଏବଂ ଜୀବନ ସହ ଜଡ଼ିତ କିଛି ବିଶେଷ କଥା ଜାଣିପାରିବେ।",
+
+        basicTitle: "ମୌଳିକ ସୂଚନା",
+        basicSub: "ମୋ ବିଷୟରେ କିଛି ଜରୁରୀ ସୂଚନା",
+        fullName: "ପୂରା ନାମ",
+        dateBirth: "ଜନ୍ମ ତାରିଖ",
+        age: "ବୟସ",
+        yearsOld: "ବର୍ଷ",
+        gender: "ଲିଙ୍ଗ",
+        male: "ପୁରୁଷ",
+        nationality: "ଜାତୀୟତା",
+        indian: "ଭାରତୀୟ",
+        hometown: "ନିଜ ସହର",
+
+        relationshipTitle: "ସମ୍ପର୍କର ସ୍ଥିତି",
+        relationshipSub: "ମୋ ଜୀବନର ଏକ ବିଶେଷ ଅଂଶ",
+        relationshipStatus: "♡ ଏକ ସମ୍ପର୍କରେ ଅଛି",
+        relationshipTagline: "ଗୋଟିଏ ହୃଦୟ, ଗୋଟିଏ ବିଶେଷ ସମ୍ପର୍କ।",
+        relationshipDescription: "କିଛି ସମ୍ପର୍କ ଜୀବନକୁ ଆହୁରି ସୁନ୍ଦର କରିଦିଏ, ଆଉ କିଛି ଲୋକ ପ୍ରତ୍ୟେକ ମୁହୂର୍ତ୍ତକୁ ବିଶେଷ କରିଦିଅନ୍ତି।",
+
+        appearanceTitle: "ଶାରୀରିକ ରୂପ",
+        appearanceSub: "ମୋ ରୂପ ବିଷୟରେ କିଛି କଥା",
+        height: "ଉଚ୍ଚତା",
+        weight: "ଓଜନ",
+        bodyType: "ଶରୀରର ଗଠନ",
+        slim: "ପତଳା",
+        skinTone: "ଚର୍ମର ରଙ୍ଗ",
+        wheatish: "ଗହମ ରଙ୍ଗ",
+        eyeColour: "ଆଖିର ରଙ୍ଗ",
+        black: "କଳା",
+        hairColour: "କେଶର ରଙ୍ଗ",
+        beardStyle: "ଦାଢ଼ିର ଶୈଳୀ",
+        lightBeard: "ହାଲୁକା ଦାଢ଼ି",
+
+        personalityTitle: "ମୋର ବ୍ୟକ୍ତିତ୍ୱ",
+        personalitySub: "ମୋ ବ୍ୟକ୍ତିତ୍ୱର କିଛି ଗୁଣ",
+        personalityDescription: "ମୁଁ ଜଣେ ସ୍ୱାଧୀନଚେତା ଏବଂ ଜିଜ୍ଞାସୁ ମଣିଷ। ମୋତେ ନୂଆ ଧାରଣା ଜାଣିବା ଏବଂ ନୂଆ କଥା ଶିଖିବା ଭଲ ଲାଗେ। ମୁଁ ଦୟା, ସତ୍ୟନିଷ୍ଠା ଏବଂ ଭାବପୂର୍ଣ୍ଣ ଆଲୋଚନାକୁ ଗୁରୁତ୍ୱ ଦିଏ। ମୁଁ ବେଳେବେଳେ ଶାନ୍ତ ଏବଂ କମ୍ କଥା କହୁଥିବା ମଣିଷ ହୋଇପାରେ, କିନ୍ତୁ ଯେଉଁ ଲୋକ ଏବଂ କଥା ମୋ ପାଇଁ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ, ସେଗୁଡ଼ିକର ମୁଁ ହୃଦୟରୁ ଯତ୍ନ ନିଏ। ମୋର ବିଶ୍ୱାସ ଯେ ନିଜେ ଚିନ୍ତା କରିବା ଏବଂ ସମସ୍ତଙ୍କୁ ସମ୍ମାନ ଦେବା ଉଚିତ।",
+        independent: "ସ୍ୱାଧୀନଚେତା",
+        creative: "ସୃଜନଶୀଳ",
+        curious: "ଜିଜ୍ଞାସୁ",
+        thoughtful: "ବିଚାରଶୀଳ",
+        openMinded: "ଉଦାର ମନୋଭାବ",
+        kindHearted: "ଦୟାଳୁ",
+        caring: "ଯତ୍ନଶୀଳ",
+        quietReserved: "ଶାନ୍ତ ଏବଂ କମ୍ କଥା କହୁଥିବା",
+
+        favouritesTitle: "ମୋର ପସନ୍ଦର ଜିନିଷ",
+        favouritesSub: "ଛୋଟ ଛୋଟ ଜିନିଷ ଯାହା ମୋତେ ଭଲ ଲାଗେ",
+        favouriteColours: "ପସନ୍ଦର ରଙ୍ଗ",
+        blackWhite: "କଳା ଏବଂ ଧଳା",
+        favouriteFood: "ପସନ୍ଦର ଖାଦ୍ୟ",
+        dependsMood: "ମୋ ମନୋଭାବ ଉପରେ ନିର୍ଭର କରେ",
+        favouriteDrink: "ପସନ୍ଦର ପାନୀୟ",
+        fruitJuice: "ଫଳ ରସ",
+        favouriteTime: "ପସନ୍ଦର ସମୟ",
+        night: "ରାତି",
+        favouriteAtmosphere: "ପସନ୍ଦର ପରିବେଶ",
+        peacefulQuiet: "ଶାନ୍ତ ଏବଂ ନିରବ",
+        favouriteView: "ପସନ୍ଦର ଦୃଶ୍ୟ",
+        moonlight: "ଜହ୍ନ ଆଲୋକ",
+
+        lifestyleTitle: "ମୋର ଜୀବନଶୈଳୀ",
+        lifestyleSub: "ମୁଁ କିପରି ଜୀବନ ବିତାଇବାକୁ ପସନ୍ଦ କରେ",
+        lifestyleDescription: "ମୋତେ ସରଳ ଏବଂ ଶାନ୍ତିପୂର୍ଣ୍ଣ ଜୀବନ ଭଲ ଲାଗେ। ବିଶେଷକରି ରାତିରେ ଶାନ୍ତ ପରିବେଶରେ ରହିବାକୁ ମୁଁ ପସନ୍ଦ କରେ। ବ୍ୟକ୍ତିଗତ ସ୍ୱାଧୀନତା ଏବଂ ଗୋପନୀୟତା ମୋ ପାଇଁ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ। ମୁଁ ନିଜ ସହିତ ସମୟ ବିତାଇବା, ଜୀବନ ବିଷୟରେ ଚିନ୍ତା କରିବା ଏବଂ ମୋ ଦିନକୁ ଅର୍ଥପୂର୍ଣ୍ଣ କରୁଥିବା କାମରେ ଧ୍ୟାନ ଦେବାକୁ ପସନ୍ଦ କରେ।",
+        peacefulSurroundings: "ଶାନ୍ତ ପରିବେଶ",
+        quietNights: "ଶାନ୍ତ ରାତି",
+        personalFreedom: "ବ୍ୟକ୍ତିଗତ ସ୍ୱାଧୀନତା",
+        privacy: "ଗୋପନୀୟତା",
+        simpleLiving: "ସରଳ ଜୀବନ",
+        timeForMyself: "ନିଜ ପାଇଁ ସମୟ",
+
+        valuesTitle: "ମୋର ମୂଲ୍ୟବୋଧ",
+        valuesSub: "ମୋ ପାଇଁ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ନୀତି",
+        valuesDescription: "ମୁଁ ମାନବିକତା, ଦୟା ଏବଂ ସମାନତାରେ ବିଶ୍ୱାସ କରେ। ପ୍ରତ୍ୟେକ ମଣିଷ ସମ୍ମାନ ପାଇବାର ଯୋଗ୍ୟ, ତାଙ୍କ ପୃଷ୍ଠଭୂମି କିମ୍ବା ମତାମତ ଯାହା ହେଉନା କାହିଁକି। ମୁଁ ସ୍ୱାଧୀନ ଚିନ୍ତାଧାରା, ଭିନ୍ନ ମତକୁ ବୁଝିବା ଏବଂ ନିଜ ପସନ୍ଦ ଅନୁସାରେ ନିଷ୍ପତ୍ତି ନେବାର ସ୍ୱାଧୀନତାକୁ ଗୁରୁତ୍ୱ ଦିଏ।",
+        humanity: "ମାନବିକତା",
+        kindness: "ଦୟା",
+        equality: "ସମାନତା",
+        mutualRespect: "ପାରସ୍ପରିକ ସମ୍ମାନ",
+        independentThinking: "ସ୍ୱାଧୀନ ଚିନ୍ତାଧାରା",
+        freedomOfChoice: "ପସନ୍ଦର ସ୍ୱାଧୀନତା",
+
+        likesTitle: "ମୋତେ କ'ଣ ଭଲ ଲାଗେ",
+        likesSub: "ଯେଉଁ କଥାଗୁଡ଼ିକ ମୋତେ ଖୁସି କରେ",
+        peacefulMoments: "ଶାନ୍ତିପୂର୍ଣ୍ଣ ମୁହୂର୍ତ୍ତ",
+        newIdeas: "ନୂଆ ଧାରଣା",
+        meaningfulConversations: "ଅର୍ଥପୂର୍ଣ୍ଣ ଆଲୋଚନା",
+        moonlitSkies: "ଜହ୍ନ ଆଲୋକିତ ଆକାଶ",
+        personalSpace: "ନିଜସ୍ୱ ସ୍ଥାନ",
+        creativeThinking: "ସୃଜନଶୀଳ ଚିନ୍ତାଧାରା",
+
+        dislikesTitle: "ମୋତେ କ'ଣ ଭଲ ଲାଗେ ନାହିଁ",
+        dislikesSub: "ଯେଉଁ କଥାଗୁଡ଼ିକଠାରୁ ମୁଁ ଦୂରେଇ ରହିବାକୁ ପସନ୍ଦ କରେ",
+        unnecessaryArguments: "ଅଯଥା ଯୁକ୍ତିତର୍କ",
+        disrespect: "ଅସମ୍ମାନ",
+        fakeBehaviour: "ଛଳନାମୟ ବ୍ୟବହାର",
+        judgingPeople: "ନ ବୁଝି ଅନ୍ୟମାନଙ୍କୁ ବିଚାର କରିବା",
+
+        dreamsTitle: "ମୋର ସ୍ୱପ୍ନ ଏବଂ ଲକ୍ଷ୍ୟ",
+        dreamsSub: "ମୁଁ ଗଢ଼ିବାକୁ ଚାହୁଁଥିବା ଭବିଷ୍ୟତ",
+        dreamsDescription: "ମୋର ସ୍ୱପ୍ନ ହେଉଛି ଆର୍ଥିକ ସ୍ୱାଧୀନତା ଏବଂ ଆତ୍ମନିର୍ଭରଶୀଳତା ସହିତ ଏକ ଶାନ୍ତିପୂର୍ଣ୍ଣ ଓ ଅର୍ଥପୂର୍ଣ୍ଣ ଜୀବନ ଗଢ଼ିବା। ମୁଁ ନିଜକୁ ଆହୁରି ଉନ୍ନତ କରିବାକୁ, ନିଜର ଏକ ପରିଚୟ ସୃଷ୍ଟି କରିବାକୁ ଏବଂ ମୋ ପାଇଁ ପ୍ରକୃତରେ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଲକ୍ଷ୍ୟ ହାସଲ କରିବାକୁ ଚାହେଁ। ମୋର ବିଶ୍ୱାସ ଯେ ପ୍ରତ୍ୟେକ ଛୋଟ ପଦକ୍ଷେପ ମୋତେ ମୋ ସ୍ୱପ୍ନର ନିକଟତର କରିପାରିବ।",
+        peacefulLife: "ଶାନ୍ତିପୂର୍ଣ୍ଣ ଜୀବନ",
+        financialFreedom: "ଆର୍ଥିକ ସ୍ୱାଧୀନତା",
+        personalGrowth: "ବ୍ୟକ୍ତିଗତ ବିକାଶ",
+        ownIdentity: "ନିଜର ପରିଚୟ ସୃଷ୍ଟି",
+        meaningfulDreams: "ଅର୍ଥପୂର୍ଣ୍ଣ ସ୍ୱପ୍ନ",
+
+        philosophyTitle: "ମୋର ଜୀବନ ଦର୍ଶନ",
+        philosophySub: "ଏକ ଚିନ୍ତାଧାରା ଯାହାକୁ ମୁଁ ଜୀବନରେ ଅନୁସରଣ କରେ",
+        philosophyQuote: "\"ସ୍ୱାଧୀନ ଭାବେ ବଞ୍ଚ, ନିଜେ ଚିନ୍ତା କର, ସମସ୍ତଙ୍କୁ ସମ୍ମାନ ଦିଅ ଏବଂ ନିଜକୁ ଆବିଷ୍କାର କରିବା କେବେ ବନ୍ଦ କରନି।\"",
+        quoteCredit: "— SK TALIB",
+
+        footerText: "ମୋ ଜୀବନ, ଚିନ୍ତାଧାରା ଏବଂ ପରିଚୟ ବାଣ୍ଟିବା ପାଇଁ ଏକ ବ୍ୟକ୍ତିଗତ ସ୍ଥାନ।",
+        allRights: "ସମସ୍ତ ଅଧିକାର ସଂରକ୍ଷିତ।",
+        backHome: "← ହୋମ୍ ପେଜ୍‌କୁ ଫେରନ୍ତୁ",
+        darkMode: "ଡାର୍କ ମୋଡ୍",
+        lightMode: "ଲାଇଟ୍ ମୋଡ୍",
+        languageLabel: "ଭାଷା"
+  }
+  };
+
+// Language codes and page direction
 const languageCodes = {
-  en:"EN",
-  "hi-en":"HI",
-  ur:"UR",
-  hi:"हि",
-  or:"ଓଡ଼ି"
+    en: "en",
+    "hi-en": "en",
+    ur: "ur",
+    hi: "hi",
+    or: "or"
 };
 
-function toggleLanguageMenu(){
-  document.getElementById("languageMenu").classList.toggle("show");
-}
+function changeLanguage(language) {
+    if (!translations[language]) return;
 
-function changeLanguage(lang){
-  if(!translations[lang]) return;
+    const content = translations[language];
 
-  document.querySelectorAll("[data-i18n]").forEach(element=>{
-    const key=element.getAttribute("data-i18n");
+    document.querySelectorAll("[data-i18n]").forEach(element => {
+        const key = element.getAttribute("data-i18n");
 
-    if(translations[lang][key] !== undefined){
-      element.textContent=translations[lang][key];
+        if (Object.prototype.hasOwnProperty.call(content, key)) {
+            element.textContent = content[key];
+        }
+    });
+
+    document.documentElement.lang = languageCodes[language] || "en";
+    document.documentElement.dir = language === "ur" ? "rtl" : "ltr";
+
+    const languageNames = {
+        en: "ENGLISH",
+        "hi-en": "ROMAN HINDI",
+        ur: "اردو",
+        hi: "हिन्दी",
+        or: "ଓଡ଼ିଆ"
+    };
+
+    const languageLabel = document.getElementById("languageLabel");
+    if (languageLabel) {
+        languageLabel.textContent = languageNames[language];
     }
-  });
 
-  document.getElementById("languageLabel").textContent=
-    languageCodes[lang];
+    document.querySelectorAll(".language-option").forEach(option => {
+        option.classList.toggle(
+            "active",
+            option.getAttribute("onclick")?.includes("'" + language + "'")
+        );
+    });
 
-  document.querySelectorAll(".language-option").forEach(button=>{
-    button.classList.remove("active");
-  });
+    try {
+        localStorage.setItem("siteLanguage", language);
+    } catch (error) {
+        console.warn("Language preference could not be saved.");
+    }
 
-  const options=document.querySelectorAll(".language-option");
-  const selectedIndex=["en","hi-en","ur","hi","or"].indexOf(lang);
-
-  if(options[selectedIndex]){
-    options[selectedIndex].classList.add("active");
-  }
-
-  document.documentElement.lang=lang==="hi-en"?"hi":lang;
-
-  document.documentElement.dir=lang==="ur"?"rtl":"ltr";
-
-  try{
-    localStorage.setItem("siteLanguage",lang);
-  }catch(error){}
-
-  document.getElementById("languageMenu").classList.remove("show");
+    closeLanguageMenu();
 }
 
-function toggleTheme(){
-  document.body.classList.toggle("light");
-
-  const isLight=document.body.classList.contains("light");
-
-  document.getElementById("themeButton").textContent=
-    isLight?"☾":"☼";
-
-  try{
-    localStorage.setItem("siteTheme",isLight?"light":"dark");
-  }catch(error){}
+function toggleLanguageMenu() {
+    const menu = document.getElementById("languageMenu");
+    if (menu) menu.classList.toggle("show");
 }
 
-function calculateAge(){
-  const birthDate=new Date(2005,0,29);
-  const today=new Date();
-
-  let age=today.getFullYear()-birthDate.getFullYear();
-
-  const beforeBirthday=
-    today.getMonth()<birthDate.getMonth() ||
-    (today.getMonth()===birthDate.getMonth() &&
-     today.getDate()<birthDate.getDate());
-
-  if(beforeBirthday) age--;
-
-  document.getElementById("ageValue").textContent=age;
+function closeLanguageMenu() {
+    const menu = document.getElementById("languageMenu");
+    if (menu) menu.classList.remove("show");
 }
 
-document.addEventListener("click",function(event){
-  const menu=document.getElementById("languageMenu");
-  const button=document.getElementById("languageButton");
+// Close language menu when clicking outside it
+document.addEventListener("click", function(event) {
+    const wrapper = document.querySelector(".language-wrap");
 
-  if(!menu.contains(event.target) && !button.contains(event.target)){
-    menu.classList.remove("show");
-  }
+    if (wrapper && !wrapper.contains(event.target)) {
+        closeLanguageMenu();
+    }
 });
 
-window.addEventListener("DOMContentLoaded",function(){
+// Dark and light theme
+function updateThemeButton() {
+    const isLight = document.body.classList.contains("light");
+    const icon = document.getElementById("themeIcon");
+    const label = document.getElementById("themeLabel");
 
-  calculateAge();
+    if (icon) icon.textContent = isLight ? "☾" : "☼";
 
-  document.getElementById("currentYear").textContent=
-    new Date().getFullYear();
+    if (label) {
+        const language = currentLanguage;
+        label.textContent = isLight
+            ? translations[language].lightMode
+            : translations[language].darkMode;
+    }
+}
 
-  let savedTheme="dark";
-  let savedLanguage="en";
+function toggleTheme() {
+    document.body.classList.toggle("light");
 
-  try{
-    savedTheme=localStorage.getItem("siteTheme")||"dark";
-    savedLanguage=localStorage.getItem("siteLanguage")||"en";
-  }catch(error){}
+    const isLight = document.body.classList.contains("light");
 
-  if(savedTheme==="light"){
-    document.body.classList.add("light");
-    document.getElementById("themeButton").textContent="☾";
-  }else{
-    document.body.classList.remove("light");
-    document.getElementById("themeButton").textContent="☼";
-  }
+    try {
+        localStorage.setItem("siteTheme", isLight ? "light" : "dark");
+    } catch (error) {
+        console.warn("Theme preference could not be saved.");
+    }
 
-  changeLanguage(savedLanguage);
+    updateThemeButton();
+}
+
+// Age calculation
+function calculateAge() {
+    const birthDate = new Date(2005, 0, 29);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    const birthdayNotReached =
+        today.getMonth() < birthDate.getMonth() ||
+        (
+            today.getMonth() === birthDate.getMonth() &&
+            today.getDate() < birthDate.getDate()
+        );
+
+    if (birthdayNotReached) age--;
+
+    const ageElement = document.getElementById("ageValue");
+
+    if (ageElement) {
+        ageElement.textContent = age;
+    }
+}
+
+// Current language
+let currentLanguage = "en";
+
+// Load saved settings
+document.addEventListener("DOMContentLoaded", function() {
+    let savedLanguage = "en";
+    let savedTheme = "dark";
+
+    try {
+        savedLanguage = localStorage.getItem("siteLanguage") || "en";
+        savedTheme = localStorage.getItem("siteTheme") || "dark";
+    } catch (error) {
+        console.warn("Saved preferences could not be loaded.");
+    }
+
+    if (!translations[savedLanguage]) {
+        savedLanguage = "en";
+    }
+
+    currentLanguage = savedLanguage;
+
+    if (savedTheme === "light") {
+        document.body.classList.add("light");
+    } else {
+        document.body.classList.remove("light");
+    }
+
+    changeLanguage(savedLanguage);
+    updateThemeButton();
+    calculateAge();
+
+    const yearElement = document.getElementById("footerYear");
+
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
 });
+
+// Keep the current language updated
+const originalChangeLanguage = changeLanguage;
+
+changeLanguage = function(language) {
+    if (!translations[language]) return;
+
+    currentLanguage = language;
+    originalChangeLanguage(language);
+    updateThemeButton();
+};
 </script>
 
 </body>
