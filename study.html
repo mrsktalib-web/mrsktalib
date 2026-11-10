@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
 <title>My Study | SK TALIB</title>
 
 <style>
@@ -24,41 +25,55 @@
   box-sizing:border-box;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:Georgia,"Times New Roman",serif;
+  font-family:Arial,Helvetica,sans-serif;
   line-height:1.7;
-  transition:.25s;
+  transition:background .3s,color .3s;
 }
 
 body.light{
   --bg:#f5f5f2;
   --surface:#ffffff;
-  --surface2:#eeeee9;
-  --gold:#8a6a24;
-  --gold2:#a17d31;
+  --surface2:#eeeeea;
+  --gold:#98752e;
+  --gold2:#806020;
   --text:#202020;
-  --muted:#686868;
-  --line:#d8c99f;
+  --muted:#66645f;
+  --line:#ded8c9;
   --shadow:rgba(0,0,0,.08);
 }
 
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
 button{
-  font:inherit;
-  cursor:pointer;
+  font-family:inherit;
 }
 
 .container{
-  width:min(100% - 30px,1050px);
+  width:92%;
+  max-width:1050px;
   margin:auto;
 }
 
 /* HEADER */
 
 header{
-  border-bottom:1px solid var(--line);
+  width:100%;
   background:var(--surface);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 4px 18px var(--shadow);
 }
 
 .header-inner{
@@ -66,44 +81,61 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
+  gap:15px;
 }
 
 .brand{
-  text-decoration:none;
-  color:var(--text);
-  line-height:1.2;
+  display:flex;
+  flex-direction:column;
+  line-height:1.25;
 }
 
 .brand strong{
-  display:block;
-  font-size:23px;
+  font-size:21px;
   letter-spacing:2px;
   color:var(--gold);
 }
 
 .brand small{
-  font-family:Arial,sans-serif;
   font-size:9px;
-  letter-spacing:2px;
+  letter-spacing:2.5px;
   color:var(--muted);
+  margin-top:4px;
 }
 
 .header-actions{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:9px;
 }
 
 .header-btn{
+  min-height:38px;
+  padding:8px 12px;
   border:1px solid var(--line);
+  border-radius:7px;
   background:var(--surface2);
   color:var(--text);
-  border-radius:7px;
-  padding:8px 11px;
-  font-family:Arial,sans-serif;
   font-size:12px;
+  font-weight:bold;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  transition:.2s;
 }
+
+.header-btn:hover{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+#themeButton{
+  min-width:105px;
+}
+
+/* LANGUAGE MENU */
 
 .language-wrap{
   position:relative;
@@ -112,15 +144,15 @@ header{
 .language-menu{
   display:none;
   position:absolute;
-  top:43px;
+  top:47px;
   right:0;
-  z-index:20;
-  width:165px;
+  width:155px;
+  padding:6px;
   background:var(--surface);
   border:1px solid var(--line);
   border-radius:9px;
-  padding:6px;
-  box-shadow:0 10px 30px var(--shadow);
+  box-shadow:0 10px 25px var(--shadow);
+  z-index:2000;
 }
 
 .language-menu.show{
@@ -128,16 +160,16 @@ header{
 }
 
 .language-option{
-  width:100%;
   display:block;
+  width:100%;
+  padding:10px;
   text-align:left;
   border:0;
-  border-radius:6px;
-  padding:9px 10px;
-  color:var(--text);
+  border-radius:5px;
   background:transparent;
-  font-family:Arial,sans-serif;
+  color:var(--text);
   font-size:13px;
+  cursor:pointer;
 }
 
 .language-option:hover,
@@ -146,150 +178,123 @@ header{
   color:var(--gold);
 }
 
-/* NAVIGATION */
-
-.navline{
-  border-bottom:1px solid var(--line);
-  padding:10px 0;
-  font-family:Arial,sans-serif;
-  font-size:12px;
-}
-
-.navline a{
-  color:var(--gold);
-  text-decoration:none;
-}
-
-/* MASTHEAD */
+/* PAGE INTRO */
 
 .masthead{
   text-align:center;
-  padding:35px 10px 25px;
+  padding:65px 15px 45px;
   border-bottom:1px solid var(--line);
 }
 
 .masthead-label{
   color:var(--gold);
-  font-family:Arial,sans-serif;
-  font-size:10px;
+  font-size:11px;
+  font-weight:bold;
   letter-spacing:4px;
-  text-transform:uppercase;
+  margin-bottom:13px;
 }
 
 .masthead h1{
-  font-size:clamp(38px,8vw,72px);
-  line-height:1.1;
-  letter-spacing:3px;
-  margin:12px 0;
+  font-size:clamp(34px,7vw,55px);
+  letter-spacing:4px;
+  line-height:1.2;
+  margin-bottom:12px;
 }
 
 .masthead p{
   color:var(--muted);
-  font-size:15px;
-  font-style:italic;
+  font-size:14px;
 }
 
-.masthead-line{
-  width:75px;
-  height:2px;
-  background:var(--gold);
-  margin:20px auto 0;
-}
-
-/* MAIN */
+/* MAIN SECTIONS */
 
 main{
-  padding:28px 0 50px;
+  padding:20px 0 45px;
 }
 
 .section{
-  margin-bottom:25px;
-  padding:22px;
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:5px;
-  box-shadow:0 5px 18px var(--shadow);
-}
-
-.section-number{
-  color:var(--gold);
-  font-family:Arial,sans-serif;
-  font-size:10px;
-  letter-spacing:3px;
-  margin-bottom:7px;
+  padding:38px 0;
+  border-bottom:1px solid var(--line);
 }
 
 .section h2{
-  font-size:25px;
-  line-height:1.3;
-  margin-bottom:12px;
+  color:var(--gold);
+  font-size:23px;
+  letter-spacing:1px;
+  margin-bottom:17px;
 }
 
 .section h3{
-  font-size:19px;
-  color:var(--gold);
-  margin-bottom:8px;
+  color:var(--text);
+  font-size:17px;
+  margin:20px 0 9px;
 }
 
 .section p{
   color:var(--muted);
-  font-size:15px;
-  line-height:1.85;
+  font-size:14px;
+  line-height:1.9;
+  margin-bottom:12px;
 }
 
 .gold-rule{
-  width:45px;
-  height:2px;
+  width:55px;
+  height:3px;
   background:var(--gold);
-  margin:12px 0 17px;
+  margin:12px 0 22px;
+  border-radius:5px;
 }
 
 /* DIPLOMA PANEL */
 
 .diploma-panel{
-  margin-top:18px;
-  padding:19px;
+  background:var(--surface);
   border:1px solid var(--line);
-  background:var(--surface2);
   border-left:3px solid var(--gold);
+  border-radius:9px;
+  padding:20px;
+  margin-top:18px;
+  box-shadow:0 5px 18px var(--shadow);
 }
 
 .diploma-panel h3{
-  color:var(--text);
+  color:var(--gold);
+  margin:0 0 12px;
   font-size:18px;
-  margin-bottom:5px;
 }
 
-.diploma-university{
-  font-family:Arial,sans-serif;
-  color:var(--muted);
-  font-size:12px;
-  margin-bottom:15px;
+.diploma-panel p{
+  margin-bottom:7px;
 }
+
+/* SUBJECT TOGGLE BUTTON */
 
 .subject-toggle{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:9px;
+  width:100%;
+  margin-top:20px;
+  padding:14px 16px;
   border:1px solid var(--gold2);
-  background:transparent;
+  border-radius:7px;
+  background:var(--surface2);
   color:var(--gold);
-  border-radius:5px;
-  padding:8px 13px;
-  font-family:Arial,sans-serif;
-  font-size:12px;
-  letter-spacing:.3px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  font-size:13px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
 }
 
 .subject-toggle:hover{
   background:var(--gold);
-  color:#111;
+  color:#080808;
 }
 
 .arrow{
-  display:inline-block;
-  transition:.2s;
+  font-size:17px;
+  transition:transform .25s;
 }
 
 .subject-toggle.open .arrow{
@@ -300,9 +305,11 @@ main{
 
 .subject-list{
   display:none;
-  margin-top:20px;
-  border-top:1px solid var(--line);
-  padding-top:18px;
+  margin-top:15px;
+  padding:18px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:8px;
 }
 
 .subject-list.show{
@@ -310,17 +317,18 @@ main{
 }
 
 .subject-category{
-  margin-bottom:20px;
+  margin-bottom:23px;
 }
 
-.subject-category h4{
+.subject-category:last-child{
+  margin-bottom:0;
+}
+
+.subject-category h3{
   color:var(--gold);
-  font-family:Arial,sans-serif;
-  font-size:12px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-  padding-bottom:7px;
+  font-size:15px;
+  margin:0 0 12px;
+  padding-bottom:8px;
   border-bottom:1px solid var(--line);
 }
 
@@ -329,35 +337,16 @@ main{
 }
 
 .subject-category li{
-  padding:5px 3px;
-  color:var(--text);
-  font-size:14px;
-  border-bottom:1px solid rgba(150,130,90,.12);
-}
-
-.subject-category li::marker{
-  color:var(--gold);
-  font-family:Arial,sans-serif;
-  font-size:12px;
-}
-
-/* FOOTER */
-
-footer{
-  border-top:1px solid var(--line);
-  padding:25px 10px;
-  text-align:center;
   color:var(--muted);
-  font-family:Arial,sans-serif;
-  font-size:11px;
-  letter-spacing:1px;
+  font-size:13px;
+  padding:5px 0;
+  border-bottom:1px solid var(--line);
 }
 
-footer strong{
-  color:var(--gold);
+.subject-category li:last-child{
+  border-bottom:0;
 }
-
-/* RESPONSIVE */
+  /* RESPONSIVE */
 
 @media(max-width:600px){
   .header-inner{
@@ -365,47 +354,115 @@ footer strong{
   }
 
   .brand strong{
-    font-size:19px;
+    font-size:18px;
+  }
+
+  .brand small{
+    font-size:8px;
+  }
+
+  .header-actions{
+    gap:6px;
   }
 
   .header-btn{
-    padding:7px 8px;
+    padding:8px 9px;
     font-size:11px;
   }
 
-  .masthead{
-    padding:28px 8px 22px;
+  #themeButton{
+    min-width:88px;
   }
 
-  .masthead h1{
-    letter-spacing:2px;
+  .masthead{
+    padding:48px 12px 35px;
   }
 
   .section{
-    padding:17px;
-    margin-bottom:17px;
+    padding:30px 0;
   }
 
   .section h2{
-    font-size:22px;
-  }
-
-  .section p{
-    font-size:14px;
+    font-size:20px;
   }
 
   .diploma-panel{
     padding:15px;
   }
 
-  .diploma-panel h3{
-    font-size:16px;
-  }
-
-  .subject-category li{
-    font-size:13px;
+  .subject-list{
+    padding:13px;
   }
 }
+
+/* FOOTER */
+
+footer{
+  background:var(--surface);
+  border-top:1px solid var(--line);
+  text-align:center;
+  padding:28px 15px;
+  margin-top:25px;
+}
+
+footer strong{
+  color:var(--gold);
+  letter-spacing:3px;
+  font-size:17px;
+}
+
+footer p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:7px;
+}
+
+/* BACK TO HOME */
+
+.back-home-wrap{
+  text-align:center;
+  padding:35px 0 10px;
+}
+
+.back-home{
+  display:inline-block;
+  padding:11px 22px;
+  border:1px solid var(--gold);
+  border-radius:7px;
+  color:var(--gold);
+  background:var(--surface);
+  font-size:13px;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.back-home:hover{
+  background:var(--gold);
+  color:#080808;
+}
+
+/* URDU SUPPORT */
+
+html[dir="rtl"] body{
+  direction:rtl;
+  text-align:right;
+}
+
+html[dir="rtl"] .language-menu{
+  right:auto;
+  left:0;
+}
+
+html[dir="rtl"] .subject-category ol{
+  padding-left:0;
+  padding-right:23px;
+}
+
+html[dir="rtl"] .diploma-panel{
+  border-left:1px solid var(--line);
+  border-right:3px solid var(--gold);
+}
+
 </style>
 </head>
 
@@ -428,443 +485,564 @@ footer strong{
         </button>
 
         <div class="language-menu" id="languageMenu">
-          <button class="language-option" onclick="changeLanguage('en')">English</button>
-          <button class="language-option" onclick="changeLanguage('hi-en')">Roman Hindi</button>
-          <button class="language-option" onclick="changeLanguage('ur')">Urdu</button>
-          <button class="language-option" onclick="changeLanguage('hi')">Hindi</button>
-          <button class="language-option" onclick="changeLanguage('or')">Odia</button>
+          <button class="language-option" data-language="en"
+            onclick="changeLanguage('en')">English</button>
+
+          <button class="language-option" data-language="hi-en"
+            onclick="changeLanguage('hi-en')">Roman Hindi</button>
+
+          <button class="language-option" data-language="ur"
+            onclick="changeLanguage('ur')">Urdu</button>
+
+          <button class="language-option" data-language="hi"
+            onclick="changeLanguage('hi')">Hindi</button>
+
+          <button class="language-option" data-language="or"
+            onclick="changeLanguage('or')">Odia</button>
         </div>
       </div>
 
       <button class="header-btn" id="themeButton"
-        onclick="toggleTheme()" aria-label="Change theme">☼</button>
+        onclick="toggleTheme()">
+        <span id="themeIcon">☼</span>
+        <span id="themeLabel">DARK MODE</span>
+      </button>
 
     </div>
   </div>
 </header>
 
-<div class="container navline">
-  <a href="index.html" data-i18n="homeLink">← Back to Home</a>
-</div>
-
-<div class="container">
-
-  <div class="masthead">
-    <div class="masthead-label" data-i18n="mastLabel">
-      THE EDUCATION EDITION
-    </div>
-
-    <h1 data-i18n="pageTitle">MY STUDY</h1>
-
-    <p data-i18n="tagline">
-      A Journey of Learning and Growth
-    </p>
-
-    <div class="masthead-line"></div>
+<div class="masthead">
+  <div class="masthead-label" data-i18n="mastheadLabel">
+    THE EDUCATION EDITION
   </div>
 
-  <main>
+  <h1 data-i18n="pageTitle">MY STUDY</h1>
 
-    <!-- UNIVERSITY -->
-
-    <section class="section">
-      <div class="section-number">01 — EDUCATION</div>
-
-      <h2 data-i18n="universityTitle">My University</h2>
-
-      <div class="gold-rule"></div>
-
-      <h3>Maulana Azad National Urdu University (MANUU)</h3>
-
-      <p data-i18n="universityText">
-        I am currently pursuing a Diploma in Electrical and Electronics
-        Engineering (EEE) at Maulana Azad National Urdu University.
-        Through this course, I am learning about electrical systems,
-        electronics and practical engineering concepts.
-      </p>
-
-      <div class="diploma-panel">
-
-        <h3 data-i18n="diplomaTitle">
-          Diploma in Electrical and Electronics Engineering (EEE)
-        </h3>
-
-        <div class="diploma-university">
-          Maulana Azad National Urdu University (MANUU)
-        </div>
-
-        <button class="subject-toggle" id="subjectToggle"
-          onclick="toggleSubjects()">
-          <span data-i18n="viewSubjects">View All Subjects</span>
-          <span class="arrow">⌄</span>
-        </button>
-
-        <div class="subject-list" id="subjectList">
-
-          <div class="subject-category">
-            <h4 data-i18n="coreTitle">Core Subjects</h4>
-            <ol>
-              <li>Mathematics</li>
-              <li>Applied Physics</li>
-              <li>Engineering Mechanics</li>
-              <li>Communication Skills in English</li>
-              <li>Fundamentals of Electrical and Electronics Engineering</li>
-              <li>Environmental Science</li>
-              <li>Engineering Workshop Practice</li>
-              <li>Introduction to IT Systems</li>
-              <li>Engineering Graphics</li>
-              <li>Applied Chemistry</li>
-              <li>Introduction to Electric Generation Systems</li>
-              <li>Electrical Circuits</li>
-              <li>Electrical and Electronic Measurements</li>
-              <li>Electric Motors and Transformers</li>
-              <li>Analog and Digital Electronics</li>
-              <li>Fundamentals of Power Electronics</li>
-              <li>Electric Power Transmission and Distribution</li>
-              <li>Induction, Synchronous and Special Electrical Machines</li>
-              <li>Microcontroller Applications</li>
-              <li>Control Systems</li>
-              <li>Switchgear and Protection</li>
-              <li>Entrepreneurship and Start-ups</li>
-              <li>Essence of Indian Knowledge and Tradition</li>
-              <li>Indian Constitution</li>
-              <li>Sports and Yoga</li>
-            </ol>
-          </div>
-
-          <div class="subject-category">
-            <h4 data-i18n="electiveTitle">Elective Subjects</h4>
-            <ol>
-              <li>Solar Power Technologies</li>
-              <li>Wind Power Technologies</li>
-              <li>Electric Vehicles</li>
-              <li>Industrial Automation and Control</li>
-              <li>Industrial Drives</li>
-              <li>Renewable Energy Technologies</li>
-              <li>Internet of Things (IoT)</li>
-              <li>Artificial Intelligence</li>
-              <li>Mechatronics</li>
-            </ol>
-          </div>
-
-          <div class="subject-category">
-            <h4 data-i18n="labTitle">Practical Labs</h4>
-            <ol>
-              <li>Communication Skills in English Lab</li>
-              <li>Applied Physics Lab</li>
-              <li>Engineering Mechanics Lab</li>
-              <li>Fundamentals of Electrical and Electronics Engineering Lab</li>
-              <li>Introduction to IT Systems Lab</li>
-              <li>Applied Chemistry Lab</li>
-              <li>Introduction to Electric Generation Systems Lab</li>
-              <li>Electrical Circuits Lab</li>
-              <li>Electrical and Electronic Measurements Lab</li>
-              <li>Electric Motors and Transformers Lab</li>
-              <li>Fundamentals of Power Electronics Lab</li>
-              <li>Electric Power Transmission and Distribution Lab</li>
-              <li>Electrical Machines Lab</li>
-              <li>Microcontroller Applications Lab</li>
-              <li>Control Systems Lab</li>
-              <li>Switchgear and Protection Lab</li>
-            </ol>
-          </div>
-
-          <div class="subject-category">
-            <h4 data-i18n="projectTitle">Projects &amp; Training</h4>
-            <ol>
-              <li>Summer Internship</li>
-              <li>Minor Project</li>
-              <li>Major Project</li>
-              <li>Seminar</li>
-            </ol>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- SCHOOL -->
-
-    <section class="section">
-      <div class="section-number">02 — SCHOOL</div>
-
-      <h2 data-i18n="schoolTitle">My School Education</h2>
-
-      <div class="gold-rule"></div>
-
-      <h3>Odisha High School</h3>
-
-      <p data-i18n="schoolText">
-        I completed my Class 10 education from Odisha High School.
-        It is an important foundation of my academic journey.
-      </p>
-    </section>
-
-    <!-- MADRASA -->
-
-    <section class="section">
-      <div class="section-number">03 — MADRASA</div>
-
-      <h2 data-i18n="madrasaTitle">My Madrasa Education</h2>
-
-      <div class="gold-rule"></div>
-
-      <h3 data-i18n="madrasaSub">Madrasa Education</h3>
-
-      <p data-i18n="madrasaText">
-        I have also been a Madrasa student.
-        This gave me a different educational experience
-        and another opportunity to learn.
-      </p>
-    </section>
-
-    <!-- INTERESTS -->
-
-    <section class="section">
-      <div class="section-number">04 — INTERESTS</div>
-
-      <h2 data-i18n="interestTitle">My Academic Interests</h2>
-
-      <div class="gold-rule"></div>
-
-      <p data-i18n="interestText">
-        I am interested in Electrical Engineering, Electronics and
-        Technology. I enjoy understanding new technical concepts,
-        performing practical experiments and applying my knowledge
-        to real life.
-      </p>
-    </section>
-
-    <!-- FUTURE GOALS -->
-
-    <section class="section">
-      <div class="section-number">05 — FUTURE</div>
-
-      <h2 data-i18n="goalTitle">My Future Goals</h2>
-
-      <div class="gold-rule"></div>
-
-      <p data-i18n="goalText">
-        My goal is to improve my technical knowledge, develop practical
-        skills and build a successful career in the field of
-        Engineering and Technology.
-      </p>
-    </section>
-
-  </main>
-
+  <p data-i18n="pageSubtitle">
+    A Journey of Learning and Growth
+  </p>
 </div>
+
+<main class="container">
+
+  <!-- MY UNIVERSITY -->
+
+  <section class="section">
+
+    <h2 data-i18n="universityTitle">My University</h2>
+    <div class="gold-rule"></div>
+
+    <div class="diploma-panel">
+
+      <h3 data-i18n="universityName">
+        Maulana Azad National Urdu University
+      </h3>
+
+      <p data-i18n="universityLocation">
+        Cuttack Campus, Odisha
+      </p>
+
+      <p>
+        <strong data-i18n="courseLabel">Course:</strong>
+        <span data-i18n="courseName">
+          Diploma in Electrical and Electronics Engineering
+        </span>
+      </p>
+
+      <p>
+        <strong data-i18n="branchLabel">Branch:</strong>
+        <span data-i18n="branchName">
+          Electrical and Electronics Engineering (EEE)
+        </span>
+      </p>
+
+      <p>
+        <strong data-i18n="durationLabel">Duration:</strong>
+        <span data-i18n="durationValue">3 Years</span>
+      </p>
+
+      <p>
+        <strong data-i18n="yearLabel">Current Year:</strong>
+        <span data-i18n="yearValue">1st Year</span>
+      </p>
+
+    </div>
+
+    <button class="subject-toggle" id="subjectToggle"
+      onclick="toggleSubjects()">
+
+      <span id="subjectButtonText" data-i18n="viewSubjects">
+        View All Subjects
+      </span>
+
+      <span class="arrow">⌄</span>
+
+    </button>
+
+    <div class="subject-list" id="subjectList">
+
+      <div class="subject-category">
+        <h3 data-i18n="coreTitle">Core Subjects</h3>
+        <ol>
+          <li>Engineering Mathematics</li>
+          <li>Applied Physics</li>
+          <li>Applied Chemistry</li>
+          <li>Communication Skills</li>
+          <li>Engineering Drawing</li>
+          <li>Basic Electrical Engineering</li>
+          <li>Electrical Circuit Theory</li>
+          <li>Electrical Machines</li>
+          <li>Electrical Measurements</li>
+          <li>Electronic Devices and Circuits</li>
+          <li>Digital Electronics</li>
+          <li>Electrical Power Generation</li>
+          <li>Transmission and Distribution</li>
+          <li>Power System Protection</li>
+          <li>Electrical Installation and Estimation</li>
+          <li>Microprocessor and Microcontroller</li>
+          <li>Control Systems</li>
+          <li>Power Electronics</li>
+          <li>Electrical Utilization</li>
+          <li>Renewable Energy Sources</li>
+          <li>Industrial Automation</li>
+          <li>Electrical Safety</li>
+          <li>Energy Management</li>
+          <li>Entrepreneurship Development</li>
+          <li>Environmental Studies</li>
+        </ol>
+      </div>
+
+      <div class="subject-category">
+        <h3 data-i18n="electiveTitle">Elective Subjects</h3>
+        <ol>
+          <li>Solar Energy Technology</li>
+          <li>Wind Energy Technology</li>
+          <li>Electric Vehicle Technology</li>
+          <li>Smart Grid Technology</li>
+          <li>Industrial Robotics</li>
+          <li>PLC and SCADA</li>
+          <li>Electrical Drives</li>
+          <li>Energy Conservation</li>
+          <li>Emerging Electrical Technologies</li>
+        </ol>
+      </div>
+
+      <div class="subject-category">
+        <h3 data-i18n="practicalTitle">Practical Labs</h3>
+        <ol>
+          <li>Basic Electrical Engineering Lab</li>
+          <li>Electrical Machines Lab</li>
+          <li>Electrical Measurements Lab</li>
+          <li>Electronics Lab</li>
+          <li>Digital Electronics Lab</li>
+          <li>Electrical Circuit Lab</li>
+          <li>Wiring and Installation Lab</li>
+          <li>Power Electronics Lab</li>
+          <li>Microcontroller Lab</li>
+          <li>Control Systems Lab</li>
+          <li>Computer Lab</li>
+          <li>Renewable Energy Lab</li>
+          <li>Electrical Maintenance Lab</li>
+          <li>Workshop Practice</li>
+          <li>Project Lab</li>
+          <li>Industrial Training</li>
+        </ol>
+      </div>
+
+      <div class="subject-category">
+        <h3 data-i18n="projectTitle">Projects &amp; Training</h3>
+        <ol>
+          <li>Mini Electrical Projects</li>
+          <li>Renewable Energy Projects</li>
+          <li>Industrial Training</li>
+          <li>Final Year Project</li>
+        </ol>
+      </div>
+
+    </div>
+
+  </section>
+    <!-- MY SCHOOL EDUCATION -->
+
+  <section class="section">
+
+    <h2 data-i18n="schoolTitle">My School Education</h2>
+    <div class="gold-rule"></div>
+
+    <h3 data-i18n="schoolName">Odisha High School</h3>
+
+    <p data-i18n="schoolText">
+      I completed my Class 10 education at Odisha High School.
+      My school education gave me the foundation for my academic journey
+      and helped me develop basic knowledge and learning skills.
+    </p>
+
+  </section>
+
+  <!-- MY MADRASA EDUCATION -->
+
+  <section class="section">
+
+    <h2 data-i18n="madrasaTitle">My Madrasa Education</h2>
+    <div class="gold-rule"></div>
+
+    <p data-i18n="madrasaText">
+      I also studied at a Madrasa, where I gained knowledge and
+      developed discipline, reading habits and learning skills.
+      This experience is an important part of my educational journey.
+    </p>
+
+  </section>
+
+  <!-- MY ACADEMIC INTERESTS -->
+
+  <section class="section">
+
+    <h2 data-i18n="interestsTitle">My Academic Interests</h2>
+    <div class="gold-rule"></div>
+
+    <p data-i18n="interestsIntro">
+      I am interested in learning new things, improving my technical
+      knowledge and developing practical skills.
+    </p>
+
+    <h3 data-i18n="interestOneTitle">Electrical Technology</h3>
+    <p data-i18n="interestOneText">
+      Learning about electrical circuits, machines, power systems,
+      electronics and renewable energy.
+    </p>
+
+    <h3 data-i18n="interestTwoTitle">Computer and Technology</h3>
+    <p data-i18n="interestTwoText">
+      Exploring computers, coding, web development and modern technology.
+    </p>
+
+    <h3 data-i18n="interestThreeTitle">Practical Learning</h3>
+    <p data-i18n="interestThreeText">
+      Building projects, performing experiments and understanding
+      how things work in real life.
+    </p>
+
+  </section>
+
+  <!-- MY FUTURE GOALS -->
+
+  <section class="section">
+
+    <h2 data-i18n="goalsTitle">My Future Goals</h2>
+    <div class="gold-rule"></div>
+
+    <p data-i18n="goalsText">
+      My goal is to complete my Diploma in Electrical and Electronics
+      Engineering, improve my technical skills and gain practical
+      experience. I want to continue learning, build useful projects
+      and create a successful career in the field of technology.
+    </p>
+
+  </section>
+
+  <!-- BACK TO HOME -->
+
+  <div class="back-home-wrap">
+    <a href="index.html" class="back-home" data-i18n="homeLink">
+      ← Back to Home
+    </a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
 
 <footer>
   <strong>SK TALIB</strong>
   <p data-i18n="footerText">My Study • Learning and Growth</p>
-  </footer>
-  <script>
-
-/* LANGUAGE TRANSLATIONS */
-
+</footer>
+<script>
 const translations = {
 
-  en:{
-    homeLink:"← Back to Home",
-    mastLabel:"THE EDUCATION EDITION",
-    pageTitle:"MY STUDY",
-    tagline:"A Journey of Learning and Growth",
-    universityTitle:"My University",
-    universityText:"I am currently pursuing a Diploma in Electrical and Electronics Engineering (EEE) at Maulana Azad National Urdu University. Through this course, I am learning about electrical systems, electronics and practical engineering concepts.",
-    diplomaTitle:"Diploma in Electrical and Electronics Engineering (EEE)",
-    viewSubjects:"View All Subjects",
-    hideSubjects:"Hide All Subjects",
-    coreTitle:"Core Subjects",
-    electiveTitle:"Elective Subjects",
-    labTitle:"Practical Labs",
-    projectTitle:"Projects & Training",
-    schoolTitle:"My School Education",
-    schoolText:"I completed my Class 10 education from Odisha High School. It is an important foundation of my academic journey.",
-    madrasaTitle:"My Madrasa Education",
-    madrasaSub:"Madrasa Education",
-    madrasaText:"I have also been a Madrasa student. This gave me a different educational experience and another opportunity to learn.",
-    interestTitle:"My Academic Interests",
-    interestText:"I am interested in Electrical Engineering, Electronics and Technology. I enjoy understanding new technical concepts, performing practical experiments and applying my knowledge to real life.",
-    goalTitle:"My Future Goals",
-    goalText:"My goal is to improve my technical knowledge, develop practical skills and build a successful career in the field of Engineering and Technology.",
-    footerText:"My Study • Learning and Growth"
-  },
+en:{
+mastheadLabel:"THE EDUCATION EDITION",
+pageTitle:"MY STUDY",
+pageSubtitle:"A Journey of Learning and Growth",
+universityTitle:"My University",
+universityName:"Maulana Azad National Urdu University",
+universityLocation:"Cuttack Campus, Odisha",
+courseLabel:"Course:",
+courseName:"Diploma in Electrical and Electronics Engineering",
+branchLabel:"Branch:",
+branchName:"Electrical and Electronics Engineering (EEE)",
+durationLabel:"Duration:",
+durationValue:"3 Years",
+yearLabel:"Current Year:",
+yearValue:"1st Year",
+viewSubjects:"View All Subjects",
+hideSubjects:"Hide All Subjects",
+coreTitle:"Core Subjects",
+electiveTitle:"Elective Subjects",
+practicalTitle:"Practical Labs",
+projectTitle:"Projects & Training",
+schoolTitle:"My School Education",
+schoolName:"Odisha High School",
+schoolText:"I completed my Class 10 education at Odisha High School. My school education gave me the foundation for my academic journey and helped me develop basic knowledge and learning skills.",
+madrasaTitle:"My Madrasa Education",
+madrasaText:"I also studied at a Madrasa, where I gained knowledge and developed discipline, reading habits and learning skills. This experience is an important part of my educational journey.",
+interestsTitle:"My Academic Interests",
+interestsIntro:"I am interested in learning new things, improving my technical knowledge and developing practical skills.",
+interestOneTitle:"Electrical Technology",
+interestOneText:"Learning about electrical circuits, machines, power systems, electronics and renewable energy.",
+interestTwoTitle:"Computer and Technology",
+interestTwoText:"Exploring computers, coding, web development and modern technology.",
+interestThreeTitle:"Practical Learning",
+interestThreeText:"Building projects, performing experiments and understanding how things work in real life.",
+goalsTitle:"My Future Goals",
+goalsText:"My goal is to complete my Diploma in Electrical and Electronics Engineering, improve my technical skills and gain practical experience. I want to continue learning, build useful projects and create a successful career in the field of technology.",
+homeLink:"← Back to Home",
+footerText:"My Study • Learning and Growth",
+darkMode:"DARK MODE",
+lightMode:"LIGHT MODE"
+},
 
-  "hi-en":{
-    homeLink:"← Home Page Par Wapas",
-    mastLabel:"MERI TALEEM KA SAFAR",
-    pageTitle:"MERI PADHAI",
-    tagline:"Seekhne Aur Aage Badhne Ka Safar",
-    universityTitle:"Meri University",
-    universityText:"Main filhaal Maulana Azad National Urdu University mein Diploma in Electrical and Electronics Engineering (EEE) ki padhai kar raha hoon. Is course ke zariye main electrical systems, electronics aur engineering ke practical concepts seekh raha hoon.",
-    diplomaTitle:"Diploma in Electrical and Electronics Engineering (EEE)",
-    viewSubjects:"Saare Subjects Dekhein",
-    hideSubjects:"Subjects Chhupayein",
-    coreTitle:"Core Subjects",
-    electiveTitle:"Elective Subjects",
-    labTitle:"Practical Labs",
-    projectTitle:"Projects Aur Training",
-    schoolTitle:"Meri School Education",
-    schoolText:"Maine apni 10th class ki padhai Odisha High School se poori ki hai. Ye meri academic journey ki ek aham buniyad hai.",
-    madrasaTitle:"Meri Madrasa Education",
-    madrasaSub:"Madrasa Education",
-    madrasaText:"Main Madarsa ka student bhi raha hoon. Yahan se mujhe taleem aur seekhne ka ek alag tajurba mila.",
-    interestTitle:"Meri Academic Interests",
-    interestText:"Mujhe Electrical Engineering, Electronics aur Technology mein dilchaspi hai. Mujhe naye technical concepts samajhna, practical experiments karna aur apni knowledge ko real life mein apply karna achha lagta hai.",
-    goalTitle:"Mere Future Goals",
-    goalText:"Mera maqsad apni technical knowledge badhana, practical skills develop karna aur Engineering aur Technology ke field mein ek successful career banana hai.",
-    footerText:"Meri Padhai • Seekhna Aur Aage Badhna"
-  },
+"hi-en":{
+mastheadLabel:"MERI TALEEM KA SAFAR",
+pageTitle:"MERI PADHAI",
+pageSubtitle:"Seekhne aur aage badhne ka safar",
+universityTitle:"Meri University",
+universityName:"Maulana Azad National Urdu University",
+universityLocation:"Cuttack Campus, Odisha",
+courseLabel:"Course:",
+courseName:"Diploma in Electrical and Electronics Engineering",
+branchLabel:"Branch:",
+branchName:"Electrical and Electronics Engineering (EEE)",
+durationLabel:"Duration:",
+durationValue:"3 Saal",
+yearLabel:"Current Year:",
+yearValue:"Pehla Saal",
+viewSubjects:"Saare Subjects Dekhein",
+hideSubjects:"Subjects Chhupayein",
+coreTitle:"Core Subjects",
+electiveTitle:"Elective Subjects",
+practicalTitle:"Practical Labs",
+projectTitle:"Projects aur Training",
+schoolTitle:"Meri School Education",
+schoolName:"Odisha High School",
+schoolText:"Maine Odisha High School se Class 10 ki padhai poori ki. School ki padhai ne meri education ki buniyad banayi aur mujhe basic knowledge aur learning skills di.",
+madrasaTitle:"Meri Madrasa Education",
+madrasaText:"Maine Madrasa mein bhi padhai ki, jahan maine knowledge hasil ki aur discipline, padhne ki aadat aur learning skills develop ki. Yeh mere taleemi safar ka ek important hissa hai.",
+interestsTitle:"Meri Padhai ke Interests",
+interestsIntro:"Mujhe nayi cheezein seekhne, technical knowledge badhane aur practical skills develop karne mein interest hai.",
+interestOneTitle:"Electrical Technology",
+interestOneText:"Electrical circuits, machines, power systems, electronics aur renewable energy ke baare mein seekhna.",
+interestTwoTitle:"Computer aur Technology",
+interestTwoText:"Computer, coding, web development aur modern technology ko samajhna.",
+interestThreeTitle:"Practical Learning",
+interestThreeText:"Projects banana, experiments karna aur real life mein cheezein kaise kaam karti hain yeh samajhna.",
+goalsTitle:"Mere Future Goals",
+goalsText:"Mera goal Electrical and Electronics Engineering mein Diploma complete karna, apni technical skills improve karna aur practical experience hasil karna hai. Main seekhte rehna, useful projects banana aur technology ke field mein successful career banana chahta hoon.",
+homeLink:"← Home Page Par Jayein",
+footerText:"Meri Padhai • Seekhna aur Aage Badhna",
+darkMode:"DARK MODE",
+lightMode:"LIGHT MODE"
+},
+ ur:{
+mastheadLabel:"تعلیم کا سفر",
+pageTitle:"میری تعلیم",
+pageSubtitle:"سیکھنے اور ترقی کا سفر",
+universityTitle:"میری یونیورسٹی",
+universityName:"مولانا آزاد نیشنل اردو یونیورسٹی",
+universityLocation:"کٹک کیمپس، اوڈیشہ",
+courseLabel:"کورس:",
+courseName:"ڈپلومہ ان الیکٹریکل اینڈ الیکٹرانکس انجینئرنگ",
+branchLabel:"شعبہ:",
+branchName:"الیکٹریکل اینڈ الیکٹرانکس انجینئرنگ (EEE)",
+durationLabel:"مدت:",
+durationValue:"3 سال",
+yearLabel:"موجودہ سال:",
+yearValue:"پہلا سال",
+viewSubjects:"تمام مضامین دیکھیں",
+hideSubjects:"تمام مضامین چھپائیں",
+coreTitle:"بنیادی مضامین",
+electiveTitle:"اختیاری مضامین",
+practicalTitle:"عملی لیب",
+projectTitle:"پروجیکٹس اور ٹریننگ",
+schoolTitle:"میری اسکول کی تعلیم",
+schoolName:"اوڈیشہ ہائی اسکول",
+schoolText:"میں نے اوڈیشہ ہائی اسکول سے دسویں جماعت کی تعلیم مکمل کی۔ میری اسکول کی تعلیم نے میرے تعلیمی سفر کی بنیاد رکھی اور مجھے بنیادی علم اور سیکھنے کی صلاحیتیں فراہم کیں۔",
+madrasaTitle:"میری مدرسہ کی تعلیم",
+madrasaText:"میں نے مدرسہ میں بھی تعلیم حاصل کی، جہاں میں نے علم حاصل کیا اور نظم و ضبط، مطالعے کی عادت اور سیکھنے کی صلاحیتیں پیدا کیں۔ یہ میرے تعلیمی سفر کا ایک اہم حصہ ہے۔",
+interestsTitle:"میرے تعلیمی دلچسپیاں",
+interestsIntro:"مجھے نئی چیزیں سیکھنے، تکنیکی علم بڑھانے اور عملی مہارتیں حاصل کرنے میں دلچسپی ہے۔",
+interestOneTitle:"الیکٹریکل ٹیکنالوجی",
+interestOneText:"الیکٹریکل سرکٹس، مشینوں، پاور سسٹم، الیکٹرانکس اور قابل تجدید توانائی کے بارے میں سیکھنا۔",
+interestTwoTitle:"کمپیوٹر اور ٹیکنالوجی",
+interestTwoText:"کمپیوٹر، کوڈنگ، ویب ڈیولپمنٹ اور جدید ٹیکنالوجی کو سمجھنا۔",
+interestThreeTitle:"عملی تعلیم",
+interestThreeText:"پروجیکٹس بنانا، تجربات کرنا اور یہ سمجھنا کہ حقیقی زندگی میں چیزیں کیسے کام کرتی ہیں۔",
+goalsTitle:"میرے مستقبل کے مقاصد",
+goalsText:"میرا مقصد الیکٹریکل اینڈ الیکٹرانکس انجینئرنگ میں ڈپلومہ مکمل کرنا، اپنی تکنیکی مہارتوں کو بہتر بنانا اور عملی تجربہ حاصل کرنا ہے۔ میں سیکھنا جاری رکھنا، مفید پروجیکٹس بنانا اور ٹیکنالوجی کے شعبے میں کامیاب کیریئر بنانا چاہتا ہوں۔",
+homeLink:"← ہوم پیج پر واپس جائیں",
+footerText:"میری تعلیم • سیکھنا اور ترقی",
+darkMode:"ڈارک موڈ",
+lightMode:"لائٹ موڈ"
+},
 
-  ur:{
-    homeLink:"← ہوم پیج پر واپس",
-    mastLabel:"میری تعلیم کا سفر",
-    pageTitle:"میری پڑھائی",
-    tagline:"سیکھنے اور آگے بڑھنے کا سفر",
-    universityTitle:"میری یونیورسٹی",
-    universityText:"میں فی الحال مولانا آزاد نیشنل اردو یونیورسٹی میں ڈپلومہ اِن الیکٹریکل اینڈ الیکٹرانکس انجینئرنگ (EEE) کی تعلیم حاصل کر رہا ہوں۔ اس کورس کے ذریعے میں الیکٹریکل سسٹمز، الیکٹرانکس اور انجینئرنگ کے عملی تصورات سیکھ رہا ہوں۔",
-    diplomaTitle:"Diploma in Electrical and Electronics Engineering (EEE)",
-    viewSubjects:"تمام مضامین دیکھیں",
-    hideSubjects:"مضامین چھپائیں",
-    coreTitle:"بنیادی مضامین",
-    electiveTitle:"اختیاری مضامین",
-    labTitle:"عملی لیب",
-    projectTitle:"پروجیکٹس اور ٹریننگ",
-    schoolTitle:"میری اسکول کی تعلیم",
-    schoolText:"میں نے دسویں جماعت کی تعلیم اوڈیشہ ہائی اسکول سے مکمل کی ہے۔ یہ میری تعلیمی زندگی کی ایک اہم بنیاد ہے۔",
-    madrasaTitle:"میری مدرسہ کی تعلیم",
-    madrasaSub:"مدرسہ کی تعلیم",
-    madrasaText:"میں مدرسہ کا طالب علم بھی رہا ہوں۔ وہاں سے مجھے تعلیم اور سیکھنے کا ایک مختلف تجربہ ملا۔",
-    interestTitle:"میری تعلیمی دلچسپیاں",
-    interestText:"مجھے الیکٹریکل انجینئرنگ، الیکٹرانکس اور ٹیکنالوجی میں دلچسپی ہے۔ مجھے نئے تکنیکی تصورات سمجھنا، عملی تجربات کرنا اور اپنے علم کو حقیقی زندگی میں استعمال کرنا اچھا لگتا ہے۔",
-    goalTitle:"میرے مستقبل کے مقاصد",
-    goalText:"میرا مقصد اپنی تکنیکی معلومات بڑھانا، عملی مہارتیں حاصل کرنا اور انجینئرنگ و ٹیکنالوجی کے شعبے میں کامیاب کیریئر بنانا ہے۔",
-    footerText:"میری پڑھائی • سیکھنا اور ترقی"
-  },
+hi:{
+mastheadLabel:"शिक्षा का सफर",
+pageTitle:"मेरी पढ़ाई",
+pageSubtitle:"सीखने और आगे बढ़ने का सफर",
+universityTitle:"मेरी यूनिवर्सिटी",
+universityName:"मौलाना आज़ाद नेशनल उर्दू यूनिवर्सिटी",
+universityLocation:"कटक कैंपस, ओडिशा",
+courseLabel:"कोर्स:",
+courseName:"इलेक्ट्रिकल एंड इलेक्ट्रॉनिक्स इंजीनियरिंग में डिप्लोमा",
+branchLabel:"शाखा:",
+branchName:"इलेक्ट्रिकल एंड इलेक्ट्रॉनिक्स इंजीनियरिंग (EEE)",
+durationLabel:"अवधि:",
+durationValue:"3 साल",
+yearLabel:"वर्तमान वर्ष:",
+yearValue:"पहला वर्ष",
+viewSubjects:"सभी विषय देखें",
+hideSubjects:"सभी विषय छिपाएँ",
+coreTitle:"मुख्य विषय",
+electiveTitle:"वैकल्पिक विषय",
+practicalTitle:"प्रैक्टिकल लैब",
+projectTitle:"प्रोजेक्ट और ट्रेनिंग",
+schoolTitle:"मेरी स्कूल की शिक्षा",
+schoolName:"ओडिशा हाई स्कूल",
+schoolText:"मैंने ओडिशा हाई स्कूल से दसवीं कक्षा की पढ़ाई पूरी की। मेरी स्कूल की शिक्षा ने मेरी शैक्षणिक यात्रा की नींव रखी और मुझे बुनियादी ज्ञान और सीखने की क्षमता दी।",
+madrasaTitle:"मेरी मदरसा शिक्षा",
+madrasaText:"मैंने मदरसे में भी पढ़ाई की, जहाँ मैंने ज्ञान प्राप्त किया और अनुशासन, पढ़ने की आदत तथा सीखने की क्षमता विकसित की। यह मेरी शैक्षणिक यात्रा का एक महत्वपूर्ण हिस्सा है।",
+interestsTitle:"मेरी शैक्षणिक रुचियाँ",
+interestsIntro:"मुझे नई चीजें सीखने, तकनीकी ज्ञान बढ़ाने और व्यावहारिक कौशल विकसित करने में रुचि है।",
+interestOneTitle:"इलेक्ट्रिकल टेक्नोलॉजी",
+interestOneText:"इलेक्ट्रिकल सर्किट, मशीनों, पावर सिस्टम, इलेक्ट्रॉनिक्स और नवीकरणीय ऊर्जा के बारे में सीखना।",
+interestTwoTitle:"कंप्यूटर और टेक्नोलॉजी",
+interestTwoText:"कंप्यूटर, कोडिंग, वेब डेवलपमेंट और आधुनिक तकनीक को समझना।",
+interestThreeTitle:"व्यावहारिक शिक्षा",
+interestThreeText:"प्रोजेक्ट बनाना, प्रयोग करना और समझना कि वास्तविक जीवन में चीजें कैसे काम करती हैं।",
+goalsTitle:"मेरे भविष्य के लक्ष्य",
+goalsText:"मेरा लक्ष्य इलेक्ट्रिकल एंड इलेक्ट्रॉनिक्स इंजीनियरिंग में डिप्लोमा पूरा करना, अपने तकनीकी कौशल को बेहतर बनाना और व्यावहारिक अनुभव प्राप्त करना है। मैं लगातार सीखना, उपयोगी प्रोजेक्ट बनाना और टेक्नोलॉजी के क्षेत्र में सफल करियर बनाना चाहता हूँ।",
+homeLink:"← होम पेज पर वापस जाएँ",
+footerText:"मेरी पढ़ाई • सीखना और आगे बढ़ना",
+darkMode:"डार्क मोड",
+lightMode:"लाइट मोड"
+},
 
-  hi:{
-    homeLink:"← होम पेज पर वापस",
-    mastLabel:"मेरी शिक्षा का सफर",
-    pageTitle:"मेरी पढ़ाई",
-    tagline:"सीखने और आगे बढ़ने का सफर",
-    universityTitle:"मेरी यूनिवर्सिटी",
-    universityText:"मैं फिलहाल मौलाना आज़ाद नेशनल उर्दू यूनिवर्सिटी में डिप्लोमा इन इलेक्ट्रिकल एंड इलेक्ट्रॉनिक्स इंजीनियरिंग (EEE) की पढ़ाई कर रहा हूँ। इस कोर्स के ज़रिए मैं इलेक्ट्रिकल सिस्टम, इलेक्ट्रॉनिक्स और इंजीनियरिंग के प्रैक्टिकल कॉन्सेप्ट सीख रहा हूँ।",
-    diplomaTitle:"Diploma in Electrical and Electronics Engineering (EEE)",
-    viewSubjects:"सभी विषय देखें",
-    hideSubjects:"विषय छिपाएँ",
-    coreTitle:"मुख्य विषय",
-    electiveTitle:"वैकल्पिक विषय",
-    labTitle:"प्रैक्टिकल लैब",
-    projectTitle:"प्रोजेक्ट और ट्रेनिंग",
-    schoolTitle:"मेरी स्कूल की शिक्षा",
-    schoolText:"मैंने अपनी 10वीं कक्षा की पढ़ाई Odisha High School से पूरी की है। यह मेरी शैक्षणिक यात्रा की एक महत्वपूर्ण नींव है।",
-    madrasaTitle:"मेरी मदरसा शिक्षा",
-    madrasaSub:"मदरसा शिक्षा",
-    madrasaText:"मैं मदरसे का विद्यार्थी भी रहा हूँ। वहाँ से मुझे शिक्षा और सीखने का एक अलग अनुभव मिला।",
-    interestTitle:"मेरी शैक्षणिक रुचियाँ",
-    interestText:"मुझे इलेक्ट्रिकल इंजीनियरिंग, इलेक्ट्रॉनिक्स और टेक्नोलॉजी में दिलचस्पी है। मुझे नए तकनीकी कॉन्सेप्ट समझना, प्रैक्टिकल प्रयोग करना और अपने ज्ञान को वास्तविक जीवन में लागू करना अच्छा लगता है।",
-    goalTitle:"मेरे भविष्य के लक्ष्य",
-    goalText:"मेरा लक्ष्य अपनी तकनीकी जानकारी बढ़ाना, प्रैक्टिकल स्किल्स विकसित करना और इंजीनियरिंग एवं टेक्नोलॉजी के क्षेत्र में एक सफल करियर बनाना है।",
-    footerText:"मेरी पढ़ाई • सीखना और आगे बढ़ना"
-  },
+or:{
+mastheadLabel:"ଶିକ୍ଷାର ଯାତ୍ରା",
+pageTitle:"ମୋ ପାଠପଢ଼ା",
+pageSubtitle:"ଶିଖିବା ଏବଂ ଆଗକୁ ବଢ଼ିବାର ଯାତ୍ରା",
+universityTitle:"ମୋ ବିଶ୍ୱବିଦ୍ୟାଳୟ",
+universityName:"ମୌଲାନା ଆଜାଦ ନ୍ୟାସନାଲ ଉର୍ଦ୍ଦୁ ବିଶ୍ୱବିଦ୍ୟାଳୟ",
+universityLocation:"କଟକ କ୍ୟାମ୍ପସ, ଓଡ଼ିଶା",
+courseLabel:"ପାଠ୍ୟକ୍ରମ:",
+courseName:"ଇଲେକ୍ଟ୍ରିକାଲ ଏବଂ ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଇଞ୍ଜିନିୟରିଂ ଡିପ୍ଲୋମା",
+branchLabel:"ଶାଖା:",
+branchName:"ଇଲେକ୍ଟ୍ରିକାଲ ଏବଂ ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଇଞ୍ଜିନିୟରିଂ (EEE)",
+durationLabel:"ଅବଧି:",
+durationValue:"3 ବର୍ଷ",
+yearLabel:"ବର୍ତ୍ତମାନ ବର୍ଷ:",
+yearValue:"ପ୍ରଥମ ବର୍ଷ",
+viewSubjects:"ସମସ୍ତ ବିଷୟ ଦେଖନ୍ତୁ",
+hideSubjects:"ସମସ୍ତ ବିଷୟ ଲୁଚାନ୍ତୁ",
+coreTitle:"ମୁଖ୍ୟ ବିଷୟ",
+electiveTitle:"ଇଚ୍ଛାଧୀନ ବିଷୟ",
+practicalTitle:"ପ୍ରାକ୍ଟିକାଲ ଲ୍ୟାବ",
+projectTitle:"ପ୍ରୋଜେକ୍ଟ ଏବଂ ଟ୍ରେନିଂ",
+schoolTitle:"ମୋ ସ୍କୁଲ ଶିକ୍ଷା",
+schoolName:"ଓଡ଼ିଶା ହାଇସ୍କୁଲ",
+schoolText:"ମୁଁ ଓଡ଼ିଶା ହାଇସ୍କୁଲରୁ ଦଶମ ଶ୍ରେଣୀ ଶିକ୍ଷା ସମାପ୍ତ କରିଛି। ମୋ ସ୍କୁଲ ଶିକ୍ଷା ମୋ ଶିକ୍ଷା ଯାତ୍ରାର ମୂଳଦୁଆ ତିଆରି କରିଛି ଏବଂ ମୋତେ ମୌଳିକ ଜ୍ଞାନ ଦେଇଛି।",
+madrasaTitle:"ମୋ ମଦ୍ରାସା ଶିକ୍ଷା",
+madrasaText:"ମୁଁ ମଦ୍ରାସାରେ ମଧ୍ୟ ପଢ଼ିଛି, ଯେଉଁଠାରେ ମୁଁ ଜ୍ଞାନ ହାସଲ କରିବା ସହ ଶୃଙ୍ଖଳା, ପଢ଼ିବା ଅଭ୍ୟାସ ଏବଂ ଶିଖିବାର ଦକ୍ଷତା ବିକାଶ କରିଛି।",
+interestsTitle:"ମୋ ଶିକ୍ଷାଗତ ଆଗ୍ରହ",
+interestsIntro:"ମୁଁ ନୂଆ ଜିନିଷ ଶିଖିବା, ବୈଷୟିକ ଜ୍ଞାନ ବଢ଼ାଇବା ଏବଂ ବ୍ୟବହାରିକ ଦକ୍ଷତା ବିକାଶ କରିବାକୁ ଆଗ୍ରହୀ।",
+interestOneTitle:"ଇଲେକ୍ଟ୍ରିକାଲ ଟେକ୍ନୋଲୋଜି",
+interestOneText:"ଇଲେକ୍ଟ୍ରିକାଲ ସର୍କିଟ, ମେସିନ, ପାୱାର ସିଷ୍ଟମ, ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଏବଂ ନବୀକରଣୀୟ ଶକ୍ତି ବିଷୟରେ ଶିଖିବା।",
+interestTwoTitle:"କମ୍ପ୍ୟୁଟର ଏବଂ ଟେକ୍ନୋଲୋଜି",
+interestTwoText:"କମ୍ପ୍ୟୁଟର, କୋଡିଂ, ୱେବ ଡେଭଲପମେଣ୍ଟ ଏବଂ ଆଧୁନିକ ଟେକ୍ନୋଲୋଜି ବିଷୟରେ ଜାଣିବା।",
+interestThreeTitle:"ବ୍ୟବହାରିକ ଶିକ୍ଷା",
+interestThreeText:"ପ୍ରୋଜେକ୍ଟ ତିଆରି କରିବା, ପରୀକ୍ଷଣ କରିବା ଏବଂ ବାସ୍ତବ ଜୀବନରେ ଜିନିଷ କିପରି କାମ କରେ ତାହା ବୁଝିବା।",
+goalsTitle:"ମୋ ଭବିଷ୍ୟତ ଲକ୍ଷ୍ୟ",
+goalsText:"ମୋର ଲକ୍ଷ୍ୟ ହେଉଛି ଇଲେକ୍ଟ୍ରିକାଲ ଏବଂ ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଇଞ୍ଜିନିୟରିଂରେ ଡିପ୍ଲୋମା ସମାପ୍ତ କରିବା, ମୋର ବୈଷୟିକ ଦକ୍ଷତା ବଢ଼ାଇବା ଏବଂ ବ୍ୟବହାରିକ ଅଭିଜ୍ଞତା ହାସଲ କରିବା।",
+homeLink:"← ହୋମ ପେଜକୁ ଫେରନ୍ତୁ",
+footerText:"ମୋ ପାଠପଢ଼ା • ଶିଖିବା ଏବଂ ଆଗକୁ ବଢ଼ିବା",
+darkMode:"ଡାର୍କ ମୋଡ୍",
+lightMode:"ଲାଇଟ୍ ମୋଡ୍"
+},
+  };
 
-  or:{
-    homeLink:"← ହୋମ୍ ପେଜକୁ ଫେରନ୍ତୁ",
-    mastLabel:"ମୋ ଶିକ୍ଷା ଯାତ୍ରା",
-    pageTitle:"ମୋ ପାଠପଢ଼ା",
-    tagline:"ଶିଖିବା ଏବଂ ଆଗକୁ ବଢ଼ିବାର ଯାତ୍ରା",
-    universityTitle:"ମୋ ବିଶ୍ୱବିଦ୍ୟାଳୟ",
-    universityText:"ମୁଁ ବର୍ତ୍ତମାନ ମୌଲାନା ଆଜାଦ ନ୍ୟାସନାଲ ଉର୍ଦ୍ଦୁ ୟୁନିଭର୍ସିଟିରେ ଡିପ୍ଲୋମା ଇନ୍ ଇଲେକ୍ଟ୍ରିକାଲ୍ ଆଣ୍ଡ ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଇଞ୍ଜିନିୟରିଂ (EEE) ପଢ଼ୁଛି। ଏହି ପାଠ୍ୟକ୍ରମ ମାଧ୍ୟମରେ ମୁଁ ଇଲେକ୍ଟ୍ରିକାଲ୍ ସିଷ୍ଟମ୍, ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଏବଂ ଇଞ୍ଜିନିୟରିଂର ପ୍ରାୟୋଗିକ ଜ୍ଞାନ ଶିଖୁଛି।",
-    diplomaTitle:"Diploma in Electrical and Electronics Engineering (EEE)",
-    viewSubjects:"ସମସ୍ତ ବିଷୟ ଦେଖନ୍ତୁ",
-    hideSubjects:"ବିଷୟଗୁଡ଼ିକୁ ଲୁଚାନ୍ତୁ",
-    coreTitle:"ମୁଖ୍ୟ ବିଷୟ",
-    electiveTitle:"ଇଚ୍ଛାଧୀନ ବିଷୟ",
-    labTitle:"ପ୍ରାୟୋଗିକ ଲ୍ୟାବ୍",
-    projectTitle:"ପ୍ରୋଜେକ୍ଟ ଏବଂ ଟ୍ରେନିଂ",
-    schoolTitle:"ମୋ ସ୍କୁଲ୍ ଶିକ୍ଷା",
-    schoolText:"ମୁଁ ମୋର ଦଶମ ଶ୍ରେଣୀର ପାଠପଢ଼ା Odisha High School ରୁ ସମ୍ପୂର୍ଣ୍ଣ କରିଛି। ଏହା ମୋ ଶିକ୍ଷା ଯାତ୍ରାର ଏକ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ ଆଧାର।",
-    madrasaTitle:"ମୋ ମଦ୍ରାସା ଶିକ୍ଷା",
-    madrasaSub:"ମଦ୍ରାସା ଶିକ୍ଷା",
-    madrasaText:"ମୁଁ ମଦ୍ରାସାର ଜଣେ ଛାତ୍ର ମଧ୍ୟ ଥିଲି। ସେଠାରୁ ମୋତେ ଶିକ୍ଷା ଏବଂ ଶିଖିବାର ଏକ ଭିନ୍ନ ଅନୁଭବ ମିଳିଥିଲା।",
-    interestTitle:"ମୋର ଶିକ୍ଷାଗତ ଆଗ୍ରହ",
-    interestText:"ମୋର ଇଲେକ୍ଟ୍ରିକାଲ୍ ଇଞ୍ଜିନିୟରିଂ, ଇଲେକ୍ଟ୍ରୋନିକ୍ସ ଏବଂ ଟେକ୍ନୋଲୋଜି ପ୍ରତି ଆଗ୍ରହ ଅଛି। ନୂଆ ଟେକ୍ନିକାଲ୍ ବିଷୟ ବୁଝିବା, ପ୍ରାୟୋଗିକ ପରୀକ୍ଷା କରିବା ଏବଂ ନିଜ ଜ୍ଞାନକୁ ଦୈନନ୍ଦିନ ଜୀବନରେ ବ୍ୟବହାର କରିବା ମୋତେ ଭଲ ଲାଗେ।",
-    goalTitle:"ମୋର ଭବିଷ୍ୟତ ଲକ୍ଷ୍ୟ",
-    goalText:"ମୋର ଲକ୍ଷ୍ୟ ହେଉଛି ନିଜର ଟେକ୍ନିକାଲ୍ ଜ୍ଞାନ ବଢ଼ାଇବା, ପ୍ରାୟୋଗିକ ଦକ୍ଷତା ବିକାଶ କରିବା ଏବଂ ଇଞ୍ଜିନିୟରିଂ ଓ ଟେକ୍ନୋଲୋଜି କ୍ଷେତ୍ରରେ ଏକ ସଫଳ କ୍ୟାରିୟର ଗଢ଼ିବା।",
-    footerText:"ମୋ ପାଠପଢ଼ା • ଶିଖିବା ଏବଂ ଆଗକୁ ବଢ଼ିବା"
-  }
+/* CURRENT LANGUAGE */
 
-};
+let currentLanguage = localStorage.getItem("siteLanguage") || "en";
 
-
-/* LANGUAGE SYSTEM */
-
-const languageNames = {
-  en:"English",
-  "hi-en":"Roman Hindi",
-  ur:"Urdu",
-  hi:"Hindi",
-  or:"Odia"
-};
-
-function applyLanguage(lang){
-
-  const words = translations[lang] || translations.en;
-
-  document.querySelectorAll("[data-i18n]").forEach(element=>{
-    const key = element.getAttribute("data-i18n");
-
-    if(words[key]){
-      element.textContent = words[key];
-    }
-  });
-
-  document.getElementById("languageLabel").textContent =
-    languageNames[lang] || "English";
-
-  document.documentElement.lang =
-    lang === "hi-en" ? "hi-Latn" :
-    lang === "or" ? "or" :
-    lang === "ur" ? "ur" :
-    lang === "hi" ? "hi" : "en";
-
-  document.documentElement.dir = lang === "ur" ? "rtl" : "ltr";
-
-  document.querySelectorAll(".language-option").forEach(button=>{
-    button.classList.remove("active");
-
-    if(button.textContent.trim() === languageNames[lang]){
-      button.classList.add("active");
-    }
-  });
-
-  const toggleText = document.querySelector("#subjectToggle [data-i18n]");
-
-  if(toggleText){
-    toggleText.textContent =
-      document.getElementById("subjectList").classList.contains("show")
-      ? words.hideSubjects
-      : words.viewSubjects;
-  }
+if (!translations[currentLanguage]) {
+  currentLanguage = "en";
 }
 
-function changeLanguage(lang){
-
-  localStorage.setItem("siteLanguage",lang);
-
-  applyLanguage(lang);
-
-  document.getElementById("languageMenu").classList.remove("show");
-}
+/* LANGUAGE MENU */
 
 function toggleLanguageMenu(){
-
   document.getElementById("languageMenu").classList.toggle("show");
 }
 
+/* CHANGE LANGUAGE */
 
-/* SUBJECT LIST BUTTON */
+function changeLanguage(language){
+
+  if (!translations[language]) return;
+
+  currentLanguage = language;
+
+  localStorage.setItem("siteLanguage", language);
+
+  document.documentElement.lang = language;
+
+  document.documentElement.dir =
+    language === "ur" ? "rtl" : "ltr";
+
+  document.getElementById("languageLabel").textContent =
+    language === "hi-en" ? "Roman Hindi" :
+    language === "ur" ? "Urdu" :
+    language === "hi" ? "Hindi" :
+    language === "or" ? "Odia" : "English";
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+
+    const key = element.getAttribute("data-i18n");
+
+    if (translations[language][key]) {
+      element.textContent = translations[language][key];
+    }
+
+  });
+
+  document.querySelectorAll(".language-option").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.language === language
+    );
+  });
+
+  document.getElementById("languageMenu").classList.remove("show");
+
+  updateSubjectButton();
+
+  updateThemeLabel();
+}
+
+/* CLOSE LANGUAGE MENU ON OUTSIDE CLICK */
+
+document.addEventListener("click", function(event){
+
+  const wrap = document.querySelector(".language-wrap");
+
+  if (!wrap.contains(event.target)) {
+    document.getElementById("languageMenu").classList.remove("show");
+  }
+
+});
+
+/* SUBJECT TOGGLE */
 
 function toggleSubjects(){
 
@@ -874,72 +1052,91 @@ function toggleSubjects(){
   list.classList.toggle("show");
   button.classList.toggle("open");
 
-  const currentLanguage =
-    localStorage.getItem("siteLanguage") || "en";
-
-  const words = translations[currentLanguage] || translations.en;
-
-  const label = button.querySelector("[data-i18n]");
-
-  label.textContent = list.classList.contains("show")
-    ? words.hideSubjects
-    : words.viewSubjects;
+  updateSubjectButton();
 }
 
+function updateSubjectButton(){
 
-/* DARK / LIGHT MODE */
+  const list = document.getElementById("subjectList");
 
-function applyTheme(theme){
+  const key = list.classList.contains("show")
+    ? "hideSubjects"
+    : "viewSubjects";
 
-  const light = theme === "light";
-
-  document.body.classList.toggle("light",light);
-
-  document.getElementById("themeButton").textContent =
-    light ? "☾" : "☼";
+  document.getElementById("subjectButtonText").textContent =
+    translations[currentLanguage][key];
 }
+
+/* THEME LABEL */
+
+function updateThemeLabel(){
+
+  const isLight = document.body.classList.contains("light");
+
+  document.getElementById("themeIcon").textContent =
+    isLight ? "☾" : "☼";
+
+  document.getElementById("themeLabel").textContent =
+    isLight
+      ? translations[currentLanguage].lightMode
+      : translations[currentLanguage].darkMode;
+
+}
+
+/* THEME COLOR */
+
+function updateThemeColor(){
+
+  const isLight = document.body.classList.contains("light");
+
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+  if (themeMeta) {
+    themeMeta.setAttribute(
+      "content",
+      isLight ? "#f5f5f2" : "#080808"
+    );
+  }
+
+}
+
+/* TOGGLE THEME */
 
 function toggleTheme(){
 
-  const light = !document.body.classList.contains("light");
+  document.body.classList.toggle("light");
 
-  const theme = light ? "light" : "dark";
+  const theme = document.body.classList.contains("light")
+    ? "light"
+    : "dark";
 
-  localStorage.setItem("siteTheme",theme);
+  localStorage.setItem("siteTheme", theme);
 
-  applyTheme(theme);
+  updateThemeLabel();
+  updateThemeColor();
 }
 
+/* LOAD SAVED THEME */
 
-/* PAGE LOAD */
+function loadTheme(){
 
-document.addEventListener("DOMContentLoaded",()=>{
+  const savedTheme = localStorage.getItem("siteTheme") || "dark";
 
-  const savedLanguage =
-    localStorage.getItem("siteLanguage") || "en";
+  document.body.classList.toggle(
+    "light",
+    savedTheme === "light"
+  );
 
-  const savedTheme =
-    localStorage.getItem("siteTheme") || "dark";
+  updateThemeLabel();
+  updateThemeColor();
+}
 
-  applyLanguage(savedLanguage);
-  applyTheme(savedTheme);
+/* INITIALIZE PAGE */
 
-});
-
-
-/* CLOSE LANGUAGE MENU WHEN CLICKING OUTSIDE */
-
-document.addEventListener("click",function(event){
-
-  const wrapper = document.querySelector(".language-wrap");
-
-  if(!wrapper.contains(event.target)){
-    document.getElementById("languageMenu").classList.remove("show");
-  }
-
-});
+changeLanguage(currentLanguage);
+loadTheme();
+updateSubjectButton();
 
 </script>
-
 </body>
-  </html>
+</html>
