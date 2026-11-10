@@ -10,991 +10,423 @@
 :root{
   --bg:#080808;
   --surface:#111111;
-  --surface2:#171717;
-  --gold:#c9a85b;
-  --gold2:#a88a45;
-  --text:#eee9df;
+  --surface2:#191713;
+  --gold:#f2c344;
+  --gold2:#b68d32;
+  --text:#f5f0e8;
   --muted:#aaa397;
-  --line:#39301f;
-  --shadow:rgba(0,0,0,.35);
+  --line:#44371d;
 }
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-  line-height:1.7;
-  transition:background .3s,color .3s;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+  transition:.25s;
 }
-
 body.light{
-  --bg:#f5f5f2;
-  --surface:#ffffff;
-  --surface2:#eeeeea;
-  --gold:#98752e;
-  --gold2:#806020;
-  --text:#202020;
-  --muted:#66645f;
-  --line:#ded8c9;
-  --shadow:rgba(0,0,0,.08);
+  --bg:#f5f3ee;
+  --surface:#fff;
+  --surface2:#eee9df;
+  --gold:#a87916;
+  --gold2:#c99a35;
+  --text:#22201c;
+  --muted:#68635a;
+  --line:#d8c18b;
 }
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button{
-  font-family:inherit;
-  cursor:pointer;
-}
-
-.container{
-  width:92%;
-  max-width:1100px;
-  margin:auto;
-}
-
-/* HEADER */
-
 header{
   width:100%;
   background:var(--surface);
   border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  z-index:1000;
-  box-shadow:0 4px 18px var(--shadow);
+  position:relative;
+  z-index:10;
 }
-
 .header-inner{
-  min-height:76px;
+  max-width:1200px;
+  margin:auto;
+  padding:18px 26px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
 }
-
 .brand{
+  text-decoration:none;
+  color:var(--gold);
   display:flex;
   flex-direction:column;
-  line-height:1.25;
+  gap:5px;
+  flex-shrink:0;
 }
-
 .brand strong{
-  font-size:21px;
+  font-size:27px;
   letter-spacing:2px;
-  color:var(--gold);
 }
-
 .brand small{
-  font-size:9px;
-  letter-spacing:2.5px;
   color:var(--muted);
-  margin-top:4px;
+  font-size:11px;
+  letter-spacing:4px;
 }
-
 .header-actions{
   display:flex;
   align-items:center;
-  gap:9px;
+  gap:10px;
 }
-
 .header-btn{
-  min-height:38px;
-  padding:8px 12px;
-  border:1px solid var(--line);
-  border-radius:7px;
   background:var(--surface2);
+  border:1px solid var(--line);
+  border-radius:12px;
   color:var(--text);
-  font-size:12px;
+  min-height:48px;
+  padding:0 15px;
+  font-size:14px;
   font-weight:bold;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  transition:.2s;
+  cursor:pointer;
 }
-
-.header-btn:hover{
-  border-color:var(--gold);
-  color:var(--gold);
-}
-
-#themeButton{
-  min-width:105px;
-}
-
-/* LANGUAGE MENU */
-
-.language-wrap{
-  position:relative;
-}
-
+.language-wrap{position:relative}
 .language-menu{
   display:none;
   position:absolute;
-  top:47px;
+  top:55px;
   right:0;
-  width:155px;
-  padding:6px;
+  width:165px;
   background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:9px;
-  box-shadow:0 10px 25px var(--shadow);
-  z-index:2000;
+  border:1px solid var(--gold2);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 10px 25px #0008;
+  z-index:30;
 }
-
-.language-menu.show{
-  display:block;
-}
-
+.language-menu.show{display:block}
 .language-option{
   display:block;
   width:100%;
-  padding:10px;
-  text-align:left;
+  padding:12px;
   border:0;
-  border-radius:5px;
   background:transparent;
   color:var(--text);
-  font-size:13px;
+  text-align:left;
+  font-size:14px;
+  cursor:pointer;
 }
-
 .language-option:hover,
 .language-option.active{
   background:var(--surface2);
   color:var(--gold);
 }
-
-/* STORY HERO */
+.theme-icon{margin-right:7px}
 
 .story-hero{
-  position:relative;
-  overflow:hidden;
   min-height:390px;
-  padding:65px 5% 55px;
+  padding:70px 25px 95px;
   display:flex;
   align-items:center;
   background:
-    radial-gradient(ellipse at 76% 55%,
-      rgba(255,139,36,.75) 0%,
-      rgba(172,75,26,.35) 19%,
-      transparent 48%),
-    linear-gradient(180deg,
-      #090b12 0%,
-      #17121a 35%,
-      #4b241e 67%,
-      #100e12 100%);
+    radial-gradient(ellipse at 78% 45%,#a94b1b88 0%,transparent 38%),
+    linear-gradient(180deg,#130e10 0%,#24100d 48%,#09090b 100%);
+  position:relative;
+  overflow:hidden;
   border-bottom:1px solid var(--line);
 }
-
-.story-hero::before{
-  content:"";
-  position:absolute;
-  left:-5%;
-  right:-5%;
-  bottom:0;
-  height:43%;
+body.light .story-hero{
   background:
-    linear-gradient(145deg,transparent 38%,#17151a 39%),
-    linear-gradient(35deg,#090b10 48%,transparent 49%);
-  clip-path:polygon(
-    0 75%,12% 40%,23% 68%,37% 25%,
-    49% 70%,63% 34%,77% 66%,89% 28%,
-    100% 65%,100% 100%,0 100%
-  );
-  opacity:.95;
+    radial-gradient(ellipse at 78% 45%,#f4c77c 0%,transparent 40%),
+    linear-gradient(180deg,#e9dfd0,#d8c5a9);
 }
-
-.story-hero::after{
+.story-hero:after{
   content:"";
   position:absolute;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  background:#ffd36b;
-  box-shadow:0 0 22px 10px rgba(255,163,54,.55);
-  right:27%;
-  bottom:29%;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:38%;
+  background:#09090d;
+  clip-path:polygon(0 65%,12% 30%,24% 70%,38% 18%,52% 75%,67% 35%,82% 72%,94% 28%,100% 55%,100% 100%,0 100%);
+  opacity:.9;
 }
-
-.story-hero-content{
-  position:relative;
-  z-index:2;
+body.light .story-hero:after{background:#51483d}
+.hero-content{
   width:100%;
   max-width:1100px;
   margin:auto;
+  position:relative;
+  z-index:2;
 }
-
 .story-kicker{
-  color:#f3c75f;
-  font-size:13px;
+  color:var(--gold);
+  font-size:15px;
   font-weight:bold;
-  letter-spacing:5px;
-  margin-bottom:15px;
+  letter-spacing:6px;
+  margin-bottom:18px;
 }
-
 .story-title{
   font-family:Georgia,serif;
-  font-size:clamp(45px,8vw,82px);
-  line-height:1.1;
+  font-size:clamp(48px,8vw,82px);
+  line-height:1.05;
   letter-spacing:2px;
   color:#f5f0e8;
 }
-
-.story-title span{
+.story-title .gold-title{color:#f2c344}
+.feather{
+  display:inline-block;
+  width:.75em;
+  height:.75em;
+  vertical-align:middle;
+  margin-left:8px;
   color:#f2c344;
-  font-style:italic;
+  transform:rotate(-12deg);
+  filter:drop-shadow(0 0 8px #f2c34455);
 }
-
+.feather svg{width:100%;height:100%;display:block}
 .story-subtitle{
   color:#eee6df;
-  font-size:clamp(14px,2vw,19px);
+  font-size:clamp(15px,2vw,20px);
   font-style:italic;
+  line-height:1.7;
   margin-top:20px;
+  max-width:650px;
 }
-  /* STORY PANEL */
+body.light .story-title,
+body.light .story-subtitle{color:#28221b}
 
-.story-section{
-  position:relative;
-  padding:55px 0 65px;
-  background:
-    radial-gradient(ellipse at center,
-      rgba(201,168,91,.09),
-      transparent 70%),
-    var(--bg);
+.story-main{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 25px 35px;
 }
-
-.story-panel{
+.story-card{
   position:relative;
-  overflow:hidden;
-  width:100%;
-  padding:55px 35px 40px;
+  margin:-55px auto 0;
+  z-index:3;
+  padding:85px 38px 55px;
   text-align:center;
+  background:linear-gradient(145deg,var(--surface2),var(--surface));
   border:2px solid var(--gold2);
   border-radius:32px;
-  background:
-    linear-gradient(145deg,
-      rgba(201,168,91,.10),
-      transparent 35%),
-    var(--surface);
-  box-shadow:
-    0 0 15px rgba(201,168,91,.13),
-    inset 0 0 25px rgba(201,168,91,.04);
+  box-shadow:0 0 25px #d5a52a22;
 }
-
-.story-panel::before{
+.story-card:before{
   content:"";
   position:absolute;
-  inset:8px;
-  border:1px solid rgba(201,168,91,.20);
-  border-radius:24px;
+  inset:14px;
+  border:1px solid var(--line);
+  border-radius:23px;
   pointer-events:none;
 }
-
-.book-decoration{
+.writing-title{
   position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:18px;
-  margin:-68px auto 20px;
-  z-index:2;
-}
-
-.book-decoration::before,
-.book-decoration::after{
-  content:"";
-  width:24%;
-  height:2px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    var(--gold),
-    var(--gold)
-  );
-}
-
-.book-icon{
-  width:68px;
-  height:68px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#f4c84e;
-  font-size:43px;
-  background:var(--surface);
-  border:2px solid var(--gold);
-  border-radius:50%;
-  box-shadow:0 0 16px rgba(201,168,91,.20);
-}
-
-.story-message{
-  position:relative;
-  z-index:2;
-  margin-top:15px;
-}
-
-.story-message h2{
   font-family:Georgia,serif;
-  font-size:clamp(25px,4vw,42px);
-  line-height:1.35;
+  font-size:clamp(27px,5vw,46px);
+  line-height:1.3;
   font-style:italic;
-  color:var(--text);
-  margin-bottom:18px;
+  margin-bottom:25px;
 }
-
-.story-message h2 span{
-  color:var(--gold);
-}
-
-.story-message p{
-  max-width:760px;
-  margin:0 auto;
-  color:var(--muted);
-  font-size:clamp(14px,2vw,18px);
-  line-height:1.9;
-}
-
-/* COMING SOON BUTTON */
-
-.coming-soon-wrap{
-  margin:32px 0;
+.writing-title span{color:var(--gold)}
+.story-description{
   position:relative;
-  z-index:2;
+  max-width:800px;
+  margin:0 auto 30px;
+  color:var(--muted);
+  font-size:clamp(16px,2.3vw,21px);
+  line-height:1.8;
 }
-
-.coming-soon-button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  padding:12px 25px;
+.update-button{
+  position:relative;
+  display:inline-block;
+  padding:19px 30px;
   border:2px solid var(--gold);
   border-radius:50px;
   color:var(--gold);
-  background:transparent;
   font-family:Georgia,serif;
   font-size:clamp(15px,2.5vw,22px);
   font-weight:bold;
   font-style:italic;
-  box-shadow:0 0 14px rgba(201,168,91,.12);
+  background:transparent;
+  margin:5px 0 35px;
 }
-
-.coming-soon-button .calendar-icon{
-  font-size:23px;
-}
-
-/* GOLD QUOTE */
-
 .story-quote{
   position:relative;
-  z-index:2;
-  max-width:680px;
-  margin:28px auto 35px;
-  padding:18px 15px;
-  background:linear-gradient(
-    100deg,
-    transparent,
-    rgba(201,168,91,.85),
-    rgba(245,195,65,.95),
-    rgba(201,168,91,.85),
-    transparent
-  );
+  padding:25px 15px;
+  margin:0 auto 38px;
+  max-width:850px;
+  background:linear-gradient(90deg,transparent,#d9a62e,#f2c344,#d9a62e,transparent);
   color:#17120a;
   font-family:Georgia,serif;
-  font-size:clamp(17px,3vw,25px);
+  font-size:clamp(18px,3vw,27px);
   font-weight:bold;
   font-style:italic;
   line-height:1.5;
-  transform:rotate(-1deg);
 }
-
-.story-signature{
+.signature{
   position:relative;
-  z-index:2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:14px;
-  color:var(--text);
   font-family:Georgia,serif;
+  font-size:21px;
+  font-weight:bold;
+}
+.signature:before,.signature:after{
+  content:"";
+  display:inline-block;
+  width:42px;
+  height:2px;
+  background:var(--gold);
+  vertical-align:middle;
+  margin:0 15px;
+}
+.back-home-wrap{
+  text-align:center;
+  padding:35px 0 55px;
+}
+.back-home{
+  display:inline-block;
+  padding:15px 25px;
+  border:1px solid var(--gold);
+  border-radius:12px;
+  background:var(--surface);
+  color:var(--gold);
+  text-decoration:none;
   font-size:16px;
   font-weight:bold;
 }
-
-.story-signature::before,
-.story-signature::after{
-  content:"";
-  width:55px;
-  height:2px;
-  background:var(--gold);
-}
-
-/* BACK TO HOME */
-
-.back-home-wrap{
-  text-align:center;
-  padding:25px 0 40px;
-}
-
-.back-home{
-  display:inline-block;
-  padding:11px 22px;
-  border:1px solid var(--gold);
-  border-radius:10px;
-  color:var(--gold);
-  background:var(--surface);
-  font-size:14px;
-  font-weight:bold;
-  transition:.2s;
-}
-
 .back-home:hover{
   background:var(--gold);
   color:#080808;
-  }
-  /* FOOTER */
-
+}
 footer{
-  padding:25px 12px;
-  text-align:center;
-  background:var(--surface);
   border-top:1px solid var(--line);
+  background:var(--surface);
+  text-align:center;
+  padding:25px 15px;
   color:var(--muted);
-  font-size:12px;
+  font-size:13px;
   letter-spacing:1px;
 }
-
 footer strong{
   display:block;
   color:var(--gold);
-  font-size:16px;
-  letter-spacing:2px;
-  margin-bottom:5px;
+  font-size:17px;
+  margin-bottom:8px;
 }
-
-/* LIGHT MODE STORY HERO */
-
-body.light .story-hero{
-  background:
-    radial-gradient(ellipse at 76% 55%,
-      rgba(255,173,74,.65),
-      transparent 48%),
-    linear-gradient(180deg,
-      #e7e8e9,
-      #c6a18b 65%,
-      #5b4942);
-}
-
-body.light .story-title,
-body.light .story-subtitle{
-  color:#ffffff;
-}
-
-body.light .story-hero::before{
-  opacity:.85;
-}
-
-/* MOBILE RESPONSIVE */
-
 @media(max-width:600px){
-
-  .container{
-    width:92%;
-  }
-
-  .header-inner{
-    min-height:68px;
-    gap:7px;
-  }
-
-  .brand strong{
-    font-size:17px;
-    letter-spacing:1.5px;
-  }
-
-  .brand small{
-    font-size:8px;
-    letter-spacing:1.5px;
-  }
-
-  .header-actions{
-    gap:6px;
-  }
-
-  .header-btn{
-    min-height:36px;
-    padding:7px 8px;
-    font-size:11px;
-  }
-
-  #themeButton{
-    min-width:92px;
-  }
-
-  .language-menu{
-    width:145px;
-  }
-
-  .story-hero{
-    min-height:320px;
-    padding:55px 5% 45px;
-  }
-
-  .story-kicker{
-    font-size:10px;
-    letter-spacing:3px;
-  }
-
-  .story-title{
-    font-size:48px;
-  }
-
-  .story-subtitle{
-    font-size:14px;
-    max-width:290px;
-  }
-
-  .story-section{
-    padding:48px 0;
-  }
-
-  .story-panel{
-    padding:48px 17px 30px;
-    border-radius:23px;
-  }
-
-  .story-panel::before{
-    border-radius:17px;
-  }
-
-  .book-decoration{
-    margin-top:-61px;
-    gap:10px;
-  }
-
-  .book-icon{
-    width:58px;
-    height:58px;
-    font-size:35px;
-  }
-
-  .story-message h2{
-    font-size:26px;
-  }
-
-  .story-message p{
-    font-size:14px;
-  }
-
-  .coming-soon-button{
-    padding:11px 16px;
-    font-size:15px;
-  }
-
-  .story-quote{
-    font-size:17px;
-    padding:15px 10px;
-  }
-
-  .story-signature{
-    font-size:13px;
-    gap:8px;
-  }
-
-  .story-signature::before,
-  .story-signature::after{
-    width:25px;
-  }
-
+  .header-inner{padding:16px 14px;gap:8px}
+  .brand strong{font-size:21px}
+  .brand small{font-size:9px;letter-spacing:3px}
+  .header-actions{gap:7px}
+  .header-btn{padding:0 10px;min-height:44px;font-size:12px}
+  .story-hero{min-height:360px;padding:55px 22px 90px}
+  .story-kicker{font-size:12px;letter-spacing:4px}
+  .story-main{padding:0 15px 25px}
+  .story-card{padding:75px 20px 42px;border-radius:25px}
+  .story-card:before{inset:10px;border-radius:18px}
+  .signature{font-size:17px}
+  .signature:before,.signature:after{width:22px;margin:0 8px}
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-
 <header>
-  <div class="container header-inner">
-
+  <div class="header-inner">
     <a href="index.html" class="brand">
       <strong>SK TALIB</strong>
       <small>PERSONAL WEBSITE</small>
     </a>
 
     <div class="header-actions">
-
-      <!-- LANGUAGE SELECTOR -->
-
       <div class="language-wrap">
-
-        <button class="header-btn"
-                id="languageButton"
-                onclick="toggleLanguageMenu()">
-
-          <span id="languageLabel">English</span>
-          <span>▾</span>
-
+        <button class="header-btn" onclick="toggleLanguageMenu()" id="languageButton">
+          <span id="languageLabel">English</span> ▾
         </button>
 
         <div class="language-menu" id="languageMenu">
-
-          <button class="language-option"
-                  data-language="en"
-                  onclick="changeLanguage('en')">
-            English
-          </button>
-
-          <button class="language-option"
-                  data-language="hi-en"
-                  onclick="changeLanguage('hi-en')">
-            Roman Hindi
-          </button>
-
-          <button class="language-option"
-                  data-language="ur"
-                  onclick="changeLanguage('ur')">
-            Urdu
-          </button>
-
-          <button class="language-option"
-                  data-language="hi"
-                  onclick="changeLanguage('hi')">
-            Hindi
-          </button>
-
-          <button class="language-option"
-                  data-language="or"
-                  onclick="changeLanguage('or')">
-            Odia
-          </button>
-
+          <button class="language-option" data-language="en" onclick="changeLanguage('en')">English</button>
+          <button class="language-option" data-language="hi-en" onclick="changeLanguage('hi-en')">Roman Hindi</button>
+          <button class="language-option" data-language="ur" onclick="changeLanguage('ur')">Urdu</button>
+          <button class="language-option" data-language="hi" onclick="changeLanguage('hi')">Hindi</button>
+          <button class="language-option" data-language="or" onclick="changeLanguage('or')">Odia</button>
         </div>
-
       </div>
 
-      <!-- DARK / LIGHT BUTTON -->
-
-      <button class="header-btn"
-              id="themeButton"
-              onclick="toggleTheme()">
-
-        <span id="themeIcon">☼</span>
+      <button class="header-btn" id="themeButton" onclick="toggleTheme()">
+        <span id="themeIcon" class="theme-icon">☼</span>
         <span id="themeLabel">DARK MODE</span>
-
       </button>
-
     </div>
   </div>
 </header>
-<!-- STORY HERO -->
 
 <section class="story-hero">
-
-  <div class="story-hero-content">
-
-    <div class="story-kicker" data-i18n="storyKicker">
-      EVERY LIFE HAS A STORY
-    </div>
+  <div class="hero-content">
+    <div class="story-kicker" data-i18n="kicker">EVERY LIFE HAS A STORY</div>
 
     <h1 class="story-title">
-      <span class="title-white" data-i18n="titleWhite">MY</span>
-      <span data-i18n="titleGold">STORY</span>
-      <span class="feather">✒</span>
+      <span data-i18n="titleWhite">MY</span>
+      <span class="gold-title" data-i18n="titleGold">STORY</span>
+      <span class="feather" aria-hidden="true">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M88 5C62 10 29 27 12 56C5 68 8 81 20 83C36 85 53 66 65 49C75 35 84 18 88 5Z" fill="currentColor"/>
+          <path d="M17 76C33 59 49 42 74 21M8 94L27 76M31 65L24 53M43 54L38 41M55 42L51 31M29 70L43 72M43 54L57 57M55 42L68 45" stroke="#17120a" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </span>
     </h1>
 
-    <p class="story-subtitle" data-i18n="storySubtitle">
+    <p class="story-subtitle" data-i18n="subtitle">
       A journey of dreams, struggles and possibilities.
     </p>
-
   </div>
-
-  <!-- CSS MOUNTAIN LANDSCAPE -->
-
-  <div class="mountain mountain-back"></div>
-  <div class="mountain mountain-front"></div>
-
-  <!-- CSS PERSON SILHOUETTE -->
-
-  <div class="person-silhouette">
-
-    <div class="person-head"></div>
-
-    <div class="person-body"></div>
-
-    <div class="person-leg leg-one"></div>
-    <div class="person-leg leg-two"></div>
-
-    <div class="person-backpack"></div>
-
-  </div>
-
 </section>
-/* HERO TITLE DETAILS */
 
-.title-white{
-  color:#ffffff;
-}
+<main class="story-main">
+  <section class="story-card">
 
-.feather{
-  display:inline-block;
-  color:#f2c344;
-  font-size:.65em;
-  transform:rotate(-25deg);
-  text-shadow:0 0 15px rgba(242,195,68,.5);
-}
+    <h2 class="writing-title">
+      <span data-i18n="writingTitle">My Story Is Being Written...</span>
+    </h2>
 
-/* MOUNTAIN LANDSCAPE */
+    <p class="story-description" data-i18n="description">
+      My story is currently being worked on. This page will be updated soon with new updates.
+    </p>
 
-.mountain{
-  position:absolute;
-  bottom:0;
-  pointer-events:none;
-}
+    <div class="update-button" data-i18n="updateButton">
+      Coming Soon — Page Under Update
+    </div>
 
-.mountain-back{
-  left:0;
-  width:100%;
-  height:38%;
-  background:#17151b;
-  clip-path:polygon(
-    0 75%,15% 35%,27% 70%,42% 25%,
-    55% 72%,70% 35%,85% 75%,100% 40%,
-    100% 100%,0 100%
-  );
-  opacity:.85;
-}
+    <div class="story-quote" data-i18n="quote">
+      Every story has its time. My story will be in front of you soon.
+    </div>
 
-.mountain-front{
-  left:0;
-  width:100%;
-  height:25%;
-  background:#090b10;
-  clip-path:polygon(
-    0 55%,18% 25%,32% 65%,48% 35%,
-    65% 70%,80% 30%,100% 60%,
-    100% 100%,0 100%
-  );
-}
-
-/* PERSON SILHOUETTE */
-
-.person-silhouette{
-  position:absolute;
-  z-index:1;
-  right:13%;
-  bottom:0;
-  width:145px;
-  height:235px;
-  pointer-events:none;
-}
-
-.person-head{
-  position:absolute;
-  top:5px;
-  left:49px;
-  width:52px;
-  height:62px;
-  border-radius:48% 48% 42% 42%;
-  background:#080808;
-}
-
-.person-body{
-  position:absolute;
-  top:58px;
-  left:26px;
-  width:100px;
-  height:112px;
-  border-radius:38px 38px 12px 12px;
-  background:#080808;
-  transform:rotate(-5deg);
-}
-
-.person-leg{
-  position:absolute;
-  bottom:0;
-  height:65px;
-  width:43px;
-  border-radius:15px 15px 5px 5px;
-  background:#080808;
-}
-
-.leg-one{
-  left:29px;
-  transform:rotate(15deg);
-}
-
-.leg-two{
-  left:76px;
-  transform:rotate(-15deg);
-}
-
-/* BACKPACK */
-
-.person-backpack{
-  position:absolute;
-  top:72px;
-  left:14px;
-  width:45px;
-  height:76px;
-  border-radius:15px 10px 10px 15px;
-  background:#101014;
-  border:2px solid #242124;
-  transform:rotate(-8deg);
-}
-
-/* LIGHT MODE LANDSCAPE */
-
-body.light .mountain-back{
-  background:#6c5047;
-}
-
-body.light .mountain-front{
-  background:#403b3a;
-}
-
-/* MOBILE HERO */
-
-@media(max-width:600px){
-
-  .person-silhouette{
-    right:4%;
-    transform:scale(.72);
-    transform-origin:bottom right;
-    opacity:.9;
-  }
-
-  .story-hero-content{
-    padding-right:30px;
-  }
-
-  .story-title{
-    position:relative;
-    z-index:3;
-  }
-
-  .story-subtitle{
-    position:relative;
-    z-index:3;
-  }
-
-}
-  <!-- MAIN STORY PANEL -->
-
-<main class="container">
-
-  <section class="story-section">
-
-    <div class="story-panel">
-
-      <!-- BOOK ICON -->
-
-      <div class="book-decoration">
-        <div class="book-icon">📖</div>
-      </div>
-
-      <!-- STORY MESSAGE -->
-
-      <div class="story-message">
-
-        <h2 data-i18n="writingTitle">
-          My story is still being
-          <span>written...</span>
-        </h2>
-
-        <p data-i18n="storyDescription">
-          Every experience has a lesson, every challenge makes me stronger,
-          and every dream gives me a reason to move forward.
-        </p>
-
-      </div>
-
-      <!-- COMING SOON -->
-
-      <div class="coming-soon-wrap">
-
-        <div class="coming-soon-button">
-          <span class="calendar-icon">◷</span>
-          <span data-i18n="comingSoonTitle">
-            Full Story Coming Soon
-          </span>
-        </div>
-
-      </div>
-
-      <!-- GOLDEN QUOTE -->
-
-      <div class="story-quote" data-i18n="storyQuote">
-        “This is not the end of my story.
-        This is just the beginning.”
-      </div>
-
-      <!-- SIGNATURE -->
-
-      <div class="story-signature">
-        <span data-i18n="signatureText">
-          A personal journey by SK TALIB
-        </span>
-      </div>
-
+    <div class="signature" data-i18n="signature">
+      A Personal Journey by SK TALIB
     </div>
 
   </section>
 
-  <!-- BACK TO HOME -->
-
   <div class="back-home-wrap">
-
-    <a href="index.html"
-       class="back-home"
-       data-i18n="homeLink">
+    <a href="index.html" class="back-home" data-i18n="homeLink">
       ← Back to Home
     </a>
-
   </div>
-
 </main>
-
-<!-- FOOTER -->
 
 <footer>
   <strong>SK TALIB</strong>
-  <p data-i18n="footerText">
-    © 2026 SK TALIB | PERSONAL WEBSITE
-  </p>
-    </footer>
-    <script>
-
-/* LANGUAGE TRANSLATIONS */
-
+  <span data-i18n="footerText">© 2026 SK TALIB | PERSONAL WEBSITE</span>
+  </footer>
+  <script>
 const translations = {
-
   en:{
     languageName:"English",
-    storyKicker:"EVERY LIFE HAS A STORY",
+    kicker:"EVERY LIFE HAS A STORY",
     titleWhite:"MY",
     titleGold:"STORY",
-    storySubtitle:"A journey of dreams, struggles and possibilities.",
-    writingTitle:"My story is still being",
-    writingHighlight:"written...",
-    storyDescription:"Every experience has a lesson, every challenge makes me stronger, and every dream gives me a reason to move forward.",
-    comingSoonTitle:"Full Story Coming Soon",
-    storyQuote:"This is not the end of my story. This is just the beginning.",
-    signatureText:"A personal journey by SK TALIB",
+    subtitle:"A journey of dreams, struggles and possibilities.",
+    writingTitle:"My Story Is Being Written...",
+    description:"My story is currently being worked on. This page will be updated soon with new updates.",
+    updateButton:"↻  Coming Soon — Page Under Update",
+    quote:"Every story has its time. My story will be in front of you soon.",
+    signature:"A Personal Journey by SK TALIB",
     homeLink:"← Back to Home",
     footerText:"© 2026 SK TALIB | PERSONAL WEBSITE",
     darkMode:"DARK MODE",
@@ -1003,33 +435,32 @@ const translations = {
 
   "hi-en":{
     languageName:"Roman Hindi",
-    storyKicker:"HAR ZINDAGI KI EK KAHANI HOTI HAI",
+    kicker:"HAR ZINDAGI KI EK KAHANI HOTI HAI",
     titleWhite:"MERI",
     titleGold:"KAHANI",
-    storySubtitle:"Sapno, mushkilon aur umeedon ka safar.",
-    writingTitle:"Meri kahani abhi likhi ja rahi hai",
-    writingHighlight:"...",
-    storyDescription:"Har tajurba mujhe kuch sikhata hai, har mushkil mujhe mazboot banati hai, aur har sapna mujhe aage badhne ki wajah deta hai.",
-    comingSoonTitle:"Puri Kahani Jald Aa Rahi Hai",
-    storyQuote:"Ye meri kahani ka ant nahi hai. Ye to sirf shuruaat hai.",
-    signatureText:"SK TALIB ka ek zaati safar",
-    homeLink:"← Home Page Par Jayein",
+    subtitle:"Sapno, sangharsh aur sambhavnayon ka safar.",
+    writingTitle:"Meri Kahani Abhi Likhi Ja Rahi Hai...",
+    description:"Meri kahani par abhi kaam chal raha hai. Is page ko jald hi naye updates ke saath update kiya jayega.",
+    updateButton:"↻  Jald Hi Update Kiya Jayega",
+    quote:"Har kahani ka ek waqt hota hai. Meri kahani bhi jald aapke saamne hogi.",
+    signature:"SK TALIB ka ek zaati safar",
+    homeLink:"← Home Page Par Jayen",
     footerText:"© 2026 SK TALIB | PERSONAL WEBSITE",
     darkMode:"DARK MODE",
     lightMode:"LIGHT MODE"
   },
-    ur:{
-    languageName:"اردو",
-    storyKicker:"ہر زندگی کی ایک کہانی ہوتی ہے",
+
+  ur:{
+    languageName:"Urdu",
+    kicker:"ہر زندگی کی ایک کہانی ہوتی ہے",
     titleWhite:"میری",
     titleGold:"کہانی",
-    storySubtitle:"خوابوں، مشکلات اور امیدوں کا سفر۔",
-    writingTitle:"میری کہانی ابھی لکھی جا رہی ہے",
-    writingHighlight:"...",
-    storyDescription:"ہر تجربہ مجھے کچھ سکھاتا ہے، ہر مشکل مجھے مضبوط بناتی ہے، اور ہر خواب مجھے آگے بڑھنے کی وجہ دیتا ہے۔",
-    comingSoonTitle:"مکمل کہانی جلد آرہی ہے",
-    storyQuote:"یہ میری کہانی کا اختتام نہیں ہے۔ یہ تو صرف شروعات ہے۔",
-    signatureText:"SK TALIB کا ذاتی سفر",
+    subtitle:"خوابوں، جدوجہد اور امکانات کا سفر۔",
+    writingTitle:"میری کہانی ابھی لکھی جا رہی ہے...",
+    description:"میری کہانی پر ابھی کام جاری ہے۔ اس صفحے کو جلد ہی نئی معلومات کے ساتھ اپ ڈیٹ کیا جائے گا۔",
+    updateButton:"↻  جلد ہی اپ ڈیٹ کیا جائے گا",
+    quote:"ہر کہانی کا ایک وقت ہوتا ہے۔ میری کہانی بھی جلد آپ کے سامنے ہوگی۔",
+    signature:"SK TALIB کا ذاتی سفر",
     homeLink:"← ہوم پیج پر جائیں",
     footerText:"© 2026 SK TALIB | ذاتی ویب سائٹ",
     darkMode:"ڈارک موڈ",
@@ -1038,17 +469,16 @@ const translations = {
 
   hi:{
     languageName:"Hindi",
-    storyKicker:"हर ज़िंदगी की एक कहानी होती है",
+    kicker:"हर ज़िंदगी की एक कहानी होती है",
     titleWhite:"मेरी",
     titleGold:"कहानी",
-    storySubtitle:"सपनों, संघर्षों और संभावनाओं का सफर।",
-    writingTitle:"मेरी कहानी अभी लिखी जा रही है",
-    writingHighlight:"...",
-    storyDescription:"हर अनुभव मुझे कुछ सिखाता है, हर चुनौती मुझे मजबूत बनाती है और हर सपना मुझे आगे बढ़ने की वजह देता है।",
-    comingSoonTitle:"पूरी कहानी जल्द आ रही है",
-    storyQuote:"यह मेरी कहानी का अंत नहीं है। यह तो सिर्फ शुरुआत है।",
-    signatureText:"SK TALIB का व्यक्तिगत सफर",
-    homeLink:"← होम पेज पर जाएं",
+    subtitle:"सपनों, संघर्षों और संभावनाओं का सफर।",
+    writingTitle:"मेरी कहानी अभी लिखी जा रही है...",
+    description:"मेरी कहानी पर अभी काम चल रहा है। इस पेज को जल्द ही नए अपडेट के साथ अपडेट किया जाएगा।",
+    updateButton:"↻  जल्द ही अपडेट किया जाएगा",
+    quote:"हर कहानी का एक समय होता है। मेरी कहानी भी जल्द आपके सामने होगी।",
+    signature:"SK TALIB का एक व्यक्तिगत सफर",
+    homeLink:"← होम पेज पर जाएँ",
     footerText:"© 2026 SK TALIB | व्यक्तिगत वेबसाइट",
     darkMode:"डार्क मोड",
     lightMode:"लाइट मोड"
@@ -1056,178 +486,135 @@ const translations = {
 
   or:{
     languageName:"Odia",
-    storyKicker:"ପ୍ରତ୍ୟେକ ଜୀବନର ଏକ କାହାଣୀ ଅଛି",
+    kicker:"ପ୍ରତ୍ୟେକ ଜୀବନର ଏକ କାହାଣୀ ଅଛି",
     titleWhite:"ମୋ",
     titleGold:"କାହାଣୀ",
-    storySubtitle:"ସ୍ୱପ୍ନ, ସଂଘର୍ଷ ଓ ସମ୍ଭାବନାର ଯାତ୍ରା।",
-    writingTitle:"ମୋ କାହାଣୀ ଏବେ ଲେଖାଯାଉଛି",
-    writingHighlight:"...",
-    storyDescription:"ପ୍ରତ୍ୟେକ ଅନୁଭବ ମୋତେ କିଛି ଶିଖାଏ, ପ୍ରତ୍ୟେକ ଚ୍ୟାଲେଞ୍ଜ ମୋତେ ଶକ୍ତିଶାଳୀ କରେ ଏବଂ ପ୍ରତ୍ୟେକ ସ୍ୱପ୍ନ ମୋତେ ଆଗକୁ ବଢ଼ିବାର କାରଣ ଦିଏ।",
-    comingSoonTitle:"ସମ୍ପୂର୍ଣ୍ଣ କାହାଣୀ ଶୀଘ୍ର ଆସୁଛି",
-    storyQuote:"ଏହା ମୋ କାହାଣୀର ଶେଷ ନୁହେଁ। ଏହା କେବଳ ଆରମ୍ଭ।",
-    signatureText:"SK TALIB ଙ୍କ ବ୍ୟକ୍ତିଗତ ଯାତ୍ରା",
-    homeLink:"← ହୋମ ପେଜକୁ ଯାଆନ୍ତୁ",
-    footerText:"© 2026 SK TALIB | ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟ",
+    subtitle:"ସ୍ୱପ୍ନ, ସଂଘର୍ଷ ଏବଂ ସମ୍ଭାବନାର ଯାତ୍ରା।",
+    writingTitle:"ମୋ କାହାଣୀ ଏବେ ଲେଖାଯାଉଛି...",
+    description:"ମୋ କାହାଣୀ ଉପରେ ବର୍ତ୍ତମାନ କାମ ଚାଲିଛି। ଏହି ପୃଷ୍ଠାକୁ ଶୀଘ୍ର ନୂତନ ଅପଡେଟ୍ ସହିତ ଅପଡେଟ୍ କରାଯିବ।",
+    updateButton:"↻  ଶୀଘ୍ର ଅପଡେଟ୍ କରାଯିବ",
+    quote:"ପ୍ରତ୍ୟେକ କାହାଣୀର ଏକ ସମୟ ଥାଏ। ମୋ କାହାଣୀ ମଧ୍ୟ ଶୀଘ୍ର ଆପଣଙ୍କ ସାମ୍ନାକୁ ଆସିବ।",
+    signature:"SK TALIB ଙ୍କ ବ୍ୟକ୍ତିଗତ ଯାତ୍ରା",
+    homeLink:"← ହୋମ୍ ପେଜ୍ କୁ ଯାଆନ୍ତୁ",
+    footerText:"© 2026 SK TALIB | ବ୍ୟକ୍ତିଗତ ୱେବସାଇଟ୍",
     darkMode:"ଡାର୍କ ମୋଡ୍",
     lightMode:"ଲାଇଟ୍ ମୋଡ୍"
-  },
-  };
-
-/* CURRENT LANGUAGE */
+  }
+};
 
 let currentLanguage =
   localStorage.getItem("siteLanguage") || "en";
 
-/* UPDATE PAGE LANGUAGE */
+function toggleLanguageMenu(){
+  document.getElementById("languageMenu")
+    .classList.toggle("show");
+}
 
 function changeLanguage(language){
-
-  if(!translations[language]) return;
-
-  currentLanguage = language;
-
-  localStorage.setItem("siteLanguage", language);
-
-  document.documentElement.lang = language;
-
-  document.documentElement.dir =
-    language === "ur" ? "rtl" : "ltr";
-
-  const t = translations[language];
-
-  document.querySelectorAll("[data-i18n]").forEach(element => {
-
-    const key = element.getAttribute("data-i18n");
-
-    if(key === "writingTitle"){
-
-      element.innerHTML =
-        t.writingTitle + ' <span>' +
-        t.writingHighlight + '</span>';
-
-    }else if(t[key] !== undefined){
-
-      element.textContent = t[key];
-
-    }
-
-  });
-
-  const languageLabel =
-    document.getElementById("languageLabel");
-
-  if(languageLabel){
-    languageLabel.textContent = t.languageName;
+  if(!translations[language]){
+    language="en";
   }
 
-  document.querySelectorAll(".language-option").forEach(button => {
+  currentLanguage=language;
 
-    button.classList.toggle(
-      "active",
-      button.dataset.language === language
-    );
+  localStorage.setItem("siteLanguage",language);
 
+  const words=translations[language];
+
+  document.querySelectorAll("[data-i18n]").forEach(element=>{
+    const key=element.getAttribute("data-i18n");
+
+    if(words[key]!==undefined){
+      element.textContent=words[key];
+    }
   });
 
-  const menu = document.getElementById("languageMenu");
+  document.getElementById("languageLabel").textContent =
+    words.languageName;
 
-  if(menu) menu.classList.remove("show");
+  document.querySelectorAll(".language-option").forEach(button=>{
+    button.classList.toggle(
+      "active",
+      button.dataset.language===language
+    );
+  });
+
+  document.documentElement.lang=language;
+
+  document.documentElement.dir =
+    language==="ur" ? "rtl" : "ltr";
+
+  document.getElementById("languageMenu")
+    .classList.remove("show");
 
   updateThemeLabel();
 }
 
-/* LANGUAGE POPUP */
-
-function toggleLanguageMenu(){
-
-  const menu = document.getElementById("languageMenu");
-
-  if(menu){
-    menu.classList.toggle("show");
-  }
-
-}
-
-/* UPDATE THEME BUTTON */
-
 function updateThemeLabel(){
+  const light=document.body.classList.contains("light");
 
-  const t = translations[currentLanguage];
+  document.getElementById("themeIcon").textContent =
+    light ? "☾" : "☼";
 
-  const icon = document.getElementById("themeIcon");
-  const label = document.getElementById("themeLabel");
-
-  const isLight = document.body.classList.contains("light");
-
-  if(icon){
-    icon.textContent = isLight ? "☾" : "☼";
-  }
-
-  if(label){
-    label.textContent = isLight ? t.lightMode : t.darkMode;
-  }
-
+  document.getElementById("themeLabel").textContent =
+    light
+      ? translations[currentLanguage].lightMode
+      : translations[currentLanguage].darkMode;
 }
-
-/* UPDATE BROWSER ADDRESS BAR COLOR */
 
 function updateThemeColor(){
+  const light=document.body.classList.contains("light");
 
-  const meta = document.querySelector(
+  const meta=document.querySelector(
     'meta[name="theme-color"]'
   );
 
   if(meta){
-
     meta.setAttribute(
       "content",
-      document.body.classList.contains("light")
-        ? "#f5f5f2"
-        : "#080808"
+      light ? "#f5f3ee" : "#080808"
     );
-
   }
-
 }
 
-/* TOGGLE DARK / LIGHT MODE */
-
 function toggleTheme(){
+  const light=document.body.classList.toggle("light");
 
-  const isLight =
-    document.body.classList.toggle("light");
-
-  const theme = isLight ? "light" : "dark";
-
-  localStorage.setItem("siteTheme", theme);
+  localStorage.setItem(
+    "siteTheme",
+    light ? "light" : "dark"
+  );
 
   updateThemeLabel();
   updateThemeColor();
-
 }
 
-/* LOAD SAVED THEME */
-
 function loadTheme(){
-
   const savedTheme =
     localStorage.getItem("siteTheme") || "dark";
 
   document.body.classList.toggle(
     "light",
-    savedTheme === "light"
+    savedTheme==="light"
   );
 
   updateThemeLabel();
   updateThemeColor();
-
 }
 
-/* INITIALIZE PAGE */
+document.addEventListener("click",function(event){
+  const menu=document.getElementById("languageMenu");
+  const wrap=document.querySelector(".language-wrap");
+
+  if(!wrap.contains(event.target)){
+    menu.classList.remove("show");
+  }
+});
 
 changeLanguage(currentLanguage);
 loadTheme();
 
 </script>
+
 </body>
 </html>
