@@ -1,44 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SK TALIB - Personal Website</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = { darkMode: 'class' }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body class="bg-white dark:bg-[#0f0f0f] text-black dark:text-white min-h-screen transition-colors duration-200 font-sans">
-    <!-- Header / Navbar -->
-    <header class="sticky top-0 z-50 bg-white/90 dark:bg-[#0f0f0f]/90 backdrop-blur border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <a href="index.html" class="text-xl font-bold tracking-wider text-red-600">SK TALIB</a>
-        </div>
-        <div class="flex-1 max-w-xl mx-4 hidden md:flex">
-            <input type="text" id="searchInput" placeholder="Search videos, movies, books..." class="w-full bg-gray-100 dark:bg-[#222] border border-gray-300 dark:border-gray-700 px-4 py-2 rounded-l-full focus:outline-none text-sm">
-            <button class="bg-gray-200 dark:bg-[#333] px-6 rounded-r-full border border-l-0 border-gray-300 dark:border-gray-700 text-sm">🔍</button>
-        </div>
-        <div class="flex items-center space-x-4">
-            <a href="product.html" class="text-sm hover:text-red-500 hidden sm:block">Products</a>
-            <a href="book.html" class="text-sm hover:text-red-500 hidden sm:block">Book</a>
-            <a href="about.html" class="text-sm hover:text-red-500 hidden sm:block">About</a>
-            <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800">🌙</button>
-            <a href="admin.html" class="text-xs bg-red-600 text-white px-3 py-1.5 rounded-full font-semibold">Admin</a>
+<body class="bg-[#0b0f19] text-gray-100 min-h-screen selection:bg-red-500 selection:text-white">
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-[#0b0f19]/80 backdrop-blur-md border-b border-gray-800 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold tracking-wider text-white">SK <span class="text-red-500">TALIB</span></a>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="index.html" class="text-red-500 transition hover:text-red-400">Home</a>
+                <a href="product.html" class="text-gray-400 transition hover:text-white">Products</a>
+                <a href="book.html" class="text-gray-400 transition hover:text-white">Books</a>
+                <a href="about.html" class="text-gray-400 transition hover:text-white">About Me</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <a href="admin.html" class="bg-red-600 hover:bg-red-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition shadow-lg shadow-red-600/20">Admin Panel</a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content Feed -->
-    <main class="p-6 max-w-7xl mx-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold">Latest Feed & Uploads</h2>
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-6 py-12">
+        <div class="bg-gradient-to-r from-red-950/40 via-gray-900 to-gray-900 border border-gray-800 rounded-2xl p-8 md:p-12 shadow-2xl">
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Welcome to <span class="text-red-500">SK TALIB's</span> Official Space</h1>
+            <p class="text-gray-400 max-w-2xl text-sm md:text-base leading-relaxed mb-6">Explore my personal collection of creative works, videos, thoughts, and curated media feeds managed directly through a secure dashboard.</p>
         </div>
+    </section>
+
+    <!-- Main Content Feed -->
+    <main class="max-w-7xl mx-auto px-6 pb-20">
+        <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
+            <h2 class="text-xl font-bold tracking-wide">Latest Uploads & Feed</h2>
+        </div>
+        
         <div id="postsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <p class="text-gray-500">Loading content...</p>
+            <div class="bg-gray-900/50 border border-gray-800 p-6 rounded-xl animate-pulse">
+                <div class="h-4 bg-gray-800 rounded w-3/4 mb-4"></div>
+                <div class="h-3 bg-gray-800 rounded w-1/2 mb-6"></div>
+                <div class="h-10 bg-gray-800 rounded"></div>
+            </div>
         </div>
     </main>
 
-    <!-- Firebase Reader Script -->
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-8 text-center text-xs text-gray-500">
+        <p>&copy; 2026 SK TALIB. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -50,40 +69,39 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
-        }
-        window.toggleDarkMode = toggleDarkMode;
-
         async function loadPosts() {
             const container = document.getElementById('postsContainer');
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
                 if(querySnapshot.empty) {
-                    container.innerHTML = `<p class="text-gray-500 col-span-full">No posts uploaded yet. Use <a href="admin.html" class="text-red-500 underline">Admin Panel</a> to add posts.</p>`;
+                    container.innerHTML = `
+                        <div class="col-span-full text-center py-12 bg-gray-900/30 border border-gray-800 rounded-xl">
+                            <p class="text-gray-400 text-sm mb-3">No content published yet.</p>
+                            <a href="admin.html" class="text-xs text-red-500 underline font-semibold">Open Admin Panel to add posts</a>
+                        </div>
+                    `;
                     return;
                 }
                 container.innerHTML = "";
                 querySnapshot.forEach((doc) => {
                     const post = doc.data();
                     container.innerHTML += `
-                        <div class="bg-gray-100 dark:bg-[#1f1f1f] rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-md">
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg mb-2">${post.title}</h3>
-                                <p class="text-xs text-red-500 uppercase font-semibold mb-3">${post.category}</p>
-                                <a href="${post.media}" target="_blank" class="text-sm bg-red-600 text-white px-4 py-2 rounded-lg inline-block hover:bg-red-700">Watch / Open Link</a>
+                        <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-lg hover:border-gray-700 transition group">
+                            <div class="p-5">
+                                <span class="text-[10px] tracking-wider uppercase bg-red-950/60 text-red-400 font-bold px-2.5 py-1 rounded-md border border-red-900/40 inline-block mb-3">${post.category || 'Feed'}</span>
+                                <h3 class="font-semibold text-lg text-white mb-4 group-hover:text-red-400 transition">${post.title}</h3>
+                                <a href="${post.media}" target="_blank" class="w-full block text-center text-xs font-semibold bg-red-600 hover:bg-red-700 text-white py-2.5 rounded-lg transition shadow-md">Open / Watch</a>
                             </div>
                         </div>
                     `;
                 });
             } catch (err) {
                 console.error(err);
-                container.innerHTML = `<p class="text-red-500 col-span-full">Error loading posts. Make sure Firestore test mode is active.</p>`;
+                container.innerHTML = `<p class="text-red-500 col-span-full">Failed to load content. Please check database connection.</p>`;
             }
         }
 
         loadPosts();
     </script>
 </body>
-          </html>
-          
+</html>
