@@ -15,37 +15,27 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-24 transition-colors duration-300 antialiased">
+<body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-28 sm:pt-32 transition-colors duration-300 antialiased">
     
     <!-- Fixed Top Navigation Bar -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-3 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-3">
-            
-            <!-- Brand Logo -->
             <div class="flex items-center shrink-0">
                 <a href="index.html" class="text-base sm:text-xl font-bold tracking-wider text-red-600 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
             </div>
 
-            <!-- Desktop Search Bar -->
-            <div class="hidden md:flex flex-1 max-w-xs lg:max-w-sm mx-4">
-                <input type="text" id="searchInput" oninput="filterPosts()" placeholder="Search content..." class="w-full bg-gray-100 dark:bg-[#171717] border border-gray-200 dark:border-gray-800 px-3.5 py-1.5 rounded-l-xl focus:outline-none focus:border-red-500 text-xs dark:text-white placeholder-gray-400">
-                <button onclick="filterPosts()" class="bg-gray-200 dark:bg-[#262626] px-3.5 rounded-r-xl border border-l-0 border-gray-200 dark:border-gray-800 text-xs text-gray-600 dark:text-gray-400">🔍</button>
-            </div>
-
             <!-- Desktop Nav Links -->
             <nav class="hidden lg:flex items-center space-x-1 text-xs font-semibold">
-                <a href="index.html" class="text-red-600 dark:text-red-500 px-2.5 py-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30 transition" data-i18n="nav_home">Home</a>
-                <a href="about.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_about">About</a>
-                <a href="movie.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_movie">Movie</a>
-                <a href="products.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_products">Products</a>
-                <a href="book.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_book">Book</a>
-                <a href="chat.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_chat">Chat with AI</a>
+                <a href="index.html" class="text-red-600 dark:text-red-500 px-2.5 py-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30 transition">Home</a>
+                <a href="about.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">About</a>
+                <a href="movie.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Movie</a>
+                <a href="products.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Products</a>
+                <a href="book.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Book</a>
+                <a href="chat.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Chat with AI</a>
             </nav>
 
             <!-- Right Controls -->
             <div class="flex items-center space-x-2.5 shrink-0">
-                
-                <!-- Custom Dark-Mode Fixed Language Dropdown -->
                 <div class="relative" id="langDropdownContainer">
                     <button type="button" onclick="toggleLangMenu()" class="flex items-center space-x-1.5 bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-800 rounded-xl px-2.5 py-1.5 text-xs font-medium hover:border-red-500 transition">
                         <span>🌐</span>
@@ -64,7 +54,6 @@
                     </div>
                 </div>
 
-                <!-- Day/Night Toggle Button (Day = Sun, Night = Moon) -->
                 <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-8 h-8 rounded-xl bg-gray-100 dark:bg-[#171717] border border-gray-200 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-[#262626] transition" title="Toggle Theme">
                     <span id="modeIcon" class="text-xs">🌙</span>
                 </button>
@@ -74,85 +63,52 @@
 
     <!-- Mobile Horizontal Nav Bar -->
     <div class="fixed top-[57px] left-0 w-full z-40 flex lg:hidden overflow-x-auto no-scrollbar space-x-4 px-4 py-2.5 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 text-xs font-semibold whitespace-nowrap">
-        <a href="index.html" class="text-red-600 dark:text-red-500" data-i18n="nav_home">Home</a>
-        <a href="about.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_about">About</a>
-        <a href="movie.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_movie">Movie</a>
-        <a href="products.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_products">Products</a>
-        <a href="book.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_book">Book</a>
-        <a href="chat.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_chat">Chat with AI</a>
+        <a href="index.html" class="text-red-600 dark:text-red-500">Home</a>
+        <a href="about.html" class="text-gray-600 dark:text-gray-400">About</a>
+        <a href="movie.html" class="text-gray-600 dark:text-gray-400">Movie</a>
+        <a href="products.html" class="text-gray-600 dark:text-gray-400">Products</a>
+        <a href="book.html" class="text-gray-600 dark:text-gray-400">Book</a>
+        <a href="chat.html" class="text-gray-600 dark:text-gray-400">Chat with AI</a>
     </div>
 
-    <!-- Floating Circular '+' Button (Bottom Right) -->
-    <button onclick="openPasswordModal()" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group" title="Add Post">
-        <span class="text-2xl font-bold group-hover:rotate-90 transition-transform duration-300">+</span>
-    </button>
-
-    <!-- Password Modal Box -->
-    <div id="passwordModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
-        <div class="bg-white dark:bg-[#171717] p-6 rounded-2xl shadow-2xl w-full max-w-sm border border-gray-200 dark:border-gray-800">
-            <h3 class="text-base font-bold text-red-600 dark:text-red-500 mb-4 text-center">Admin Verification</h3>
-            <input type="password" id="modalPassword" placeholder="Enter admin password" class="w-full p-3 bg-gray-100 dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-sm text-gray-900 dark:text-white mb-3 focus:outline-none focus:border-red-500">
-            <div class="flex space-x-2.5">
-                <button onclick="verifyPassword()" class="flex-1 bg-red-600 hover:bg-red-700 py-2.5 rounded-xl text-xs font-bold text-white transition">Submit</button>
-                <button onclick="closePasswordModal()" class="flex-1 bg-gray-200 dark:bg-[#262626] hover:bg-gray-300 dark:hover:bg-[#333333] py-2.5 rounded-xl text-xs font-bold text-gray-800 dark:text-gray-200 transition">Cancel</button>
-            </div>
-            <p id="modalError" class="text-red-500 text-xs text-center mt-2.5 min-h-[16px]"></p>
-        </div>
-    </div>
-
-    <!-- Main Content Feed -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 mt-2">
-        <div class="flex justify-between items-center mb-6 border-b border-gray-200 dark:border-gray-800 pb-3">
-            <h2 class="text-lg sm:text-xl font-bold tracking-tight text-gray-900 dark:text-white" data-i18n="latest_feed">Latest Uploads</h2>
-        </div>
-        
-        <div id="postsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div class="bg-gray-100 dark:bg-[#171717] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 animate-pulse space-y-3">
-                <div class="h-5 bg-gray-200 dark:bg-[#262626] rounded w-3/4"></div>
-                <div class="h-44 bg-gray-200 dark:bg-[#262626] rounded-xl w-full"></div>
-                <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded w-full"></div>
-            </div>
-        </div>
-
-        <!-- Compact Empty State -->
-        <div id="emptyState" class="hidden max-w-md mx-auto text-center py-8 px-6 border border-dashed border-gray-300 dark:border-gray-800 rounded-2xl bg-gray-50 dark:bg-[#171717]">
-            <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-3 font-medium" data-i18n="no_posts">No content published yet.</p>
-            <button onclick="openPasswordModal()" class="inline-flex items-center space-x-1.5 text-xs bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl font-bold transition shadow" data-i18n="admin_link">
-                <span>Ad Post</span>
-                <span>+</span>
-            </button>
+    <!-- Main Content Container -->
+    <main class="max-w-2xl mx-auto px-4 py-6">
+        <h2 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">Latest Feed</h2>
+        <div id="homeFeedContainer" class="space-y-4">
+            <p class="text-xs text-gray-500 text-center py-8">Loading feed...</p>
         </div>
     </main>
+
+    <!-- Floating Admin Button (+) -->
+    <button onclick="openAdminModal()" class="fixed bottom-6 right-6 w-12 h-12 bg-red-600 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl font-bold hover:bg-red-700 transition z-50">+</button>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#171717] p-6 rounded-3xl w-full max-w-sm border border-gray-200 dark:border-gray-800 shadow-2xl">
+            <h3 class="text-sm font-bold mb-3 text-gray-900 dark:text-white">Admin Access</h3>
+            <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full p-3 bg-gray-100 dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs mb-3 focus:outline-none focus:border-red-500">
+            <div class="flex space-x-2">
+                <button onclick="verifyAdmin()" class="flex-1 bg-red-600 text-white py-2.5 rounded-xl text-xs font-bold hover:bg-red-700 transition">Login</button>
+                <button onclick="closeAdminModal()" class="flex-1 bg-gray-200 dark:bg-[#262626] text-gray-800 dark:text-gray-200 py-2.5 rounded-xl text-xs font-bold transition">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-gray-800 py-8 text-center px-4 mt-12 mb-16">
         <p class="text-xs text-gray-500 dark:text-gray-400">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
-        <!-- Scripts -->
+
+    <!-- Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Firebase Configuration
-        const firebaseConfig = {
-            projectId: "mrsktalib-4ab8e"
-        };
+        const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        const translations = {
-            en: { 
-                nav_home: "Home", nav_about: "About", nav_movie: "Movie", nav_products: "Products", nav_book: "Book", nav_chat: "Chat with AI",
-                latest_feed: "Latest Uploads", no_posts: "No content published yet.", admin_link: "Ad Post +" 
-            },
-            roman_hi: { 
-                nav_home: "Home", nav_about: "About", nav_movie: "Movie", nav_products: "Products", nav_book: "Book", nav_chat: "Chat with AI",
-                latest_feed: "Latest Uploads", no_posts: "Abhi tak koi content publish nahi hua hai.", admin_link: "Ad Post +" 
-            }
-        };
-
         let currentLang = localStorage.getItem('site_lang') || 'en';
-        let allFetchedPosts = [];
 
         window.toggleLangMenu = function() {
             document.getElementById('langMenu').classList.toggle('hidden');
@@ -165,8 +121,7 @@
             document.getElementById('check_en').classList.toggle('hidden', lang !== 'en');
             document.getElementById('check_roman_hi').classList.toggle('hidden', lang !== 'roman_hi');
             document.getElementById('langMenu').classList.add('hidden');
-            applyTranslations();
-            renderPosts(allFetchedPosts);
+            loadHomeFeed();
         }
 
         document.addEventListener('click', function(e) {
@@ -176,18 +131,6 @@
             }
         });
 
-        function applyTranslations() {
-            const t = translations[currentLang] || translations.en;
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (t[key]) el.innerText = t[key];
-            });
-            document.getElementById('currentLangLabel').innerText = currentLang === 'roman_hi' ? 'Roman Hindi' : 'English';
-            document.getElementById('check_en').classList.toggle('hidden', currentLang !== 'en');
-            document.getElementById('check_roman_hi').classList.toggle('hidden', currentLang !== 'roman_hi');
-        }
-
-        // Day = Sun, Night = Moon
         const html = document.documentElement;
         const modeIcon = document.getElementById('modeIcon');
 
@@ -211,115 +154,74 @@
             }
         }
 
-        window.openPasswordModal = function() {
-            document.getElementById('passwordModal').classList.remove('hidden');
-            document.getElementById('modalPassword').value = '';
-            document.getElementById('modalError').innerText = '';
-            setTimeout(() => document.getElementById('modalPassword').focus(), 50);
+        window.openAdminModal = function() {
+            document.getElementById('adminModal').classList.remove('hidden');
         }
 
-        window.closePasswordModal = function() {
-            document.getElementById('passwordModal').classList.add('hidden');
+        window.closeAdminModal = function() {
+            document.getElementById('adminModal').classList.add('hidden');
         }
 
-        window.verifyPassword = function() {
-            const pass = document.getElementById('modalPassword').value.trim();
+        window.verifyAdmin = function() {
+            const pass = document.getElementById('adminPassInput').value;
             if (pass === 'SKTALIB@9037') {
                 sessionStorage.setItem('isAdmin', 'true');
                 window.location.href = 'admin.html';
             } else {
-                document.getElementById('modalError').innerText = 'Incorrect Password!';
-                document.getElementById('modalPassword').value = '';
+                alert('Incorrect Password!');
             }
         }
 
-        document.getElementById('modalPassword').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') verifyPassword();
-        });
-
-        window.filterPosts = function() {
-            const term = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = allFetchedPosts.filter(p => {
-                const title = (p.titles && p.titles[currentLang]) ? p.titles[currentLang] : (p.title || '');
-                const desc = (p.descriptions && p.descriptions[currentLang]) ? p.descriptions[currentLang] : '';
-                return title.toLowerCase().includes(term) || desc.toLowerCase().includes(term);
-            });
-            renderPosts(filtered);
-        }
-
-        function renderPosts(postsList) {
-            const container = document.getElementById('postsContainer');
-            const emptyState = document.getElementById('emptyState');
-
-            if (postsList.length === 0) {
-                container.innerHTML = "";
-                emptyState.classList.remove('hidden');
-                return;
-            }
-
-            emptyState.classList.add('hidden');
-            container.innerHTML = "";
-
-            postsList.forEach((post) => {
-                const title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : (post.title || 'Untitled');
-                const desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : (post.description || '');
-
-                let mediaContent = "";
-                if (post.mediaType === 'video_link' && post.media) {
-                    const rawUrl = post.media;
-                    let embedUrl = rawUrl;
-                    if (rawUrl.includes('youtube.com') || rawUrl.includes('youtu.be')) {
-                        let ytId = rawUrl.includes('v=') ? rawUrl.split('v=')[1].split('&')[0] : rawUrl.split('/').pop();
-                        embedUrl = `https://www.youtube.com/embed/${ytId}?rel=0`;
-                    } else if (rawUrl.includes('instagram.com')) {
-                        embedUrl = rawUrl.endsWith('/') ? rawUrl + 'embed/' : rawUrl + '/embed/';
-                    }
-                    mediaContent = `<div class="relative aspect-video w-full bg-black rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 my-3"><iframe class="w-full h-full" src="${embedUrl}" frameborder="0" allowfullscreen loading="lazy"></iframe></div>`;
-                } else if (post.media) {
-                    mediaContent = `<img src="${post.media}" class="w-full h-48 object-cover rounded-xl border border-gray-200 dark:border-gray-800 my-3" alt="${title}" loading="lazy">`;
-                }
-
-                // Exact Order: 1. Category & Title Upar -> 2. Media Beech Mein -> 3. Description Niche
-                container.innerHTML += `
-                    <article class="bg-white dark:bg-[#171717] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition flex flex-col">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-[10px] tracking-wider uppercase bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-bold px-2.5 py-0.5 rounded-full">${post.category || 'Home'}</span>
-                            ${post.price ? `<span class="text-xs font-bold text-green-600 dark:text-green-500">${post.price}</span>` : ''}
-                        </div>
-                        <h3 class="font-semibold text-base sm:text-lg leading-snug text-gray-900 dark:text-white">${title}</h3>
-                        ${mediaContent}
-                        ${desc ? `<p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed mt-1">${desc}</p>` : ''}
-                    </article>
-                `;
-            });
-        }
-
-        async function loadPosts() {
-            const container = document.getElementById('postsContainer');
+        async function loadHomeFeed() {
+            const container = document.getElementById('homeFeedContainer');
+            if (!container) return;
             try {
-                // Safe fetch without orderBy index crash; sort on client side
                 const querySnapshot = await getDocs(collection(db, "posts"));
-                let validPosts = [];
-                querySnapshot.forEach((doc) => {
+                let posts = [];
+                querySnapshot.forEach(doc => {
                     const data = doc.data();
-                    if (data.status !== 'unpublished') {
-                        validPosts.push({ id: doc.id, ...data });
+                    // STRICTLY load ONLY 'home' category posts
+                    if (data.category === 'home' && data.status !== 'unpublished') {
+                        posts.push({ id: doc.id, ...data });
                     }
                 });
+                posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
-                // Sort newest first safely
-                validPosts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-                allFetchedPosts = validPosts;
-                renderPosts(allFetchedPosts);
+                if (posts.length === 0) {
+                    container.innerHTML = `<p class="text-xs text-gray-500 text-center py-8">No posts in Home feed yet.</p>`;
+                    return;
+                }
+
+                container.innerHTML = "";
+                posts.forEach(post => {
+                    const title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : (post.titles?.en || '');
+                    const desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : (post.descriptions?.en || '');
+                    
+                    let mediaHtml = "";
+                    if (post.mediaType === 'video_link' && post.media) {
+                        mediaHtml = `<div class="aspect-video w-full mb-3"><iframe src="${post.media}" class="w-full h-full rounded-2xl" allowfullscreen></iframe></div>`;
+                    } else if (post.media) {
+                        mediaHtml = `<img src="${post.media}" class="w-full max-h-[450px] object-cover rounded-2xl mb-3 border border-gray-200 dark:border-gray-800" loading="lazy">`;
+                    }
+
+                    container.innerHTML += `
+                        <div class="bg-gray-50 dark:bg-[#171717] p-5 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-[10px] text-gray-400">${post.dateFormatted || ''}</span>
+                            </div>
+                            ${title ? `<h3 class="text-sm font-bold text-gray-900 dark:text-white mb-2">${title}</h3>` : ''}
+                            ${mediaHtml}
+                            ${desc ? `<p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
+                        </div>
+                    `;
+                });
             } catch (err) {
-                console.error("Load error:", err);
-                container.innerHTML = `<p class="text-red-500 text-xs col-span-full text-center py-8">Unable to load posts. Check Firebase Rules.</p>`;
+                console.error("Home feed error:", err);
             }
         }
 
-        applyTranslations();
-        loadPosts();
+        loadHomeFeed();
     </script>
 </body>
-    </html>
-    
+                </html>
+                
