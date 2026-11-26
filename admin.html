@@ -32,14 +32,18 @@
 
     <!-- Main Admin Content -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-        
-        <!-- Category Selector Tabs -->
+                <!-- Category Selector Tabs (Website Sections + All 6 About Sections Separately) -->
         <div class="flex overflow-x-auto no-scrollbar space-x-2 pb-4 mb-6 border-b border-gray-200 dark:border-gray-800">
             <button onclick="switchTab('home')" id="tab_home" class="px-4 py-2 rounded-xl text-xs font-bold bg-red-600 text-white transition whitespace-nowrap">Home / Feed</button>
             <button onclick="switchTab('movie')" id="tab_movie" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Movies</button>
             <button onclick="switchTab('products')" id="tab_products" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Products</button>
             <button onclick="switchTab('book')" id="tab_book" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Books</button>
-            <button onclick="switchTab('about')" id="tab_about" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">About Profile</button>
+            <button onclick="switchTab('about_personal')" id="tab_about_personal" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">👤 About: Personal</button>
+            <button onclick="switchTab('about_education')" id="tab_about_education" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🎓 About: Education</button>
+            <button onclick="switchTab('about_gallery')" id="tab_about_gallery" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🖼️ About: Gallery</button>
+            <button onclick="switchTab('about_feelings')" id="tab_about_feelings" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">💭 About: Feeling Moment</button>
+            <button onclick="switchTab('about_social')" id="tab_about_social" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🌐 About: Social Media</button>
+            <button onclick="switchTab('about_contact')" id="tab_about_contact" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">📞 About: Contact</button>
         </div>
 
         <!-- Content Form Box -->
@@ -49,25 +53,25 @@
             <form id="contentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <input type="hidden" id="editingId" value="">
 
-                <!-- Titles (English & Roman Hindi) -->
+                <!-- Bilingual Titles (English & Roman Hindi) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="titleFieldsContainer">
                     <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Title (English)</label>
-                        <input type="text" id="titleEn" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Title / Label (English)</label>
+                        <input type="text" id="titleEn" placeholder="e.g. Current Location or Title" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Title (Roman Hindi)</label>
-                        <input type="text" id="titleHi" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Title / Label (Roman Hindi)</label>
+                        <input type="text" id="titleHi" placeholder="Roman hindi mein title..." class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                     </div>
                 </div>
 
-                <!-- Price / Badge Field (For Products & Books) -->
+                <!-- Price / Badge Field -->
                 <div id="priceFieldContainer" class="hidden">
                     <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Price / Status Badge</label>
                     <input type="text" id="postPrice" placeholder="e.g. ₹499 or Coming Soon" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                 </div>
 
-                <!-- Media Upload / Link Section -->
+                <!-- Media Section -->
                 <div id="mediaFieldsContainer" class="space-y-3">
                     <div id="mediaTypeToggleBox" class="flex items-center space-x-4">
                         <label class="text-xs font-semibold text-gray-600 dark:text-gray-400">Media Type:</label>
@@ -88,41 +92,41 @@
                     </div>
                 </div>
 
-                <!-- Action / Redirect Link (For Products & Books) -->
+                <!-- Redirect / Social Link -->
                 <div id="linkFieldContainer" class="hidden">
-                    <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Affiliate / Platform Redirect Link</label>
-                    <input type="url" id="postRedirectLink" placeholder="https://amazon.in/... or Flipkart link" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
+                    <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Redirect / Social / Affiliate Link</label>
+                    <input type="url" id="postRedirectLink" placeholder="https://instagram.com/... or telegram link" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                 </div>
 
-                <!-- Descriptions (English & Roman Hindi) -->
+                <!-- Bilingual Descriptions / Values -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="descFieldsContainer">
                     <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Description (English)</label>
-                        <textarea id="descEn" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none"></textarea>
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Value / Description (English)</label>
+                        <textarea id="descEn" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none" placeholder="Enter details or description here..."></textarea>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Description (Roman Hindi)</label>
-                        <textarea id="descHi" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none"></textarea>
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Value / Description (Roman Hindi)</label>
+                        <textarea id="descHi" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none" placeholder="Roman hindi mein details likhein..."></textarea>
                     </div>
                 </div>
 
                 <!-- Submit Button -->
                 <div class="flex items-center space-x-3 pt-2">
-                    <button type="submit" id="submitBtn" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl text-xs font-bold transition shadow">Publish Post</button>
+                    <button type="submit" id="submitBtn" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl text-xs font-bold transition shadow">Publish Item</button>
                     <button type="button" onclick="resetForm()" id="cancelEditBtn" class="hidden bg-gray-200 dark:bg-[#262626] text-gray-800 dark:text-gray-200 px-5 py-3 rounded-xl text-xs font-bold transition">Cancel Edit</button>
                 </div>
             </form>
         </div>
-
-        <!-- Existing Posts Manager List -->
+                <!-- Manager List -->
         <div class="space-y-4">
             <h3 class="text-base font-bold text-gray-900 dark:text-white">Manage Uploads (<span id="totalPostsCount">0</span>)</h3>
             <div id="adminPostsList" class="space-y-3">
-                <p class="text-xs text-gray-500">Loading your posts...</p>
+                <p class="text-xs text-gray-500">Loading your items...</p>
             </div>
         </div>
     </main>
-        <!-- Scripts -->
+
+    <!-- Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -145,12 +149,14 @@
 
         window.switchTab = function(category) {
             currentCategory = category;
-            ['home', 'movie', 'products', 'book', 'about'].forEach(cat => {
+            ['home', 'movie', 'products', 'book', 'about_personal', 'about_education', 'about_gallery', 'about_feelings', 'about_social', 'about_contact'].forEach(cat => {
                 const btn = document.getElementById(`tab_${cat}`);
-                if (cat === category) {
-                    btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-red-600 text-white transition whitespace-nowrap";
-                } else {
-                    btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap";
+                if (btn) {
+                    if (cat === category) {
+                        btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-red-600 text-white transition whitespace-nowrap";
+                    } else {
+                        btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap";
+                    }
                 }
             });
 
@@ -163,13 +169,31 @@
             if (category === 'products' || category === 'book') {
                 priceContainer.classList.remove('hidden');
                 linkContainer.classList.remove('hidden');
-                mediaTypeToggleBox.classList.add('hidden'); // Hide video option for products/books
+                mediaTypeToggleBox.classList.add('hidden');
                 videoLinkBox.classList.add('hidden');
                 imageUploadBox.classList.remove('hidden');
                 document.querySelector('input[name="mediaType"][value="image"]').checked = true;
-                if (category === 'book') {
-                    document.getElementById('postPrice').value = 'Coming Soon';
-                }
+                if (category === 'book') document.getElementById('postPrice').value = 'Coming Soon';
+            } else if (category === 'about_gallery' || category === 'about_feelings') {
+                priceContainer.classList.add('hidden');
+                linkContainer.classList.add('hidden');
+                mediaTypeToggleBox.classList.add('hidden');
+                videoLinkBox.classList.add('hidden');
+                imageUploadBox.classList.remove('hidden');
+                document.querySelector('input[name="mediaType"][value="image"]').checked = true;
+            } else if (category === 'about_social' || category === 'about_contact') {
+                priceContainer.classList.add('hidden');
+                linkContainer.classList.remove('hidden'); // Show link for social/contact
+                mediaTypeToggleBox.classList.add('hidden');
+                videoLinkBox.classList.add('hidden');
+                imageUploadBox.classList.remove('hidden'); // Optional logo/icon
+                document.querySelector('input[name="mediaType"][value="image"]').checked = true;
+            } else if (category === 'about_personal' || category === 'about_education') {
+                priceContainer.classList.add('hidden');
+                linkContainer.classList.add('hidden');
+                mediaTypeToggleBox.classList.add('hidden');
+                videoLinkBox.classList.add('hidden');
+                imageUploadBox.classList.add('hidden'); // No image needed for text info cards
             } else {
                 priceContainer.classList.add('hidden');
                 linkContainer.classList.add('hidden');
@@ -190,8 +214,7 @@
                 document.getElementById('videoLinkBox').classList.remove('hidden');
             }
         }
-
-        window.compressAndConvertImage = function(input) {
+                window.compressAndConvertImage = function(input) {
             const file = input.files[0];
             if (!file) return;
             const reader = new FileReader();
@@ -237,18 +260,18 @@
             const price = document.getElementById('postPrice').value.trim();
             const redirectLink = document.getElementById('postRedirectLink').value.trim();
 
-            const mediaType = (currentCategory === 'products' || currentCategory === 'book') ? 'image' : document.querySelector('input[name="mediaType"]:checked').value;
+            const mediaType = document.querySelector('input[name="mediaType"]:checked').value;
             let mediaVal = "";
-            if (mediaType === 'image') {
+            if (!document.getElementById('imageUploadBox').classList.contains('hidden')) {
                 mediaVal = document.getElementById('imageBase64').value;
-            } else {
+            } else if (!document.getElementById('videoLinkBox').classList.contains('hidden')) {
                 mediaVal = document.getElementById('videoLinkInput').value.trim();
             }
 
             const postData = {
                 category: currentCategory,
-                titles: { en: titleEn || "Untitled", roman_hi: titleHi || titleEn || "Untitled" },
-                descriptions: { en: descEn, roman_hi: descHi || descEn },
+                titles: { en: titleEn, roman_hi: titleHi },
+                descriptions: { en: descEn, roman_hi: descHi },
                 price: price,
                 redirectLink: redirectLink,
                 mediaType: mediaType,
@@ -265,17 +288,17 @@
             try {
                 if (editingId) {
                     await updateDoc(doc(db, "posts", editingId), postData);
-                    alert("Post updated successfully!");
+                    alert("Item updated successfully!");
                 } else {
                     await addDoc(collection(db, "posts"), postData);
-                    alert("Post published successfully!");
+                    alert("Item published successfully!");
                 }
                 resetForm();
                 loadAdminPosts();
             } catch (err) {
                 console.error("Save error:", err);
-                alert("Failed to save post. Check Firebase connection.");
-                submitBtn.innerText = "Publish Post";
+                alert("Failed to save. Check Firebase connection.");
+                submitBtn.innerText = "Publish Item";
                 submitBtn.disabled = false;
             }
         }
@@ -285,10 +308,10 @@
             document.getElementById('editingId').value = '';
             document.getElementById('imageBase64').value = '';
             document.getElementById('imagePreviewContainer').classList.add('hidden');
-            document.getElementById('submitBtn').innerText = "Publish Post";
+            document.getElementById('submitBtn').innerText = "Publish Item";
             document.getElementById('submitBtn').disabled = false;
             document.getElementById('cancelEditBtn').classList.add('hidden');
-            document.getElementById('formTitle').innerText = `Add New ${currentCategory.toUpperCase()} Post`;
+            document.getElementById('formTitle').innerText = `Add New Item (${currentCategory.toUpperCase()})`;
             if(currentCategory === 'book') document.getElementById('postPrice').value = 'Coming Soon';
         }
 
@@ -304,23 +327,15 @@
             document.getElementById('postPrice').value = post.price || '';
             document.getElementById('postRedirectLink').value = post.redirectLink || '';
 
-            if (post.mediaType === 'video_link') {
-                document.querySelector('input[name="mediaType"][value="video_link"]').checked = true;
-                toggleMediaType();
-                document.getElementById('videoLinkInput').value = post.media || '';
-            } else {
-                document.querySelector('input[name="mediaType"][value="image"]').checked = true;
-                toggleMediaType();
-                if (post.media) {
-                    document.getElementById('imageBase64').value = post.media;
-                    document.getElementById('imagePreview').src = post.media;
-                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
-                }
+            if (post.media) {
+                document.getElementById('imageBase64').value = post.media;
+                document.getElementById('imagePreview').src = post.media;
+                document.getElementById('imagePreviewContainer').classList.remove('hidden');
             }
 
-            document.getElementById('submitBtn').innerText = "Update Post";
+            document.getElementById('submitBtn').innerText = "Update Item";
             document.getElementById('cancelEditBtn').classList.remove('hidden');
-            document.getElementById('formTitle').innerText = `Edit Post (${currentCategory.toUpperCase()})`;
+            document.getElementById('formTitle').innerText = `Edit Item (${currentCategory.toUpperCase()})`;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -335,12 +350,12 @@
         }
 
         window.deletePost = async function(id) {
-            if (confirm("Are you sure you want to delete this post?")) {
+            if (confirm("Are you sure you want to delete this item?")) {
                 try {
                     await deleteDoc(doc(db, "posts", id));
                     loadAdminPosts();
                 } catch (err) {
-                    alert("Failed to delete post.");
+                    alert("Failed to delete.");
                 }
             }
         }
@@ -351,13 +366,13 @@
             document.getElementById('totalPostsCount').innerText = filtered.length;
 
             if (filtered.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-500 py-4 text-center border border-dashed border-gray-200 dark:border-gray-800 rounded-2xl">No posts found in ${currentCategory.toUpperCase()}.</p>`;
+                container.innerHTML = `<p class="text-xs text-gray-500 py-4 text-center border border-dashed border-gray-200 dark:border-gray-800 rounded-2xl">No items found in ${currentCategory.toUpperCase()}.</p>`;
                 return;
             }
 
             container.innerHTML = "";
             filtered.forEach(post => {
-                const title = post.titles?.en || 'Untitled';
+                const title = post.titles?.en || post.titles?.roman_hi || 'Untitled Item';
                 const isPub = post.status !== 'unpublished';
                 const timeStr = post.dateFormatted || 'Recently';
 
@@ -400,5 +415,4 @@
         loadAdminPosts();
     </script>
 </body>
-        </html>
-        
+</html>
