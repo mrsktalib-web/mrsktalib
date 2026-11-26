@@ -15,7 +15,7 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-24 transition-colors duration-300 antialiased">
+<body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-28 sm:pt-32 transition-colors duration-300 antialiased">
     
     <!-- Fixed Top Navigation Bar -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-3 shadow-sm">
@@ -26,12 +26,12 @@
 
             <!-- Desktop Nav Links -->
             <nav class="hidden lg:flex items-center space-x-1 text-xs font-semibold">
-                <a href="index.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_home">Home</a>
-                <a href="about.html" class="text-red-600 dark:text-red-500 px-2.5 py-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30 transition" data-i18n="nav_about">About</a>
-                <a href="movie.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_movie">Movie</a>
-                <a href="products.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_products">Products</a>
-                <a href="book.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_book">Book</a>
-                <a href="chat.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_chat">Chat with AI</a>
+                <a href="index.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Home</a>
+                <a href="about.html" class="text-red-600 dark:text-red-500 px-2.5 py-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30 transition">About</a>
+                <a href="movie.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Movie</a>
+                <a href="products.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Products</a>
+                <a href="book.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Book</a>
+                <a href="chat.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Chat with AI</a>
             </nav>
 
             <!-- Right Controls -->
@@ -63,101 +63,28 @@
 
     <!-- Mobile Horizontal Nav Bar -->
     <div class="fixed top-[57px] left-0 w-full z-40 flex lg:hidden overflow-x-auto no-scrollbar space-x-4 px-4 py-2.5 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 text-xs font-semibold whitespace-nowrap">
-        <a href="index.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_home">Home</a>
-        <a href="about.html" class="text-red-600 dark:text-red-500" data-i18n="nav_about">About</a>
-        <a href="movie.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_movie">Movie</a>
-        <a href="products.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_products">Products</a>
-        <a href="book.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_book">Book</a>
-        <a href="chat.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_chat">Chat with AI</a>
+        <a href="index.html" class="text-gray-600 dark:text-gray-400">Home</a>
+        <a href="about.html" class="text-red-600 dark:text-red-500">About</a>
+        <a href="movie.html" class="text-gray-600 dark:text-gray-400">Movie</a>
+        <a href="products.html" class="text-gray-600 dark:text-gray-400">Products</a>
+        <a href="book.html" class="text-gray-600 dark:text-gray-400">Book</a>
+        <a href="chat.html" class="text-gray-600 dark:text-gray-400">Chat with AI</a>
     </div>
 
     <!-- Main About Container -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 mt-2 space-y-8">
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-6 space-y-8">
         
-        <!-- Header Title -->
-        <div class="text-center">
+        <!-- Header Title Section -->
+        <div class="text-center pt-2">
             <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">SK TALIB</h2>
             <p class="text-xs text-red-600 dark:text-red-400 font-semibold mt-1">Personal Profile & Background</p>
         </div>
 
-        <!-- Personal Details Box -->
-        <div class="bg-gray-50 dark:bg-[#171717] p-6 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-4">
-            <h3 class="text-sm font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-2">📋 Personal Details</h3>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div class="bg-white dark:bg-[#0f0f0f] p-3.5 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Current Location</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">Bhubaneswar</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3.5 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Home Town</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">Kendrapara</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3.5 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Date of Birth & Age</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">19/01/2005 (Age: 21+)</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3.5 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Relationship Status</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">In a relationship</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3.5 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Gender</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">Male</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3.5 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Languages Known</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">Urdu, Hindi, Odia, Little English, Reading Arabic</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3.5 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Religious Views</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">Atheist (Formerly Muslim)</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3.5 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Habits & Lifestyle</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">No Drinks, No Smoking (Quit)</span>
-                </div>
+        <!-- Dynamic Sections Rendered from Admin Panel (Gallery, Feelings, About Info) -->
+        <div id="aboutDynamicContainer" class="space-y-6">
+            <div class="text-center py-10 text-gray-500 text-xs border border-dashed border-gray-300 dark:border-gray-800 rounded-3xl">
+                No custom details published yet. Use your Admin Panel to add Gallery photos, Feelings, or Profile info.
             </div>
-        </div>
-
-        <!-- Physical Stats Box -->
-        <div class="bg-gray-50 dark:bg-[#171717] p-6 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-4">
-            <h3 class="text-sm font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-2">💪 Physical & Lifestyle Stats</h3>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
-                <div class="bg-white dark:bg-[#0f0f0f] p-3 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Height</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">5 ft 6 inch</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Weight</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">Around 50 kg</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Body Type</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">Slim</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3 rounded-2xl border border-gray-200 dark:border-gray-800">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Eye & Hair Color</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">Black / Black</span>
-                </div>
-                <div class="bg-white dark:bg-[#0f0f0f] p-3 rounded-2xl border border-gray-200 dark:border-gray-800 col-span-2">
-                    <span class="text-gray-400 text-[10px] uppercase font-bold block">Complexion</span>
-                    <span class="font-semibold text-gray-800 dark:text-gray-200">Wheatish (Mix of Light & Dark)</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bio / Description Box -->
-        <div class="bg-gray-50 dark:bg-[#171717] p-6 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm space-y-3">
-            <h3 class="text-sm font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-2">✍️ Bio & Hobbies</h3>
-            <p id="aboutBioText" class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                Peace, solitude, nature, simple living. (Manage your full personal bio anytime from the admin panel).
-            </p>
-        </div>
-
-        <!-- Dynamic Dynamic Sections Container (Gallery, Social, Contact, Feelings) -->
-        <div id="aboutDynamicContainer" class="space-y-8">
-            <!-- Rendered via JS from Firestore -->
         </div>
     </main>
 
@@ -165,7 +92,8 @@
     <footer class="border-t border-gray-200 dark:border-gray-800 py-8 text-center px-4 mt-12 mb-16">
         <p class="text-xs text-gray-500 dark:text-gray-400">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
-        <!-- Scripts -->
+
+    <!-- Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -181,12 +109,12 @@
         }
 
         window.selectLanguage = function(lang, label) {
-            currentLang = lang;
             localStorage.setItem('site_lang', lang);
             document.getElementById('currentLangLabel').innerText = label;
             document.getElementById('check_en').classList.toggle('hidden', lang !== 'en');
             document.getElementById('check_roman_hi').classList.toggle('hidden', lang !== 'roman_hi');
             document.getElementById('langMenu').classList.add('hidden');
+            loadAboutDynamicContent();
         }
 
         document.addEventListener('click', function(e) {
@@ -219,7 +147,6 @@
             }
         }
 
-        // Load About custom uploads (Gallery, Feelings, Socials, Contact) from Firestore
         async function loadAboutDynamicContent() {
             const container = document.getElementById('aboutDynamicContainer');
             try {
@@ -227,7 +154,7 @@
                 let aboutPosts = [];
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
-                    if (data.category === 'about' && data.status !== 'unpublished') {
+                    if ((data.category === 'about' || data.category === 'gallery' || data.category === 'feelings') && data.status !== 'unpublished') {
                         aboutPosts.push(data);
                     }
                 });
@@ -235,26 +162,26 @@
                 if (aboutPosts.length === 0) return;
 
                 container.innerHTML = "";
-                aboutPosts.forEach(post => {
-                    const title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : (post.title || '');
-                    const desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : '';
-                    
-                    if (desc && !post.media) {
-                        // Bio update if posted via about category
-                        document.getElementById('aboutBioText').innerText = desc;
-                        return;
-                    }
+                aboutPosts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
+                aboutPosts.forEach(post => {
+                    const title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : (post.titles?.en || '');
+                    const desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : (post.descriptions?.en || '');
+                    
                     let mediaHtml = "";
                     if (post.media) {
-                        mediaHtml = `<img src="${post.media}" class="w-full h-64 object-cover rounded-2xl mb-3 border border-gray-200 dark:border-gray-800" alt="${title}" loading="lazy">`;
+                        mediaHtml = `<img src="${post.media}" class="w-full sm:h-80 object-cover rounded-2xl mb-3 border border-gray-200 dark:border-gray-800" loading="lazy">`;
                     }
 
                     container.innerHTML += `
                         <div class="bg-gray-50 dark:bg-[#171717] p-6 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm">
-                            ${title ? `<h3 class="text-sm font-bold text-gray-900 dark:text-white mb-3">${title}</h3>` : ''}
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-[10px] tracking-wider uppercase bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-bold px-2.5 py-0.5 rounded-full">${post.category.toUpperCase()}</span>
+                                <span class="text-[10px] text-gray-400">${post.dateFormatted || ''}</span>
+                            </div>
+                            ${title ? `<h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-2">${title}</h3>` : ''}
                             ${mediaHtml}
-                            ${desc ? `<p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">${desc}</p>` : ''}
+                            ${desc ? `<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed mt-2">${desc}</p>` : ''}
                             ${post.redirectLink ? `<div class="mt-3"><a href="${post.redirectLink}" target="_blank" class="inline-block text-xs bg-red-600 text-white px-4 py-2 rounded-xl font-bold hover:bg-red-700 transition">Visit Link</a></div>` : ''}
                         </div>
                     `;
@@ -267,4 +194,5 @@
         loadAboutDynamicContent();
     </script>
 </body>
-</html>
+                    </html>
+                    
