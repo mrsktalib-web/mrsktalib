@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SK TALIB | Official Website</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f2f2f2;
+      --text: #0f0f0f;
+      --text-muted: #606060;
+      --border: #e5e5e5;
+      --brand-bg: #0f0f0f;
+      --brand-text: #ffffff;
+      --pill-bg: #f2f2f2;
+      --pill-active-bg: #0f0f0f;
+      --pill-active-text: #ffffff;
+      --card-bg: #ffffff;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f0f0f;
+      --bg-secondary: #222222;
+      --text: #f1f1f1;
+      --text-muted: #aaaaaa;
+      --border: #2e2e2e;
+      --brand-bg: #f1f1f1;
+      --brand-text: #0f0f0f;
+      --pill-bg: #222222;
+      --pill-active-bg: #f1f1f1;
+      --pill-active-text: #0f0f0f;
+      --card-bg: #181818;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Arial, sans-serif; }
+    body { background: var(--bg); color: var(--text); transition: 0.2s; padding-bottom: 60px; }
+
+    /* Top Header - 100% Original SK TALIB Branding */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 900; font-size: 20px; letter-spacing: 0.5px; }
+    .brand-badge {
+      background: var(--brand-bg); color: var(--brand-text);
+      padding: 4px 8px; border-radius: 8px; font-size: 13px; font-weight: 800;
+    }
+
+    .header-actions { display: flex; align-items: center; gap: 7px; }
+    .icon-btn {
+      background: var(--bg-secondary); color: var(--text); border: none;
+      padding: 8px 11px; border-radius: 20px; cursor: pointer; font-size: 13px;
+      display: flex; align-items: center; gap: 5px; font-weight: 600;
+    }
+    .ai-btn { background: linear-gradient(135deg, #1d4ed8, #7e22ce); color: #fff; }
+
+    /* Live Search Drawer */
+    .search-bar-wrap {
+      display: none; padding: 8px 16px; background: var(--bg); border-bottom: 1px solid var(--border);
+    }
+    .search-bar-wrap.active { display: flex; gap: 8px; }
+    .search-bar-wrap input {
+      flex: 1; padding: 10px 14px; border-radius: 20px; border: 1px solid var(--border);
+      background: var(--bg-secondary); color: var(--text); outline: none; font-size: 15px;
+    }
+
+    /* Navigation Pills */
+    .nav-pills {
+      display: flex; gap: 10px; overflow-x: auto; padding: 10px 16px;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      scrollbar-width: none; position: sticky; top: 53px; z-index: 90;
+    }
+    .nav-pills::-webkit-scrollbar { display: none; }
+    .pill {
+      background: var(--pill-bg); color: var(--text); border: none;
+      padding: 8px 16px; border-radius: 10px; font-size: 14px; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: 0.2s;
+    }
+    .pill.active { background: var(--pill-active-bg); color: var(--pill-active-text); }
+
+    /* Main Layout */
+    .container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* Home Feed */
+    .feed-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+    .post-card { background: var(--card-bg); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+    .media-box { width: 100%; aspect-ratio: 16/9; background: #000; object-fit: cover; display: block; }
+    .post-info { padding: 12px 14px; display: flex; gap: 12px; }
+    .avatar {
+      width: 38px; height: 38px; border-radius: 50%; background: var(--brand-bg);
+      color: var(--brand-text); display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 13px; flex-shrink: 0;
+    }
+    .post-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .post-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.4; }
+    .post-meta { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+    /* About Me */
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    @media(min-width: 768px) { .about-grid { grid-template-columns: 1fr 1fr; } }
+    .card-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+    .card-box h2 { font-size: 18px; margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+    .specs-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .specs-list li { background: var(--bg-secondary); padding: 10px; border-radius: 10px; font-size: 14px; }
+    .specs-list span { display: block; font-size: 11px; color: var(--text-muted); text-transform: uppercase; }
+    .social-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .social-btn { padding: 8px 14px; border-radius: 8px; background: var(--bg-secondary); color: var(--text); text-decoration: none; font-size: 14px; font-weight: 600; }
+    .movie-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+
+    /* Products & Books */
+    .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+    .item-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; }
+    .item-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+    .price-tag { font-size: 16px; font-weight: 800; color: #16a34a; margin: 6px 0; }
+    .buy-btn { display: block; text-align: center; background: var(--brand-bg); color: var(--brand-text); padding: 9px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; }
+
+    /* SK TALIB AI Modal */
+    .ai-modal {
+      display: none; position: fixed; bottom: 20px; right: 20px; width: 340px; max-width: calc(100vw - 32px);
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 200; overflow: hidden;
+    }
+    .ai-modal.open { display: flex; flex-direction: column; }
+    .ai-header { background: linear-gradient(135deg, #1d4ed8, #7e22ce); color: #fff; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; }
+    .ai-messages { height: 250px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+    .msg { padding: 8px 12px; border-radius: 12px; max-width: 85%; line-height: 1.4; }
+    .msg.bot { background: var(--bg-secondary); align-self: flex-start; }
+    .msg.user { background: #1d4ed8; color: #fff; align-self: flex-end; }
+    .ai-input { display: flex; border-top: 1px solid var(--border); padding: 8px; gap: 6px; }
+    .ai-input input { flex: 1; padding: 8px 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text); outline: none; }
+    .ai-input button { background: #1d4ed8; color: #fff; border: none; padding: 8px 14px; border-radius: 20px; cursor: pointer; }
+
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    body { top: 0px !important; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="brand" onclick="switchTab('home')">
+      <span class="brand-badge">ST</span>
+      <span>SK TALIB</span>
+    </a>
+
+    <div class="header-actions">
+      <button class="icon-btn ai-btn" onclick="toggleAI()">
+        <i class="fa-solid fa-robot"></i> <span>AI</span>
+      </button>
+      <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button class="icon-btn" onclick="toggleTranslate()">
+        <i class="fa-solid fa-language"></i>
+      </button>
+      <button class="icon-btn" onclick="toggleSearch()">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+  </header>
+
+  <div id="google_translate_element" style="display:none; padding:8px 16px; background:var(--bg-secondary);"></div>
+
+  <div class="search-bar-wrap" id="searchWrap">
+    <input type="text" id="searchInput" placeholder="Search video title, movies, products, books..." onkeyup="filterContent()" />
+    <button class="icon-btn" onclick="toggleSearch()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <nav class="nav-pills">
+    <button class="pill active" onclick="switchTab('home', this)">Home</button>
+    <button class="pill" onclick="switchTab('about', this)">About Me</button>
+    <button class="pill" onclick="switchTab('products', this)">My Product</button>
+    <button class="pill" onclick="switchTab('books', this)">My Book</button>
+  </nav>
+
+  <main class="container">
+    <!-- HOME -->
+    <section id="home" class="section active">
+      <div class="feed-grid" id="postsContainer">
+        <article class="post-card searchable" data-title="Welcome to SK TALIB Official Website">
+          <img class="media-box" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800" alt="Post" />
+          <div class="post-info">
+            <div class="avatar">ST</div>
+            <div>
+              <h3 class="post-title">Welcome to SK TALIB Official Website</h3>
+              <p class="post-desc">Yahan mere daily photos, video clips, shayari aur updates milenge. Admin panel se naye posts turant add honge.</p>
+              <div class="post-meta">SK TALIB • Official</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT ME -->
+    <section id="about" class="section">
+      <div class="about-grid">
+        <div class="card-box">
+          <h2><i class="fa-solid fa-user"></i> Mere Baare Me (Full Details)</h2>
+          <ul class="specs-list" id="aboutSpecsList">
+            <li><span>Full Name</span>Sk Talib</li>
+            <li><span>Hometown</span>Odisha, India</li>
+            <li><span>Height</span>Edit from Admin</li>
+            <li><span>Build / Weight</span>Slim Build</li>
+            <li><span>Hair Color</span>Black</li>
+            <li><span>Eye Color</span>Dark Brown / Black</li>
+          </ul>
+          <h3 style="font-size:15px; margin-top:18px;">Social Media Links</h3>
+          <div class="social-links" id="socialLinksBox">
+            <a href="https://instagram.com" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            <a href="https://facebook.com" target="_blank" class="social-btn"><i class="fa-brands fa-facebook"></i> Facebook</a>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <h2><i class="fa-solid fa-film"></i> Watched Movies & Web Series</h2>
+          <div id="moviesContainer">
+            <div class="movie-item searchable" data-title="Mirzapur Web Series">
+              <span><strong>Mirzapur</strong> (Web Series)</span>
+              <span style="color:#16a34a;">Watched</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY PRODUCT -->
+    <section id="products" class="section">
+      <div class="item-grid" id="productsContainer">
+        <div class="item-card searchable" data-title="Redmi 14C 5G">
+          <div>
+            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500" alt="Product" />
+            <h3 class="post-title">Redmi 14C 5G</h3>
+            <p class="post-desc">My daily use smartphone.</p>
+            <div class="price-tag">₹10,999</div>
+          </div>
+          <a href="#" target="_blank" class="buy-btn">View Product</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MY BOOK -->
+    <section id="books" class="section">
+      <div class="item-grid" id="booksContainer">
+        <div class="item-card searchable" data-title="Atomic Habits">
+          <div>
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500" alt="Book" />
+            <h3 class="post-title">Atomic Habits</h3>
+            <p class="post-desc">Best book for building good habits.</p>
+            <div class="price-tag">₹399</div>
+          </div>
+          <a href="#" target="_blank" class="buy-btn">Check Book</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SK TALIB AI -->
+  <div class="ai-modal" id="aiModal">
+    <div class="ai-header">
+      <span><i class="fa-solid fa-robot"></i> SK TALIB AI</span>
+      <button onclick="toggleAI()" style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">✕</button>
+    </div>
+    <div class="ai-messages" id="aiMessages">
+      <div class="msg bot">Salam / Namaste! Main SK TALIB AI hoon. Aap mujhse Sk Talib ke baare me koi bhi jankari pooch sakte hain!</div>
+    </div>
+    <div class="ai-input">
+      <input type="text" id="aiUserInput" placeholder="Ask anything about Sk Talib..." onkeypress="if(event.key==='Enter') sendAIMessage()" />
+      <button onclick="sendAIMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+  </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script>
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      if (btn) {
+        document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+      }
+    }
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('themeBtn').innerHTML = isDark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+    }
+    function toggleSearch() {
+      const wrap = document.getElementById('searchWrap');
+      wrap.classList.toggle('active');
+      if (wrap.classList.contains('active')) document.getElementById('searchInput').focus();
+    }
+    function filterContent() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      document.querySelectorAll('.searchable').forEach(el => {
+        const title = (el.getAttribute('data-title') || el.innerText).toLowerCase();
+        el.style.display = title.includes(q) ? '' : 'none';
+      });
+    }
+    function toggleTranslate() {
+      const el = document.getElementById('google_translate_element');
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+    function toggleAI() {
+      document.getElementById('aiModal').classList.toggle('open');
+    }
+    function sendAIMessage() {
+      const input = document.getElementById('aiUserInput');
+      const text = input.value.trim();
+      if (!text) return;
+      const box = document.getElementById('aiMessages');
+      box.innerHTML += `<div class="msg user">${text}</div>`;
+      input.value = '';
+      setTimeout(() => {
+        box.innerHTML += `<div class="msg bot">Sk Talib Odisha se hain. Unki saari details, watched movies, books aur products aap upar ke tabs me dekh sakte hain!</div>`;
+        box.scrollTop = box.scrollHeight;
+      }, 400);
+    }
+  </script>
+</body>
+  </html>
+      
