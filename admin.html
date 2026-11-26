@@ -38,10 +38,7 @@
 
         <!-- Add Post Form -->
         <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 mb-8 shadow-xl">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-semibold text-red-400">Upload New Content</h3>
-                <button type="button" onclick="autoTranslateAll()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-xs font-bold transition shadow">✨ Auto-Translate</button>
-            </div>
+            <h3 class="text-xl font-semibold mb-4 text-red-400">Upload New Content</h3>
 
             <form id="postForm" class="space-y-4">
                 <div>
@@ -76,13 +73,13 @@
                     <input type="text" id="youtubeUrl" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="https://www.youtube.com/watch?v=...">
                 </div>
 
-                <!-- 6 Languages Section -->
+                <!-- 2 Languages Section (English & Roman Hindi) -->
                 <div class="border-t border-gray-700 pt-4 space-y-4">
-                    <h4 class="text-sm font-bold text-red-400 uppercase tracking-wider">Titles & Descriptions in 6 Languages:</h4>
+                    <h4 class="text-sm font-bold text-red-400 uppercase tracking-wider">Title & Description (2 Languages):</h4>
                     
                     <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 space-y-2">
-                        <span class="text-xs font-bold text-red-400">1. English (Primary - Type Here)</span>
-                        <input type="text" id="title_en" placeholder="English Title / Name" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" required>
+                        <span class="text-xs font-bold text-red-400">1. English</span>
+                        <input type="text" id="title_en" placeholder="English Title" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" required>
                         <textarea id="desc_en" placeholder="English Description" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
                     </div>
 
@@ -90,30 +87,6 @@
                         <span class="text-xs font-bold text-red-400">2. Roman Hindi</span>
                         <input type="text" id="title_roman_hi" placeholder="Roman Hindi Title" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm">
                         <textarea id="desc_roman_hi" placeholder="Roman Hindi Description" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
-                    </div>
-
-                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 space-y-2">
-                        <span class="text-xs font-bold text-red-400">3. Hindi (हिन्दी)</span>
-                        <input type="text" id="title_hi" placeholder="हिन्दी टाइटल" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm">
-                        <textarea id="desc_hi" placeholder="हिन्दी विवरण" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
-                    </div>
-
-                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 space-y-2">
-                        <span class="text-xs font-bold text-red-400">4. Urdu (اردو)</span>
-                        <input type="text" id="title_ur" placeholder="اردو عنوان" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm">
-                        <textarea id="desc_ur" placeholder="اردو تفصیل" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
-                    </div>
-
-                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 space-y-2">
-                        <span class="text-xs font-bold text-red-400">5. Bengali (বাংলা)</span>
-                        <input type="text" id="title_bn" placeholder="বাংলা শিরোনাম" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm">
-                        <textarea id="desc_bn" placeholder="বাংলা বিবরণ" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
-                    </div>
-
-                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 space-y-2">
-                        <span class="text-xs font-bold text-red-400">6. Odia (ଓଡ଼ିଆ)</span>
-                        <input type="text" id="title_or" placeholder="ଓଡ଼ିଆ ଶୀର୍ଷକ" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm">
-                        <textarea id="desc_or" placeholder="ଓଡ଼ିଆ ବିବରଣୀ" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
                     </div>
                 </div>
 
@@ -127,8 +100,8 @@
                 <p class="text-gray-400 text-sm">Loading posts...</p>
             </div>
         </div>
-    </div>
-        <!-- Login & Firebase Script -->
+                            </div>
+                                <!-- Login & Firebase Script -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -137,7 +110,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Instant Login Logic Check
         const loginForm = document.getElementById('loginForm');
         const loginSection = document.getElementById('loginSection');
         const adminDashboard = document.getElementById('adminDashboard');
@@ -190,42 +162,6 @@
             }
         }
 
-        window.autoTranslateAll = async function() {
-            const titleEn = document.getElementById('title_en').value.trim();
-            const descEn = document.getElementById('desc_en').value.trim();
-
-            if(!titleEn) {
-                alert("Please enter English Title first!");
-                return;
-            }
-
-            try {
-                async function trans(text, targetLang) {
-                    if(!text) return "";
-                    const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${targetLang}`);
-                    const data = await res.json();
-                    return data.responseData ? data.responseData.translatedText : text;
-                }
-
-                document.getElementById('title_hi').value = await trans(titleEn, 'hi');
-                document.getElementById('desc_hi').value = await trans(descEn, 'hi');
-                document.getElementById('title_ur').value = await trans(titleEn, 'ur');
-                document.getElementById('desc_ur').value = await trans(descEn, 'ur');
-                document.getElementById('title_bn').value = await trans(titleEn, 'bn');
-                document.getElementById('desc_bn').value = await trans(descEn, 'desc_en' ? await trans(descEn, 'bn') : '');
-                document.getElementById('title_or').value = await trans(titleEn, 'or');
-                document.getElementById('desc_or').value = await trans(descEn, 'or');
-
-                document.getElementById('title_roman_hi').value = titleEn;
-                document.getElementById('desc_roman_hi').value = descEn;
-
-                alert("Successfully Auto-Translated!");
-            } catch(err) {
-                console.error(err);
-                alert("Translation error. You can type manually.");
-            }
-        }
-
         postForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const publishBtn = document.getElementById('publishBtn');
@@ -273,20 +209,12 @@
 
             const titles = {
                 en: document.getElementById('title_en').value,
-                roman_hi: document.getElementById('title_roman_hi').value || document.getElementById('title_en').value,
-                hi: document.getElementById('title_hi').value || document.getElementById('title_en').value,
-                ur: document.getElementById('title_ur').value || document.getElementById('title_en').value,
-                bn: document.getElementById('title_bn').value || document.getElementById('title_en').value,
-                or: document.getElementById('title_or').value || document.getElementById('title_en').value
+                roman_hi: document.getElementById('title_roman_hi').value || document.getElementById('title_en').value
             };
 
             const descriptions = {
                 en: document.getElementById('desc_en').value,
-                roman_hi: document.getElementById('desc_roman_hi').value,
-                hi: document.getElementById('desc_hi').value,
-                ur: document.getElementById('desc_ur').value,
-                bn: document.getElementById('desc_bn').value,
-                or: document.getElementById('desc_or').value
+                roman_hi: document.getElementById('desc_roman_hi').value || document.getElementById('desc_en').value
             };
 
             try {
