@@ -79,6 +79,21 @@
         </div>
     </main>
 
+    <!-- Floating Admin Button (+) -->
+    <button onclick="openAdminModal()" class="fixed bottom-6 right-6 w-12 h-12 bg-red-600 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl font-bold hover:bg-red-700 transition z-50">+</button>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-[#171717] p-6 rounded-3xl w-full max-w-sm border border-gray-200 dark:border-gray-800 shadow-2xl">
+            <h3 class="text-sm font-bold mb-3 text-gray-900 dark:text-white">Admin Access</h3>
+            <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full p-3 bg-gray-100 dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs mb-3 focus:outline-none focus:border-red-500">
+            <div class="flex space-x-2">
+                <button onclick="verifyAdmin()" class="flex-1 bg-red-600 text-white py-2.5 rounded-xl text-xs font-bold hover:bg-red-700 transition">Login</button>
+                <button onclick="closeAdminModal()" class="flex-1 bg-gray-200 dark:bg-[#262626] text-gray-800 dark:text-gray-200 py-2.5 rounded-xl text-xs font-bold transition">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-gray-800 py-8 text-center px-4 mt-12 mb-16">
         <p class="text-xs text-gray-500 dark:text-gray-400">&copy; 2026 SK TALIB. All rights reserved.</p>
@@ -139,6 +154,24 @@
             }
         }
 
+        window.openAdminModal = function() {
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        window.closeAdminModal = function() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        window.verifyAdmin = function() {
+            const pass = document.getElementById('adminPassInput').value;
+            if (pass === 'SKTALIB@9037') {
+                sessionStorage.setItem('isAdmin', 'true');
+                window.location.href = 'admin.html';
+            } else {
+                alert('Incorrect Password!');
+            }
+        }
+
         async function loadHomeFeed() {
             const container = document.getElementById('homeFeedContainer');
             if (!container) return;
@@ -189,5 +222,5 @@
         loadHomeFeed();
     </script>
 </body>
-    </html>
-    
+                    </html>
+                    
