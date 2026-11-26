@@ -17,7 +17,7 @@
 </head>
 <body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-24 transition-colors duration-300 antialiased">
     
-    <!-- Fixed Top Navigation Bar (Clean without Ad Post button) -->
+    <!-- Fixed Top Navigation Bar -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-3 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-3">
             
@@ -28,8 +28,8 @@
 
             <!-- Desktop Search Bar -->
             <div class="hidden md:flex flex-1 max-w-xs lg:max-w-sm mx-4">
-                <input type="text" id="searchInput" placeholder="Search content..." class="w-full bg-gray-100 dark:bg-[#171717] border border-gray-200 dark:border-gray-800 px-3.5 py-1.5 rounded-l-xl focus:outline-none focus:border-red-500 text-xs dark:text-white placeholder-gray-400">
-                <button class="bg-gray-200 dark:bg-[#262626] px-3.5 rounded-r-xl border border-l-0 border-gray-200 dark:border-gray-800 text-xs text-gray-600 dark:text-gray-400">🔍</button>
+                <input type="text" id="searchInput" oninput="filterPosts()" placeholder="Search content..." class="w-full bg-gray-100 dark:bg-[#171717] border border-gray-200 dark:border-gray-800 px-3.5 py-1.5 rounded-l-xl focus:outline-none focus:border-red-500 text-xs dark:text-white placeholder-gray-400">
+                <button onclick="filterPosts()" class="bg-gray-200 dark:bg-[#262626] px-3.5 rounded-r-xl border border-l-0 border-gray-200 dark:border-gray-800 text-xs text-gray-600 dark:text-gray-400">🔍</button>
             </div>
 
             <!-- Desktop Nav Links -->
@@ -64,9 +64,9 @@
                     </div>
                 </div>
 
-                <!-- Day/Night Toggle Button -->
+                <!-- Day/Night Toggle Button (Day = Sun, Night = Moon) -->
                 <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-8 h-8 rounded-xl bg-gray-100 dark:bg-[#171717] border border-gray-200 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-[#262626] transition" title="Toggle Theme">
-                    <span id="modeIcon" class="text-xs">☀️</span>
+                    <span id="modeIcon" class="text-xs">🌙</span>
                 </button>
             </div>
         </div>
@@ -108,14 +108,14 @@
         
         <div id="postsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <div class="bg-gray-100 dark:bg-[#171717] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 animate-pulse space-y-3">
-                <div class="h-44 bg-gray-200 dark:bg-[#262626] rounded-xl w-full"></div>
-                <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded w-1/3"></div>
                 <div class="h-5 bg-gray-200 dark:bg-[#262626] rounded w-3/4"></div>
+                <div class="h-44 bg-gray-200 dark:bg-[#262626] rounded-xl w-full"></div>
+                <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded w-full"></div>
             </div>
         </div>
 
         <!-- Compact Empty State -->
-        <div id="emptyState" class="hidden max-w-md mx-auto text-center py-10 px-6 border border-dashed border-gray-300 dark:border-gray-800 rounded-2xl bg-gray-50 dark:bg-[#171717]">
+        <div id="emptyState" class="hidden max-w-md mx-auto text-center py-8 px-6 border border-dashed border-gray-300 dark:border-gray-800 rounded-2xl bg-gray-50 dark:bg-[#171717]">
             <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mb-3 font-medium" data-i18n="no_posts">No content published yet.</p>
             <button onclick="openPasswordModal()" class="inline-flex items-center space-x-1.5 text-xs bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl font-bold transition shadow" data-i18n="admin_link">
                 <span>Ad Post</span>
@@ -131,9 +131,12 @@
         <!-- Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
+        // Firebase Configuration
+        const firebaseConfig = {
+            projectId: "mrsktalib-4ab8e"
+        };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
@@ -149,6 +152,7 @@
         };
 
         let currentLang = localStorage.getItem('site_lang') || 'en';
+        let allFetchedPosts = [];
 
         window.toggleLangMenu = function() {
             document.getElementById('langMenu').classList.toggle('hidden');
@@ -162,7 +166,7 @@
             document.getElementById('check_roman_hi').classList.toggle('hidden', lang !== 'roman_hi');
             document.getElementById('langMenu').classList.add('hidden');
             applyTranslations();
-            loadPosts();
+            renderPosts(allFetchedPosts);
         }
 
         document.addEventListener('click', function(e) {
@@ -183,25 +187,26 @@
             document.getElementById('check_roman_hi').classList.toggle('hidden', currentLang !== 'roman_hi');
         }
 
+        // Day = Sun, Night = Moon
         const html = document.documentElement;
         const modeIcon = document.getElementById('modeIcon');
 
         if (localStorage.getItem('theme') === 'light') {
             html.classList.remove('dark');
-            modeIcon.innerText = '🌙';
+            modeIcon.innerText = '☀️';
         } else {
             html.classList.add('dark');
-            modeIcon.innerText = '☀️';
+            modeIcon.innerText = '🌙';
         }
 
         window.toggleDarkMode = function() {
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
-                modeIcon.innerText = '🌙';
+                modeIcon.innerText = '☀️';
                 localStorage.setItem('theme', 'light');
             } else {
                 html.classList.add('dark');
-                modeIcon.innerText = '☀️';
+                modeIcon.innerText = '🌙';
                 localStorage.setItem('theme', 'dark');
             }
         }
@@ -232,65 +237,83 @@
             if (e.key === 'Enter') verifyPassword();
         });
 
-        async function loadPosts() {
+        window.filterPosts = function() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allFetchedPosts.filter(p => {
+                const title = (p.titles && p.titles[currentLang]) ? p.titles[currentLang] : (p.title || '');
+                const desc = (p.descriptions && p.descriptions[currentLang]) ? p.descriptions[currentLang] : '';
+                return title.toLowerCase().includes(term) || desc.toLowerCase().includes(term);
+            });
+            renderPosts(filtered);
+        }
+
+        function renderPosts(postsList) {
             const container = document.getElementById('postsContainer');
             const emptyState = document.getElementById('emptyState');
-            
+
+            if (postsList.length === 0) {
+                container.innerHTML = "";
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            container.innerHTML = "";
+
+            postsList.forEach((post) => {
+                const title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : (post.title || 'Untitled');
+                const desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : (post.description || '');
+
+                let mediaContent = "";
+                if (post.mediaType === 'video_link' && post.media) {
+                    const rawUrl = post.media;
+                    let embedUrl = rawUrl;
+                    if (rawUrl.includes('youtube.com') || rawUrl.includes('youtu.be')) {
+                        let ytId = rawUrl.includes('v=') ? rawUrl.split('v=')[1].split('&')[0] : rawUrl.split('/').pop();
+                        embedUrl = `https://www.youtube.com/embed/${ytId}?rel=0`;
+                    } else if (rawUrl.includes('instagram.com')) {
+                        embedUrl = rawUrl.endsWith('/') ? rawUrl + 'embed/' : rawUrl + '/embed/';
+                    }
+                    mediaContent = `<div class="relative aspect-video w-full bg-black rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 my-3"><iframe class="w-full h-full" src="${embedUrl}" frameborder="0" allowfullscreen loading="lazy"></iframe></div>`;
+                } else if (post.media) {
+                    mediaContent = `<img src="${post.media}" class="w-full h-48 object-cover rounded-xl border border-gray-200 dark:border-gray-800 my-3" alt="${title}" loading="lazy">`;
+                }
+
+                // Exact Order: 1. Category & Title Upar -> 2. Media Beech Mein -> 3. Description Niche
+                container.innerHTML += `
+                    <article class="bg-white dark:bg-[#171717] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition flex flex-col">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] tracking-wider uppercase bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-bold px-2.5 py-0.5 rounded-full">${post.category || 'Home'}</span>
+                            ${post.price ? `<span class="text-xs font-bold text-green-600 dark:text-green-500">${post.price}</span>` : ''}
+                        </div>
+                        <h3 class="font-semibold text-base sm:text-lg leading-snug text-gray-900 dark:text-white">${title}</h3>
+                        ${mediaContent}
+                        ${desc ? `<p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed mt-1">${desc}</p>` : ''}
+                    </article>
+                `;
+            });
+        }
+
+        async function loadPosts() {
+            const container = document.getElementById('postsContainer');
             try {
-                const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-                const querySnapshot = await getDocs(q);
-                
+                // Safe fetch without orderBy index crash; sort on client side
+                const querySnapshot = await getDocs(collection(db, "posts"));
                 let validPosts = [];
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-                    if (data.status !== 'unpublished') validPosts.push(data);
-                });
-
-                if (validPosts.length === 0) {
-                    container.innerHTML = "";
-                    emptyState.classList.remove('hidden');
-                    return;
-                }
-
-                emptyState.classList.add('hidden');
-                container.innerHTML = "";
-
-                validPosts.forEach((post) => {
-                    const title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : (post.title || 'Untitled');
-                    const desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : '';
-
-                    let mediaContent = "";
-                    if (post.mediaType === 'video_link' && post.media) {
-                        const rawUrl = post.media;
-                        let embedUrl = rawUrl;
-                        if (rawUrl.includes('youtube.com') || rawUrl.includes('youtu.be')) {
-                            let ytId = rawUrl.includes('v=') ? rawUrl.split('v=')[1].split('&')[0] : rawUrl.split('/').pop();
-                            embedUrl = `https://www.youtube.com/embed/${ytId}?rel=0`;
-                        } else if (rawUrl.includes('instagram.com')) {
-                            embedUrl = rawUrl.endsWith('/') ? rawUrl + 'embed/' : rawUrl + '/embed/';
-                        }
-                        mediaContent = `<div class="relative aspect-video w-full bg-black rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800"><iframe class="w-full h-full" src="${embedUrl}" frameborder="0" allowfullscreen loading="lazy"></iframe></div>`;
-                    } else if (post.media) {
-                        mediaContent = `<img src="${post.media}" class="w-full h-48 object-cover rounded-xl border border-gray-200 dark:border-gray-800" alt="${title}" loading="lazy">`;
+                    if (data.status !== 'unpublished') {
+                        validPosts.push({ id: doc.id, ...data });
                     }
-
-                    container.innerHTML += `
-                        <article class="bg-white dark:bg-[#171717] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition flex flex-col">
-                            ${mediaContent}
-                            <div class="pt-4 flex-grow">
-                                <div class="flex justify-between items-center mb-2.5">
-                                    <span class="text-[10px] tracking-wider uppercase bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-bold px-2.5 py-0.5 rounded-full">${post.category || 'Feed'}</span>
-                                    ${post.price ? `<span class="text-xs font-bold text-green-600 dark:text-green-500">${post.price}</span>` : ''}
-                                </div>
-                                <h3 class="font-semibold text-base sm:text-lg leading-snug mb-2 text-gray-900 dark:text-white">${title}</h3>
-                                ${desc ? `<p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-3 leading-relaxed">${desc}</p>` : ''}
-                            </div>
-                        </article>
-                    `;
                 });
+
+                // Sort newest first safely
+                validPosts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                allFetchedPosts = validPosts;
+                renderPosts(allFetchedPosts);
             } catch (err) {
                 console.error("Load error:", err);
-                container.innerHTML = `<p class="text-red-500 text-xs col-span-full text-center py-8">Unable to load posts. Check Firebase connection.</p>`;
+                container.innerHTML = `<p class="text-red-500 text-xs col-span-full text-center py-8">Unable to load posts. Check Firebase Rules.</p>`;
             }
         }
 
@@ -298,4 +321,5 @@
         loadPosts();
     </script>
 </body>
-</html>
+    </html>
+    
