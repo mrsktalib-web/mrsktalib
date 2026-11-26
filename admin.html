@@ -1,360 +1,406 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SK TALIB - Admin Panel</title>
+    <title>Admin Dashboard - SK TALIB</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
-    <!-- Login Section -->
-    <div id="loginSection" class="flex items-center justify-center min-h-screen p-4">
-        <div class="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-md border border-gray-700">
-            <h2 class="text-2xl font-bold mb-6 text-center text-red-500">SK TALIB ADMIN PANEL</h2>
-            <form id="loginForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm mb-1 text-gray-400">Password</label>
-                    <input type="password" id="adminPassword" placeholder="Enter admin password" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-red-500" required>
-                </div>
-                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 p-3 rounded-lg font-bold transition">Login</button>
-                <p id="loginError" class="text-red-400 text-xs text-center mt-2"></p>
-            </form>
-        </div>
-    </div>
-
-    <!-- Admin Dashboard -->
-    <div id="adminDashboard" class="hidden p-6 max-w-5xl mx-auto">
-        <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
-            <h1 class="text-2xl sm:text-3xl font-bold text-red-500">SK TALIB ADMIN PANEL</h1>
-            <div class="space-x-3">
-                <a href="index.html" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm">View Website</a>
-                <button id="logoutBtn" class="bg-red-900/40 hover:bg-red-900 px-4 py-2 rounded-lg text-sm text-red-300">Logout</button>
+<body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-24 transition-colors duration-300 antialiased">
+    
+    <!-- Fixed Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-3 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-xs bg-gray-100 dark:bg-[#171717] hover:bg-gray-200 dark:hover:bg-[#262626] px-3 py-1.5 rounded-xl font-medium transition">← Back to Site</a>
+                <h1 class="text-base sm:text-lg font-bold text-red-600">Admin Dashboard ⚡</h1>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="logoutAdmin()" class="text-xs bg-red-600/10 text-red-600 dark:text-red-400 px-3.5 py-1.5 rounded-xl font-bold hover:bg-red-600 hover:text-white transition">Logout</button>
             </div>
         </div>
+    </header>
 
-        <!-- Add / Edit Post Form -->
-        <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 mb-8 shadow-xl">
-            <h3 id="formTitle" class="text-xl font-semibold mb-4 text-red-400">Upload New Content</h3>
+    <!-- Main Admin Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        
+        <!-- Category Selector Tabs -->
+        <div class="flex overflow-x-auto no-scrollbar space-x-2 pb-4 mb-6 border-b border-gray-200 dark:border-gray-800">
+            <button onclick="switchTab('home')" id="tab_home" class="px-4 py-2 rounded-xl text-xs font-bold bg-red-600 text-white transition whitespace-nowrap">Home / Feed</button>
+            <button onclick="switchTab('movie')" id="tab_movie" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Movies</button>
+            <button onclick="switchTab('products')" id="tab_products" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Products</button>
+            <button onclick="switchTab('book')" id="tab_book" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Books</button>
+            <button onclick="switchTab('about')" id="tab_about" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">About Profile</button>
+        </div>
 
-            <form id="postForm" class="space-y-4">
-                <input type="hidden" id="editPostId" value="">
-                
-                <div>
-                    <label class="block text-sm mb-1 text-gray-400">Select Category</label>
-                    <select id="postCategory" onchange="handleCategoryChange(this.value)" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-red-500 text-sm">
-                        <option value="feed">Home Feed (Photo / YouTube Video)</option>
-                        <option value="movies">Movies / Web Series</option>
-                        <option value="products">Products</option>
-                    </select>
-                </div>
+        <!-- Content Form Box -->
+        <div class="bg-gray-50 dark:bg-[#171717] p-6 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm mb-10">
+            <h3 id="formTitle" class="text-base font-bold mb-4 text-gray-900 dark:text-white">Add New Post</h3>
+            
+            <form id="contentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <input type="hidden" id="editingId" value="">
 
-                <div id="priceFieldWrapper" class="hidden">
-                    <label class="block text-sm mb-1 text-gray-400">Product Price (₹)</label>
-                    <input type="text" id="postPrice" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="e.g. ₹999">
-                </div>
-
-                <div>
-                    <label class="block text-sm mb-1 text-gray-400">Media Type</label>
-                    <select id="mediaType" onchange="handleMediaType(this.value)" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg text-sm mb-3">
-                        <option value="photo">Upload Photo</option>
-                        <option value="youtube">YouTube Video Link</option>
-                    </select>
-                </div>
-
-                <div id="photoUploadWrapper">
-                    <label class="block text-sm mb-1 text-gray-400">Upload Image / Change Image</label>
-                    <input type="file" id="mediaFile" accept="image/*" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700">
-                </div>
-
-                <div id="youtubeLinkWrapper" class="hidden">
-                    <label class="block text-sm mb-1 text-gray-400">YouTube Video URL</label>
-                    <input type="text" id="youtubeUrl" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="https://www.youtube.com/watch?v=...">
-                </div>
-
-                <!-- 2 Languages Section -->
-                <div class="border-t border-gray-700 pt-4 space-y-4">
-                    <h4 class="text-sm font-bold text-red-400 uppercase tracking-wider">Title & Description (English & Roman Hindi):</h4>
-                    
-                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 space-y-2">
-                        <span class="text-xs font-bold text-red-400">1. English</span>
-                        <input type="text" id="title_en" placeholder="English Title" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" required>
-                        <textarea id="desc_en" placeholder="English Description" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
+                <!-- Titles (English & Roman Hindi) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="titleFieldsContainer">
+                    <div>
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Title (English)</label>
+                        <input type="text" id="titleEn" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                     </div>
-
-                    <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 space-y-2">
-                        <span class="text-xs font-bold text-red-400">2. Roman Hindi</span>
-                        <input type="text" id="title_roman_hi" placeholder="Roman Hindi Title" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm">
-                        <textarea id="desc_roman_hi" placeholder="Roman Hindi Description" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Title (Roman Hindi)</label>
+                        <input type="text" id="titleHi" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                     </div>
                 </div>
 
-                <div class="flex space-x-3">
-                    <button type="submit" id="publishBtn" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-bold transition flex-1 shadow-lg">Publish Post</button>
-                    <button type="button" id="cancelEditBtn" onclick="resetForm()" class="hidden bg-gray-700 hover:bg-gray-600 px-4 py-3 rounded-lg font-bold text-xs">Cancel Edit</button>
+                <!-- Price / Badge Field (For Products & Books) -->
+                <div id="priceFieldContainer" class="hidden">
+                    <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Price / Status Badge</label>
+                    <input type="text" id="postPrice" placeholder="e.g. ₹499 or Coming Soon" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                 </div>
-            </form>
-        </div>
 
-        <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
-            <h3 class="text-xl font-semibold mb-4 text-red-400">Manage Published Content</h3>
-            <div id="managePostsContainer" class="space-y-3">
-                <p class="text-gray-400 text-sm">Loading posts...</p>
-            </div>
-        </div>
+                <!-- Media Upload / Link Section -->
+                <div id="mediaFieldsContainer" class="space-y-3">
+                    <div class="flex items-center space-x-4">
+                        <label class="text-xs font-semibold text-gray-600 dark:text-gray-400">Media Type:</label>
+                        <label class="text-xs flex items-center space-x-1 cursor-pointer"><input type="radio" name="mediaType" value="image" checked onchange="toggleMediaType()"> <span>Image (Local/Compressed)</span></label>
+                        <label class="text-xs flex items-center space-x-1 cursor-pointer"><input type="radio" name="mediaType" value="video_link" onchange="toggleMediaType()"> <span>Video Link</span></label>
+                    </div>
+
+                    <div id="imageUploadBox">
+                        <input type="file" id="imageFile" accept="image/*" onchange="compressAndConvertImage(this)" class="w-full text-xs text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-red-600 file:text-white hover:file:bg-red-700 cursor-pointer">
+                        <input type="hidden" id="imageBase64">
+                        <div id="imagePreviewContainer" class="mt-2 hidden">
+                            <img id="imagePreview" class="w-24 h-24 object-cover rounded-xl border border-gray-200 dark:border-gray-800">
                         </div>
-                            <script type="module">
+                    </div>
+
+                    <div id="videoLinkBox" class="hidden">
+                        <input type="url" id="videoLinkInput" placeholder="Paste YouTube, Instagram or video URL" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
+                    </div>
+                </div>
+
+                <!-- Action / Redirect Link (For Products & Books) -->
+                <div id="linkFieldContainer" class="hidden">
+                    <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Affiliate / Platform Redirect Link</label>
+                    <input type="url" id="postRedirectLink" placeholder="https://amazon.in/... or Flipkart link" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
+                </div>
+
+                <!-- Descriptions (English & Roman Hindi) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="descFieldsContainer">
+                    <div>
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Description (English)</label>
+                        <textarea id="descEn" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Description (Roman Hindi)</label>
+                        <textarea id="descHi" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none"></textarea>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex items-center space-x-3 pt-2">
+                    <button type="submit" id="submitBtn" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl text-xs font-bold transition shadow">Publish Post</button>
+                    <button type="button" onclick="resetForm()" id="cancelEditBtn" class="hidden bg-gray-200 dark:bg-[#262626] text-gray-800 dark:text-gray-200 px-5 py-3 rounded-xl text-xs font-bold transition">Cancel Edit</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Existing Posts Manager List -->
+        <div class="space-y-4">
+            <h3 class="text-base font-bold text-gray-900 dark:text-white">Manage Uploads (<span id="totalPostsCount">0</span>)</h3>
+            <div id="adminPostsList" class="space-y-3">
+                <p class="text-xs text-gray-500">Loading your posts...</p>
+            </div>
+        </div>
+                        </main>
+                            <!-- Scripts -->
+    <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        const loginForm = document.getElementById('loginForm');
-        const loginSection = document.getElementById('loginSection');
-        const adminDashboard = document.getElementById('adminDashboard');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const postForm = document.getElementById('postForm');
-        const loginError = document.getElementById('loginError');
-
-        if (sessionStorage.getItem('isAdmin') === 'true') {
-            loginSection.classList.add('hidden');
-            adminDashboard.classList.remove('hidden');
-            loadManagePosts();
+        // Security Check
+        if (sessionStorage.getItem('isAdmin') !== 'true') {
+            window.location.href = 'index.html';
         }
 
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const pass = document.getElementById('adminPassword').value.trim();
-            if (pass === 'SKTALIB@9037') {
-                sessionStorage.setItem('isAdmin', 'true');
-                loginSection.classList.add('hidden');
-                adminDashboard.classList.remove('hidden');
-                loadManagePosts();
-            } else {
-                loginError.innerText = "Incorrect Password! Try again.";
-            }
-        });
-
-        logoutBtn.addEventListener('click', () => {
+        window.logoutAdmin = function() {
             sessionStorage.removeItem('isAdmin');
-            location.reload();
-        });
+            window.location.href = 'index.html';
+        }
 
-        window.handleCategoryChange = function(cat) {
-            const priceWrapper = document.getElementById('priceFieldWrapper');
-            if (cat === 'products') {
-                priceWrapper.classList.remove('hidden');
+        let currentCategory = 'home';
+        let allAdminPosts = [];
+
+        window.switchTab = function(category) {
+            currentCategory = category;
+            ['home', 'movie', 'products', 'book', 'about'].forEach(cat => {
+                const btn = document.getElementById(`tab_${cat}`);
+                if (cat === category) {
+                    btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-red-600 text-white transition whitespace-nowrap";
+                } else {
+                    btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap";
+                }
+            });
+
+            // Adjust form fields based on category
+            const priceContainer = document.getElementById('priceFieldContainer');
+            const linkContainer = document.getElementById('linkFieldContainer');
+            const mediaContainer = document.getElementById('mediaFieldsContainer');
+            const descContainer = document.getElementById('descFieldsContainer');
+
+            if (category === 'products' || category === 'book') {
+                priceContainer.classList.remove('hidden');
+                linkContainer.classList.remove('hidden');
+                mediaContainer.classList.remove('hidden');
+                if (category === 'book') {
+                    document.getElementById('postPrice').value = 'Coming Soon';
+                }
+            } else if (category === 'about') {
+                priceContainer.classList.add('hidden');
+                linkContainer.classList.add('hidden');
+                mediaContainer.classList.remove('hidden');
             } else {
-                priceWrapper.classList.add('hidden');
+                priceContainer.classList.add('hidden');
+                linkContainer.classList.add('hidden');
+                mediaContainer.classList.remove('hidden');
+            }
+            resetForm();
+            renderAdminPosts();
+        }
+
+        window.toggleMediaType = function() {
+            const type = document.querySelector('input[name="mediaType"]:checked').value;
+            if (type === 'image') {
+                document.getElementById('imageUploadBox').classList.remove('hidden');
+                document.getElementById('videoLinkBox').classList.add('hidden');
+            } else {
+                document.getElementById('imageUploadBox').classList.add('hidden');
+                document.getElementById('videoLinkBox').classList.remove('hidden');
             }
         }
 
-        window.handleMediaType = function(type) {
-            const photoWrapper = document.getElementById('photoUploadWrapper');
-            const ytWrapper = document.getElementById('youtubeLinkWrapper');
-            if(type === 'youtube') {
-                photoWrapper.classList.add('hidden');
-                ytWrapper.classList.remove('hidden');
+        // Image compression helper
+        window.compressAndConvertImage = function(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 800;
+                    const MAX_HEIGHT = 800;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                    } else {
+                        if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    const base64String = canvas.toDataURL('image/jpeg', 0.7);
+                    
+                    document.getElementById('imageBase64').value = base64String;
+                    const preview = document.getElementById('imagePreview');
+                    preview.src = base64String;
+                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+
+        // Form Submit (Add or Edit)
+        window.handleFormSubmit = async function(e) {
+            e.preventDefault();
+            const editingId = document.getElementById('editingId').value;
+            
+            const titleEn = document.getElementById('titleEn').value.trim();
+            const titleHi = document.getElementById('titleHi').value.trim();
+            const descEn = document.getElementById('descEn').value.trim();
+            const descHi = document.getElementById('descHi').value.trim();
+            const price = document.getElementById('postPrice').value.trim();
+            const redirectLink = document.getElementById('postRedirectLink').value.trim();
+
+            const mediaType = document.querySelector('input[name="mediaType"]:checked').value;
+            let mediaVal = "";
+            if (mediaType === 'image') {
+                mediaVal = document.getElementById('imageBase64').value;
             } else {
-                photoWrapper.classList.remove('hidden');
-                ytWrapper.classList.add('hidden');
+                mediaVal = document.getElementById('videoLinkInput').value.trim();
+            }
+
+            const postData = {
+                category: currentCategory,
+                titles: { en: titleEn || "Untitled", roman_hi: titleHi || titleEn || "Untitled" },
+                descriptions: { en: descEn, roman_hi: descHi || descEn },
+                price: price,
+                redirectLink: redirectLink,
+                mediaType: mediaType,
+                media: mediaVal,
+                status: 'published',
+                createdAt: Date.now()
+            };
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerText = "Saving...";
+            submitBtn.disabled = true;
+
+            try {
+                if (editingId) {
+                    await updateDoc(doc(db, "posts", editingId), postData);
+                    alert("Post updated successfully!");
+                } else {
+                    await addDoc(collection(db, "posts"), postData);
+                    alert("Post published successfully!");
+                }
+                resetForm();
+                loadAdminPosts();
+            } catch (err) {
+                console.error("Save error:", err);
+                alert("Failed to save post. Check Firebase connection.");
+                submitBtn.innerText = "Publish Post";
+                submitBtn.disabled = false;
             }
         }
 
         window.resetForm = function() {
-            postForm.reset();
-            document.getElementById('editPostId').value = "";
-            document.getElementById('formTitle').innerText = "Upload New Content";
-            document.getElementById('publishBtn').innerText = "Publish Post";
+            document.getElementById('contentForm').reset();
+            document.getElementById('editingId').value = '';
+            document.getElementById('imageBase64').value = '';
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+            document.getElementById('submitBtn').innerText = "Publish Post";
+            document.getElementById('submitBtn').disabled = false;
             document.getElementById('cancelEditBtn').classList.add('hidden');
-            document.getElementById('priceFieldWrapper').classList.add('hidden');
+            document.getElementById('formTitle').innerText = `Add New ${currentCategory.toUpperCase()} Post`;
         }
 
-        postForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const publishBtn = document.getElementById('publishBtn');
-            const editId = document.getElementById('editPostId').value;
-            publishBtn.innerText = editId ? "Updating..." : "Publishing...";
-            publishBtn.disabled = true;
+        // Edit Post
+        window.editPost = function(id) {
+            const post = allAdminPosts.find(p => p.id === id);
+            if (!post) return;
 
-            const category = document.getElementById('postCategory').value;
-            const price = category === 'products' ? (document.getElementById('postPrice').value || '') : '';
-            const mediaType = document.getElementById('mediaType').value;
-            
-            let mediaUrl = "";
-            if (mediaType === 'youtube') {
-                mediaUrl = document.getElementById('youtubeUrl').value.trim();
+            document.getElementById('editingId').value = post.id;
+            document.getElementById('titleEn').value = post.titles?.en || '';
+            document.getElementById('titleHi').value = post.titles?.roman_hi || '';
+            document.getElementById('descEn').value = post.descriptions?.en || '';
+            document.getElementById('descHi').value = post.descriptions?.roman_hi || '';
+            document.getElementById('postPrice').value = post.price || '';
+            document.getElementById('postRedirectLink').value = post.redirectLink || '';
+
+            if (post.mediaType === 'video_link') {
+                document.querySelector('input[name="mediaType"][value="video_link"]').checked = true;
+                toggleMediaType();
+                document.getElementById('videoLinkInput').value = post.media || '';
             } else {
-                const fileInput = document.getElementById('mediaFile');
-                if (fileInput.files.length > 0) {
-                    const file = fileInput.files[0];
-                    mediaUrl = await new Promise((resolve) => {
-                        const reader = new FileReader();
-                        reader.onload = (event) => {
-                            const img = new Image();
-                            img.onload = () => {
-                                const canvas = document.createElement('canvas');
-                                const MAX_WIDTH = 800;
-                                const MAX_HEIGHT = 800;
-                                let width = img.width;
-                                let height = img.height;
-                                if (width > height) {
-                                    if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-                                } else {
-                                    if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
-                                }
-                                canvas.width = width;
-                                canvas.height = height;
-                                const ctx = canvas.getContext('2d');
-                                ctx.drawImage(img, 0, 0, width, height);
-                                resolve(canvas.toDataURL('image/jpeg', 0.7));
-                            }
-                            img.src = event.target.result;
-                        };
-                        reader.readAsDataURL(file);
-                    });
+                document.querySelector('input[name="mediaType"][value="image"]').checked = true;
+                toggleMediaType();
+                if (post.media) {
+                    document.getElementById('imageBase64').value = post.media;
+                    document.getElementById('imagePreview').src = post.media;
+                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
                 }
             }
 
-            const titles = {
-                en: document.getElementById('title_en').value.trim(),
-                roman_hi: document.getElementById('title_roman_hi').value.trim() || document.getElementById('title_en').value.trim()
-            };
+            document.getElementById('submitBtn').innerText = "Update Post";
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+            document.getElementById('formTitle').innerText = `Edit Post (${currentCategory.toUpperCase()})`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-            const descriptions = {
-                en: document.getElementById('desc_en').value.trim(),
-                roman_hi: document.getElementById('desc_roman_hi').value.trim() || document.getElementById('desc_en').value.trim()
-            };
-
+        // Toggle Status (Publish / Unpublished)
+        window.toggleStatus = async function(id, currentStatus) {
+            const newStatus = currentStatus === 'unpublished' ? 'published' : 'unpublished';
             try {
-                if (editId) {
-                    // Update Existing Post
-                    const updateData = {
-                        title: titles.en,
-                        titles: titles,
-                        descriptions: descriptions,
-                        category,
-                        price,
-                        mediaType
-                    };
-                    if (mediaUrl) updateData.media = mediaUrl; // Only update media if new provided
-
-                    await updateDoc(doc(db, "posts", editId), updateData);
-                    alert('Successfully Updated!');
-                } else {
-                    // Create New Post
-                    await addDoc(collection(db, "posts"), {
-                        title: titles.en,
-                        titles: titles,
-                        descriptions: descriptions,
-                        media: mediaUrl,
-                        mediaType: mediaType,
-                        category,
-                        price,
-                        status: 'published',
-                        createdAt: new Date()
-                    });
-                    alert('Successfully Published!');
-                }
-                resetForm();
-                loadManagePosts();
-            } catch (error) {
-                alert('Error: ' + error.message);
-            } finally {
-                publishBtn.innerText = editId ? "Update Post" : "Publish Post";
-                publishBtn.disabled = false;
+                await updateDoc(doc(db, "posts", id), { status: newStatus });
+                loadAdminPosts();
+            } catch (err) {
+                alert("Failed to update status.");
             }
-        });
+        }
 
-        async function loadManagePosts() {
-            const container = document.getElementById('managePostsContainer');
-            try {
-                const querySnapshot = await getDocs(collection(db, "posts"));
-                if(querySnapshot.empty) {
-                    container.innerHTML = `<p class="text-gray-400 text-sm">No posts found.</p>`;
-                    return;
+        // Delete Post
+        window.deletePost = async function(id) {
+            if (confirm("Are you sure you want to delete this post?")) {
+                try {
+                    await deleteDoc(doc(db, "posts", id));
+                    loadAdminPosts();
+                } catch (err) {
+                    alert("Failed to delete post.");
                 }
-                container.innerHTML = "";
-                querySnapshot.forEach((docSnap) => {
-                    const post = docSnap.data();
-                    const postId = docSnap.id;
-                    const statusColor = post.status === 'unpublished' ? 'text-yellow-500' : 'text-green-500';
+            }
+        }
 
-                    container.innerHTML += `
-                        <div class="bg-gray-900 border border-gray-700 p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                            <div>
-                                <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-gray-800 text-red-400">${post.category || 'feed'}</span>
-                                <h4 class="font-semibold text-white mt-1">${post.title || post.titles?.en || 'Untitled'}</h4>
-                                <p class="text-xs text-gray-400">Status: <span class="${statusColor}">${post.status || 'published'}</span></p>
-                            </div>
-                            <div class="flex items-center space-x-2 flex-wrap gap-y-2">
-                                <button onclick="editPost('${postId}')" class="bg-blue-600 hover:bg-blue-700 px-3 py-1.5 rounded text-xs font-semibold">Edit</button>
-                                <button onclick="togglePublish('${postId}', '${post.status || 'published'}')" class="bg-yellow-600 hover:bg-yellow-700 px-3 py-1.5 rounded text-xs font-semibold">${post.status === 'unpublished' ? 'Publish' : 'Unpublish'}</button>
-                                <button onclick="deletePost('${postId}')" class="bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded text-xs font-semibold">Delete</button>
+        function renderAdminPosts() {
+            const container = document.getElementById('adminPostsList');
+            const filtered = allAdminPosts.filter(p => p.category === currentCategory);
+            document.getElementById('totalPostsCount').innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-500 py-4 text-center border border-dashed border-gray-200 dark:border-gray-800 rounded-2xl">No posts found in ${currentCategory.toUpperCase()}.</p>`;
+                return;
+            }
+
+            container.innerHTML = "";
+            filtered.forEach(post => {
+                const title = post.titles?.en || 'Untitled';
+                const isPub = post.status !== 'unpublished';
+
+                container.innerHTML += `
+                    <div class="bg-white dark:bg-[#171717] p-4 rounded-2xl border border-gray-200 dark:border-gray-800 flex items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3 overflow-hidden">
+                            ${post.media ? `<img src="${post.media}" class="w-12 h-12 object-cover rounded-xl shrink-0" onerror="this.style.display='none'">` : '<div class="w-12 h-12 bg-gray-200 dark:bg-gray-800 rounded-xl shrink-0 flex items-center justify-center text-xs">📝</div>'}
+                            <div class="truncate">
+                                <h4 class="font-semibold text-xs sm:text-sm truncate text-gray-900 dark:text-white">${title}</h4>
+                                <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-bold ${isPub ? 'bg-green-100 text-green-700 dark:bg-green-950/60 dark:text-green-400' : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-950/60 dark:text-yellow-400'}">${isPub ? 'Published' : 'Unpublished'}</span>
                             </div>
                         </div>
-                    `;
-                });
-            } catch (err) {
-                console.error(err);
-                container.innerHTML = `<p class="text-gray-500 text-sm">Could not load posts list.</p>`;
-            }
+                        <div class="flex items-center space-x-1.5 shrink-0">
+                            <button onclick="editPost('${post.id}')" class="px-3 py-1.5 bg-gray-100 dark:bg-[#262626] hover:bg-gray-200 dark:hover:bg-[#333] text-xs font-semibold rounded-xl transition">Edit</button>
+                            <button onclick="toggleStatus('${post.id}', '${post.status || 'published'}')" class="px-3 py-1.5 bg-gray-100 dark:bg-[#262626] hover:bg-gray-200 dark:hover:bg-[#333] text-xs font-semibold rounded-xl transition">${isPub ? 'Unpublish' : 'Publish'}</button>
+                            <button onclick="deletePost('${post.id}')" class="px-3 py-1.5 bg-red-600/10 hover:bg-red-600 hover:text-white text-red-600 dark:text-red-400 text-xs font-semibold rounded-xl transition">Delete</button>
+                        </div>
+                    </div>
+                `;
+            });
         }
 
-        window.editPost = async function(id) {
+        async function loadAdminPosts() {
             try {
-                const docRef = doc(db, "posts", id);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    const post = docSnap.data();
-                    document.getElementById('editPostId').value = id;
-                    document.getElementById('postCategory').value = post.category || 'feed';
-                    handleCategoryChange(post.category);
-                    
-                    document.getElementById('mediaType').value = post.mediaType || 'photo';
-                    handleMediaType(post.mediaType || 'photo');
-                    
-                    if(post.mediaType === 'youtube') {
-                        document.getElementById('youtubeUrl').value = post.media || '';
-                    }
-
-                    document.getElementById('title_en').value = post.titles?.en || post.title || '';
-                    document.getElementById('desc_en').value = post.descriptions?.en || '';
-                    document.getElementById('title_roman_hi').value = post.titles?.roman_hi || '';
-                    document.getElementById('desc_roman_hi').value = post.descriptions?.roman_hi || '';
-
-                    if(post.category === 'products') {
-                        document.getElementById('postPrice').value = post.price || '';
-                    }
-
-                    document.getElementById('formTitle').innerText = "Edit Post";
-                    document.getElementById('publishBtn').innerText = "Update Post";
-                    document.getElementById('cancelEditBtn').classList.remove('hidden');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
+                const querySnapshot = await getDocs(collection(db, "posts"));
+                let posts = [];
+                querySnapshot.forEach(doc => {
+                    posts.push({ id: doc.id, ...doc.data() });
+                });
+                posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                allAdminPosts = posts;
+                renderAdminPosts();
             } catch (err) {
-                console.error(err);
-                alert("Error loading post for editing.");
+                console.error("Admin load error:", err);
+                document.getElementById('adminPostsList').innerHTML = `<p class="text-red-500 text-xs">Failed to load posts. Check Firebase Rules.</p>`;
             }
         }
 
-        window.deletePost = async function(id) {
-            if(confirm("Are you sure you want to delete this post?")) {
-                await deleteDoc(doc(db, "posts", id));
-                loadManagePosts();
-            }
-        }
-
-        window.togglePublish = async function(id, currentStatus) {
-            const newStatus = currentStatus === 'unpublished' ? 'published' : 'unpublished';
-            await updateDoc(doc(db, "posts", id), { status: newStatus });
-            loadManagePosts();
-        }
+        loadAdminPosts();
     </script>
 </body>
-</html>
+    </html>
+    
