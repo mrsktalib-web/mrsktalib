@@ -69,7 +69,7 @@
 
                 <!-- Media Upload / Link Section -->
                 <div id="mediaFieldsContainer" class="space-y-3">
-                    <div class="flex items-center space-x-4">
+                    <div id="mediaTypeToggleBox" class="flex items-center space-x-4">
                         <label class="text-xs font-semibold text-gray-600 dark:text-gray-400">Media Type:</label>
                         <label class="text-xs flex items-center space-x-1 cursor-pointer"><input type="radio" name="mediaType" value="image" checked onchange="toggleMediaType()"> <span>Image (Local/Compressed)</span></label>
                         <label class="text-xs flex items-center space-x-1 cursor-pointer"><input type="radio" name="mediaType" value="video_link" onchange="toggleMediaType()"> <span>Video Link</span></label>
@@ -121,8 +121,8 @@
                 <p class="text-xs text-gray-500">Loading your posts...</p>
             </div>
         </div>
-                        </main>
-                            <!-- Scripts -->
+    </main>
+        <!-- Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -131,7 +131,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Security Check
         if (sessionStorage.getItem('isAdmin') !== 'true') {
             window.location.href = 'index.html';
         }
@@ -155,27 +154,27 @@
                 }
             });
 
-            // Adjust form fields based on category
             const priceContainer = document.getElementById('priceFieldContainer');
             const linkContainer = document.getElementById('linkFieldContainer');
-            const mediaContainer = document.getElementById('mediaFieldsContainer');
-            const descContainer = document.getElementById('descFieldsContainer');
+            const mediaTypeToggleBox = document.getElementById('mediaTypeToggleBox');
+            const videoLinkBox = document.getElementById('videoLinkBox');
+            const imageUploadBox = document.getElementById('imageUploadBox');
 
             if (category === 'products' || category === 'book') {
                 priceContainer.classList.remove('hidden');
                 linkContainer.classList.remove('hidden');
-                mediaContainer.classList.remove('hidden');
+                mediaTypeToggleBox.classList.add('hidden'); // Hide video option for products/books
+                videoLinkBox.classList.add('hidden');
+                imageUploadBox.classList.remove('hidden');
+                document.querySelector('input[name="mediaType"][value="image"]').checked = true;
                 if (category === 'book') {
                     document.getElementById('postPrice').value = 'Coming Soon';
                 }
-            } else if (category === 'about') {
-                priceContainer.classList.add('hidden');
-                linkContainer.classList.add('hidden');
-                mediaContainer.classList.remove('hidden');
             } else {
                 priceContainer.classList.add('hidden');
                 linkContainer.classList.add('hidden');
-                mediaContainer.classList.remove('hidden');
+                mediaTypeToggleBox.classList.remove('hidden');
+                toggleMediaType();
             }
             resetForm();
             renderAdminPosts();
@@ -192,7 +191,6 @@
             }
         }
 
-        // Image compression helper
         window.compressAndConvertImage = function(input) {
             const file = input.files[0];
             if (!file) return;
@@ -228,7 +226,6 @@
             reader.readAsDataURL(file);
         }
 
-        // Form Submit (Add or Edit)
         window.handleFormSubmit = async function(e) {
             e.preventDefault();
             const editingId = document.getElementById('editingId').value;
@@ -240,7 +237,7 @@
             const price = document.getElementById('postPrice').value.trim();
             const redirectLink = document.getElementById('postRedirectLink').value.trim();
 
-            const mediaType = document.querySelector('input[name="mediaType"]:checked').value;
+            const mediaType = (currentCategory === 'products' || currentCategory === 'book') ? 'image' : document.querySelector('input[name="mediaType"]:checked').value;
             let mediaVal = "";
             if (mediaType === 'image') {
                 mediaVal = document.getElementById('imageBase64').value;
@@ -257,7 +254,8 @@
                 mediaType: mediaType,
                 media: mediaVal,
                 status: 'published',
-                createdAt: Date.now()
+                createdAt: Date.now(),
+                dateFormatted: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ' at ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             };
 
             const submitBtn = document.getElementById('submitBtn');
@@ -291,9 +289,9 @@
             document.getElementById('submitBtn').disabled = false;
             document.getElementById('cancelEditBtn').classList.add('hidden');
             document.getElementById('formTitle').innerText = `Add New ${currentCategory.toUpperCase()} Post`;
+            if(currentCategory === 'book') document.getElementById('postPrice').value = 'Coming Soon';
         }
 
-        // Edit Post
         window.editPost = function(id) {
             const post = allAdminPosts.find(p => p.id === id);
             if (!post) return;
@@ -326,7 +324,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Toggle Status (Publish / Unpublished)
         window.toggleStatus = async function(id, currentStatus) {
             const newStatus = currentStatus === 'unpublished' ? 'published' : 'unpublished';
             try {
@@ -337,7 +334,6 @@
             }
         }
 
-        // Delete Post
         window.deletePost = async function(id) {
             if (confirm("Are you sure you want to delete this post?")) {
                 try {
@@ -363,6 +359,7 @@
             filtered.forEach(post => {
                 const title = post.titles?.en || 'Untitled';
                 const isPub = post.status !== 'unpublished';
+                const timeStr = post.dateFormatted || 'Recently';
 
                 container.innerHTML += `
                     <div class="bg-white dark:bg-[#171717] p-4 rounded-2xl border border-gray-200 dark:border-gray-800 flex items-center justify-between gap-4">
@@ -370,6 +367,7 @@
                             ${post.media ? `<img src="${post.media}" class="w-12 h-12 object-cover rounded-xl shrink-0" onerror="this.style.display='none'">` : '<div class="w-12 h-12 bg-gray-200 dark:bg-gray-800 rounded-xl shrink-0 flex items-center justify-center text-xs">📝</div>'}
                             <div class="truncate">
                                 <h4 class="font-semibold text-xs sm:text-sm truncate text-gray-900 dark:text-white">${title}</h4>
+                                <p class="text-[10px] text-gray-400 mt-0.5">${timeStr}</p>
                                 <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-bold ${isPub ? 'bg-green-100 text-green-700 dark:bg-green-950/60 dark:text-green-400' : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-950/60 dark:text-yellow-400'}">${isPub ? 'Published' : 'Unpublished'}</span>
                             </div>
                         </div>
@@ -402,5 +400,5 @@
         loadAdminPosts();
     </script>
 </body>
-    </html>
-    
+        </html>
+        
