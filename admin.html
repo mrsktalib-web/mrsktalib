@@ -57,8 +57,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm mb-1 text-gray-400">Upload Media (Image / Video)</label>
-                    <input type="file" id="mediaFile" accept="image/*,video/*" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700" required>
+                    <label class="block text-sm mb-1 text-gray-400">Upload Image / Banner</label>
+                    <input type="file" id="mediaFile" accept="image/*" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700" required>
                 </div>
 
                 <!-- 6 Languages Title & Description Section -->
@@ -69,7 +69,7 @@
                     <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 space-y-2">
                         <span class="text-xs font-bold text-red-400">1. English (Primary)</span>
                         <input type="text" id="title_en" placeholder="English Title / Name" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" required>
-                        <textarea id="desc_en" placeholder="English Description (Optional for Movies)" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
+                        <textarea id="desc_en" placeholder="English Description" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
                     </div>
 
                     <!-- Roman Hindi -->
@@ -125,16 +125,13 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
         const firebaseConfig = {
-            projectId: "mrsktalib-4ab8e",
-            storageBucket: "mrsktalib-4ab8e.appspot.com"
+            projectId: "mrsktalib-4ab8e"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const storage = getStorage(app);
 
         const loginForm = document.getElementById('loginForm');
         const loginSection = document.getElementById('loginSection');
@@ -167,7 +164,6 @@
             location.reload();
         });
 
-        // Show/Hide Price field based on category
         window.handleCategoryChange = function(cat) {
             const priceWrapper = document.getElementById('priceFieldWrapper');
             if (cat === 'products') {
@@ -177,11 +173,11 @@
             }
         }
 
-        // Publish Post
+        // Publish Post with Direct Image-to-Base64 Conversion
         postForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const publishBtn = document.getElementById('publishBtn');
-            publishBtn.innerText = "Uploading & Publishing...";
+            publishBtn.innerText = "Publishing...";
             publishBtn.disabled = true;
 
             const category = document.getElementById('postCategory').value;
@@ -191,9 +187,11 @@
             let mediaUrl = "";
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
-                const storageRef = ref(storage, 'uploads/' + Date.now() + '_' + file.name);
-                const snapshot = await uploadBytes(storageRef, file);
-                mediaUrl = await getDownloadURL(snapshot.ref);
+                mediaUrl = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.readAsDataURL(file);
+                });
             }
 
             const titles = {
@@ -237,7 +235,6 @@
             }
         });
 
-        // Load Manage Posts List
         async function loadManagePosts() {
             const container = document.getElementById('managePostsContainer');
             try {
@@ -285,5 +282,5 @@
         }
     </script>
 </body>
-                    </html>
-                    
+                            </html>
+                            
