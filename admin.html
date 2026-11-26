@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SK TALIB - Admin Dashboard</title>
+    <title>SK TALIB - Admin Panel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -14,7 +14,7 @@
     <!-- Login Section -->
     <div id="loginSection" class="flex items-center justify-center min-h-screen p-4">
         <div class="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-md border border-gray-700">
-            <h2 class="text-2xl font-bold mb-6 text-center text-red-500">SK TALIB Admin Login</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center text-red-500">SK TALIB ADMIN PANEL</h2>
             <form id="loginForm" class="space-y-4">
                 <div>
                     <label class="block text-sm mb-1 text-gray-400">Password</label>
@@ -29,7 +29,7 @@
     <!-- Admin Dashboard -->
     <div id="adminDashboard" class="hidden p-6 max-w-5xl mx-auto">
         <div class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
-            <h1 class="text-3xl font-bold text-red-500">SK TALIB Creator Studio</h1>
+            <h1 class="text-2xl sm:text-3xl font-bold text-red-500">SK TALIB ADMIN PANEL</h1>
             <div class="space-x-3">
                 <a href="index.html" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm">View Website</a>
                 <button id="logoutBtn" class="bg-red-900/40 hover:bg-red-900 px-4 py-2 rounded-lg text-sm text-red-300">Logout</button>
@@ -38,38 +38,38 @@
 
         <!-- Add Post Form -->
         <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 mb-8 shadow-xl">
-            <h3 class="text-xl font-semibold mb-4 text-red-400">Upload New Content (Multi-Language)</h3>
+            <h3 class="text-xl font-semibold mb-4 text-red-400">Upload New Content</h3>
             <form id="postForm" class="space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm mb-1 text-gray-400">Select Section / Category</label>
-                        <select id="postCategory" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-red-500 text-sm">
-                            <option value="feed">Home Feed / Reel</option>
-                            <option value="movies">Movies / Web Series</option>
-                            <option value="products">Products</option>
-                            <option value="books">Books</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm mb-1 text-gray-400">Price / Tag (For Books/Products)</label>
-                        <input type="text" id="postPrice" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="e.g. ₹499 or Coming Soon">
-                    </div>
+                
+                <div>
+                    <label class="block text-sm mb-1 text-gray-400">Select Category</label>
+                    <select id="postCategory" onchange="handleCategoryChange(this.value)" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-red-500 text-sm">
+                        <option value="feed">Home (Upload Image & Video)</option>
+                        <option value="movies">Movies / Web Series (Banner & Name)</option>
+                        <option value="products">Products (Image, Name & Price)</option>
+                    </select>
+                </div>
+
+                <!-- Price Field (Only visible for Products) -->
+                <div id="priceFieldWrapper" class="hidden">
+                    <label class="block text-sm mb-1 text-gray-400">Product Price (₹)</label>
+                    <input type="text" id="postPrice" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="e.g. ₹999">
                 </div>
 
                 <div>
-                    <label class="block text-sm mb-1 text-gray-400">Direct Media File (Image / Video Banner)</label>
-                    <input type="file" id="mediaFile" accept="image/*,video/*" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700">
+                    <label class="block text-sm mb-1 text-gray-400">Upload Media (Image / Video)</label>
+                    <input type="file" id="mediaFile" accept="image/*,video/*" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700" required>
                 </div>
 
-                <!-- 6 Languages Title & Description Tabs -->
+                <!-- 6 Languages Title & Description Section -->
                 <div class="border-t border-gray-700 pt-4 space-y-4">
                     <h4 class="text-sm font-bold text-red-400 uppercase tracking-wider">Titles & Descriptions in 6 Languages:</h4>
                     
                     <!-- English -->
                     <div class="bg-gray-900/60 p-4 rounded-lg border border-gray-700 space-y-2">
                         <span class="text-xs font-bold text-red-400">1. English (Primary)</span>
-                        <input type="text" id="title_en" placeholder="English Title" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" required>
-                        <textarea id="desc_en" placeholder="English Description" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
+                        <input type="text" id="title_en" placeholder="English Title / Name" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" required>
+                        <textarea id="desc_en" placeholder="English Description (Optional for Movies)" rows="2" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm"></textarea>
                     </div>
 
                     <!-- Roman Hindi -->
@@ -167,7 +167,17 @@
             location.reload();
         });
 
-        // Publish Post with File Upload & 6 Languages
+        // Show/Hide Price field based on category
+        window.handleCategoryChange = function(cat) {
+            const priceWrapper = document.getElementById('priceFieldWrapper');
+            if (cat === 'products') {
+                priceWrapper.classList.remove('hidden');
+            } else {
+                priceWrapper.classList.add('hidden');
+            }
+        }
+
+        // Publish Post
         postForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const publishBtn = document.getElementById('publishBtn');
@@ -175,7 +185,7 @@
             publishBtn.disabled = true;
 
             const category = document.getElementById('postCategory').value;
-            const price = document.getElementById('postPrice').value || '';
+            const price = category === 'products' ? (document.getElementById('postPrice').value || '') : '';
             const fileInput = document.getElementById('mediaFile');
             
             let mediaUrl = "";
@@ -217,6 +227,7 @@
                 });
                 alert('Successfully Published!');
                 postForm.reset();
+                document.getElementById('priceFieldWrapper').classList.add('hidden');
                 loadManagePosts();
             } catch (error) {
                 alert('Error: ' + error.message);
@@ -226,7 +237,7 @@
             }
         });
 
-        // Load Manage Posts List (Edit, Unpublish, Delete)
+        // Load Manage Posts List
         async function loadManagePosts() {
             const container = document.getElementById('managePostsContainer');
             try {
@@ -246,7 +257,7 @@
                             <div>
                                 <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-gray-800 text-red-400">${post.category}</span>
                                 <h4 class="font-semibold text-white mt-1">${post.title}</h4>
-                                <p class="text-xs text-gray-400">Status: <span class="${statusColor}">${post.status || 'published'}</span> | Price: ${post.price || 'N/A'}</p>
+                                <p class="text-xs text-gray-400">Status: <span class="${statusColor}">${post.status || 'published'}</span> ${post.price ? '| Price: ' + post.price : ''}</p>
                             </div>
                             <div class="flex items-center space-x-2">
                                 <button onclick="togglePublish('${postId}', '${post.status}')" class="bg-yellow-600 hover:bg-yellow-700 px-3 py-1.5 rounded text-xs font-semibold">${post.status === 'unpublished' ? 'Publish' : 'Unpublish'}</button>
@@ -274,5 +285,5 @@
         }
     </script>
 </body>
-                            </html>
-                            
+                    </html>
+                    
