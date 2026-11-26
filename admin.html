@@ -32,18 +32,19 @@
 
     <!-- Main Admin Content -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-                <!-- Category Selector Tabs (Website Sections + All 6 About Sections Separately) -->
+        
+        <!-- Category Selector Tabs -->
         <div class="flex overflow-x-auto no-scrollbar space-x-2 pb-4 mb-6 border-b border-gray-200 dark:border-gray-800">
             <button onclick="switchTab('home')" id="tab_home" class="px-4 py-2 rounded-xl text-xs font-bold bg-red-600 text-white transition whitespace-nowrap">Home / Feed</button>
             <button onclick="switchTab('movie')" id="tab_movie" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Movies</button>
             <button onclick="switchTab('products')" id="tab_products" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Products</button>
             <button onclick="switchTab('book')" id="tab_book" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Books</button>
-            <button onclick="switchTab('about_personal')" id="tab_about_personal" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">👤 About: Personal</button>
-            <button onclick="switchTab('about_education')" id="tab_about_education" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🎓 About: Education</button>
-            <button onclick="switchTab('about_gallery')" id="tab_about_gallery" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🖼️ About: Gallery</button>
-            <button onclick="switchTab('about_feelings')" id="tab_about_feelings" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">💭 About: Feeling Moment</button>
-            <button onclick="switchTab('about_social')" id="tab_about_social" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🌐 About: Social Media</button>
-            <button onclick="switchTab('about_contact')" id="tab_about_contact" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">📞 About: Contact</button>
+            <button onclick="switchTab('about_personal')" id="tab_about_personal" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">👤 Personal Details</button>
+            <button onclick="switchTab('about_education')" id="tab_about_education" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🎓 Education</button>
+            <button onclick="switchTab('about_gallery')" id="tab_about_gallery" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🖼️ Gallery</button>
+            <button onclick="switchTab('about_feelings')" id="tab_about_feelings" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">💭 Feeling Moments</button>
+            <button onclick="switchTab('about_social')" id="tab_about_social" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🌐 Social Media</button>
+            <button onclick="switchTab('about_contact')" id="tab_about_contact" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">📞 Contact</button>
         </div>
 
         <!-- Content Form Box -->
@@ -53,15 +54,15 @@
             <form id="contentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <input type="hidden" id="editingId" value="">
 
-                <!-- Bilingual Titles (English & Roman Hindi) -->
+                <!-- Titles / Labels -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="titleFieldsContainer">
                     <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Title / Label (English)</label>
-                        <input type="text" id="titleEn" placeholder="e.g. Current Location or Title" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Field Name / Label (English)</label>
+                        <input type="text" id="titleEn" placeholder="e.g. Current Location, DOB, Height..." class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Title / Label (Roman Hindi)</label>
-                        <input type="text" id="titleHi" placeholder="Roman hindi mein title..." class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Field Name / Label (Roman Hindi)</label>
+                        <input type="text" id="titleHi" placeholder="Roman hindi mein heading..." class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                     </div>
                 </div>
 
@@ -95,18 +96,18 @@
                 <!-- Redirect / Social Link -->
                 <div id="linkFieldContainer" class="hidden">
                     <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Redirect / Social / Affiliate Link</label>
-                    <input type="url" id="postRedirectLink" placeholder="https://instagram.com/... or telegram link" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
+                    <input type="url" id="postRedirectLink" placeholder="https://... or link" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                 </div>
 
-                <!-- Bilingual Descriptions / Values -->
+                <!-- Descriptions / Values -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="descFieldsContainer">
                     <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Value / Description (English)</label>
-                        <textarea id="descEn" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none" placeholder="Enter details or description here..."></textarea>
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Your Answer / Details (English)</label>
+                        <textarea id="descEn" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none" placeholder="e.g. Bhubaneswar, Odisha..."></textarea>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Value / Description (Roman Hindi)</label>
-                        <textarea id="descHi" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none" placeholder="Roman hindi mein details likhein..."></textarea>
+                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Your Answer / Details (Roman Hindi)</label>
+                        <textarea id="descHi" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none" placeholder="Roman hindi mein details..."></textarea>
                     </div>
                 </div>
 
@@ -116,8 +117,8 @@
                     <button type="button" onclick="resetForm()" id="cancelEditBtn" class="hidden bg-gray-200 dark:bg-[#262626] text-gray-800 dark:text-gray-200 px-5 py-3 rounded-xl text-xs font-bold transition">Cancel Edit</button>
                 </div>
             </form>
-        </div>
-                <!-- Manager List -->
+    </div>
+            <!-- Manager List -->
         <div class="space-y-4">
             <h3 class="text-base font-bold text-gray-900 dark:text-white">Manage Uploads (<span id="totalPostsCount">0</span>)</h3>
             <div id="adminPostsList" class="space-y-3">
@@ -183,17 +184,17 @@
                 document.querySelector('input[name="mediaType"][value="image"]').checked = true;
             } else if (category === 'about_social' || category === 'about_contact') {
                 priceContainer.classList.add('hidden');
-                linkContainer.classList.remove('hidden'); // Show link for social/contact
+                linkContainer.classList.remove('hidden');
                 mediaTypeToggleBox.classList.add('hidden');
                 videoLinkBox.classList.add('hidden');
-                imageUploadBox.classList.remove('hidden'); // Optional logo/icon
+                imageUploadBox.classList.remove('hidden');
                 document.querySelector('input[name="mediaType"][value="image"]').checked = true;
             } else if (category === 'about_personal' || category === 'about_education') {
                 priceContainer.classList.add('hidden');
                 linkContainer.classList.add('hidden');
                 mediaTypeToggleBox.classList.add('hidden');
                 videoLinkBox.classList.add('hidden');
-                imageUploadBox.classList.add('hidden'); // No image needed for text info cards
+                imageUploadBox.classList.add('hidden');
             } else {
                 priceContainer.classList.add('hidden');
                 linkContainer.classList.add('hidden');
@@ -214,7 +215,8 @@
                 document.getElementById('videoLinkBox').classList.remove('hidden');
             }
         }
-                window.compressAndConvertImage = function(input) {
+
+        window.compressAndConvertImage = function(input) {
             const file = input.files[0];
             if (!file) return;
             const reader = new FileReader();
@@ -415,4 +417,5 @@
         loadAdminPosts();
     </script>
 </body>
-</html>
+    </html>
+    
