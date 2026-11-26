@@ -11,80 +11,76 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        /* Custom scrollbar for webkit browsers */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #404040; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
-        /* Fix for dark mode select dropdown */
-        select option { background-color: #171717; color: #ffffff; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-20 transition-colors duration-300 antialiased">
+<body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-24 transition-colors duration-300 antialiased">
     
-    <!-- Fixed Top Navigation Bar (Does not scroll away) -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 px-4 sm:px-6 py-3 shadow-sm">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <!-- Fixed Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-3 sm:px-6 py-3 shadow-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center gap-2 sm:gap-4">
             
-            <!-- Logo -->
-            <div class="flex items-center">
-                <a href="index.html" class="text-lg sm:text-xl font-bold tracking-wider text-red-600 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
+            <!-- Brand Logo (Single Line) -->
+            <div class="flex items-center shrink-0">
+                <a href="index.html" class="text-base sm:text-xl font-bold tracking-wider text-red-600 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
             </div>
 
-            <!-- Search Bar -->
-            <div class="hidden md:flex flex-1 max-w-sm mx-6">
-                <input type="text" id="searchInput" placeholder="Search content..." class="w-full bg-gray-50 dark:bg-[#171717] border border-gray-100 dark:border-gray-800 px-4 py-2 rounded-xl focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 text-xs dark:text-white placeholder-gray-400 transition-all">
-                <button class="bg-gray-100 dark:bg-[#262626] px-4 rounded-r-xl border border-l-0 border-gray-100 dark:border-gray-800 text-xs text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-[#333333] transition-all">🔍</button>
+            <!-- Desktop Search Bar -->
+            <div class="hidden md:flex flex-1 max-w-xs lg:max-w-sm mx-4">
+                <input type="text" id="searchInput" placeholder="Search content..." class="w-full bg-gray-100 dark:bg-[#171717] border border-gray-200 dark:border-gray-800 px-3.5 py-1.5 rounded-l-xl focus:outline-none focus:border-red-500 text-xs dark:text-white placeholder-gray-400">
+                <button class="bg-gray-200 dark:bg-[#262626] px-3.5 rounded-r-xl border border-l-0 border-gray-200 dark:border-gray-800 text-xs text-gray-600 dark:text-gray-400">🔍</button>
             </div>
 
-            <!-- Nav Links & Controls -->
-            <div class="flex items-center space-x-1 sm:space-x-2 text-sm font-medium">
-                <a href="index.html" class="text-red-600 dark:text-red-500 hidden lg:block text-xs font-semibold px-3 py-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30 transition-all" data-i18n="nav_home">Home</a>
-                <a href="about.html" class="text-gray-600 dark:text-gray-300 hidden lg:block text-xs font-semibold px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition-all" data-i18n="nav_about">About</a>
-                <a href="movie.html" class="text-gray-600 dark:text-gray-300 hidden lg:block text-xs font-semibold px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition-all" data-i18n="nav_movie">Movie</a>
-                <a href="products.html" class="text-gray-600 dark:text-gray-300 hidden lg:block text-xs font-semibold px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition-all" data-i18n="nav_products">Products</a>
-                <a href="book.html" class="text-gray-600 dark:text-gray-300 hidden lg:block text-xs font-semibold px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition-all" data-i18n="nav_book">Book</a>
-                <a href="chat.html" class="text-gray-600 dark:text-gray-300 hidden lg:block text-xs font-semibold px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition-all" data-i18n="nav_chat">Chat with AI ✨</a>
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-1 text-xs font-semibold">
+                <a href="index.html" class="text-red-600 dark:text-red-500 px-2.5 py-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30 transition" data-i18n="nav_home">Home</a>
+                <a href="about.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_about">About</a>
+                <a href="movie.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_movie">Movie</a>
+                <a href="products.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_products">Products</a>
+                <a href="book.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_book">Book</a>
+                <a href="chat.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition" data-i18n="nav_chat">Chat with AI</a>
+            </nav>
 
-                <!-- Translate Globe Logo + Dropdown (Dark Mode Fixed) -->
-                <div class="flex items-center bg-gray-50 dark:bg-[#171717] border border-gray-100 dark:border-gray-800 rounded-xl px-3 py-1.5 shadow-inner">
-                    <span class="text-xs mr-1.5">🌐</span>
-                    <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-transparent text-gray-800 dark:text-gray-200 text-xs focus:outline-none cursor-pointer font-medium appearance-none">
-                        <option value="en">English</option>
-                        <option value="roman_hi">Roman Hindi</option>
-                    </select>
-                    <svg class="w-3 h-3 text-gray-400 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <!-- Right Controls (Properly Spaced) -->
+            <div class="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
+                
+                <!-- Custom Dark-Mode Fixed Language Dropdown -->
+                <div class="relative" id="langDropdownContainer">
+                    <button type="button" onclick="toggleLangMenu()" class="flex items-center space-x-1.5 bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-800 rounded-xl px-2.5 py-1.5 text-xs font-medium hover:border-red-500 transition">
+                        <span>🌐</span>
+                        <span id="currentLangLabel">English</span>
+                        <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <!-- Custom Dropdown Menu (Matches Dark/Light Background) -->
+                    <div id="langMenu" class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-[#171717] border border-gray-200 dark:border-gray-800 rounded-xl shadow-xl overflow-hidden z-50">
+                        <button type="button" onclick="selectLanguage('en', 'English')" class="w-full text-left px-3.5 py-2.5 text-xs font-medium text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#262626] transition flex items-center justify-between">
+                            <span>English</span>
+                            <span id="check_en" class="text-red-500 font-bold">✓</span>
+                        </button>
+                        <button type="button" onclick="selectLanguage('roman_hi', 'Roman Hindi')" class="w-full text-left px-3.5 py-2.5 text-xs font-medium text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#262626] border-t border-gray-100 dark:border-gray-800 transition flex items-center justify-between">
+                            <span>Roman Hindi</span>
+                            <span id="check_roman_hi" class="text-red-500 font-bold hidden">✓</span>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Premium Day/Night Toggle Button -->
-                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-9 h-9 rounded-xl bg-gray-50 dark:bg-[#171717] border border-gray-100 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-[#262626] hover:scale-105 active:scale-95 transition-all shadow-sm" title="Toggle Theme">
-                    <span id="modeIcon" class="text-sm">🌙</span>
+                <!-- Day/Night Toggle Button -->
+                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-8 h-8 rounded-xl bg-gray-100 dark:bg-[#171717] border border-gray-200 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-[#262626] transition" title="Toggle Theme">
+                    <span id="modeIcon" class="text-xs">☀️</span>
                 </button>
 
-                <!-- Secure Ad Post Button (Password Modal) -->
-                <button onclick="openPasswordModal()" class="flex items-center space-x-1.5 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl text-white text-xs font-bold shadow-md transition hover:scale-105 active:scale-95 whitespace-nowrap" title="Admin Ad Post">
-                    <span>+</span>
+                <!-- Secure 'Ad Post +' Button -->
+                <button onclick="openPasswordModal()" class="flex items-center space-x-1 bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded-xl text-white text-xs font-bold shadow-sm transition whitespace-nowrap" title="Admin Panel">
                     <span>Ad Post</span>
+                    <span>+</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Password Modal Box -->
-    <div id="passwordModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 transition-opacity duration-300">
-        <div class="bg-gray-800 p-6 rounded-2xl shadow-2xl w-full max-w-sm border border-gray-700 transform transition-transform scale-95 duration-300">
-            <h3 class="text-lg font-bold text-red-500 mb-4 text-center">Admin Password</h3>
-            <input type="password" id="modalPassword" placeholder="Enter secret password" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-xl text-sm text-white mb-3 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500">
-            <div class="flex space-x-3">
-                <button onclick="verifyPassword()" class="flex-1 bg-red-600 hover:bg-red-700 py-3 rounded-xl text-xs font-bold text-white transition-all shadow">Submit</button>
-                <button onclick="closePasswordModal()" class="flex-1 bg-gray-700 hover:bg-gray-600 py-3 rounded-xl text-xs font-bold text-white transition-all">Cancel</button>
-            </div>
-            <p id="modalError" class="text-red-400 text-xs text-center mt-3 min-h-[16px]"></p>
-        </div>
-    </div>
-
-    <!-- Mobile Nav Bar Links -->
-    <div class="fixed top-[57px] left-0 w-full z-40 flex md:hidden overflow-x-auto space-x-4 px-4 py-3 bg-white dark:bg-[#0f0f0f] border-b border-gray-100 dark:border-gray-800 text-xs font-semibold whitespace-nowrap shadow-sm scrollbar-hide">
+    <!-- Mobile Horizontal Nav Bar -->
+    <div class="fixed top-[57px] left-0 w-full z-40 flex lg:hidden overflow-x-auto no-scrollbar space-x-4 px-4 py-2.5 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 text-xs font-semibold whitespace-nowrap">
         <a href="index.html" class="text-red-600 dark:text-red-500" data-i18n="nav_home">Home</a>
         <a href="about.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_about">About</a>
         <a href="movie.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_movie">Movie</a>
@@ -93,96 +89,89 @@
         <a href="chat.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_chat">Chat with AI</a>
     </div>
 
+    <!-- Password Modal Box -->
+    <div id="passwordModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+        <div class="bg-white dark:bg-[#171717] p-6 rounded-2xl shadow-2xl w-full max-w-sm border border-gray-200 dark:border-gray-800">
+            <h3 class="text-base font-bold text-red-600 dark:text-red-500 mb-4 text-center">Admin Verification</h3>
+            <input type="password" id="modalPassword" placeholder="Enter admin password" class="w-full p-3 bg-gray-100 dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-sm text-gray-900 dark:text-white mb-3 focus:outline-none focus:border-red-500">
+            <div class="flex space-x-2.5">
+                <button onclick="verifyPassword()" class="flex-1 bg-red-600 hover:bg-red-700 py-2.5 rounded-xl text-xs font-bold text-white transition">Submit</button>
+                <button onclick="closePasswordModal()" class="flex-1 bg-gray-200 dark:bg-[#262626] hover:bg-gray-300 dark:hover:bg-[#333333] py-2.5 rounded-xl text-xs font-bold text-gray-800 dark:text-gray-200 transition">Cancel</button>
+            </div>
+            <p id="modalError" class="text-red-500 text-xs text-center mt-2.5 min-h-[16px]"></p>
+        </div>
+    </div>
+
     <!-- Main Content Feed -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-10 mt-4">
-        <div class="flex justify-between items-center mb-8 border-b border-gray-100 dark:border-gray-800 pb-4">
-            <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white" data-i18n="latest_feed">Latest Uploads</h2>
-            <button onclick="openPasswordModal()" class="text-xs text-red-600 dark:text-red-500 hover:underline font-medium flex items-center lg:hidden">
-                + Ad Post
-            </button>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 mt-4">
+        <div class="flex justify-between items-center mb-6 border-b border-gray-200 dark:border-gray-800 pb-3">
+            <h2 class="text-lg sm:text-xl font-bold tracking-tight text-gray-900 dark:text-white" data-i18n="latest_feed">Latest Uploads</h2>
         </div>
         
-        <div id="postsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <!-- Post Skeleton Loader (while loading) -->
-            <div class="bg-gray-50 dark:bg-[#171717] p-6 rounded-3xl border border-gray-100 dark:border-gray-800 animate-pulse space-y-4">
-                <div class="h-48 bg-gray-200 dark:bg-[#262626] rounded-2xl w-full"></div>
-                <div class="flex justify-between items-center">
-                    <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-1/4"></div>
-                    <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-1/6"></div>
-                </div>
-                <div class="h-6 bg-gray-200 dark:bg-[#262626] rounded-lg w-3/4"></div>
-                <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-full"></div>
-                <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-2/3"></div>
-            </div>
-             <div class="bg-gray-50 dark:bg-[#171717] p-6 rounded-3xl border border-gray-100 dark:border-gray-800 animate-pulse space-y-4 hidden sm:block">
-                <div class="h-48 bg-gray-200 dark:bg-[#262626] rounded-2xl w-full"></div>
-                <div class="flex justify-between items-center">
-                    <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-1/4"></div>
-                    <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-1/6"></div>
-                </div>
-                <div class="h-6 bg-gray-200 dark:bg-[#262626] rounded-lg w-3/4"></div>
-                <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-full"></div>
-                 <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-2/3"></div>
-            </div>
-             <div class="bg-gray-50 dark:bg-[#171717] p-6 rounded-3xl border border-gray-100 dark:border-gray-800 animate-pulse space-y-4 hidden md:block">
-                <div class="h-48 bg-gray-200 dark:bg-[#262626] rounded-2xl w-full"></div>
-                <div class="flex justify-between items-center">
-                    <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-1/4"></div>
-                    <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-1/6"></div>
-                </div>
-                <div class="h-6 bg-gray-200 dark:bg-[#262626] rounded-lg w-3/4"></div>
-                <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-full"></div>
-                 <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded-md w-2/3"></div>
+        <div id="postsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="bg-gray-100 dark:bg-[#171717] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 animate-pulse space-y-3">
+                <div class="h-44 bg-gray-200 dark:bg-[#262626] rounded-xl w-full"></div>
+                <div class="h-4 bg-gray-200 dark:bg-[#262626] rounded w-1/3"></div>
+                <div class="h-5 bg-gray-200 dark:bg-[#262626] rounded w-3/4"></div>
             </div>
         </div>
 
-        <!-- Empty State Message -->
-        <div id="emptyState" class="hidden col-span-full text-center py-16 border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-3xl bg-gray-50 dark:bg-[#171717]">
-            <p class="text-base text-gray-500 dark:text-gray-400 mb-5 font-medium" data-i18n="no_posts">No posts yet.</p>
-             <button onclick="openPasswordModal()" class="inline-block text-sm bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg active:scale-95" data-i18n="admin_link">Create First Post</button>
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-14 border border-dashed border-gray-300 dark:border-gray-800 rounded-2xl bg-gray-50 dark:bg-[#171717]">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4" data-i18n="no_posts">No content published yet.</p>
+            <button onclick="openPasswordModal()" class="text-xs bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl font-bold transition shadow" data-i18n="admin_link">Ad Post +</button>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-100 dark:border-gray-800 py-12 text-center px-4 mt-10 bg-gray-50 dark:bg-[#171717]">
+    <footer class="border-t border-gray-200 dark:border-gray-800 py-8 text-center px-4 mt-12">
         <p class="text-xs text-gray-500 dark:text-gray-400">&copy; 2026 SK TALIB. All rights reserved.</p>
-         <p class="text-[10px] text-gray-400 dark:text-gray-600 mt-2">Crafted with passion by SK TALIB & Gemini AI</p>
-                                                                                                                                                                                                                            </footer>
-               <!-- Scripts -->
+                </footer>
+                    <!-- Scripts -->
     <script type="module">
-        // Firebase SDK Imports
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, getDocs, query, orderBy, where } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Firebase Configuration (Securely embedded)
-        const firebaseConfig = {
-            projectId: "mrsktalib-4ab8e"
-        };
+        const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Translation Dictionary
         const translations = {
             en: { 
-                nav_home: "Home", nav_about: "About", nav_movie: "Movie", nav_products: "Products", nav_book: "Book", nav_chat: "Chat with AI ✨",
-                latest_feed: "Latest Uploads", no_posts: "No content published yet.", admin_link: "Create First Post" 
+                nav_home: "Home", nav_about: "About", nav_movie: "Movie", nav_products: "Products", nav_book: "Book", nav_chat: "Chat with AI",
+                latest_feed: "Latest Uploads", no_posts: "No content published yet.", admin_link: "Ad Post +" 
             },
             roman_hi: { 
-                nav_home: "Home", nav_about: "About", nav_movie: "Movie", nav_products: "Products", nav_book: "Book", nav_chat: "Chat with AI ✨",
-                latest_feed: "Latest Uploads", no_posts: "Abhi tak koi content publish nahi hua hai.", admin_link: "Pehla Post Banayein" 
+                nav_home: "Home", nav_about: "About", nav_movie: "Movie", nav_products: "Products", nav_book: "Book", nav_chat: "Chat with AI",
+                latest_feed: "Latest Uploads", no_posts: "Abhi tak koi content publish nahi hua hai.", admin_link: "Ad Post +" 
             }
         };
 
-        // Language Management
         let currentLang = localStorage.getItem('site_lang') || 'en';
-        document.getElementById('langSelect').value = currentLang;
 
-        window.changeLanguage = function(lang) {
+        // Custom Dropdown Toggle & Selection
+        window.toggleLangMenu = function() {
+            document.getElementById('langMenu').classList.toggle('hidden');
+        }
+
+        window.selectLanguage = function(lang, label) {
             currentLang = lang;
             localStorage.setItem('site_lang', lang);
+            document.getElementById('currentLangLabel').innerText = label;
+            document.getElementById('check_en').classList.toggle('hidden', lang !== 'en');
+            document.getElementById('check_roman_hi').classList.toggle('hidden', lang !== 'roman_hi');
+            document.getElementById('langMenu').classList.add('hidden');
             applyTranslations();
-            loadPosts(); // Reload posts to show translated titles/descriptions
+            loadPosts();
         }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const container = document.getElementById('langDropdownContainer');
+            if (container && !container.contains(e.target)) {
+                document.getElementById('langMenu').classList.add('hidden');
+            }
+        });
 
         function applyTranslations() {
             const t = translations[currentLang] || translations.en;
@@ -190,20 +179,21 @@
                 const key = el.getAttribute('data-i18n');
                 if (t[key]) el.innerText = t[key];
             });
-            // Update placeholder for search input
-            document.getElementById('searchInput').placeholder = currentLang === 'en' ? "Search content..." : "Content khojein...";
+            document.getElementById('currentLangLabel').innerText = currentLang === 'roman_hi' ? 'Roman Hindi' : 'English';
+            document.getElementById('check_en').classList.toggle('hidden', currentLang !== 'en');
+            document.getElementById('check_roman_hi').classList.toggle('hidden', currentLang !== 'roman_hi');
         }
 
-        // Theme (Dark/Light Mode) Management
+        // Dark / Light Mode Toggle
         const html = document.documentElement;
         const modeIcon = document.getElementById('modeIcon');
 
-        if (localStorage.getItem('theme') === 'dark') {
-            html.classList.add('dark');
-            modeIcon.innerText = '☀️';
-        } else {
+        if (localStorage.getItem('theme') === 'light') {
             html.classList.remove('dark');
             modeIcon.innerText = '🌙';
+        } else {
+            html.classList.add('dark');
+            modeIcon.innerText = '☀️';
         }
 
         window.toggleDarkMode = function() {
@@ -218,107 +208,98 @@
             }
         }
 
-        // Password Modal Logic (for Admin Access)
+        // Password Modal Logic
         window.openPasswordModal = function() {
             document.getElementById('passwordModal').classList.remove('hidden');
-            setTimeout(() => {
-                document.getElementById('passwordModal').firstElementChild.classList.remove('scale-95');
-                 document.getElementById('modalPassword').focus();
-            }, 10);
+            document.getElementById('modalPassword').value = '';
+            document.getElementById('modalError').innerText = '';
+            setTimeout(() => document.getElementById('modalPassword').focus(), 50);
         }
 
         window.closePasswordModal = function() {
-            document.getElementById('passwordModal').firstElementChild.classList.add('scale-95');
-            setTimeout(() => {
-                document.getElementById('passwordModal').classList.add('hidden');
-            }, 300);
+            document.getElementById('passwordModal').classList.add('hidden');
         }
 
         window.verifyPassword = function() {
             const pass = document.getElementById('modalPassword').value.trim();
-            const errorMsg = document.getElementById('modalError');
             if (pass === 'SKTALIB@9037') {
                 sessionStorage.setItem('isAdmin', 'true');
                 window.location.href = 'admin.html';
             } else {
-                errorMsg.innerText = 'Incorrect Password! Please try again.';
-                 document.getElementById('modalPassword').value = '';
+                document.getElementById('modalError').innerText = 'Incorrect Password!';
+                document.getElementById('modalPassword').value = '';
             }
         }
-        
-        // Allow 'Enter' key to submit password modal
+
         document.getElementById('modalPassword').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') { verifyPassword(); }
+            if (e.key === 'Enter') verifyPassword();
         });
 
-        // Firestore Data Loading & Rendering
+        // Load Posts from Firestore (No Composite Index Needed)
         async function loadPosts() {
             const container = document.getElementById('postsContainer');
             const emptyState = document.getElementById('emptyState');
             
             try {
-                const postsRef = collection(db, "posts");
-                // Query only published posts, ordered by creation date (newest first)
-                const q = query(postsRef, where("status", "==", "published"), orderBy("createdAt", "desc"));
+                const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
                 const querySnapshot = await getDocs(q);
+                
+                let validPosts = [];
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    if (data.status !== 'unpublished') validPosts.push(data);
+                });
 
-                if(querySnapshot.empty) {
-                    container.innerHTML = ""; // Clear skeletons
+                if (validPosts.length === 0) {
+                    container.innerHTML = "";
                     emptyState.classList.remove('hidden');
                     return;
                 }
 
                 emptyState.classList.add('hidden');
-                container.innerHTML = ""; // Clear skeletons
+                container.innerHTML = "";
 
-                querySnapshot.forEach((doc) => {
-                    const post = doc.data();
-                    
-                    // Fallback to 'en' or raw title if translation is missing
-                    const title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : post.title;
+                validPosts.forEach((post) => {
+                    const title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : (post.title || 'Untitled');
                     const desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : '';
 
                     let mediaContent = "";
-                    if(post.mediaType === 'video_link') {
+                    if (post.mediaType === 'video_link' && post.media) {
                         const rawUrl = post.media;
                         let embedUrl = rawUrl;
-                        // Handle Video Embed URLs (YouTube, Instagram, Facebook)
-                        if(rawUrl.includes('youtube.com') || rawUrl.includes('youtu.be')) {
+                        if (rawUrl.includes('youtube.com') || rawUrl.includes('youtu.be')) {
                             let ytId = rawUrl.includes('v=') ? rawUrl.split('v=')[1].split('&')[0] : rawUrl.split('/').pop();
-                            embedUrl = `https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1`;
-                        } else if(rawUrl.includes('instagram.com')) {
+                            embedUrl = `https://www.youtube.com/embed/${ytId}?rel=0`;
+                        } else if (rawUrl.includes('instagram.com')) {
                             embedUrl = rawUrl.endsWith('/') ? rawUrl + 'embed/' : rawUrl + '/embed/';
                         }
-                        mediaContent = `<div class="relative aspect-video w-full bg-black rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800"><iframe class="w-full h-full" src="${embedUrl}" frameborder="0" allowfullscreen loading="lazy"></iframe></div>`;
-                    } else if(post.media) {
-                        mediaContent = `<img src="${post.media}" class="w-full h-48 object-cover rounded-2xl border border-gray-100 dark:border-gray-800" alt="${post.title}" loading="lazy">`;
+                        mediaContent = `<div class="relative aspect-video w-full bg-black rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800"><iframe class="w-full h-full" src="${embedUrl}" frameborder="0" allowfullscreen loading="lazy"></iframe></div>`;
+                    } else if (post.media) {
+                        mediaContent = `<img src="${post.media}" class="w-full h-48 object-cover rounded-xl border border-gray-200 dark:border-gray-800" alt="${title}" loading="lazy">`;
                     }
 
-                    // Post Card HTML Template
                     container.innerHTML += `
-                        <article class="bg-white dark:bg-[#171717] p-6 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col">
+                        <article class="bg-white dark:bg-[#171717] p-5 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm hover:shadow-md transition flex flex-col">
                             ${mediaContent}
-                            <div class="pt-5 flex-grow">
-                                <div class="flex justify-between items-center mb-3">
-                                    <span class="text-[10px] tracking-wider uppercase bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-bold px-3 py-1 rounded-full">${post.category || 'Feed'}</span>
-                                    ${post.price ? `<span class="text-sm font-bold text-green-600 dark:text-green-500">${post.price}</span>` : ''}
+                            <div class="pt-4 flex-grow">
+                                <div class="flex justify-between items-center mb-2.5">
+                                    <span class="text-[10px] tracking-wider uppercase bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-bold px-2.5 py-0.5 rounded-full">${post.category || 'Feed'}</span>
+                                    ${post.price ? `<span class="text-xs font-bold text-green-600 dark:text-green-500">${post.price}</span>` : ''}
                                 </div>
-                                <h3 class="font-semibold text-lg leading-snug mb-3 text-gray-900 dark:text-white hover:text-red-600 dark:hover:text-red-500 transition-colors">${title}</h3>
+                                <h3 class="font-semibold text-base sm:text-lg leading-snug mb-2 text-gray-900 dark:text-white">${title}</h3>
                                 ${desc ? `<p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-3 leading-relaxed">${desc}</p>` : ''}
                             </div>
                         </article>
                     `;
                 });
             } catch (err) {
-                console.error("Error loading posts:", err);
-                container.innerHTML = `<p class="text-red-500 col-span-full text-center p-10 bg-red-50 dark:bg-red-950/30 rounded-3xl">Failed to load content. Please check your connection or Firebase configuration.</p>`;
+                console.error("Load error:", err);
+                container.innerHTML = `<p class="text-red-500 text-xs col-span-full text-center py-8">Unable to load posts. Check Firebase connection.</p>`;
             }
         }
 
-        // Initialize
         applyTranslations();
         loadPosts();
-
     </script>
 </body>
 </html>
