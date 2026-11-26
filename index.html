@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SK TALIB - Personal Website</title>
+    <title>SK TALIB - Home Feed</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' }
@@ -34,7 +34,7 @@
                 <a href="chat.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Chat with AI</a>
             </nav>
 
-            <!-- Right Controls -->
+            <!-- Right Controls: Translate & Theme -->
             <div class="flex items-center space-x-2.5 shrink-0">
                 <div class="relative" id="langDropdownContainer">
                     <button type="button" onclick="toggleLangMenu()" class="flex items-center space-x-1.5 bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-800 rounded-xl px-2.5 py-1.5 text-xs font-medium hover:border-red-500 transition">
@@ -71,28 +71,13 @@
         <a href="chat.html" class="text-gray-600 dark:text-gray-400">Chat with AI</a>
     </div>
 
-    <!-- Main Content Container -->
+    <!-- Main Home Feed Container -->
     <main class="max-w-2xl mx-auto px-4 py-6">
         <h2 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">Latest Feed</h2>
         <div id="homeFeedContainer" class="space-y-4">
             <p class="text-xs text-gray-500 text-center py-8">Loading feed...</p>
         </div>
     </main>
-
-    <!-- Floating Admin Button (+) -->
-    <button onclick="openAdminModal()" class="fixed bottom-6 right-6 w-12 h-12 bg-red-600 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl font-bold hover:bg-red-700 transition z-50">+</button>
-
-    <!-- Admin Login Modal -->
-    <div id="adminModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-[#171717] p-6 rounded-3xl w-full max-w-sm border border-gray-200 dark:border-gray-800 shadow-2xl">
-            <h3 class="text-sm font-bold mb-3 text-gray-900 dark:text-white">Admin Access</h3>
-            <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full p-3 bg-gray-100 dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs mb-3 focus:outline-none focus:border-red-500">
-            <div class="flex space-x-2">
-                <button onclick="verifyAdmin()" class="flex-1 bg-red-600 text-white py-2.5 rounded-xl text-xs font-bold hover:bg-red-700 transition">Login</button>
-                <button onclick="closeAdminModal()" class="flex-1 bg-gray-200 dark:bg-[#262626] text-gray-800 dark:text-gray-200 py-2.5 rounded-xl text-xs font-bold transition">Cancel</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-gray-800 py-8 text-center px-4 mt-12 mb-16">
@@ -154,24 +139,6 @@
             }
         }
 
-        window.openAdminModal = function() {
-            document.getElementById('adminModal').classList.remove('hidden');
-        }
-
-        window.closeAdminModal = function() {
-            document.getElementById('adminModal').classList.add('hidden');
-        }
-
-        window.verifyAdmin = function() {
-            const pass = document.getElementById('adminPassInput').value;
-            if (pass === 'SKTALIB@9037') {
-                sessionStorage.setItem('isAdmin', 'true');
-                window.location.href = 'admin.html';
-            } else {
-                alert('Incorrect Password!');
-            }
-        }
-
         async function loadHomeFeed() {
             const container = document.getElementById('homeFeedContainer');
             if (!container) return;
@@ -180,7 +147,6 @@
                 let posts = [];
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
-                    // STRICTLY load ONLY 'home' category posts
                     if (data.category === 'home' && data.status !== 'unpublished') {
                         posts.push({ id: doc.id, ...data });
                     }
@@ -223,5 +189,5 @@
         loadHomeFeed();
     </script>
 </body>
-                </html>
-                
+    </html>
+    
