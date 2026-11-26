@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SK TALIB - Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen font-sans">
+<body class="bg-gray-900 text-white min-h-screen">
     <!-- Login Section -->
     <div id="loginSection" class="flex items-center justify-center min-h-screen p-4">
         <div class="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-md border border-gray-700">
@@ -36,14 +40,10 @@
         </div>
 
         <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 mb-8">
-            <h3 class="text-xl font-semibold mb-4">Add New Post / Video</h3>
+            <h3 class="text-xl font-semibold mb-4">Add New Post (Multi-Language)</h3>
             <form id="postForm" class="space-y-4">
                 <div>
-                    <label class="block text-sm mb-1 text-gray-400">Title</label>
-                    <input type="text" id="postTitle" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-red-500" placeholder="Video or Post Title" required>
-                </div>
-                <div>
-                    <label class="block text-sm mb-1 text-gray-400">Media URL (YouTube link / Image / Cloudinary)</label>
+                    <label class="block text-sm mb-1 text-gray-400">Media URL (YouTube / Image link)</label>
                     <input type="text" id="postMedia" class="w-full p-3 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:border-red-500" placeholder="Paste link here" required>
                 </div>
                 <div>
@@ -55,6 +55,36 @@
                         <option value="books">Books</option>
                     </select>
                 </div>
+
+                <!-- 6 Language Title Inputs -->
+                <div class="border-t border-gray-700 pt-4 space-y-3">
+                    <h4 class="text-sm font-semibold text-red-400">Enter Title in 6 Languages:</h4>
+                    <div>
+                        <label class="block text-xs mb-1 text-gray-400">English Title</label>
+                        <input type="text" id="title_en" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="Title in English" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs mb-1 text-gray-400">Roman Hindi Title</label>
+                        <input type="text" id="title_roman_hi" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="Title in Roman Hindi">
+                    </div>
+                    <div>
+                        <label class="block text-xs mb-1 text-gray-400">Hindi Title (हिन्दी)</label>
+                        <input type="text" id="title_hi" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="हिन्दी में टाइटल">
+                    </div>
+                    <div>
+                        <label class="block text-xs mb-1 text-gray-400">Urdu Title (اردو)</label>
+                        <input type="text" id="title_ur" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="اردو میں عنوان">
+                    </div>
+                    <div>
+                        <label class="block text-xs mb-1 text-gray-400">Bengali Title (বাংলা)</label>
+                        <input type="text" id="title_bn" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="বাংলায় শিরোনাম">
+                    </div>
+                    <div>
+                        <label class="block text-xs mb-1 text-gray-400">Odia Title (ଓଡ଼ିଆ)</label>
+                        <input type="text" id="title_or" class="w-full p-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm" placeholder="ଓଡ଼ିଆରେ शिर्ଷକ">
+                    </div>
+                </div>
+
                 <button type="submit" class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-lg font-bold transition w-full">Publish to Website</button>
             </form>
         </div>
@@ -106,18 +136,27 @@
 
         postForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const title = document.getElementById('postTitle').value;
             const media = document.getElementById('postMedia').value;
             const category = document.getElementById('postCategory').value;
 
+            const titles = {
+                en: document.getElementById('title_en').value,
+                roman_hi: document.getElementById('title_roman_hi').value || document.getElementById('title_en').value,
+                hi: document.getElementById('title_hi').value || document.getElementById('title_en').value,
+                ur: document.getElementById('title_ur').value || document.getElementById('title_en').value,
+                bn: document.getElementById('title_bn').value || document.getElementById('title_en').value,
+                or: document.getElementById('title_or').value || document.getElementById('title_en').value
+            };
+
             try {
                 await addDoc(collection(db, "posts"), {
-                    title,
+                    title: titles.en, // default fallback
+                    titles: titles,   // all 6 languages
                     media,
                     category,
                     createdAt: new Date()
                 });
-                alert('Successfully Published!');
+                alert('Successfully Published in 6 Languages!');
                 postForm.reset();
             } catch (error) {
                 alert('Error adding post: ' + error.message);
@@ -125,5 +164,5 @@
         });
     </script>
 </body>
-  </html>
-  
+                            </html>
+                            
