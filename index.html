@@ -12,29 +12,11 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         
-        /* Hide Google Translate top banner, tooltips & forced body margin */
+        /* Hide all Google Translate default banners & UI completely */
         .goog-te-banner-frame { display: none !important; }
         .goog-tooltip { display: none !important; }
         body { top: 0 !important; position: static !important; }
-        #google_translate_element { display: none; }
-        
-        /* Custom Clean Select Dropdown */
-        .custom-translate {
-            background-color: transparent;
-            border: 1px solid rgba(156, 163, 175, 0.4);
-            padding: 5px 10px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 500;
-            outline: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .dark .custom-translate {
-            border-color: rgba(75, 85, 99, 0.6);
-            color: #f3f4f6;
-            background-color: #1f2937;
-        }
+        #google_translate_element { display: none !important; }
     </style>
 </head>
 <body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
@@ -43,7 +25,7 @@
     <header class="sticky top-0 z-50 bg-white/90 dark:bg-[#0f0f0f]/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-3">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             
-            <!-- Logo (Single Line Fixed) -->
+            <!-- Logo (Fixed on single line) -->
             <div class="flex items-center">
                 <a href="index.html" class="text-lg sm:text-xl font-bold tracking-wider text-red-600 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
             </div>
@@ -62,22 +44,23 @@
                 <a href="movies.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold">Movies</a>
                 <a href="about.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold">About</a>
 
-                <!-- Custom Compact Translate Dropdown -->
-                <select id="customTranslateSelect" onchange="changeLanguage(this.value)" class="custom-translate">
-                    <option value="en">English</option>
-                    <option value="hi">हिंदी (Hindi)</option>
-                    <option value="ur">اردو (Urdu)</option>
-                    <option value="bn">বাংলা (Bengali)</option>
-                    <option value="or">ଓଡ଼ିଆ (Odia)</option>
-                    <option value="ar">العربية (Arabic)</option>
-                    <option value="es">Español (Spanish)</option>
-                    <option value="fr">Français (French)</option>
-                    <option value="de">Deutsch (German)</option>
-                    <option value="zh-CN">中文 (Chinese)</option>
-                    <option value="ja">日本語 (Japanese)</option>
-                </select>
+                <!-- Custom Premium Translate Dropdown -->
+                <div class="relative">
+                    <select id="customLangSelect" onchange="triggerGoogleTranslate(this.value)" class="bg-gray-100 dark:bg-[#1f2937] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 text-xs rounded-xl px-3 py-2 focus:outline-none cursor-pointer font-medium shadow-sm transition hover:border-red-500">
+                        <option value="en">🌐 English</option>
+                        <option value="hi-Latn">Roman Hindi</option>
+                        <option value="hi">हिंदी (Hindi)</option>
+                        <option value="ur">اردو (Urdu)</option>
+                        <option value="or">ଓଡ଼ିଆ (Odia)</option>
+                        <option value="bn">বাংলা (Bengali)</option>
+                        <option value="ar">العربية (Arabic)</option>
+                        <option value="es">Español (Spanish)</option>
+                        <option value="fr">Français (French)</option>
+                        <option value="zh-CN">中文 (Chinese)</option>
+                    </select>
+                </div>
 
-                <!-- Hidden Google Translate Container -->
+                <!-- Hidden Google Translate Element to process translation engine -->
                 <div id="google_translate_element"></div>
 
                 <!-- Premium Glowing Glass Day/Night Toggle Button -->
@@ -120,16 +103,17 @@
         <p>&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
 
-    <!-- Google Translate Script Setup -->
+    <!-- Google Translate Script & Custom Trigger -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
+                includedLanguages: 'en,hi,ur,or,bn,ar,es,fr,zh-CN',
                 autoDisplay: false
             }, 'google_translate_element');
         }
 
-        function changeLanguage(langCode) {
+        function triggerGoogleTranslate(langCode) {
             var tbl = ['/auto/' + langCode, '/en/' + langCode];
             document.cookie = 'googtrans=' + tbl[1] + ';path=/;domain=' + document.domain;
             document.cookie = 'googtrans=' + tbl[1] + ';path=/';
@@ -218,5 +202,5 @@
         loadPosts();
     </script>
 </body>
-                    </html>
+    </html>
     
