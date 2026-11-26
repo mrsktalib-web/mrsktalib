@@ -11,67 +11,88 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        /* Hide default Google Translate banner elements */
+        
+        /* Hide Google Translate top banner, tooltips & forced body margin */
         .goog-te-banner-frame { display: none !important; }
         .goog-tooltip { display: none !important; }
-        body { top: 0 !important; }
-        #google_translate_element { display: none; } /* Hide raw widget, use custom dropdown */
+        body { top: 0 !important; position: static !important; }
+        #google_translate_element { display: none; }
+        
+        /* Custom Clean Select Dropdown */
+        .custom-translate {
+            background-color: transparent;
+            border: 1px solid rgba(156, 163, 175, 0.4);
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 500;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .dark .custom-translate {
+            border-color: rgba(75, 85, 99, 0.6);
+            color: #f3f4f6;
+            background-color: #1f2937;
+        }
     </style>
 </head>
 <body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
     
     <!-- Top Navigation Bar -->
-    <header class="sticky top-0 z-50 bg-white/90 dark:bg-[#0f0f0f]/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-6 py-3">
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-[#0f0f0f]/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-3">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             
-            <!-- Logo -->
-            <div class="flex items-center space-x-3">
-                <a href="index.html" class="text-xl font-bold tracking-wider text-red-600">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
+            <!-- Logo (Single Line Fixed) -->
+            <div class="flex items-center">
+                <a href="index.html" class="text-lg sm:text-xl font-bold tracking-wider text-red-600 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
             </div>
 
             <!-- Search Bar -->
-            <div class="hidden md:flex flex-1 max-w-md mx-6">
-                <input type="text" id="searchInput" placeholder="Search videos, movies, books..." class="w-full bg-gray-100 dark:bg-[#1a1a1a] border border-gray-300 dark:border-gray-800 px-4 py-2 rounded-l-full focus:outline-none text-sm">
-                <button class="bg-gray-200 dark:bg-[#262626] px-6 rounded-r-full border border-l-0 border-gray-300 dark:border-gray-800 text-sm">🔍</button>
+            <div class="hidden md:flex flex-1 max-w-sm mx-6">
+                <input type="text" id="searchInput" placeholder="Search videos, movies, books..." class="w-full bg-gray-100 dark:bg-[#1a1a1a] border border-gray-300 dark:border-gray-800 px-4 py-1.5 rounded-l-full focus:outline-none text-xs">
+                <button class="bg-gray-200 dark:bg-[#262626] px-4 rounded-r-full border border-l-0 border-gray-300 dark:border-gray-800 text-xs">🔍</button>
             </div>
 
             <!-- Nav Links & Controls -->
-            <div class="flex items-center space-x-3 sm:space-x-4 text-sm font-medium">
-                <a href="index.html" class="text-red-600 hover:text-red-500 hidden lg:block">Home</a>
-                <a href="product.html" class="hover:text-red-500 hidden lg:block">Products</a>
-                <a href="book.html" class="hover:text-red-500 hidden lg:block">Books</a>
-                <a href="movies.html" class="hover:text-red-500 hidden lg:block">Movies</a>
-                <a href="about.html" class="hover:text-red-500 hidden lg:block">About</a>
+            <div class="flex items-center space-x-2 sm:space-x-3 text-sm font-medium">
+                <a href="index.html" class="text-red-600 hover:text-red-500 hidden lg:block text-xs font-semibold">Home</a>
+                <a href="product.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold">Products</a>
+                <a href="book.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold">Books</a>
+                <a href="movies.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold">Movies</a>
+                <a href="about.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold">About</a>
 
-                <!-- Custom Premium Translate Dropdown -->
-                <select id="customTranslateSelect" onchange="changeLanguage(this.value)" class="bg-gray-100 dark:bg-[#1f2937] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 text-xs rounded-xl px-3 py-2 focus:outline-none cursor-pointer font-medium shadow-sm transition hover:border-red-500">
-                    <option value="en">English (Default)</option>
-                    <option value="hi">Hindi (हिन्दी)</option>
-                    <option value="ur">Urdu (اردو)</option>
-                    <option value="bn">Bengali (বাংলা)</option>
-                    <option value="or">Odia (ଓଡ଼ିଆ)</option>
-                    <option value="ar">Arabic (العربية)</option>
-                    <option value="es">Spanish (Español)</option>
-                    <option value="fr">French (Français)</option>
-                    <option value="de">German (Deutsch)</option>
+                <!-- Custom Compact Translate Dropdown -->
+                <select id="customTranslateSelect" onchange="changeLanguage(this.value)" class="custom-translate">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी (Hindi)</option>
+                    <option value="ur">اردو (Urdu)</option>
+                    <option value="bn">বাংলা (Bengali)</option>
+                    <option value="or">ଓଡ଼ିଆ (Odia)</option>
+                    <option value="ar">العربية (Arabic)</option>
+                    <option value="es">Español (Spanish)</option>
+                    <option value="fr">Français (French)</option>
+                    <option value="de">Deutsch (German)</option>
+                    <option value="zh-CN">中文 (Chinese)</option>
+                    <option value="ja">日本語 (Japanese)</option>
                 </select>
 
-                <!-- Hidden Google Translate Element for backend working -->
+                <!-- Hidden Google Translate Container -->
                 <div id="google_translate_element"></div>
 
-                <!-- Premium Day/Night Toggle Button -->
-                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-9 h-9 rounded-xl bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:scale-105 transition shadow-sm" title="Toggle Theme">
-                    <span id="modeIcon" class="text-base">🌙</span>
+                <!-- Premium Glowing Glass Day/Night Toggle Button -->
+                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700 hover:scale-110 active:scale-95 transition-all shadow-sm" title="Toggle Theme">
+                    <span id="modeIcon" class="text-sm">🌙</span>
                 </button>
 
                 <!-- Admin Link -->
-                <a href="admin.html" class="text-xs bg-red-600 hover:bg-red-700 text-white px-3.5 py-2 rounded-lg font-semibold transition shadow-md">Admin</a>
+                <a href="admin.html" class="text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg font-semibold transition shadow-md whitespace-nowrap">Admin</a>
             </div>
         </div>
     </header>
 
     <!-- Mobile Nav Bar Links -->
-    <div class="flex md:hidden overflow-x-auto space-x-4 px-6 py-2 bg-gray-50 dark:bg-[#151515] border-b border-gray-200 dark:border-gray-800 text-xs font-semibold whitespace-nowrap">
+    <div class="flex md:hidden overflow-x-auto space-x-4 px-4 py-2 bg-gray-50 dark:bg-[#151515] border-b border-gray-200 dark:border-gray-800 text-xs font-semibold whitespace-nowrap">
         <a href="index.html" class="text-red-600">Home</a>
         <a href="product.html" class="text-gray-600 dark:text-gray-400">Products</a>
         <a href="book.html" class="text-gray-600 dark:text-gray-400">Books</a>
@@ -108,9 +129,7 @@
             }, 'google_translate_element');
         }
 
-        // Trigger Google Translate Cookie Change
         function changeLanguage(langCode) {
-            var useCookie = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
             var tbl = ['/auto/' + langCode, '/en/' + langCode];
             document.cookie = 'googtrans=' + tbl[1] + ';path=/;domain=' + document.domain;
             document.cookie = 'googtrans=' + tbl[1] + ';path=/';
@@ -131,14 +150,14 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Premium Day/Night Mode Toggle Function
+        // Premium Smooth Day/Night Toggle Function
         function toggleDarkMode() {
             const html = document.documentElement;
             const modeIcon = document.getElementById('modeIcon');
             const btn = document.getElementById('themeToggleBtn');
             
-            btn.style.transform = 'rotate(360deg)';
-            setTimeout(() => { btn.style.transform = 'rotate(0deg)'; }, 300);
+            btn.style.transform = 'rotate(360deg) scale(1.1)';
+            setTimeout(() => { btn.style.transform = 'rotate(0deg) scale(1)'; }, 300);
 
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
@@ -154,7 +173,7 @@
         }
         window.toggleDarkMode = toggleDarkMode;
 
-        // Check saved theme preference
+        // Check saved theme preference on load
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.classList.add('dark');
             document.getElementById('modeIcon').innerText = '☀️';
@@ -199,5 +218,5 @@
         loadPosts();
     </script>
 </body>
-    </html>
+                    </html>
     
