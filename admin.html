@@ -17,7 +17,6 @@
 </head>
 <body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-24 transition-colors duration-300 antialiased">
     
-    <!-- Fixed Top Navigation Bar -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-3 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
@@ -30,40 +29,29 @@
         </div>
     </header>
 
-    <!-- Main Admin Content -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-        
-        <!-- Category Selector Tabs -->
-        <div class="flex overflow-x-auto no-scrollbar space-x-2 pb-4 mb-6 border-b border-gray-200 dark:border-gray-800">
+            <div class="flex overflow-x-auto no-scrollbar space-x-2 pb-4 mb-6 border-b border-gray-200 dark:border-gray-800">
             <button onclick="switchTab('home')" id="tab_home" class="px-4 py-2 rounded-xl text-xs font-bold bg-red-600 text-white transition whitespace-nowrap">Home / Feed</button>
             <button onclick="switchTab('movie')" id="tab_movie" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Movies</button>
             <button onclick="switchTab('products')" id="tab_products" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Products</button>
             <button onclick="switchTab('book')" id="tab_book" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">Books</button>
-            <button onclick="switchTab('about_personal')" id="tab_about_personal" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">👤 Personal Details</button>
+            <button onclick="switchTab('about_personal')" id="tab_about_personal" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">👤 Personal</button>
             <button onclick="switchTab('about_education')" id="tab_about_education" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🎓 Education</button>
             <button onclick="switchTab('about_gallery')" id="tab_about_gallery" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🖼️ Gallery</button>
             <button onclick="switchTab('about_feelings')" id="tab_about_feelings" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">💭 Feeling Moments</button>
             <button onclick="switchTab('about_social')" id="tab_about_social" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">🌐 Social Media</button>
             <button onclick="switchTab('about_contact')" id="tab_about_contact" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition whitespace-nowrap">📞 Contact</button>
-        </div>
-
-        <!-- Content Form Box -->
-        <div class="bg-gray-50 dark:bg-[#171717] p-6 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm mb-10">
-            <h3 id="formTitle" class="text-base font-bold mb-4 text-gray-900 dark:text-white">Add New Post</h3>
+            </div>
+                    <div class="bg-gray-50 dark:bg-[#171717] p-6 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm mb-10">
+            <h3 id="formTitle" class="text-base font-bold mb-4 text-gray-900 dark:text-white">Add New Item</h3>
             
             <form id="contentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <input type="hidden" id="editingId" value="">
 
-                <!-- Titles / Labels -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="titleFieldsContainer">
-                    <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Field Name / Label (English)</label>
-                        <input type="text" id="titleEn" placeholder="e.g. Current Location, DOB, Height..." class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Field Name / Label (Roman Hindi)</label>
-                        <input type="text" id="titleHi" placeholder="Roman hindi mein heading..." class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
-                    </div>
+                <!-- Title Field (English Only for About sections) -->
+                <div id="titleSingleContainer">
+                    <label id="titleLabelText" class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Title / Label (English)</label>
+                    <input type="text" id="titleEn" placeholder="e.g. Current Location, DOB, Height..." class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                 </div>
 
                 <!-- Price / Badge Field -->
@@ -89,36 +77,28 @@
                     </div>
 
                     <div id="videoLinkBox" class="hidden">
-                        <input type="url" id="videoLinkInput" placeholder="Paste YouTube, Instagram or video URL" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
+                        <input type="url" id="videoLinkInput" placeholder="Paste YouTube or video URL" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                     </div>
                 </div>
 
                 <!-- Redirect / Social Link -->
                 <div id="linkFieldContainer" class="hidden">
-                    <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Redirect / Social / Affiliate Link</label>
-                    <input type="url" id="postRedirectLink" placeholder="https://... or link" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
+                    <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Redirect / Social Link</label>
+                    <input type="url" id="postRedirectLink" placeholder="https://instagram.com/... or mailto:..." class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500">
                 </div>
 
-                <!-- Descriptions / Values -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="descFieldsContainer">
-                    <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Your Answer / Details (English)</label>
-                        <textarea id="descEn" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none" placeholder="e.g. Bhubaneswar, Odisha..."></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Your Answer / Details (Roman Hindi)</label>
-                        <textarea id="descHi" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none" placeholder="Roman hindi mein details..."></textarea>
-                    </div>
+                <!-- Description / Value Field (English Only) -->
+                <div id="descSingleContainer">
+                    <label id="descLabelText" class="block text-xs font-semibold mb-1 text-gray-600 dark:text-gray-400">Value / Description (English)</label>
+                    <textarea id="descEn" rows="3" class="w-full p-3 bg-white dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs focus:outline-none focus:border-red-500 resize-none" placeholder="Enter details here..."></textarea>
                 </div>
-
-                <!-- Submit Button -->
-                <div class="flex items-center space-x-3 pt-2">
+                                <div class="flex items-center space-x-3 pt-2">
                     <button type="submit" id="submitBtn" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl text-xs font-bold transition shadow">Publish Item</button>
                     <button type="button" onclick="resetForm()" id="cancelEditBtn" class="hidden bg-gray-200 dark:bg-[#262626] text-gray-800 dark:text-gray-200 px-5 py-3 rounded-xl text-xs font-bold transition">Cancel Edit</button>
                 </div>
             </form>
-    </div>
-            <!-- Manager List -->
+        </div>
+
         <div class="space-y-4">
             <h3 class="text-base font-bold text-gray-900 dark:text-white">Manage Uploads (<span id="totalPostsCount">0</span>)</h3>
             <div id="adminPostsList" class="space-y-3">
@@ -126,9 +106,7 @@
             </div>
         </div>
     </main>
-
-    <!-- Scripts -->
-    <script type="module">
+        <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -187,7 +165,7 @@
                 linkContainer.classList.remove('hidden');
                 mediaTypeToggleBox.classList.add('hidden');
                 videoLinkBox.classList.add('hidden');
-                imageUploadBox.classList.remove('hidden');
+                imageUploadBox.classList.remove('hidden'); // Optional icon/logo
                 document.querySelector('input[name="mediaType"][value="image"]').checked = true;
             } else if (category === 'about_personal' || category === 'about_education') {
                 priceContainer.classList.add('hidden');
@@ -215,8 +193,7 @@
                 document.getElementById('videoLinkBox').classList.remove('hidden');
             }
         }
-
-        window.compressAndConvertImage = function(input) {
+                window.compressAndConvertImage = function(input) {
             const file = input.files[0];
             if (!file) return;
             const reader = new FileReader();
@@ -256,9 +233,7 @@
             const editingId = document.getElementById('editingId').value;
             
             const titleEn = document.getElementById('titleEn').value.trim();
-            const titleHi = document.getElementById('titleHi').value.trim();
             const descEn = document.getElementById('descEn').value.trim();
-            const descHi = document.getElementById('descHi').value.trim();
             const price = document.getElementById('postPrice').value.trim();
             const redirectLink = document.getElementById('postRedirectLink').value.trim();
 
@@ -272,15 +247,15 @@
 
             const postData = {
                 category: currentCategory,
-                titles: { en: titleEn, roman_hi: titleHi },
-                descriptions: { en: descEn, roman_hi: descHi },
+                titles: { en: titleEn },
+                descriptions: { en: descEn },
                 price: price,
                 redirectLink: redirectLink,
                 mediaType: mediaType,
                 media: mediaVal,
                 status: 'published',
                 createdAt: Date.now(),
-                dateFormatted: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ' at ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                dateFormatted: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
             };
 
             const submitBtn = document.getElementById('submitBtn');
@@ -323,9 +298,7 @@
 
             document.getElementById('editingId').value = post.id;
             document.getElementById('titleEn').value = post.titles?.en || '';
-            document.getElementById('titleHi').value = post.titles?.roman_hi || '';
             document.getElementById('descEn').value = post.descriptions?.en || '';
-            document.getElementById('descHi').value = post.descriptions?.roman_hi || '';
             document.getElementById('postPrice').value = post.price || '';
             document.getElementById('postRedirectLink').value = post.redirectLink || '';
 
@@ -374,7 +347,7 @@
 
             container.innerHTML = "";
             filtered.forEach(post => {
-                const title = post.titles?.en || post.titles?.roman_hi || 'Untitled Item';
+                const title = post.titles?.en || 'Untitled Item';
                 const isPub = post.status !== 'unpublished';
                 const timeStr = post.dateFormatted || 'Recently';
 
@@ -417,5 +390,4 @@
         loadAdminPosts();
     </script>
 </body>
-    </html>
-    
+</html>
