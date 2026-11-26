@@ -13,10 +13,10 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
+<body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-20 transition-colors duration-300">
     
-    <!-- Top Navigation Bar -->
-    <header class="sticky top-0 z-50 bg-white/90 dark:bg-[#0f0f0f]/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-3">
+    <!-- Fixed Top Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-3 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             
             <!-- Logo (Fixed on Single Line) -->
@@ -26,8 +26,8 @@
 
             <!-- Search Bar -->
             <div class="hidden md:flex flex-1 max-w-sm mx-6">
-                <input type="text" id="searchInput" placeholder="Search..." class="w-full bg-gray-100 dark:bg-[#1a1a1a] border border-gray-300 dark:border-gray-800 px-4 py-1.5 rounded-l-full focus:outline-none text-xs">
-                <button class="bg-gray-200 dark:bg-[#262626] px-4 rounded-r-full border border-l-0 border-gray-300 dark:border-gray-800 text-xs">🔍</button>
+                <input type="text" id="searchInput" placeholder="Search..." class="w-full bg-gray-100 dark:bg-[#1a1a1a] border border-gray-300 dark:border-gray-800 px-4 py-2 rounded-l-xl focus:outline-none text-xs dark:text-white">
+                <button class="bg-gray-200 dark:bg-[#262626] px-4 rounded-r-xl border border-l-0 border-gray-300 dark:border-gray-800 text-xs">🔍</button>
             </div>
 
             <!-- Nav Links & Controls -->
@@ -36,42 +36,42 @@
                 <a href="product.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold" data-i18n="nav_products">Products</a>
                 <a href="book.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold" data-i18n="nav_books">Books</a>
                 <a href="movies.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold" data-i18n="nav_movies">Movies</a>
-                <a href="about.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold" data-i18n="nav_about">About</a>
+                <a href="about.html" class="hover:text-red-500 hidden lg:block text-xs font-semibold" data-i18n="nav_about">About AI</a>
 
-                <!-- 2-Language Dropdown (English & Roman Hindi) -->
-                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-gray-100 dark:bg-[#1f2937] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 text-xs rounded-xl px-3 py-2 focus:outline-none cursor-pointer font-medium shadow-sm transition hover:border-red-500">
-                    <option value="en">English</option>
-                    <option value="roman_hi">Roman Hindi</option>
+                <!-- 2-Language Dropdown (Dark Mode Fixed) -->
+                <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-gray-100 dark:bg-[#1a1a1a] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-700 text-xs rounded-xl px-3 py-2 focus:outline-none cursor-pointer font-medium shadow-sm transition hover:border-red-500">
+                    <option value="en" class="bg-white dark:bg-[#1a1a1a] text-gray-900 dark:text-white">English</option>
+                    <option value="roman_hi" class="bg-white dark:bg-[#1a1a1a] text-gray-900 dark:text-white">Roman Hindi</option>
                 </select>
 
                 <!-- Premium Day/Night Toggle Button -->
-                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700 hover:scale-110 active:scale-95 transition-all shadow-sm" title="Toggle Theme">
+                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700 hover:scale-105 active:scale-95 transition-all shadow-sm" title="Toggle Theme">
                     <span id="modeIcon" class="text-sm">🌙</span>
                 </button>
 
-                <!-- YouTube Style '+' Admin Icon -->
-                <a href="admin.html" class="flex items-center justify-center w-9 h-9 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-lg shadow-md transition hover:scale-105" title="Creator Studio / Add Post">+</a>
+                <!-- Admin '+' Icon -->
+                <a href="admin.html" class="flex items-center justify-center w-9 h-9 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-lg shadow-md transition hover:scale-105" title="Creator Studio">+</a>
             </div>
         </div>
     </header>
 
     <!-- Mobile Nav Bar Links -->
-    <div class="flex md:hidden overflow-x-auto space-x-4 px-4 py-2 bg-gray-50 dark:bg-[#151515] border-b border-gray-200 dark:border-gray-800 text-xs font-semibold whitespace-nowrap">
+    <div class="fixed top-[57px] left-0 w-full z-40 flex md:hidden overflow-x-auto space-x-4 px-4 py-2 bg-gray-50 dark:bg-[#151515] border-b border-gray-200 dark:border-gray-800 text-xs font-semibold whitespace-nowrap shadow-sm">
         <a href="index.html" class="text-red-600" data-i18n="nav_home">Home</a>
         <a href="product.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_products">Products</a>
         <a href="book.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_books">Books</a>
         <a href="movies.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_movies">Movies</a>
-        <a href="about.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_about">About</a>
+        <a href="about.html" class="text-gray-600 dark:text-gray-400" data-i18n="nav_about">About AI</a>
     </div>
 
     <!-- Main Content Feed -->
-    <main class="max-w-7xl mx-auto px-6 py-8">
+    <main class="max-w-7xl mx-auto px-6 py-8 mt-4">
         <div class="flex justify-between items-center mb-6 border-b border-gray-200 dark:border-gray-800 pb-3">
             <h2 class="text-xl font-bold" data-i18n="latest_feed">Latest Feed & Uploads</h2>
         </div>
         
         <div id="postsContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800 animate-pulse bg-gray-50 dark:bg-[#1a1a1a]">
+            <div class="p-6 rounded-2xl border border-gray-200 dark:border-gray-800 animate-pulse bg-gray-50 dark:bg-[#1a1a1a]">
                 <div class="h-4 bg-gray-200 dark:bg-gray-800 rounded w-3/4 mb-4"></div>
                 <div class="h-3 bg-gray-200 dark:bg-gray-800 rounded w-1/2 mb-6"></div>
                 <div class="h-10 bg-gray-200 dark:bg-gray-800 rounded"></div>
@@ -94,11 +94,11 @@
 
         const translations = {
             en: { 
-                nav_home: "Home", nav_products: "Products", nav_books: "Books", nav_movies: "Movies", nav_about: "About", 
+                nav_home: "Home", nav_products: "Products", nav_books: "Books", nav_movies: "Movies", nav_about: "About AI", 
                 latest_feed: "Latest Feed & Uploads", no_posts: "No content published yet.", admin_link: "Click '+' icon above to add posts" 
             },
             roman_hi: { 
-                nav_home: "Home", nav_products: "Products", nav_books: "Books", nav_movies: "Movies", nav_about: "About", 
+                nav_home: "Home", nav_products: "Products", nav_books: "Books", nav_movies: "Movies", nav_about: "About AI", 
                 latest_feed: "Latest Feed & Uploads", no_posts: "Abhi tak koi content publish nahi hua hai.", admin_link: "Post add karne ke liye upar '+' icon dabayein" 
             }
         };
@@ -148,7 +148,7 @@
                 const querySnapshot = await getDocs(collection(db, "posts"));
                 if(querySnapshot.empty) {
                     container.innerHTML = `
-                        <div class="col-span-full text-center py-12 border border-dashed border-gray-300 dark:border-gray-800 rounded-xl">
+                        <div class="col-span-full text-center py-12 border border-dashed border-gray-300 dark:border-gray-800 rounded-2xl">
                             <p class="text-sm text-gray-500 mb-3">${t.no_posts}</p>
                             <a href="admin.html" class="text-xs text-red-600 underline font-semibold">${t.admin_link}</a>
                         </div>
@@ -164,15 +164,22 @@
                     let desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : '';
 
                     let mediaContent = "";
-                    if(post.mediaType === 'youtube') {
-                        let ytId = post.media.split('v=')[1] || post.media.split('/').pop();
-                        mediaContent = `<iframe class="w-full h-48" src="https://www.youtube.com/embed/${ytId}" frameborder="0" allowfullscreen></iframe>`;
+                    if(post.mediaType === 'video_link') {
+                        let rawUrl = post.media;
+                        let embedUrl = rawUrl;
+                        if(rawUrl.includes('youtube.com') || rawUrl.includes('youtu.be')) {
+                            let ytId = rawUrl.includes('v=') ? rawUrl.split('v=')[1].split('&')[0] : rawUrl.split('/').pop();
+                            embedUrl = `https://www.youtube.com/embed/${ytId}`;
+                        } else if(rawUrl.includes('instagram.com')) {
+                            embedUrl = rawUrl.endsWith('/') ? rawUrl + 'embed/' : rawUrl + '/embed/';
+                        }
+                        mediaContent = `<div class="relative w-full h-64 bg-black"><iframe class="w-full h-full" src="${embedUrl}" frameborder="0" allowfullscreen></iframe></div>`;
                     } else if(post.media) {
-                        mediaContent = `<img src="${post.media}" class="w-full h-48 object-cover" alt="Banner">`;
+                        mediaContent = `<img src="${post.media}" class="w-full h-64 object-cover" alt="Media">`;
                     }
 
                     container.innerHTML += `
-                        <div class="bg-white dark:bg-[#161616] border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                        <div class="bg-white dark:bg-[#161616] border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
                             ${mediaContent}
                             <div class="p-5">
                                 <div class="flex justify-between items-center mb-2">
@@ -180,7 +187,7 @@
                                     ${post.price ? `<span class="text-xs font-bold text-green-500">${post.price}</span>` : ''}
                                 </div>
                                 <h3 class="font-semibold text-lg mb-2">${title}</h3>
-                                ${desc ? `<p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">${desc}</p>` : ''}
+                                ${desc ? `<p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-3">${desc}</p>` : ''}
                             </div>
                         </div>
                     `;
