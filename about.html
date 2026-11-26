@@ -34,7 +34,7 @@
                 <a href="chat.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Chat with AI</a>
             </nav>
 
-            <!-- Right Controls -->
+            <!-- Right Controls: Translate & Theme -->
             <div class="flex items-center space-x-2.5 shrink-0">
                 <div class="relative" id="langDropdownContainer">
                     <button type="button" onclick="toggleLangMenu()" class="flex items-center space-x-1.5 bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-800 rounded-xl px-2.5 py-1.5 text-xs font-medium hover:border-red-500 transition">
@@ -74,13 +74,12 @@
     <!-- Main About Container -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-6 space-y-6">
         
-        <!-- Header Title -->
         <div class="text-center">
             <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">SK TALIB</h2>
-            <p class="text-xs text-red-600 dark:text-red-400 font-semibold mt-1">Mere Baare Mein Aur Personal Space</p>
+            <p class="text-xs text-red-600 dark:text-red-400 font-semibold mt-1">About Me & Personal Space</p>
         </div>
 
-        <!-- 6 Category Navigation Buttons -->
+        <!-- 6 About Sub-Sections / Tabs -->
         <div class="grid grid-cols-3 sm:flex sm:flex-wrap sm:justify-center gap-2 pb-3 border-b border-gray-200 dark:border-gray-800">
             <button onclick="selectAboutTab('personal')" id="atab_personal" class="px-3 py-2 rounded-xl text-[11px] sm:text-xs font-bold bg-red-600 text-white transition text-center truncate">Personal</button>
             <button onclick="selectAboutTab('education')" id="atab_education" class="px-3 py-2 rounded-xl text-[11px] sm:text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition text-center truncate">Education</button>
@@ -90,7 +89,7 @@
             <button onclick="selectAboutTab('contact')" id="atab_contact" class="px-3 py-2 rounded-xl text-[11px] sm:text-xs font-bold bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-300 transition text-center truncate">Contact</button>
         </div>
 
-        <!-- Tab Content Area -->
+        <!-- Content Area -->
         <div id="aboutTabContent" class="min-h-[250px]">
             <div class="text-center py-12 text-gray-500 text-xs border border-dashed border-gray-300 dark:border-gray-800 rounded-3xl bg-gray-50/50 dark:bg-[#171717]/50">
                 Loading details...
@@ -118,29 +117,23 @@
         let allAboutPosts = [];
 
         window.toggleLangMenu = function() {
-            const menu = document.getElementById('langMenu');
-            if (menu) menu.classList.toggle('hidden');
+            document.getElementById('langMenu').classList.toggle('hidden');
         }
 
         window.selectLanguage = function(lang, label) {
             currentLang = lang;
             localStorage.setItem('site_lang', lang);
-            const lbl = document.getElementById('currentLangLabel');
-            if (lbl) lbl.innerText = label;
-            const ce = document.getElementById('check_en');
-            const cr = document.getElementById('check_roman_hi');
-            if (ce) ce.classList.toggle('hidden', lang !== 'en');
-            if (cr) cr.classList.toggle('hidden', lang !== 'roman_hi');
-            const menu = document.getElementById('langMenu');
-            if (menu) menu.classList.add('hidden');
+            document.getElementById('currentLangLabel').innerText = label;
+            document.getElementById('check_en').classList.toggle('hidden', lang !== 'en');
+            document.getElementById('check_roman_hi').classList.toggle('hidden', lang !== 'roman_hi');
+            document.getElementById('langMenu').classList.add('hidden');
             renderAboutTab();
         }
 
         document.addEventListener('click', function(e) {
             const container = document.getElementById('langDropdownContainer');
-            const menu = document.getElementById('langMenu');
-            if (container && menu && !container.contains(e.target)) {
-                menu.classList.add('hidden');
+            if (container && !container.contains(e.target)) {
+                document.getElementById('langMenu').classList.add('hidden');
             }
         });
 
@@ -149,20 +142,20 @@
 
         if (localStorage.getItem('theme') === 'light') {
             html.classList.remove('dark');
-            if (modeIcon) modeIcon.innerText = '☀️';
+            modeIcon.innerText = '☀️';
         } else {
             html.classList.add('dark');
-            if (modeIcon) modeIcon.innerText = '🌙';
+            modeIcon.innerText = '🌙';
         }
 
         window.toggleDarkMode = function() {
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
-                if (modeIcon) modeIcon.innerText = '☀️';
+                modeIcon.innerText = '☀️';
                 localStorage.setItem('theme', 'light');
             } else {
                 html.classList.add('dark');
-                if (modeIcon) modeIcon.innerText = '🌙';
+                modeIcon.innerText = '🌙';
                 localStorage.setItem('theme', 'dark');
             }
         }
@@ -191,7 +184,7 @@
             if (filtered.length === 0) {
                 container.innerHTML = `
                     <div class="text-center py-12 text-gray-500 text-xs border border-dashed border-gray-300 dark:border-gray-800 rounded-3xl bg-gray-50/50 dark:bg-[#171717]/50">
-                        Nothing added in ${currentAboutTab.toUpperCase()} yet. Add details from your Admin Panel.
+                        No items found in ${currentAboutTab.toUpperCase()}. Add details from your Admin Panel.
                     </div>
                 `;
                 return;
@@ -297,5 +290,5 @@
         loadAllAboutData();
     </script>
 </body>
-            </html>
+    </html>
     
