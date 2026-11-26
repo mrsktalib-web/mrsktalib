@@ -93,21 +93,17 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        const firebaseConfig = {
-            projectId: "mrsktalib-4ab8e"
-        };
-
+        const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Multi-Language Dictionary
         const translations = {
-            en: { nav_home: "Home", nav_products: "Products", nav_books: "Books", nav_movies: "Movies", nav_about: "About", latest_feed: "Latest Feed & Uploads", no_posts: "No content published yet.", admin_link: "Click '+' icon above to add posts", open_btn: "Open / Watch" },
-            roman_hi: { nav_home: "Home", nav_products: "Products", nav_books: "Books", nav_movies: "Movies", nav_about: "About", latest_feed: "Latest Feed & Uploads", no_posts: "Abhi tak koi content publish nahi hua hai.", admin_link: "Post add karne ke liye upar '+' icon dabayein", open_btn: "Dekhein / Open Karein" },
-            hi: { nav_home: "होम", nav_products: "उत्पाद", nav_books: "किताबें", nav_movies: "फ़िल्में", nav_about: "हमारे बारे में", latest_feed: "नवीनतम फ़ीड और अपलोड", no_posts: "अभी तक कोई सामग्री प्रकाशित नहीं हुई है.", admin_link: "पोस्ट जोड़ने के लिए ऊपर '+' आइकॉन दबाएं", open_btn: "देखें / खोलें" },
-            ur: { nav_home: "ہوم", nav_products: "مصنوعات", nav_books: "کتابیں", nav_movies: "فلمیں", nav_about: "ہمارے بارے میں", latest_feed: "تازہ ترین فیڈ اور اپ لوڈز", no_posts: "ابھی تک کوئی مواد شائع نہیں ہوا۔", admin_link: "پوسٹس شامل کرنے کے لیے اوپر '+' آئیکن پر کلک کریں", open_btn: "دیکھیں / کھولیں" },
-            bn: { nav_home: "হোম", nav_products: "পণ্য", nav_books: "বই", nav_movies: "চলচ্চিত্র", nav_about: "সম্পর্কিত", latest_feed: "সর্বশেষ ফিড এবং আপলোড", no_posts: "এখনও কোনো কন্টেন্ট প্রকাশিত হয়নি।", admin_link: "পোস্ট যোগ করতে উপরে '+' আইকনে ক্লিক করুন", open_btn: "দেখুন / খুলুন" },
-            or: { nav_home: "ହୋମ୍", nav_products: "ଉତ୍ପାଦ", nav_books: "ବହି", nav_movies: "ଚଳଚ୍ଚିତ୍ର", nav_about: "ବିଷୟରେ", latest_feed: "ସର୍ବଶେଷ ଫିଡ୍ ଏବଂ ଅପଲୋଡ୍", no_posts: "ବର୍ତ୍ତମାନ ପର୍ଯ୍ୟନ୍ତ କୌଣସି କଣ୍ଟେଣ୍ଟ୍ ପ୍ରକାଶିତ ହୋଇନାହିଁ।", admin_link: "ପୋଷ୍ଟ ଯୋଡିବା ପାଇଁ ଉପରେ '+' ଆଇକନ୍ କ୍ଲିକ୍ କରନ୍ତୁ", open_btn: "ଖୋଲନ୍ତୁ / ଦେଖନ୍ତୁ" }
+            en: { nav_home: "Home", nav_products: "Products", nav_books: "Books", nav_movies: "Movies", nav_about: "About", latest_feed: "Latest Feed & Uploads", no_posts: "No content published yet.", admin_link: "Click '+' icon above to add posts" },
+            roman_hi: { nav_home: "Home", nav_products: "Products", nav_books: "Books", nav_movies: "Movies", nav_about: "About", latest_feed: "Latest Feed & Uploads", no_posts: "Abhi tak koi content publish nahi hua hai.", admin_link: "Post add karne ke liye upar '+' icon dabayein" },
+            hi: { nav_home: "होम", nav_products: "उत्पाद", nav_books: "किताबें", nav_movies: "फ़िल्में", nav_about: "हमारे बारे में", latest_feed: "नवीनतम फ़ीड और अपलोड", no_posts: "अभी तक कोई सामग्री प्रकाशित नहीं हुई है.", admin_link: "पोस्ट जोड़ने के लिए ऊपर '+' आइकॉन दबाएं" },
+            ur: { nav_home: "ہوم", nav_products: "مصنوعات", nav_books: "کتابیں", nav_movies: "فلمیں", nav_about: "ہمارے بارے میں", latest_feed: "تازہ ترین فیڈ اور اپ لوڈز", no_posts: "ابھی تک کوئی مواد شائع نہیں ہوا۔", admin_link: "پوسٹس شامل کرنے کے لیے اوپر '+' آئیکن پر کلک کریں" },
+            bn: { nav_home: "হোম", nav_products: "পণ্য", nav_books: "বই", nav_movies: "চলচ্চিত্র", nav_about: "সম্পর্কিত", latest_feed: "সর্বশেষ ফিড এবং আপলোড", no_posts: "এখনও কোনো কন্টেন্ট প্রকাশিত হয়নি।", admin_link: "পোস্ট যোগ করতে উপরে '+' আইকনে ক্লিক করুন" },
+            or: { nav_home: "ହୋମ୍", nav_products: "ଉତ୍ପାଦ", nav_books: "ବହି", nav_movies: "ଚଳଚ୍ଚିତ୍ର", nav_about: "ବିଷୟରେ", latest_feed: "ସର୍ବଶେଷ ଫିଡ୍ ଏବଂ ଅପଲୋଡ୍", no_posts: "ବର୍ତ୍ତମାନ ପର୍ଯ୍ୟନ୍ତ କୌଣସି କଣ୍ଟେଣ୍ଟ୍ ପ୍ରକାଶିତ ହୋଇନାହିଁ।", admin_link: "ପୋଷ୍ଟ ଯୋଡିବା ପାଇଁ ଉପରେ '+' ଆଇକନ୍ କ୍ଲିକ୍ କରନ୍ତୁ" }
         };
 
         let currentLang = localStorage.getItem('site_lang') || 'en';
@@ -128,22 +124,14 @@
             });
         }
 
-        // Day/Night Mode Toggle Function
         function toggleDarkMode() {
             const html = document.documentElement;
             const modeIcon = document.getElementById('modeIcon');
-            const btn = document.getElementById('themeToggleBtn');
-            
-            btn.style.transform = 'rotate(360deg) scale(1.1)';
-            setTimeout(() => { btn.style.transform = 'rotate(0deg) scale(1);' }, 300);
-
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
-                html.classList.add('light');
                 modeIcon.innerText = '🌙';
                 localStorage.setItem('theme', 'light');
             } else {
-                html.classList.remove('light');
                 html.classList.add('dark');
                 modeIcon.innerText = '☀️';
                 localStorage.setItem('theme', 'dark');
@@ -154,12 +142,8 @@
         if (localStorage.getItem('theme') === 'dark') {
             document.documentElement.classList.add('dark');
             document.getElementById('modeIcon').innerText = '☀️';
-        } else {
-            document.documentElement.classList.add('dark', false); // default light
-            document.getElementById('modeIcon').innerText = '🌙';
         }
 
-        // Load Posts from Firestore Database with Multi-Language Support
         async function loadPosts() {
             const container = document.getElementById('postsContainer');
             const t = translations[currentLang] || translations.en;
@@ -177,29 +161,36 @@
                 container.innerHTML = "";
                 querySnapshot.forEach((doc) => {
                     const post = doc.data();
-                    if(post.status === 'unpublished') return; // Skip unpublished items
+                    if(post.status === 'unpublished') return;
 
                     let title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : post.title;
                     let desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : '';
 
+                    let mediaContent = "";
+                    if(post.mediaType === 'youtube') {
+                        let ytId = post.media.split('v=')[1] || post.media.split('/').pop();
+                        mediaContent = `<iframe class="w-full h-48" src="https://www.youtube.com/embed/${ytId}" frameborder="0" allowfullscreen></iframe>`;
+                    } else if(post.media) {
+                        mediaContent = `<img src="${post.media}" class="w-full h-48 object-cover" alt="Banner">`;
+                    }
+
                     container.innerHTML += `
                         <div class="bg-white dark:bg-[#161616] border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
-                            ${post.media ? `<img src="${post.media}" class="w-full h-48 object-cover" alt="Banner">` : ''}
+                            ${mediaContent}
                             <div class="p-5">
                                 <div class="flex justify-between items-center mb-2">
                                     <span class="text-[10px] tracking-wider uppercase bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 font-bold px-2.5 py-1 rounded-md">${post.category || 'Feed'}</span>
                                     ${post.price ? `<span class="text-xs font-bold text-green-500">${post.price}</span>` : ''}
                                 </div>
                                 <h3 class="font-semibold text-lg mb-2">${title}</h3>
-                                ${desc ? `<p class="text-xs text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">${desc}</p>` : ''}
-                                <a href="${post.media}" target="_blank" class="w-full block text-center text-xs font-semibold bg-red-600 hover:bg-red-700 text-white py-2.5 rounded-lg transition">${t.open_btn}</a>
+                                ${desc ? `<p class="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">${desc}</p>` : ''}
                             </div>
                         </div>
                     `;
                 });
             } catch (err) {
                 console.error(err);
-                container.innerHTML = `<p class="text-red-500 col-span-full">Failed to load content. Check database connection.</p>`;
+                container.innerHTML = `<p class="text-red-500 col-span-full">Failed to load content.</p>`;
             }
         }
 
@@ -207,5 +198,5 @@
         loadPosts();
     </script>
 </body>
-                    </html>
-                    
+                        </html>
+                        
