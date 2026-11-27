@@ -33,80 +33,86 @@
         }
     </style>
 </head>
-<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-40 lg:pt-28 transition-colors duration-300 antialiased">
+<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-24 transition-colors duration-300 antialiased">
     
-    <!-- Fixed Top Navigation Bar -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
-        <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
-            <div class="flex items-center shrink-0">
-                <a href="index.html" class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
-            </div>
+    <!-- Custom Top Bar (Back Button on Left, Brand in Center, 3-Line Contact Menu on Right) -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/25 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
+        <div class="max-w-2xl mx-auto flex justify-between items-center">
+            
+            <!-- Left: Back Button -->
+            <a href="index.html" class="flex items-center space-x-1.5 text-xs font-bold bg-gray-200 dark:bg-[#171717] hover:bg-amber-500 hover:text-gray-950 px-3.5 py-2 rounded-xl transition border border-gray-300 dark:border-amber-500/30">
+                <span>←</span>
+                <span>Back</span>
+            </a>
 
-            <!-- Desktop Nav Links -->
-            <nav class="hidden lg:flex items-center space-x-1.5 text-xs font-bold tracking-wide">
-                <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Home</a>
-                <a href="about.html" class="text-amber-700 dark:text-amber-500 bg-amber-500/15 border border-amber-500/50 px-4 py-2 rounded-xl transition">About</a>
-                <a href="movie.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Movie</a>
-                <a href="products.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Products</a>
-                <a href="book.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Book</a>
-                <a href="gallery.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Gallery</a>
-            </nav>
+            <!-- Center: Brand Name -->
+            <h1 class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500">SK <span class="text-gray-900 dark:text-white">TALIB</span></h1>
 
-            <div class="flex items-center space-x-2.5 shrink-0">
-                <a href="chat.html" class="premium-btn flex items-center space-x-2 text-amber-700 dark:text-amber-400 px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition">
-                    <span>Chat with AI</span>
-                    <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </a>
-                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500/70 transition text-sm shrink-0 shadow-sm">
+            <!-- Right: Contact 3-Line Menu Toggle & Dark Mode -->
+            <div class="flex items-center space-x-2">
+                <button onclick="toggleContactMenu()" class="w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500 flex items-center justify-center text-amber-500 font-bold transition shadow-sm text-sm" title="Contact Menu">
+                    ☰
+                </button>
+                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500 transition text-sm flex items-center justify-center shadow-sm">
                     <span id="modeIcon">🌙</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Grid Nav Bar -->
-    <div class="fixed top-[65px] left-0 w-full z-40 grid grid-cols-3 gap-2 lg:hidden px-3 py-3 bg-white/95 dark:bg-[#0b0b0b]/95 backdrop-blur-xl border-b border-gray-200 dark:border-amber-500/20 text-xs font-bold text-center tracking-wide">
-        <a href="index.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Home</a>
-        <a href="about.html" class="py-2 px-2 rounded-xl bg-amber-500 text-gray-950 font-black shadow-md shadow-amber-500/30">About</a>
-        <a href="movie.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Movie</a>
-        <a href="products.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Products</a>
-        <a href="book.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Book</a>
-        <a href="gallery.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Gallery</a>
+    <!-- Contact Dropdown Modal / Popup (Telegram & Gmail) -->
+    <div id="contactModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center px-4">
+        <div class="glass-card w-full max-w-md p-6 rounded-3xl space-y-5 relative border border-amber-500/40">
+            <div class="flex justify-between items-center">
+                <h3 class="text-base font-black tracking-wider text-amber-500 uppercase">Contact Options</h3>
+                <button onclick="toggleContactMenu()" class="w-8 h-8 rounded-xl bg-gray-200 dark:bg-[#1f1f1f] text-gray-700 dark:text-gray-300 font-bold flex items-center justify-center">✕</button>
+            </div>
+            <div class="space-y-3">
+                <!-- Telegram -->
+                <a href="https://t.me/mrsktalib" target="_blank" class="p-4 rounded-2xl bg-white/5 dark:bg-[#141414] border border-amber-500/20 hover:border-amber-500 flex items-center space-x-3.5 transition block">
+                    <div class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-base">✈️</div>
+                    <div>
+                        <p class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white">Telegram Channel / Chat</p>
+                        <p class="text-[11px] text-amber-600 dark:text-amber-500">t.me/mrsktalib</p>
+                    </div>
+                </a>
+                <!-- Gmail -->
+                <a href="mailto:mrsktalib@gmail.com" class="p-4 rounded-2xl bg-white/5 dark:bg-[#141414] border border-amber-500/20 hover:border-amber-500 flex items-center space-x-3.5 transition block">
+                    <div class="w-9 h-9 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-base">✉️</div>
+                    <div>
+                        <p class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white">Email / Gmail</p>
+                        <p class="text-[11px] text-amber-600 dark:text-amber-500">mrsktalib@gmail.com</p>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- Main Container -->
     <main class="max-w-2xl mx-auto px-4 py-6 space-y-8">
         
-        <!-- About Me Section (Managed from Admin Panel) -->
+        <!-- About Me Section (Latest posts appear on top) -->
         <section class="space-y-4">
             <div class="text-center space-y-1">
                 <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">About Me</h2>
-                <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Personal Profile & Connect</p>
+                <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Personal Profile & Updates</p>
             </div>
             <div id="aboutContainer" class="space-y-4">
-                <div class="glass-card p-5 sm:p-6 rounded-3xl text-center text-gray-500 text-xs font-medium">
+                <div class="glass-card p-6 rounded-3xl text-center text-gray-500 text-xs font-medium">
                     Loading profile...
                 </div>
             </div>
         </section>
 
-        <!-- Social Media Section (Clean Logo & Name without URL text) -->
+        <!-- Social Media Section (6 Clean Links with Logo & Name ONLY) -->
         <section class="space-y-4">
             <h3 class="text-sm font-black tracking-wider uppercase text-amber-600 dark:text-amber-500 px-1">Social Media</h3>
             <div id="socialContainer" class="space-y-3">
                 <div class="glass-card p-4 rounded-2xl text-center text-gray-500 text-xs">Loading social links...</div>
             </div>
         </section>
-
-        <!-- Contact Section (Telegram & Gmail only) -->
-        <section class="space-y-4">
-            <h3 class="text-sm font-black tracking-wider uppercase text-amber-600 dark:text-amber-500 px-1">Contact & Support</h3>
-            <div id="contactContainer" class="space-y-3">
-                <div class="glass-card p-4 rounded-2xl text-center text-gray-500 text-xs">Loading contacts...</div>
-            </div>
-        </section>
-    </main>
-        <!-- Footer -->
+                </main>
+                    <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-amber-500/20 py-8 text-center px-4 mt-16 mb-16">
         <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
@@ -143,26 +149,28 @@
             }
         }
 
+        window.toggleContactMenu = function() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.toggle('hidden');
+        }
+
         async function loadAboutData() {
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
                 
-                let aboutHtml = "";
-                let socialHtml = "";
-                let contactHtml = "";
-
                 let abouts = [];
                 let socials = [];
-                let contacts = [];
 
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
                     if (data.status !== 'unpublished') {
                         if (data.category === 'about_me' || data.category === 'home') abouts.push(data);
                         else if (data.category === 'about_social') socials.push(data);
-                        else if (data.category === 'about_contact') contacts.push(data);
                     }
                 });
+
+                // Sort About posts: Latest posted on top (descending order)
+                abouts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
                 // Render About Me
                 const aboutContainer = document.getElementById('aboutContainer');
@@ -185,11 +193,12 @@
                     });
                 }
 
-                // Render Social Media (Logo & Name ONLY, clicking opens link without showing raw URL)
+                // Render Social Media (Logo & Name ONLY, clean buttons)
                 const socialContainer = document.getElementById('socialContainer');
                 if (socials.length === 0) {
                     socialContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No social links added yet.</p>`;
                 } else {
+                    socials.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
                     socialContainer.innerHTML = "";
                     socials.forEach(item => {
                         const title = item.titles?.en || 'Social Link';
@@ -208,29 +217,6 @@
                     });
                 }
 
-                // Render Contact (Telegram & Gmail only)
-                const contactContainer = document.getElementById('contactContainer');
-                if (contacts.length === 0) {
-                    contactContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No contacts added yet.</p>`;
-                } else {
-                    contactContainer.innerHTML = "";
-                    contacts.forEach(item => {
-                        const title = item.titles?.en || 'Contact';
-                        const link = item.redirectLink || item.descriptions?.en || '#';
-                        let mediaTag = item.media ? `<img src="${item.media}" class="w-9 h-9 rounded-xl object-cover border border-amber-500/30 shrink-0">` : `<div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-500 font-bold text-xs shrink-0">✉️</div>`;
-                        
-                        contactContainer.innerHTML += `
-                            <a href="${link.includes('@') ? 'mailto:' + link : link}" target="_blank" class="glass-card p-4 rounded-2xl flex items-center justify-between hover:border-amber-500/70 transition group block">
-                                <div class="flex items-center space-x-3.5">
-                                    ${mediaTag}
-                                    <span class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white group-hover:text-amber-500 transition">${title}</span>
-                                </div>
-                                <span class="text-amber-500 text-xs font-bold px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 group-hover:bg-amber-500 group-hover:text-gray-950 transition">Connect →</span>
-                            </a>
-                        `;
-                    });
-                }
-
             } catch (err) {
                 console.error("Error loading about data:", err);
             }
@@ -239,4 +225,5 @@
         loadAboutData();
     </script>
 </body>
-</html>
+    </html>
+    
