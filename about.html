@@ -33,23 +33,23 @@
         }
     </style>
 </head>
-<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-44 lg:pt-36 transition-colors duration-300 antialiased">
+<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-24 lg:pt-20 transition-colors duration-300 antialiased">
     
-    <!-- Fixed Top Bar with Brand, Back, Contact Menu & Dark Mode -->
+    <!-- Fixed Top Bar with Back Button, Brand, Contact Menu & Dark Mode -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/25 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
-        <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
+        <div class="max-w-2xl mx-auto flex justify-between items-center">
             
-            <!-- Left: Back Button -->
-            <a href="index.html" class="flex items-center space-x-1.5 text-xs font-bold bg-gray-200 dark:bg-[#171717] hover:bg-amber-500 hover:text-gray-950 px-3.5 py-2 rounded-xl transition border border-gray-300 dark:border-amber-500/30 shrink-0">
-                <span>←</span>
+            <!-- Left: Back Button (⬆️ / ←) -->
+            <a href="index.html" class="flex items-center space-x-1.5 text-xs font-bold bg-gray-200 dark:bg-[#171717] hover:bg-amber-500 hover:text-gray-950 px-3.5 py-2 rounded-xl transition border border-gray-300 dark:border-amber-500/30">
+                <span>⬆️</span>
                 <span>Back</span>
             </a>
 
             <!-- Center: Brand Name -->
-            <h1 class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></h1>
+            <h1 class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500">SK <span class="text-gray-900 dark:text-white">TALIB</span></h1>
 
-            <!-- Right: Contact Menu & Dark Mode -->
-            <div class="flex items-center space-x-2 shrink-0">
+            <!-- Right: Contact 3-Line Menu & Dark Mode -->
+            <div class="flex items-center space-x-2">
                 <button onclick="toggleContactMenu()" class="w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500 flex items-center justify-center text-amber-500 font-bold transition shadow-sm text-sm" title="Contact Menu">
                     ☰
                 </button>
@@ -60,39 +60,15 @@
         </div>
     </header>
 
-    <!-- Top Social Media Header Bar (Where Home/Movie tabs used to be) -->
-    <div class="fixed top-[65px] left-0 w-full z-40 bg-white/95 dark:bg-[#0b0b0b]/95 backdrop-blur-xl border-b border-gray-200 dark:border-amber-500/20 px-3 py-2.5">
-        <div class="max-w-7xl mx-auto flex overflow-x-auto no-scrollbar space-x-2 items-center justify-start lg:justify-center">
-            <div id="topSocialContainer" class="flex space-x-2 shrink-0">
-                <!-- Social links will load here dynamically with Logo & Name -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Dropdown Modal (Telegram: t.me/mrsktalib & Gmail) -->
+    <!-- Contact Dropdown Modal (Managed via Admin Panel) -->
     <div id="contactModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center px-4">
         <div class="glass-card w-full max-w-md p-6 rounded-3xl space-y-5 relative border border-amber-500/40">
             <div class="flex justify-between items-center">
                 <h3 class="text-base font-black tracking-wider text-amber-500 uppercase">Contact Options</h3>
                 <button onclick="toggleContactMenu()" class="w-8 h-8 rounded-xl bg-gray-200 dark:bg-[#1f1f1f] text-gray-700 dark:text-gray-300 font-bold flex items-center justify-center">✕</button>
             </div>
-            <div class="space-y-3">
-                <!-- Telegram -->
-                <a href="https://t.me/mrsktalib" target="_blank" class="p-4 rounded-2xl bg-white/5 dark:bg-[#141414] border border-amber-500/20 hover:border-amber-500 flex items-center space-x-3.5 transition block">
-                    <div class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-base">✈️</div>
-                    <div>
-                        <p class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white">Telegram Channel / Chat</p>
-                        <p class="text-[11px] text-amber-600 dark:text-amber-500">t.me/mrsktalib</p>
-                    </div>
-                </a>
-                <!-- Gmail -->
-                <a href="mailto:mrsktalib@gmail.com" class="p-4 rounded-2xl bg-white/5 dark:bg-[#141414] border border-amber-500/20 hover:border-amber-500 flex items-center space-x-3.5 transition block">
-                    <div class="w-9 h-9 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-base">✉️</div>
-                    <div>
-                        <p class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white">Email / Gmail</p>
-                        <p class="text-[11px] text-amber-600 dark:text-amber-500">mrsktalib@gmail.com</p>
-                    </div>
-                </a>
+            <div id="contactContainer" class="space-y-3">
+                <p class="text-xs text-gray-500 text-center py-4">No contact info added yet. Add from Admin Panel.</p>
             </div>
         </div>
     </div>
@@ -100,6 +76,14 @@
     <!-- Main Container -->
     <main class="max-w-2xl mx-auto px-4 py-6 space-y-8">
         
+        <!-- Social Media Grid Section (No slide, direct grid view with Logo & Name) -->
+        <section class="space-y-3">
+            <h3 class="text-xs font-black tracking-wider uppercase text-amber-600 dark:text-amber-500 px-1">Social Media</h3>
+            <div id="socialContainer" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="glass-card p-4 rounded-2xl text-center text-gray-500 text-xs col-span-full">Loading social links...</div>
+            </div>
+        </section>
+
         <!-- About Me Section (Latest post on top) -->
         <section class="space-y-4">
             <div class="text-center space-y-1">
@@ -161,12 +145,14 @@
                 
                 let abouts = [];
                 let socials = [];
+                let contacts = [];
 
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
                     if (data.status !== 'unpublished') {
                         if (data.category === 'about_me' || data.category === 'home') abouts.push(data);
                         else if (data.category === 'about_social') socials.push(data);
+                        else if (data.category === 'about_contact') contacts.push(data);
                     }
                 });
 
@@ -194,22 +180,45 @@
                     });
                 }
 
-                // Render Top Social Media Bar (Logo + Name style buttons)
-                const topSocialContainer = document.getElementById('topSocialContainer');
+                // Render Social Media (Grid layout, no slide, Logo + Name)
+                const socialContainer = document.getElementById('socialContainer');
                 if (socials.length === 0) {
-                    topSocialContainer.innerHTML = `<span class="text-xs text-gray-500 px-2">No social links added yet.</span>`;
+                    socialContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 col-span-full">No social links added yet. Add from Admin Panel.</p>`;
                 } else {
                     socials.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
-                    topSocialContainer.innerHTML = "";
+                    socialContainer.innerHTML = "";
                     socials.forEach(item => {
                         const title = item.titles?.en || 'Social';
                         const link = item.redirectLink || '#';
-                        let mediaTag = item.media ? `<img src="${item.media}" class="w-5 h-5 rounded-md object-cover shrink-0">` : `<span class="text-xs">🔗</span>`;
+                        let mediaTag = item.media ? `<img src="${item.media}" class="w-7 h-7 rounded-xl object-cover border border-amber-500/35 shrink-0">` : `<div class="w-7 h-7 rounded-xl bg-amber-500/15 border border-amber-500/35 flex items-center justify-center text-amber-500 font-bold text-xs shrink-0">🔗</div>`;
                         
-                        topSocialContainer.innerHTML += `
-                            <a href="${link}" target="_blank" class="flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-[#171717] hover:bg-amber-500 hover:text-gray-950 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-amber-500/30 font-bold text-xs transition shadow-sm shrink-0">
+                        socialContainer.innerHTML += `
+                            <a href="${link}" target="_blank" class="glass-card p-3 rounded-2xl flex items-center space-x-2.5 hover:border-amber-500/70 transition group block">
                                 ${mediaTag}
-                                <span>${title}</span>
+                                <span class="text-xs font-bold text-gray-900 dark:text-white group-hover:text-amber-500 truncate">${title}</span>
+                            </a>
+                        `;
+                    });
+                }
+
+                // Render Contact (Dynamic from Admin Panel)
+                const contactContainer = document.getElementById('contactContainer');
+                if (contacts.length === 0) {
+                    contactContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No contact details added yet. Add from Admin Panel.</p>`;
+                } else {
+                    contactContainer.innerHTML = "";
+                    contacts.forEach(item => {
+                        const title = item.titles?.en || 'Contact';
+                        const link = item.redirectLink || item.descriptions?.en || '#';
+                        let mediaTag = item.media ? `<img src="${item.media}" class="w-9 h-9 rounded-xl object-cover border border-amber-500/30 shrink-0">` : `<div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-500 font-bold text-xs shrink-0">✉️</div>`;
+                        
+                        contactContainer.innerHTML += `
+                            <a href="${link.includes('@') ? 'mailto:' + link : link}" target="_blank" class="p-4 rounded-2xl bg-white/5 dark:bg-[#141414] border border-amber-500/20 hover:border-amber-500 flex items-center space-x-3.5 transition block">
+                                ${mediaTag}
+                                <div>
+                                    <p class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white">${title}</p>
+                                    <p class="text-[11px] text-amber-600 dark:text-amber-500 truncate max-w-[220px]">${link}</p>
+                                </div>
                             </a>
                         `;
                     });
