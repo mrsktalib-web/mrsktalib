@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - SK TALIB</title>
+    <title>Admin Panel - SK TALIB</title>
+    <meta name="theme-color" content="#080808">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' }
@@ -11,380 +13,203 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .glass-card {
             background: linear-gradient(135deg, rgba(22, 22, 22, 0.9) 0%, rgba(12, 12, 12, 0.98) 100%);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 175, 55, 0.25);
             box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.7);
         }
+        html:not(.dark) .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 247, 0.98) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.08);
+        }
+        .premium-btn {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.08) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 4px 20px 0 rgba(212, 175, 55, 0.2);
+        }
     </style>
 </head>
-<body class="bg-[#080808] text-gray-100 min-h-screen pt-24 antialiased">
-    
-    <!-- Header -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-xl">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
+<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen py-8 px-4 antialiased">
+
+    <!-- Login Section -->
+    <div id="loginSection" class="max-w-md mx-auto mt-20">
+        <div class="glass-card p-8 rounded-3xl space-y-6 border border-amber-500/40">
+            <div class="text-center space-y-2">
+                <h1 class="text-2xl font-black tracking-wider text-amber-500">ADMIN PANEL</h1>
+                <p class="text-xs text-gray-400">Enter your secure password to continue</p>
+            </div>
+            <div class="space-y-4">
+                <input type="password" id="adminPassword" placeholder="Enter Password" class="w-full bg-black/40 border border-amber-500/30 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500">
+                <button onclick="checkLogin()" class="w-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black py-3 rounded-2xl text-sm transition shadow-lg shadow-amber-500/30">Login</button>
+                <p id="loginError" class="text-xs text-red-500 text-center hidden">Incorrect Password! Hint: SKTALIB@9037</p>
+            </div>
+            <div class="text-center">
+                <a href="index.html" class="text-xs text-amber-500 hover:underline">← Back to Website</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard (Hidden until login) -->
+    <div id="dashboardSection" class="max-w-3xl mx-auto space-y-6 hidden">
+        <div class="flex justify-between items-center bg-black/60 p-4 rounded-2xl border border-amber-500/30">
+            <h1 class="text-lg font-black text-amber-500">SK TALIB Admin Dashboard</h1>
             <div class="flex items-center space-x-3">
-                <a href="index.html" class="text-xs bg-[#171717] hover:bg-amber-500 hover:text-gray-950 px-3.5 py-2 rounded-xl font-bold transition border border-amber-500/30">← Back to Site</a>
-                <h1 class="text-base sm:text-lg font-black text-amber-500">Admin Dashboard ⚡</h1>
+                <a href="index.html" class="text-xs bg-[#171717] hover:bg-amber-500 hover:text-gray-950 px-3 py-2 rounded-xl font-bold transition border border-amber-500/30">View Site</a>
+                <button onclick="logoutAdmin()" class="text-xs bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-3 py-2 rounded-xl font-bold transition border border-red-500/30">Logout</button>
             </div>
-            <button onclick="logoutAdmin()" class="text-xs bg-red-600/10 text-red-400 border border-red-500/30 px-3.5 py-2 rounded-xl font-bold hover:bg-red-600 hover:text-white transition">Logout</button>
-        </div>
-    </header>
-
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8">
-        
-        <!-- Category Selection Tabs -->
-        <div class="flex overflow-x-auto no-scrollbar space-x-2 pb-2 border-b border-amber-500/20">
-            <button onclick="switchTab('home')" id="tab_home" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-gray-950 transition shrink-0">Home Feed</button>
-            <button onclick="switchTab('movie')" id="tab_movie" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">Movies</button>
-            <button onclick="switchTab('products')" id="tab_products" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">Products</button>
-            <button onclick="switchTab('book')" id="tab_book" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">Books</button>
-            <button onclick="switchTab('gallery')" id="tab_gallery" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">Gallery</button>
-            <button onclick="switchTab('about_me')" id="tab_about_me" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">👤 About Me</button>
-            <button onclick="switchTab('about_social')" id="tab_about_social" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">🌐 Social Media</button>
-            <button onclick="switchTab('about_contact')" id="tab_about_contact" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">📞 Contact</button>
         </div>
 
-        <!-- Form Box -->
-        <div class="glass-card p-6 rounded-3xl">
-            <h3 id="formTitle" class="text-base font-bold mb-4 text-white">Add New Item</h3>
-            
-            <form id="contentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                <input type="hidden" id="editingId" value="">
+        <!-- Publish / Add Post Section -->
+        <div class="glass-card p-6 rounded-3xl space-y-4">
+            <h2 class="text-base font-black text-amber-500 uppercase">Publish New Post / Item</h2>
+            <div class="space-y-3">
+                <select id="postCategory" class="w-full bg-black/40 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                    <option value="home">Home Feed Post</option>
+                    <option value="about_me">About Me Section</option>
+                    <option value="about_social">Social Media Link</option>
+                    <option value="about_contact">Contact Option</option>
+                    <option value="movie">Movie / Video</option>
+                    <option value="products">Product Item</option>
+                    <option value="book">Book / Writing</option>
+                    <option value="gallery">Gallery Photo</option>
+                </select>
+                <input type="text" id="postTitle" placeholder="Title / Name" class="w-full bg-black/40 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                <input type="text" id="postMedia" placeholder="Media Image / Video URL (https://...)" class="w-full bg-black/40 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                <input type="text" id="postLink" placeholder="Redirect Link (for Social / Contact)" class="w-full bg-black/40 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                <input type="text" id="postPrice" placeholder="Price (optional, e.g. ₹999)" class="w-full bg-black/40 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                <textarea id="postDesc" placeholder="Description / Content..." rows="4" class="w-full bg-black/40 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500"></textarea>
+                <button onclick="publishPost()" class="w-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black py-3 rounded-2xl text-xs transition shadow-md shadow-amber-500/30">Publish Now</button>
+            </div>
+        </div>
 
-                <div id="titleContainer">
-                    <label id="titleLabel" class="block text-xs font-semibold mb-1 text-gray-300">Title / Label</label>
-                    <input type="text" id="titleEn" placeholder="Enter title..." class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
-                </div>
-
-                <div id="priceFieldContainer" class="hidden">
-                    <label id="priceLabel" class="block text-xs font-semibold mb-1 text-gray-300">Price / Status Badge</label>
-                    <input type="text" id="postPrice" placeholder="e.g. ₹499 or Coming Soon" class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
-                </div>
-
-                <!-- Media Section with Visible Toggle -->
-                <div id="mediaFieldsContainer" class="space-y-3">
-                    <div id="mediaTypeToggleBox" class="flex items-center space-x-4 bg-[#0b0b0b] p-3 rounded-xl border border-amber-500/20">
-                        <label class="text-xs font-bold text-amber-500">Media Type:</label>
-                        <label class="text-xs flex items-center space-x-1.5 cursor-pointer text-gray-300"><input type="radio" name="mediaType" value="image" checked onchange="toggleMediaType()"> <span>Image Upload</span></label>
-                        <label class="text-xs flex items-center space-x-1.5 cursor-pointer text-gray-300"><input type="radio" name="mediaType" value="video_link" onchange="toggleMediaType()"> <span>Video Link</span></label>
-                    </div>
-
-                    <div id="imageUploadBox">
-                        <label id="imageLabel" class="block text-xs font-semibold mb-1 text-gray-300">Image / Cover Photo / Logo</label>
-                        <input type="file" id="imageFile" accept="image/*" onchange="compressAndConvertImage(this)" class="w-full text-xs text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-500 file:text-gray-950 hover:file:bg-amber-400 cursor-pointer">
-                        <input type="hidden" id="imageBase64">
-                        <div id="imagePreviewContainer" class="mt-3 hidden">
-                            <img id="imagePreview" class="w-20 h-20 object-cover rounded-xl border border-amber-500/40">
-                        </div>
-                    </div>
-
-                    <div id="videoLinkBox" class="hidden">
-                        <label class="block text-xs font-semibold mb-1 text-gray-300">Video URL (YouTube/MP4 Link)</label>
-                        <input type="url" id="videoLinkInput" placeholder="Paste video URL here..." class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
-                    </div>
-                </div>
-
-                <div id="linkFieldContainer" class="hidden">
-                    <label id="linkLabel" class="block text-xs font-semibold mb-1 text-gray-300">Link / Username</label>
-                    <input type="text" id="postRedirectLink" placeholder="Enter link or username..." class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
-                </div>
-
-                <div id="descContainer">
-                    <label id="descLabel" class="block text-xs font-semibold mb-1 text-gray-300">Description / Details</label>
-                    <textarea id="descEn" rows="3" class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500 resize-none" placeholder="Enter description..."></textarea>
-                </div>
-
-                <div class="flex items-center space-x-3 pt-2">
-                    <button type="submit" id="submitBtn" class="bg-amber-500 hover:bg-amber-400 text-gray-950 px-6 py-3 rounded-xl text-xs font-bold transition shadow-lg shadow-amber-500/20">Publish Item</button>
-                    <button type="button" onclick="resetForm()" id="cancelEditBtn" class="hidden bg-gray-800 text-gray-300 px-5 py-3 rounded-xl text-xs font-bold transition">Cancel Edit</button>
-                </div>
-            </form>
-                </div>
-                        <!-- Manage Uploads List -->
-        <div class="space-y-4">
-            <h3 class="text-base font-bold text-white">Manage Uploads in <span id="currentCatName" class="text-amber-500">HOME</span> (<span id="totalPostsCount">0</span>)</h3>
+        <!-- Manage Posts List -->
+        <div class="glass-card p-6 rounded-3xl space-y-4">
+            <h2 class="text-base font-black text-amber-500 uppercase">Manage Existing Posts</h2>
             <div id="adminPostsList" class="space-y-3">
-                <p class="text-xs text-gray-500">Loading items...</p>
+                <p class="text-xs text-gray-500 text-center py-4">Loading posts...</p>
             </div>
         </div>
-    </main>
-
-    <script type="module">
+    </div>
+        <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        if (sessionStorage.getItem('isAdmin') !== 'true') {
-            window.location.href = 'index.html';
+        // Check if already logged in via sessionStorage
+        if (sessionStorage.getItem('isAdminLoggedIn') === 'true') {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+            loadAdminPosts();
+        }
+
+        window.checkLogin = function() {
+            const pwd = document.getElementById('adminPassword').value.trim();
+            if (pwd === "SKTALIB@9037") {
+                sessionStorage.setItem('isAdminLoggedIn', 'true');
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('dashboardSection').classList.remove('hidden');
+                loadAdminPosts();
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+            }
         }
 
         window.logoutAdmin = function() {
-            sessionStorage.removeItem('isAdmin');
-            window.location.href = 'index.html';
+            sessionStorage.removeItem('isAdminLoggedIn');
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('adminPassword').value = "";
         }
 
-        let currentCategory = 'home';
-        let allAdminPosts = [];
-
-        window.switchTab = function(category) {
-            currentCategory = category;
-            document.getElementById('currentCatName').innerText = category.toUpperCase();
-
-            ['home', 'movie', 'products', 'book', 'gallery', 'about_me', 'about_social', 'about_contact'].forEach(cat => {
-                const btn = document.getElementById(`tab_${cat}`);
-                if (btn) {
-                    if (cat === category) {
-                        btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-gray-950 transition shrink-0";
-                    } else {
-                        btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0";
-                    }
-                }
-            });
-
-            const priceContainer = document.getElementById('priceFieldContainer');
-            const linkContainer = document.getElementById('linkFieldContainer');
-            const mediaTypeToggleBox = document.getElementById('mediaTypeToggleBox');
-            const imageUploadBox = document.getElementById('imageUploadBox');
-            const titleLabel = document.getElementById('titleLabel');
-            const descLabel = document.getElementById('descLabel');
-
-            priceContainer.classList.add('hidden');
-            linkContainer.classList.add('hidden');
-            mediaTypeToggleBox.classList.remove('hidden');
-            imageUploadBox.classList.remove('hidden');
-
-            if (category === 'home' || category === 'gallery' || category === 'movie') {
-                titleLabel.innerText = category === 'movie' ? "Movie Title" : "Title / Caption";
-                descLabel.innerText = category === 'movie' ? "Movie Description" : "Description / Content";
-            } else if (category === 'products') {
-                priceContainer.classList.remove('hidden');
-                linkContainer.classList.remove('hidden');
-                titleLabel.innerText = "Product Name";
-                document.getElementById('postPrice').placeholder = "e.g. ₹499";
-                document.getElementById('postRedirectLink').placeholder = "Product Buy Link";
-                descLabel.innerText = "Product Description";
-            } else if (category === 'book') {
-                priceContainer.classList.remove('hidden');
-                mediaTypeToggleBox.classList.add('hidden');
-                document.getElementById('videoLinkBox').classList.add('hidden');
-                titleLabel.innerText = "Book Title";
-                document.getElementById('postPrice').value = "Coming Soon";
-                descLabel.innerText = "Book Description / Author";
-            } else if (category === 'about_me') {
-                mediaTypeToggleBox.classList.add('hidden');
-                imageUploadBox.classList.add('hidden');
-                document.getElementById('videoLinkBox').classList.add('hidden');
-                titleLabel.innerText = "Title / Heading (e.g. Name)";
-                descLabel.innerText = "Description / Value (e.g. Sk Talib)";
-            } else if (category === 'about_social') {
-                mediaTypeToggleBox.classList.add('hidden');
-                document.getElementById('videoLinkBox').classList.add('hidden');
-                linkContainer.classList.remove('hidden');
-                titleLabel.innerText = "Social Platform Name";
-                document.getElementById('postRedirectLink').placeholder = "Social Profile URL";
-                descLabel.innerText = "Description / Handle (Optional)";
-            } else if (category === 'about_contact') {
-                mediaTypeToggleBox.classList.add('hidden');
-                document.getElementById('videoLinkBox').classList.add('hidden');
-                linkContainer.classList.remove('hidden');
-                titleLabel.innerText = "Contact Name (e.g. Telegram / Gmail)";
-                document.getElementById('postRedirectLink').placeholder = "Username or Email (e.g. @mrsktalib)";
-                descLabel.innerText = "Additional Info (Optional)";
-            }
-
-            resetForm();
-            renderAdminPosts();
-        }
-
-        window.toggleMediaType = function() {
-            const type = document.querySelector('input[name="mediaType"]:checked').value;
-            if (type === 'image') {
-                document.getElementById('imageUploadBox').classList.remove('hidden');
-                document.getElementById('videoLinkBox').classList.add('hidden');
-            } else {
-                document.getElementById('imageUploadBox').classList.add('hidden');
-                document.getElementById('videoLinkBox').classList.remove('hidden');
-            }
-        }
-
-        window.compressAndConvertImage = function(input) {
-            const file = input.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 800;
-                    const MAX_HEIGHT = 800;
-                    let width = img.width;
-                    let height = img.height;
-                    if (width > height) { if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; } }
-                    else { if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; } }
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-                    const base64String = canvas.toDataURL('image/jpeg', 0.7);
-                    document.getElementById('imageBase64').value = base64String;
-                    document.getElementById('imagePreview').src = base64String;
-                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
-                }
-                img.src = e.target.result;
-            }
-            reader.readAsDataURL(file);
-        }
-
-        window.handleFormSubmit = async function(e) {
-            e.preventDefault();
-            const editingId = document.getElementById('editingId').value;
-            const titleEn = document.getElementById('titleEn').value.trim();
-            const descEn = document.getElementById('descEn').value.trim();
+        window.publishPost = async function() {
+            const category = document.getElementById('postCategory').value;
+            const title = document.getElementById('postTitle').value.trim();
+            const media = document.getElementById('postMedia').value.trim();
+            const redirectLink = document.getElementById('postLink').value.trim();
             const price = document.getElementById('postPrice').value.trim();
-            const redirectLink = document.getElementById('postRedirectLink').value.trim();
+            const desc = document.getElementById('postDesc').value.trim();
 
-            const mediaType = document.querySelector('input[name="mediaType"]:checked')?.value || 'image';
-            let mediaVal = "";
-            if (!document.getElementById('imageUploadBox').classList.contains('hidden')) {
-                mediaVal = document.getElementById('imageBase64').value;
-            } else if (!document.getElementById('videoLinkBox').classList.contains('hidden')) {
-                mediaVal = document.getElementById('videoLinkInput').value.trim();
-            }
-
-            const postData = {
-                category: currentCategory,
-                titles: { en: titleEn },
-                descriptions: { en: descEn },
-                price: price,
-                redirectLink: redirectLink,
-                mediaType: mediaType,
-                media: mediaVal,
-                status: 'published',
-                createdAt: Date.now(),
-                dateFormatted: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-            };
-
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.innerText = "Saving...";
-            submitBtn.disabled = true;
-
-            try {
-                if (editingId) {
-                    await updateDoc(doc(db, "posts", editingId), postData);
-                    alert("Item updated successfully!");
-                } else {
-                    await addDoc(collection(db, "posts"), postData);
-                    alert("Item published successfully!");
-                }
-                resetForm();
-                loadAdminPosts();
-            } catch (err) {
-                console.error("Save error:", err);
-                alert("Failed to save.");
-                submitBtn.innerText = "Publish Item";
-                submitBtn.disabled = false;
-            }
-        }
-
-        window.resetForm = function() {
-            document.getElementById('contentForm').reset();
-            document.getElementById('editingId').value = '';
-            document.getElementById('imageBase64').value = '';
-            document.getElementById('imagePreviewContainer').classList.add('hidden');
-            document.getElementById('videoLinkBox').classList.add('hidden');
-            document.getElementById('imageUploadBox').classList.remove('hidden');
-            document.querySelector('input[name="mediaType"][value="image"]').checked = true;
-            document.getElementById('submitBtn').innerText = "Publish Item";
-            document.getElementById('submitBtn').disabled = false;
-            document.getElementById('cancelEditBtn').classList.add('hidden');
-            if(currentCategory === 'book') document.getElementById('postPrice').value = 'Coming Soon';
-        }
-
-        window.editPost = function(id) {
-            const post = allAdminPosts.find(p => p.id === id);
-            if (!post) return;
-            document.getElementById('editingId').value = post.id;
-            document.getElementById('titleEn').value = post.titles?.en || '';
-            document.getElementById('descEn').value = post.descriptions?.en || '';
-            document.getElementById('postPrice').value = post.price || '';
-            document.getElementById('postRedirectLink').value = post.redirectLink || '';
-            
-            if (post.mediaType === 'video_link') {
-                document.querySelector('input[name="mediaType"][value="video_link"]').checked = true;
-                toggleMediaType();
-                document.getElementById('videoLinkInput').value = post.media || '';
-            } else if (post.media) {
-                document.querySelector('input[name="mediaType"][value="image"]').checked = true;
-                toggleMediaType();
-                document.getElementById('imageBase64').value = post.media;
-                document.getElementById('imagePreview').src = post.media;
-                document.getElementById('imagePreviewContainer').classList.remove('hidden');
-            }
-
-            document.getElementById('submitBtn').innerText = "Update Item";
-            document.getElementById('cancelEditBtn').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        window.deletePost = async function(id) {
-            if (confirm("Are you sure you want to delete this item?")) {
-                try {
-                    await deleteDoc(doc(db, "posts", id));
-                    loadAdminPosts();
-                } catch (err) { alert("Failed to delete."); }
-            }
-        }
-
-        function renderAdminPosts() {
-            const container = document.getElementById('adminPostsList');
-            const filtered = allAdminPosts.filter(p => p.category === currentCategory);
-            document.getElementById('totalPostsCount').innerText = filtered.length;
-
-            if (filtered.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-500 py-4 text-center border border-dashed border-white/10 rounded-2xl">No items found.</p>`;
+            if (!title && !desc && !media) {
+                alert("Please add at least a title, description or media.");
                 return;
             }
 
-            container.innerHTML = "";
-            filtered.forEach(post => {
-                const title = post.titles?.en || 'Untitled';
-                container.innerHTML += `
-                    <div class="bg-[#171717] p-4 rounded-2xl border border-white/10 flex items-center justify-between gap-4">
-                        <div class="flex items-center space-x-3 overflow-hidden">
-                            ${post.media && post.mediaType !== 'video_link' ? `<img src="${post.media}" class="w-12 h-12 object-cover rounded-xl shrink-0">` : '<div class="w-12 h-12 bg-amber-500/10 rounded-xl shrink-0 flex items-center justify-center text-xs text-amber-500">🎥</div>'}
-                            <div class="truncate">
-                                <h4 class="font-semibold text-xs sm:text-sm truncate text-white">${title}</h4>
-                                <p class="text-[10px] text-gray-400 mt-0.5 truncate">${post.descriptions?.en || ''}</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-1.5 shrink-0">
-                            <button onclick="editPost('${post.id}')" class="px-3 py-1.5 bg-[#262626] hover:bg-[#333] text-xs font-semibold rounded-xl transition">Edit</button>
-                            <button onclick="deletePost('${post.id}')" class="px-3 py-1.5 bg-red-600/10 hover:bg-red-600 hover:text-white text-red-400 text-xs font-semibold rounded-xl transition">Delete</button>
-                        </div>
-                    </div>
-                `;
-            });
+            try {
+                await addDoc(collection(db, "posts"), {
+                    category: category,
+                    titles: { en: title },
+                    descriptions: { en: desc },
+                    media: media,
+                    redirectLink: redirectLink,
+                    price: price,
+                    status: 'published',
+                    createdAt: Date.now()
+                });
+                alert("Published successfully!");
+                document.getElementById('postTitle').value = "";
+                document.getElementById('postMedia').value = "";
+                document.getElementById('postLink').value = "";
+                document.getElementById('postPrice').value = "";
+                document.getElementById('postDesc').value = "";
+                loadAdminPosts();
+            } catch (err) {
+                console.error("Publish error:", err);
+                alert("Failed to publish. Check console.");
+            }
         }
 
         async function loadAdminPosts() {
+            const listContainer = document.getElementById('adminPostsList');
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
                 let posts = [];
-                querySnapshot.forEach(doc => { posts.push({ id: doc.id, ...doc.data() }); });
+                querySnapshot.forEach(docSnap => {
+                    posts.push({ id: docSnap.id, ...docSnap.data() });
+                });
                 posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-                allAdminPosts = posts;
-                renderAdminPosts();
-            } catch (err) { console.error(err); }
+
+                if (posts.length === 0) {
+                    listContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No posts found.</p>`;
+                    return;
+                }
+
+                listContainer.innerHTML = "";
+                posts.forEach(post => {
+                    const title = post.titles?.en || 'Untitled';
+                    const cat = post.category || 'general';
+                    listContainer.innerHTML += `
+                        <div class="flex justify-between items-center p-3 rounded-2xl bg-black/40 border border-amber-500/20 text-xs">
+                            <div>
+                                <span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-md font-bold uppercase text-[10px]">${cat}</span>
+                                <p class="font-bold text-white mt-1">${title}</p>
+                            </div>
+                            <button onclick="deletePost('${post.id}')" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-xl font-bold transition">Delete</button>
+                        </div>
+                    `;
+                });
+            } catch (err) {
+                console.error("Load admin posts error:", err);
+                listContainer.innerHTML = `<p class="text-xs text-red-500 text-center py-4">Error loading posts.</p>`;
+            }
         }
 
-        loadAdminPosts();
+        window.deletePost = async function(id) {
+            if (confirm("Are you sure you want to delete this post?")) {
+                try {
+                    await deleteDoc(doc(db, "posts", id));
+                    alert("Deleted successfully!");
+                    loadAdminPosts();
+                } catch (err) {
+                    console.error("Delete error:", err);
+                    alert("Failed to delete.");
+                }
+            }
+        }
     </script>
 </body>
 </html>
