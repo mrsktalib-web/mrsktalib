@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - SK TALIB</title>
+    <title>Admin Dashboard - SK TALIB</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' }
@@ -13,226 +13,310 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
         .glass-card {
             background: linear-gradient(135deg, rgba(22, 22, 22, 0.9) 0%, rgba(12, 12, 12, 0.98) 100%);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 175, 55, 0.25);
             box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.7);
         }
-        html:not(.dark) .glass-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 247, 0.98) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.08);
-        }
-
-        .premium-btn {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.08) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            box-shadow: 0 4px 20px 0 rgba(212, 175, 55, 0.2);
-        }
-        .premium-btn:hover {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.15) 100%);
-            border-color: rgba(212, 175, 55, 0.9);
-            box-shadow: 0 4px 25px 0 rgba(212, 175, 55, 0.35);
-        }
     </style>
 </head>
-<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-40 lg:pt-28 transition-colors duration-300 antialiased">
+<body class="bg-[#080808] text-gray-100 min-h-screen pt-24 antialiased">
     
-    <!-- Fixed Top Navigation Bar -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
-        <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
-            <div class="flex items-center shrink-0">
-                <a href="index.html" class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-xl">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-xs bg-[#171717] hover:bg-amber-500 hover:text-gray-950 px-3.5 py-2 rounded-xl font-bold transition border border-amber-500/30">← Back to Site</a>
+                <h1 class="text-base sm:text-lg font-black text-amber-500">Admin Dashboard ⚡</h1>
             </div>
-
-            <nav class="hidden lg:flex items-center space-x-1.5 text-xs font-bold tracking-wide">
-                <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Home</a>
-                <a href="about.html" class="text-amber-700 dark:text-amber-500 bg-amber-500/15 border border-amber-500/50 px-4 py-2 rounded-xl transition">About</a>
-                <a href="movie.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Movie</a>
-                <a href="products.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Products</a>
-                <a href="book.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Book</a>
-                <a href="gallery.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Gallery</a>
-            </nav>
-
-            <div class="flex items-center space-x-2.5 shrink-0">
-                <a href="chat.html" class="premium-btn flex items-center space-x-2 text-amber-700 dark:text-amber-400 px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition">
-                    <span>Chat with AI</span>
-                    <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </a>
-                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500/70 transition text-sm shrink-0 shadow-sm">
-                    <span id="modeIcon">🌙</span>
-                </button>
-            </div>
+            <button onclick="logoutAdmin()" class="text-xs bg-red-600/10 text-red-400 border border-red-500/30 px-3.5 py-2 rounded-xl font-bold hover:bg-red-600 hover:text-white transition">Logout</button>
         </div>
     </header>
 
-    <!-- Mobile Grid Nav Bar -->
-    <div class="fixed top-[65px] left-0 w-full z-40 grid grid-cols-3 gap-2 lg:hidden px-3 py-3 bg-white/95 dark:bg-[#0b0b0b]/95 backdrop-blur-xl border-b border-gray-200 dark:border-amber-500/20 text-xs font-bold text-center tracking-wide">
-        <a href="index.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Home</a>
-        <a href="about.html" class="py-2 px-2 rounded-xl bg-amber-500 text-gray-950 font-black shadow-md shadow-amber-500/30">About</a>
-        <a href="movie.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Movie</a>
-        <a href="products.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Products</a>
-        <a href="book.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Book</a>
-        <a href="gallery.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Gallery</a>
-    </div>
-
-    <!-- Main Container -->
-    <main class="max-w-4xl mx-auto px-4 py-6 space-y-6">
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8">
         
-        <div class="text-center space-y-1">
-            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-gray-900 dark:text-white">About Me</h2>
-            <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-widest">Personal Space & Background</p>
+        <!-- Category Selection Tabs for Admin -->
+        <div class="flex overflow-x-auto no-scrollbar space-x-2 pb-2 border-b border-amber-500/20">
+            <button onclick="switchTab('home')" id="tab_home" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-gray-950 transition shrink-0">Home Feed</button>
+            <button onclick="switchTab('movie')" id="tab_movie" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">Movies</button>
+            <button onclick="switchTab('products')" id="tab_products" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">Products</button>
+            <button onclick="switchTab('book')" id="tab_book" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">Books</button>
+            <button onclick="switchTab('gallery')" id="tab_gallery" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">Gallery</button>
+            <button onclick="switchTab('about_me')" id="tab_about_me" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">👤 About Me</button>
+            <button onclick="switchTab('about_social')" id="tab_about_social" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">🌐 Social</button>
+            <button onclick="switchTab('about_contact')" id="tab_about_contact" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0">📞 Contact</button>
         </div>
 
-        <!-- Category Selection Tabs (Managed from Admin Panel) -->
-        <div class="flex overflow-x-auto no-scrollbar space-x-2 pb-2 border-b border-gray-200 dark:border-amber-500/20">
-            <button onclick="switchCategory('about_personal')" id="tab_personal" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-gray-950 transition shrink-0 shadow-md">Personal</button>
-            <button onclick="switchCategory('about_education')" id="tab_education" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-[#171717] text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-white/10 transition shrink-0">Education</button>
-            <button onclick="switchCategory('about_gallery')" id="tab_gallery" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-[#171717] text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-white/10 transition shrink-0">Gallery</button>
-            <button onclick="switchCategory('about_feelings')" id="tab_feelings" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-[#171717] text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-white/10 transition shrink-0">Feelings</button>
-            <button onclick="switchCategory('about_social')" id="tab_social" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-[#171717] text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-white/10 transition shrink-0">Social</button>
-            <button onclick="switchCategory('about_contact')" id="tab_contact" class="px-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-[#171717] text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-white/10 transition shrink-0">Contact</button>
+        <!-- Form Box -->
+        <div class="glass-card p-6 rounded-3xl">
+            <h3 id="formTitle" class="text-base font-bold mb-4 text-white">Add New Item</h3>
+            
+            <form id="contentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <input type="hidden" id="editingId" value="">
+
+                <div id="titleContainer">
+                    <label id="titleLabel" class="block text-xs font-semibold mb-1 text-gray-300">Title / Label</label>
+                    <input type="text" id="titleEn" placeholder="Enter title (e.g. Name)" class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
+                </div>
+
+                <div id="priceFieldContainer" class="hidden">
+                    <label class="block text-xs font-semibold mb-1 text-gray-300">Price / Status</label>
+                    <input type="text" id="postPrice" placeholder="e.g. ₹499" class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
+                </div>
+
+                <div id="mediaFieldsContainer" class="space-y-3">
+                    <div id="imageUploadBox">
+                        <label id="imageLabel" class="block text-xs font-semibold mb-1 text-gray-300">Image / Logo Upload</label>
+                        <input type="file" id="imageFile" accept="image/*" onchange="compressAndConvertImage(this)" class="w-full text-xs text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-500 file:text-gray-950 hover:file:bg-amber-400 cursor-pointer">
+                        <input type="hidden" id="imageBase64">
+                        <div id="imagePreviewContainer" class="mt-3 hidden">
+                            <img id="imagePreview" class="w-20 h-20 object-cover rounded-xl border border-amber-500/40">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="linkFieldContainer" class="hidden">
+                    <label id="linkLabel" class="block text-xs font-semibold mb-1 text-gray-300">Link / Username / Details</label>
+                    <input type="text" id="postRedirectLink" placeholder="Enter link or username..." class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
+                </div>
+
+                <div id="descContainer">
+                    <label id="descLabel" class="block text-xs font-semibold mb-1 text-gray-300">Description / Details</label>
+                    <textarea id="descEn" rows="3" class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500 resize-none" placeholder="Enter description (e.g. Sk Talib)..."></textarea>
+                </div>
+
+                <div class="flex items-center space-x-3 pt-2">
+                    <button type="submit" id="submitBtn" class="bg-amber-500 hover:bg-amber-400 text-gray-950 px-6 py-3 rounded-xl text-xs font-bold transition shadow-lg shadow-amber-500/20">Publish Item</button>
+                    <button type="button" onclick="resetForm()" id="cancelEditBtn" class="hidden bg-gray-800 text-gray-300 px-5 py-3 rounded-xl text-xs font-bold transition">Cancel Edit</button>
+                </div>
+            </form>
         </div>
 
-        <!-- Dynamic Content Display Grid -->
-        <div id="aboutContentContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="text-center py-16 text-gray-500 text-xs col-span-full border border-dashed border-gray-300 dark:border-amber-500/20 rounded-3xl bg-white dark:bg-[#141414]">
-                Loading details...
+        <!-- List of Items -->
+        <div class="space-y-4">
+            <h3 class="text-base font-bold text-white">Manage Uploads in <span id="currentCatName" class="text-amber-500">HOME</span> (<span id="totalPostsCount">0</span>)</h3>
+            <div id="adminPostsList" class="space-y-3">
+                <p class="text-xs text-gray-500">Loading items...</p>
             </div>
         </div>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-gray-200 dark:border-amber-500/20 py-8 text-center px-4 mt-16 mb-16">
-        <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
-    </footer>
-
-    <!-- Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        const html = document.documentElement;
-        const modeIcon = document.getElementById('modeIcon');
-
-        if (localStorage.getItem('theme') === 'light') {
-            html.classList.remove('dark');
-            modeIcon.innerText = '☀️';
-        } else {
-            html.classList.add('dark');
-            modeIcon.innerText = '🌙';
+        if (sessionStorage.getItem('isAdmin') !== 'true') {
+            window.location.href = 'index.html';
         }
 
-        window.toggleDarkMode = function() {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                modeIcon.innerText = '☀️';
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                modeIcon.innerText = '🌙';
-                localStorage.setItem('theme', 'dark');
-            }
+        window.logoutAdmin = function() {
+            sessionStorage.removeItem('isAdmin');
+            window.location.href = 'index.html';
         }
 
-        let allAboutPosts = [];
-        let currentTab = 'about_personal';
+        let currentCategory = 'home';
+        let allAdminPosts = [];
 
-        window.switchCategory = function(category) {
-            currentTab = category;
-            ['about_personal', 'about_education', 'about_gallery', 'about_feelings', 'about_social', 'about_contact'].forEach(cat => {
-                const btn = document.getElementById(`tab_${cat.replace('about_', '')}`);
+        window.switchTab = function(category) {
+            currentCategory = category;
+            document.getElementById('currentCatName').innerText = category.toUpperCase();
+
+            ['home', 'movie', 'products', 'book', 'gallery', 'about_me', 'about_social', 'about_contact'].forEach(cat => {
+                const btn = document.getElementById(`tab_${cat}`);
                 if (btn) {
                     if (cat === category) {
-                        btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-gray-950 transition shrink-0 shadow-md";
+                        btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-gray-950 transition shrink-0";
                     } else {
-                        btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-gray-200 dark:bg-[#171717] text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-white/10 transition shrink-0";
+                        btn.className = "px-4 py-2 rounded-xl text-xs font-bold bg-[#171717] text-gray-300 border border-white/10 transition shrink-0";
                     }
                 }
             });
-            renderAboutContent();
+
+            const priceContainer = document.getElementById('priceFieldContainer');
+            const linkContainer = document.getElementById('linkFieldContainer');
+            const imageUploadBox = document.getElementById('imageUploadBox');
+            const titleLabel = document.getElementById('titleLabel');
+            const descLabel = document.getElementById('descLabel');
+
+            if (category === 'about_me') {
+                priceContainer.classList.add('hidden');
+                linkContainer.classList.add('hidden');
+                imageUploadBox.classList.add('hidden');
+                titleLabel.innerText = "Title / Heading (e.g. Name)";
+                descLabel.innerText = "Description / Value (e.g. Sk Talib)";
+            } else if (category === 'about_social' || category === 'about_contact') {
+                priceContainer.classList.add('hidden');
+                linkContainer.classList.remove('hidden');
+                imageUploadBox.classList.remove('hidden');
+                titleLabel.innerText = category === 'about_social' ? "Social Platform Name" : "Contact Name / Platform";
+                linkLabel.innerText = category === 'about_social' ? "Social Link / URL" : "Username or Details (e.g. @mrsktalib)";
+                descLabel.innerText = "Description / Additional Text (Optional)";
+            } else {
+                imageUploadBox.classList.remove('hidden');
+                titleLabel.innerText = "Title / Heading";
+                descLabel.innerText = "Description / Content";
+            }
+
+            resetForm();
+            renderAdminPosts();
         }
 
-        function renderAboutContent() {
-            const container = document.getElementById('aboutContentContainer');
-            const filtered = allAboutPosts.filter(p => p.category === currentTab);
+        window.compressAndConvertImage = function(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 800;
+                    const MAX_HEIGHT = 800;
+                    let width = img.width;
+                    let height = img.height;
+                    if (width > height) { if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; } }
+                    else { if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; } }
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    const base64String = canvas.toDataURL('image/jpeg', 0.7);
+                    document.getElementById('imageBase64').value = base64String;
+                    document.getElementById('imagePreview').src = base64String;
+                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+
+        window.handleFormSubmit = async function(e) {
+            e.preventDefault();
+            const editingId = document.getElementById('editingId').value;
+            const titleEn = document.getElementById('titleEn').value.trim();
+            const descEn = document.getElementById('descEn').value.trim();
+            const price = document.getElementById('postPrice').value.trim();
+            const redirectLink = document.getElementById('postRedirectLink').value.trim();
+            const mediaVal = document.getElementById('imageBase64').value;
+
+            const postData = {
+                category: currentCategory,
+                titles: { en: titleEn },
+                descriptions: { en: descEn },
+                price: price,
+                redirectLink: redirectLink,
+                media: mediaVal,
+                status: 'published',
+                createdAt: Date.now(),
+                dateFormatted: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+            };
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerText = "Saving...";
+            submitBtn.disabled = true;
+
+            try {
+                if (editingId) {
+                    await updateDoc(doc(db, "posts", editingId), postData);
+                    alert("Item updated successfully!");
+                } else {
+                    await addDoc(collection(db, "posts"), postData);
+                    alert("Item published successfully!");
+                }
+                resetForm();
+                loadAdminPosts();
+            } catch (err) {
+                console.error("Save error:", err);
+                alert("Failed to save.");
+                submitBtn.innerText = "Publish Item";
+                submitBtn.disabled = false;
+            }
+        }
+
+        window.resetForm = function() {
+            document.getElementById('contentForm').reset();
+            document.getElementById('editingId').value = '';
+            document.getElementById('imageBase64').value = '';
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+            document.getElementById('submitBtn').innerText = "Publish Item";
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('cancelEditBtn').classList.add('hidden');
+        }
+
+        window.editPost = function(id) {
+            const post = allAdminPosts.find(p => p.id === id);
+            if (!post) return;
+            document.getElementById('editingId').value = post.id;
+            document.getElementById('titleEn').value = post.titles?.en || '';
+            document.getElementById('descEn').value = post.descriptions?.en || '';
+            document.getElementById('postPrice').value = post.price || '';
+            document.getElementById('postRedirectLink').value = post.redirectLink || '';
+            if (post.media) {
+                document.getElementById('imageBase64').value = post.media;
+                document.getElementById('imagePreview').src = post.media;
+                document.getElementById('imagePreviewContainer').classList.remove('hidden');
+            }
+            document.getElementById('submitBtn').innerText = "Update Item";
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.deletePost = async function(id) {
+            if (confirm("Are you sure you want to delete this item?")) {
+                try {
+                    await deleteDoc(doc(db, "posts", id));
+                    loadAdminPosts();
+                } catch (err) { alert("Failed to delete."); }
+            }
+        }
+
+        function renderAdminPosts() {
+            const container = document.getElementById('adminPostsList');
+            const filtered = allAdminPosts.filter(p => p.category === currentCategory);
+            document.getElementById('totalPostsCount').innerText = filtered.length;
 
             if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-20 text-gray-500 text-xs sm:text-sm col-span-full border border-dashed border-gray-300 dark:border-amber-500/20 rounded-3xl bg-white dark:bg-[#141414] shadow-sm">
-                        No items found in this section yet. Add them from your Admin Panel.
-                    </div>
-                `;
+                container.innerHTML = `<p class="text-xs text-gray-500 py-4 text-center border border-dashed border-white/10 rounded-2xl">No items found.</p>`;
                 return;
             }
 
             container.innerHTML = "";
             filtered.forEach(post => {
-                const title = post.titles?.en || '';
-                const desc = post.descriptions?.en || '';
-                const link = post.redirectLink || '#';
-
-                let cardBody = '';
-
-                if (currentTab === 'about_social' || currentTab === 'about_contact') {
-                    cardBody = `
-                        <a href="${link}" target="_blank" class="glass-card p-5 rounded-2xl flex items-center space-x-4 transition-all duration-300 block group hover:scale-[1.02]">
-                            ${post.media ? `<img src="${post.media}" class="w-14 h-14 object-cover rounded-xl border border-amber-500/30 shrink-0">` : '<div class="w-14 h-14 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 font-bold shrink-0">🔗</div>'}
-                            <div class="overflow-hidden">
-                                <h4 class="text-sm font-bold text-gray-900 dark:text-white group-hover:text-amber-500 transition truncate">${title}</h4>
-                                <p class="text-xs text-gray-600 dark:text-gray-400 truncate mt-0.5">${desc}</p>
+                const title = post.titles?.en || 'Untitled';
+                container.innerHTML += `
+                    <div class="bg-[#171717] p-4 rounded-2xl border border-white/10 flex items-center justify-between gap-4">
+                        <div class="flex items-center space-x-3 overflow-hidden">
+                            ${post.media ? `<img src="${post.media}" class="w-12 h-12 object-cover rounded-xl shrink-0">` : '<div class="w-12 h-12 bg-amber-500/10 rounded-xl shrink-0 flex items-center justify-center text-xs text-amber-500">📝</div>'}
+                            <div class="truncate">
+                                <h4 class="font-semibold text-xs sm:text-sm truncate text-white">${title}</h4>
+                                <p class="text-[10px] text-gray-400 mt-0.5 truncate">${post.descriptions?.en || ''}</p>
                             </div>
-                        </a>
-                    `;
-                    container.innerHTML += cardBody;
-                } else if (currentTab === 'about_gallery' || currentTab === 'about_feelings') {
-                    cardBody = `
-                        <div class="glass-card p-5 rounded-3xl space-y-3">
-                            ${post.media ? `<img src="${post.media}" class="w-full h-64 object-cover rounded-2xl border border-amber-500/20" loading="lazy">` : ''}
-                            ${title ? `<h4 class="text-sm font-bold text-gray-900 dark:text-white">${title}</h4>` : ''}
-                            ${desc ? `<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
                         </div>
-                    `;
-                    container.innerHTML += `<div class="col-span-full">${cardBody}</div>`;
-                } else {
-                    // Personal & Education
-                    cardBody = `
-                        <div class="glass-card p-5 rounded-2xl space-y-2">
-                            ${title ? `<span class="text-amber-600 dark:text-amber-500 text-[11px] uppercase font-black tracking-wider block">${title}</span>` : ''}
-                            ${desc ? `<p class="text-xs sm:text-sm font-medium text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
+                        <div class="flex items-center space-x-1.5 shrink-0">
+                            <button onclick="editPost('${post.id}')" class="px-3 py-1.5 bg-[#262626] hover:bg-[#333] text-xs font-semibold rounded-xl transition">Edit</button>
+                            <button onclick="deletePost('${post.id}')" class="px-3 py-1.5 bg-red-600/10 hover:bg-red-600 hover:text-white text-red-400 text-xs font-semibold rounded-xl transition">Delete</button>
                         </div>
-                    `;
-                    container.innerHTML += cardBody;
-                }
+                    </div>
+                `;
             });
         }
 
-        async function loadAboutData() {
+        async function loadAdminPosts() {
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
-                let fetched = [];
-                querySnapshot.forEach(doc => {
-                    const data = doc.data();
-                    if (data.category && data.category.startsWith('about_') && data.status !== 'unpublished') {
-                        fetched.push({ id: doc.id, ...data });
-                    }
-                });
-                fetched.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-                allAboutPosts = fetched;
-                renderAboutContent();
-            } catch (err) {
-                console.error("Error loading about data:", err);
-            }
+                let posts = [];
+                querySnapshot.forEach(doc => { posts.push({ id: doc.id, ...doc.data() }); });
+                posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                allAdminPosts = posts;
+                renderAdminPosts();
+            } catch (err) { console.error(err); }
         }
 
-        loadAboutData();
+        loadAdminPosts();
     </script>
 </body>
-</html>
+    </html>
+    
