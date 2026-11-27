@@ -23,7 +23,7 @@
 </head>
 <body class="min-h-screen py-8 px-4 antialiased flex flex-col justify-between">
 
-    <div class="max-w-md mx-auto w-full mt-10">
+    <div class="max-w-md mx-auto w-full mt-6">
         <!-- Login Box -->
         <div id="loginBox" class="glass-card p-8 rounded-3xl space-y-6 border border-amber-500/40">
             <div class="text-center space-y-2">
@@ -31,7 +31,7 @@
                 <p class="text-xs text-gray-400">Enter your password to manage website</p>
             </div>
             <div class="space-y-4">
-                <input type="password" id="passwordInput" placeholder="Enter Password" class="w-full bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500">
+                <input type="password" id="passwordInput" placeholder="Enter Password" onkeypress="if(event.key==='Enter') verifyLogin()" class="w-full bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500">
                 <button onclick="verifyLogin()" class="w-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black py-3 rounded-2xl text-sm transition shadow-lg shadow-amber-500/30">Login</button>
                 <p id="errorMsg" class="text-xs text-red-500 text-center hidden">Incorrect Password! (SKTALIB@9037)</p>
             </div>
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <!-- Dashboard Box (Hidden initially) -->
+        <!-- Dashboard Box -->
         <div id="dashboardBox" style="display: none;" class="space-y-6">
             <div class="flex justify-between items-center bg-black/60 p-4 rounded-2xl border border-amber-500/30">
                 <h1 class="text-sm font-black text-amber-500">SK TALIB Dashboard</h1>
@@ -51,79 +51,94 @@
             </div>
 
             <div class="glass-card p-6 rounded-3xl space-y-4">
-                <h2 class="text-sm font-black text-amber-500 uppercase">Publish New Post</h2>
+                <h2 class="text-sm font-black text-amber-500 uppercase">Publish New Item</h2>
                 <div class="space-y-3">
+                    <!-- 1. Category Selector -->
                     <div>
                         <label class="text-[11px] font-bold text-gray-400 ml-1">Select Category</label>
-                        <select id="postCategory" onchange="toggleCategoryFields()" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                        <select id="postCategory" onchange="updateFormFields()" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                             <option value="home">Home Feed Post</option>
-                            <option value="about_me">About Me Section</option>
-                            <option value="about_social">Social Media Link (Logo + Name)</option>
-                            <option value="about_contact">Contact Option (Telegram/Gmail)</option>
+                            <option value="about_me">About Me (Personal Info)</option>
+                            <option value="about_social">About - Social Media</option>
+                            <option value="about_contact">About - Contact Option</option>
                             <option value="movie">Movie / TV Show</option>
-                            <option value="products">Product Item</option>
-                            <option value="book">Book / Writing</option>
-                            <option value="gallery">Gallery Photo</option>
+                            <option value="products">Products</option>
+                            <option value="book">Book</option>
+                            <option value="gallery">Gallery</option>
                         </select>
                     </div>
 
-                    <!-- Movie Type Selector (Only for Movie/TV Show) -->
-                    <div id="movieTypeField" style="display: none;">
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Content Type</label>
+                    <!-- Movie / TV Show Type Selector -->
+                    <div id="fieldContentType" style="display: none;">
+                        <label class="text-[11px] font-bold text-gray-400 ml-1">Select Type (Movie or TV Show)</label>
                         <select id="contentType" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                             <option value="Movie">Movie</option>
                             <option value="TV Show">TV Show</option>
                         </select>
                     </div>
 
-                    <div>
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Title / Name</label>
-                        <input type="text" id="postTitle" placeholder="Enter title or name..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                    <!-- Title Field -->
+                    <div id="fieldTitle">
+                        <label id="labelTitle" class="text-[11px] font-bold text-gray-400 ml-1">Title</label>
+                        <input type="text" id="postTitle" placeholder="Enter title..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <!-- Image Upload Section -->
-                    <div id="imageUploadField">
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Upload Image (From Device)</label>
+                    <!-- Intro Box (Only for About Me) -->
+                    <div id="fieldIntro" style="display: none;">
+                        <label class="text-[11px] font-bold text-gray-400 ml-1">Short Intro (Thoda Bada Dikhega)</label>
+                        <textarea id="postIntro" placeholder="e.g. Here are some basic details about me..." rows="2" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500"></textarea>
+                    </div>
+
+                    <!-- Image File Upload (Device) -->
+                    <div id="fieldImageUpload">
+                        <label id="labelImage" class="text-[11px] font-bold text-gray-400 ml-1">Upload Image (From Device)</label>
                         <input type="file" id="imageInput" accept="image/*" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2 text-xs text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-gray-950 hover:file:bg-amber-400">
                     </div>
 
-                    <!-- Media / Video Link Section -->
-                    <div id="mediaLinkField">
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Video / Media Link (YouTube Embed Link)</label>
-                        <input type="text" id="postMedia" placeholder="https://www.youtube.com/embed/..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                    <!-- Video Link Field (Any Platform Link) -->
+                    <div id="fieldVideoLink">
+                        <label id="labelVideo" class="text-[11px] font-bold text-gray-400 ml-1">Video Link (Any Platform - Plays inside site)</label>
+                        <input type="text" id="postVideo" placeholder="https://..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <!-- Redirect Link Section -->
-                    <div id="redirectLinkField">
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Redirect Link (For Social / Contact / External Links)</label>
-                        <input type="text" id="postLink" placeholder="https://t.me/mrsktalib or mailto:..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                    <!-- Redirect / Product / Book / Social Link Field -->
+                    <div id="fieldRedirectLink">
+                        <label id="labelLink" class="text-[11px] font-bold text-gray-400 ml-1">Link</label>
+                        <input type="text" id="postLink" placeholder="https://..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <!-- Price / Coming Soon Section -->
-                    <div id="priceField">
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Price (e.g. ₹999 or Coming Soon)</label>
-                        <input type="text" id="postPrice" placeholder="₹999 or Coming Soon" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                    <!-- Price Field (Products) -->
+                    <div id="fieldPrice" style="display: none;">
+                        <label class="text-[11px] font-bold text-gray-400 ml-1">Price</label>
+                        <input type="text" id="postPrice" placeholder="e.g. ₹999" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <!-- Description Section -->
-                    <div id="descField">
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Description / Content</label>
-                        <textarea id="postDesc" placeholder="Write description here..." rows="3" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500"></textarea>
+                    <!-- Coming Soon Option (Book) -->
+                    <div id="fieldComingSoon" style="display: none;" class="flex items-center space-x-2.5 bg-black/40 border border-amber-500/25 px-4 py-3 rounded-2xl">
+                        <input type="checkbox" id="comingSoonCheck" checked class="w-4 h-4 accent-amber-500 rounded">
+                        <label for="comingSoonCheck" class="text-xs font-bold text-amber-400">Show "Coming Soon" Badge (Price ki jagah)</label>
                     </div>
 
-                    <button onclick="publishNewPost()" class="w-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black py-3 rounded-2xl text-xs transition shadow-md shadow-amber-500/30 mt-2">Publish Now</button>
+                    <!-- Description / Details Box -->
+                    <div id="fieldDesc">
+                        <label id="labelDesc" class="text-[11px] font-bold text-gray-400 ml-1">Description</label>
+                        <textarea id="postDesc" placeholder="Write details here..." rows="4" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500"></textarea>
+                    </div>
+
+                    <button id="publishBtn" onclick="publishNewPost()" class="w-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black py-3 rounded-2xl text-xs transition shadow-md shadow-amber-500/30 mt-2">Publish Now</button>
                 </div>
             </div>
 
+            <!-- Manage Posts -->
             <div class="glass-card p-6 rounded-3xl space-y-4">
-                <h2 class="text-sm font-black text-amber-500 uppercase">Manage Posts</h2>
+                <h2 class="text-sm font-black text-amber-500 uppercase">Manage Existing Posts</h2>
                 <div id="postsList" class="space-y-3">
                     <p class="text-xs text-gray-500 text-center py-4">Loading posts...</p>
                 </div>
             </div>
         </div>
-    </div>
-        <footer class="py-4 text-center text-xs text-gray-600">
+                            </div>
+                                <footer class="py-6 text-center text-xs text-gray-600">
         &copy; 2026 SK TALIB. All rights reserved.
     </footer>
 
@@ -163,81 +178,215 @@
             document.getElementById('passwordInput').value = "";
         }
 
-        // Show/Hide fields based on selected category for a cleaner UI
-        window.toggleCategoryFields = function() {
-            const cat = document.getElementById('postCategory').value;
-            const movieTypeField = document.getElementById('movieTypeField');
-            const priceField = document.getElementById('priceField');
-            const mediaLinkField = document.getElementById('mediaLinkField');
-
-            if (cat === 'movie') {
-                movieTypeField.style.display = 'block';
-            } else {
-                movieTypeField.style.display = 'none';
+        // Convert any video link into embed/playable format automatically
+        function formatPlayableUrl(url) {
+            if (!url) return "";
+            if (url.includes("youtube.com/watch?v=")) {
+                const id = url.split("v=")[1].split("&")[0];
+                return `https://www.youtube.com/embed/${id}`;
             }
+            if (url.includes("youtu.be/")) {
+                const id = url.split("youtu.be/")[1].split("?")[0];
+                return `https://www.youtube.com/embed/${id}`;
+            }
+            return url;
+        }
 
-            if (cat === 'products') {
-                priceField.style.display = 'block';
-            } else if (cat === 'book') {
-                priceField.style.display = 'block';
-                document.getElementById('postPrice').value = 'Coming Soon';
-            } else {
-                priceField.style.display = 'none';
+        // Category-specific field visibility
+        window.updateFormFields = function() {
+            const cat = document.getElementById('postCategory').value;
+
+            const fType = document.getElementById('fieldContentType');
+            const fTitle = document.getElementById('fieldTitle');
+            const fIntro = document.getElementById('fieldIntro');
+            const fImg = document.getElementById('fieldImageUpload');
+            const fVid = document.getElementById('fieldVideoLink');
+            const fLink = document.getElementById('fieldRedirectLink');
+            const fPrice = document.getElementById('fieldPrice');
+            const fSoon = document.getElementById('fieldComingSoon');
+            const fDesc = document.getElementById('fieldDesc');
+
+            const lTitle = document.getElementById('labelTitle');
+            const lImage = document.getElementById('labelImage');
+            const lVideo = document.getElementById('labelVideo');
+            const lLink = document.getElementById('labelLink');
+            const lDesc = document.getElementById('labelDesc');
+
+            // Hide all optional boxes first
+            fType.style.display = 'none';
+            fIntro.style.display = 'none';
+            fImg.style.display = 'none';
+            fVid.style.display = 'none';
+            fLink.style.display = 'none';
+            fPrice.style.display = 'none';
+            fSoon.style.display = 'none';
+            fDesc.style.display = 'none';
+
+            if (cat === 'home') {
+                lTitle.innerText = "Title (Video/Photo ke upar dikhega)";
+                lImage.innerText = "Upload Image (Optional)";
+                lVideo.innerText = "Video Link (Optional - Direct website mein play hoga)";
+                lDesc.innerText = "Description (Video/Photo ke niche dikhega)";
+                fImg.style.display = 'block';
+                fVid.style.display = 'block';
+                fDesc.style.display = 'block';
+            } 
+            else if (cat === 'about_me') {
+                lTitle.innerText = "Title (Sabse Bada Dikhega - e.g. Personal Information)";
+                lDesc.innerText = "Details / Caption (Full Name, DOB, Age, etc.)";
+                fIntro.style.display = 'block';
+                fDesc.style.display = 'block';
+            } 
+            else if (cat === 'about_social') {
+                lTitle.innerText = "Social Platform Name (e.g. Instagram, YouTube)";
+                lImage.innerText = "Upload Social Logo Image";
+                lLink.innerText = "Profile Redirect Link";
+                fImg.style.display = 'block';
+                fLink.style.display = 'block';
+            } 
+            else if (cat === 'about_contact') {
+                lTitle.innerText = "Contact Title (e.g. Telegram, Gmail)";
+                lImage.innerText = "Upload Contact Icon/Logo";
+                lLink.innerText = "Contact Link or Email (e.g. https://t.me/mrsktalib)";
+                fImg.style.display = 'block';
+                fLink.style.display = 'block';
+            } 
+            else if (cat === 'movie') {
+                lTitle.innerText = "Banner / Movie Title";
+                lImage.innerText = "Upload Banner Image";
+                lVideo.innerText = "Watch / Video Link (Optional)";
+                fType.style.display = 'block';
+                fImg.style.display = 'block';
+                fVid.style.display = 'block';
+            } 
+            else if (cat === 'products') {
+                lTitle.innerText = "Product Title";
+                lImage.innerText = "Upload Product Image";
+                lLink.innerText = "Product Buy / Info Link (Optional)";
+                lVideo.innerText = "Product Video Link (Optional)";
+                lDesc.innerText = "Product Description";
+                fImg.style.display = 'block';
+                fLink.style.display = 'block';
+                fVid.style.display = 'block';
+                fPrice.style.display = 'block';
+                fDesc.style.display = 'block';
+            } 
+            else if (cat === 'book') {
+                lTitle.innerText = "Book Title";
+                lImage.innerText = "Upload Book Cover Photo";
+                lLink.innerText = "Book Link (Optional - Abhi khali chhod sakte hain)";
+                lDesc.innerText = "Book Description";
+                fImg.style.display = 'block';
+                fLink.style.display = 'block';
+                fSoon.style.display = 'flex';
+                fDesc.style.display = 'block';
+            } 
+            else if (cat === 'gallery') {
+                lTitle.innerText = "Photo Title";
+                lImage.innerText = "Upload Gallery Image";
+                lLink.innerText = "Video / External Link (Optional)";
+                lDesc.innerText = "Description";
+                fImg.style.display = 'block';
+                fLink.style.display = 'block';
+                fDesc.style.display = 'block';
             }
         }
-        toggleCategoryFields();
+        updateFormFields();
 
-        function convertImageFile(file) {
+        function compressAndConvertImage(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 900;
+                        let width = img.width;
+                        let height = img.height;
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        resolve(canvas.toDataURL('image/jpeg', 0.8));
+                    };
+                };
+                reader.onerror = err => reject(err);
             });
         }
 
         window.publishNewPost = async function() {
-            const category = document.getElementById('postCategory').value;
-            const contentType = document.getElementById('contentType')?.value || 'Movie';
+            const btn = document.getElementById('publishBtn');
+            const cat = document.getElementById('postCategory').value;
+            const contentType = document.getElementById('contentType').value;
             const title = document.getElementById('postTitle').value.trim();
+            const intro = document.getElementById('postIntro').value.trim();
             const imageFile = document.getElementById('imageInput').files[0];
-            let media = document.getElementById('postMedia').value.trim();
+            const videoRaw = document.getElementById('postVideo').value.trim();
             const redirectLink = document.getElementById('postLink').value.trim();
-            const price = document.getElementById('postPrice').value.trim();
-            const desc = document.getElementById('postDesc').value.trim();
+            let price = document.getElementById('postPrice').value.trim();
+            const comingSoon = document.getElementById('comingSoonCheck').checked;
+            let desc = document.getElementById('postDesc').value.trim();
 
-            if (!title && !desc && !imageFile && !media) {
-                alert("Please add at least title, description, image or media link.");
-                return;
+            if (cat === 'about_me' && intro) {
+                desc = intro + "\n\n" + desc;
             }
+            if (cat === 'book' && comingSoon) {
+                price = "Coming Soon";
+            }
+
+            let mediaData = "";
+            let mediaType = "image";
+
+            btn.innerText = "Publishing...";
+            btn.disabled = true;
 
             try {
                 if (imageFile) {
-                    media = await convertImageFile(imageFile);
+                    mediaData = await compressAndConvertImage(imageFile);
+                    mediaType = "image";
+                } else if (videoRaw) {
+                    mediaData = formatPlayableUrl(videoRaw);
+                    mediaType = "video_link";
+                } else if (cat === 'gallery' && redirectLink) {
+                    mediaData = formatPlayableUrl(redirectLink);
+                    mediaType = "video_link";
                 }
 
                 await addDoc(collection(db, "posts"), {
-                    category: category,
-                    contentType: contentType,
+                    category: cat,
+                    contentType: cat === 'movie' ? contentType : '',
                     titles: { en: title },
                     descriptions: { en: desc },
-                    media: media,
+                    media: mediaData,
+                    mediaType: mediaType,
+                    videoUrl: videoRaw ? formatPlayableUrl(videoRaw) : '',
                     redirectLink: redirectLink,
                     price: price,
                     status: 'published',
                     createdAt: Date.now()
                 });
+
                 alert("Published successfully!");
                 document.getElementById('postTitle').value = "";
+                document.getElementById('postIntro').value = "";
                 document.getElementById('imageInput').value = "";
-                document.getElementById('postMedia').value = "";
+                document.getElementById('postVideo').value = "";
                 document.getElementById('postLink').value = "";
                 document.getElementById('postPrice').value = "";
                 document.getElementById('postDesc').value = "";
                 fetchAdminPosts();
             } catch (err) {
-                console.error("Error publishing:", err);
-                alert("Failed to publish. Image size might be too large.");
+                console.error("Publish error:", err);
+                alert("Error while publishing.");
+            } finally {
+                btn.innerText = "Publish Now";
+                btn.disabled = false;
             }
         }
 
@@ -260,11 +409,11 @@
                 list.forEach(item => {
                     const titleText = item.titles?.en || 'Untitled';
                     const categoryName = item.category || 'general';
-                    const badge = item.contentType ? `[${item.contentType}]` : '';
+                    const badge = item.contentType ? ` • ${item.contentType}` : '';
                     container.innerHTML += `
                         <div class="flex justify-between items-center p-3 rounded-2xl bg-black/60 border border-amber-500/20 text-xs">
                             <div>
-                                <span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-md font-bold uppercase text-[10px]">${categoryName} ${badge}</span>
+                                <span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-md font-bold uppercase text-[10px]">${categoryName}${badge}</span>
                                 <p class="font-bold text-white mt-1">${titleText}</p>
                             </div>
                             <button onclick="removePost('${item.id}')" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-xl font-bold transition">Delete</button>
@@ -291,4 +440,5 @@
         }
     </script>
 </body>
-</html>
+    </html>
+    
