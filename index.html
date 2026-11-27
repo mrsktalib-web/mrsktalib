@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SK TALIB - Home Feed</title>
+    <title>SK TALIB - Official Website</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' }
@@ -14,7 +14,6 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Dark Glass & Light Glass Cards */
         .glass-card {
             background: linear-gradient(135deg, rgba(22, 22, 22, 0.9) 0%, rgba(12, 12, 12, 0.98) 100%);
             backdrop-filter: blur(20px);
@@ -27,16 +26,10 @@
             box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.08);
         }
 
-        /* Premium Buttons */
         .premium-btn {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.08) 100%);
             border: 1px solid rgba(212, 175, 55, 0.5);
             box-shadow: 0 4px 20px 0 rgba(212, 175, 55, 0.2);
-        }
-        .premium-btn:hover {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.15) 100%);
-            border-color: rgba(212, 175, 55, 0.9);
-            box-shadow: 0 4px 25px 0 rgba(212, 175, 55, 0.35);
         }
     </style>
 </head>
@@ -45,7 +38,6 @@
     <!-- Fixed Top Navigation Bar -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
-            <!-- Brand Logo -->
             <div class="flex items-center shrink-0">
                 <a href="index.html" class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
             </div>
@@ -53,14 +45,13 @@
             <!-- Desktop Nav Links -->
             <nav class="hidden lg:flex items-center space-x-1.5 text-xs font-bold tracking-wide">
                 <a href="index.html" class="text-amber-700 dark:text-amber-500 bg-amber-500/15 border border-amber-500/50 px-4 py-2 rounded-xl transition">Home</a>
-                <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">About</a>
-                <a href="movie.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Movie</a>
-                <a href="products.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Products</a>
-                <a href="book.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Book</a>
-                <a href="gallery.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Gallery</a>
+                <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">About</a>
+                <a href="movie.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Movie</a>
+                <a href="products.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Products</a>
+                <a href="book.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Book</a>
+                <a href="gallery.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Gallery</a>
             </nav>
 
-            <!-- Right Controls: Chat with AI (Text on left, Search icon on right) + Theme Toggle -->
             <div class="flex items-center space-x-2.5 shrink-0">
                 <a href="chat.html" class="premium-btn flex items-center space-x-2 text-amber-700 dark:text-amber-400 px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition">
                     <span>Chat with AI</span>
@@ -73,7 +64,7 @@
         </div>
     </header>
 
-    <!-- Mobile Grid Nav Bar (Sharp & Rich in Light/Dark mode) -->
+    <!-- Mobile Grid Nav Bar -->
     <div class="fixed top-[65px] left-0 w-full z-40 grid grid-cols-3 gap-2 lg:hidden px-3 py-3 bg-white/95 dark:bg-[#0b0b0b]/95 backdrop-blur-xl border-b border-gray-200 dark:border-amber-500/20 text-xs font-bold text-center tracking-wide">
         <a href="index.html" class="py-2 px-2 rounded-xl bg-amber-500 text-gray-950 font-black shadow-md shadow-amber-500/30">Home</a>
         <a href="about.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">About</a>
@@ -83,34 +74,20 @@
         <a href="gallery.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Gallery</a>
     </div>
 
-    <!-- Main Container -->
+    <!-- Main Feed Container (Blinking dot removed) -->
     <main class="max-w-2xl mx-auto px-4 py-6 space-y-6">
         <div class="flex items-center justify-between">
             <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">Latest Feed</h2>
-            <span class="h-2.5 w-2.5 rounded-full bg-amber-500 animate-ping"></span>
         </div>
 
-        <div id="homeFeedContainer" class="space-y-5">
+        <div id="feedContainer" class="space-y-5">
             <div class="text-center py-20 text-gray-500 text-xs sm:text-sm font-medium border border-dashed border-gray-300 dark:border-amber-500/20 rounded-3xl bg-white dark:bg-[#141414] shadow-sm">
                 Loading feed...
             </div>
         </div>
-    </main>
-
-    <!-- Floating Admin Button (+) -->
-    <button onclick="openAdminModal()" class="fixed bottom-6 right-6 w-14 h-14 bg-amber-500 text-gray-950 rounded-full shadow-2xl flex items-center justify-center text-3xl font-black hover:bg-amber-400 hover:scale-105 transition duration-300 z-50 shadow-amber-500/50">+</button>
-
-    <!-- Admin Login Modal -->
-    <div id="adminModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="glass-card p-7 rounded-3xl w-full max-w-sm shadow-2xl border border-amber-500/40">
-            <h3 class="text-base font-bold mb-3 text-gray-900 dark:text-white">Admin Access</h3>
-            <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full p-3.5 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-amber-500/30 rounded-2xl text-xs mb-4 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500">
-            <div class="flex space-x-2.5">
-                <button onclick="verifyAdmin()" class="flex-1 bg-amber-500 text-gray-950 py-3 rounded-xl text-xs font-bold hover:bg-amber-400 transition shadow-lg shadow-amber-500/30">Login</button>
-                <button onclick="closeAdminModal()" class="flex-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-300 py-3 rounded-xl text-xs font-bold hover:bg-gray-300 dark:hover:bg-gray-700 transition">Cancel</button>
-            </div>
-        </div>
-    </div>
+            </main>
+                <!-- Floating Admin Button -->
+    <a href="admin.html" class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black text-xl flex items-center justify-center shadow-lg shadow-amber-500/30 transition transform hover:scale-105" title="Admin Panel">+</a>
 
     <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-amber-500/20 py-8 text-center px-4 mt-16 mb-16">
@@ -149,47 +126,33 @@
             }
         }
 
-        window.openAdminModal = function() {
-            document.getElementById('adminModal').classList.remove('hidden');
-        }
-
-        window.closeAdminModal = function() {
-            document.getElementById('adminModal').classList.add('hidden');
-        }
-
-        window.verifyAdmin = function() {
-            const pass = document.getElementById('adminPassInput').value;
-            if (pass === 'SKTALIB@9037') {
-                sessionStorage.setItem('isAdmin', 'true');
-                window.location.href = 'admin.html';
-            } else {
-                alert('Incorrect Password!');
-            }
-        }
-
-        async function loadHomeFeed() {
-            const container = document.getElementById('homeFeedContainer');
+        async function loadFeed() {
+            const container = document.getElementById('feedContainer');
             if (!container) return;
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
-                let posts = [];
+                let homePosts = [];
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
                     if (data.category === 'home' && data.status !== 'unpublished') {
-                        posts.push({ id: doc.id, ...data });
+                        homePosts.push({ id: doc.id, ...data });
                     }
                 });
-                posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                homePosts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
-                if (posts.length === 0) {
-                    container.innerHTML = `<p class="text-xs text-gray-500 text-center py-12">No posts in Home feed yet.</p>`;
+                if (homePosts.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-20 text-gray-500 text-xs sm:text-sm font-medium border border-dashed border-gray-300 dark:border-amber-500/20 rounded-3xl bg-white dark:bg-[#141414] shadow-sm">
+                            No posts in Home feed yet.
+                        </div>`;
                     return;
                 }
 
                 container.innerHTML = "";
-                posts.forEach(post => {
+                homePosts.forEach(post => {
                     const title = post.titles?.en || '';
                     const desc = post.descriptions?.en || '';
+                    const dateStr = post.createdAt ? new Date(post.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase() : '';
                     
                     let mediaHtml = "";
                     if (post.mediaType === 'video_link' && post.media) {
@@ -200,9 +163,7 @@
 
                     container.innerHTML += `
                         <div class="glass-card p-5 sm:p-6 rounded-3xl transition-all duration-300">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="text-[11px] text-amber-600 dark:text-amber-500 font-bold tracking-wider uppercase">${post.dateFormatted || ''}</span>
-                            </div>
+                            ${dateStr ? `<p class="text-[11px] text-amber-600 dark:text-amber-500 font-bold tracking-wider mb-2">${dateStr}</p>` : ''}
                             ${title ? `<h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2.5">${title}</h3>` : ''}
                             ${mediaHtml}
                             ${desc ? `<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
@@ -210,12 +171,12 @@
                     `;
                 });
             } catch (err) {
-                console.error("Home feed error:", err);
+                console.error("Feed load error:", err);
             }
         }
 
-        loadHomeFeed();
+        loadFeed();
     </script>
 </body>
-            </html>
-            
+    </html>
+    
