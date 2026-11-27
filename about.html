@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - SK TALIB</title>
+    <meta name="theme-color" content="#080808">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' }
@@ -13,7 +15,6 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
         .glass-card {
             background: linear-gradient(135deg, rgba(22, 22, 22, 0.9) 0%, rgba(12, 12, 12, 0.98) 100%);
             backdrop-filter: blur(20px);
@@ -25,7 +26,6 @@
             border: 1px solid rgba(212, 175, 55, 0.4);
             box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.08);
         }
-
         .premium-btn {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.08) 100%);
             border: 1px solid rgba(212, 175, 55, 0.5);
@@ -34,25 +34,15 @@
     </style>
 </head>
 <body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-24 lg:pt-20 transition-colors duration-300 antialiased">
-    
-    <!-- Fixed Top Bar with Back Button (← Back), Brand, Contact Menu & Dark Mode -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/25 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
         <div class="max-w-2xl mx-auto flex justify-between items-center">
-            
-            <!-- Left: Back Button with Left Arrow -->
             <a href="index.html" class="flex items-center space-x-1.5 text-xs font-bold bg-gray-200 dark:bg-[#171717] hover:bg-amber-500 hover:text-gray-950 px-3.5 py-2 rounded-xl transition border border-gray-300 dark:border-amber-500/30">
                 <span>←</span>
                 <span>Back</span>
             </a>
-
-            <!-- Center: Brand Name -->
             <h1 class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500">SK <span class="text-gray-900 dark:text-white">TALIB</span></h1>
-
-            <!-- Right: Contact 3-Line Menu & Dark Mode -->
             <div class="flex items-center space-x-2">
-                <button onclick="toggleContactMenu()" class="w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500 flex items-center justify-center text-amber-500 font-bold transition shadow-sm text-sm" title="Contact Menu">
-                    ☰
-                </button>
+                <button onclick="toggleContactMenu()" class="w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500 flex items-center justify-center text-amber-500 font-bold transition shadow-sm text-sm" title="Contact Menu">☰</button>
                 <button onclick="toggleDarkMode()" id="themeToggleBtn" class="w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500 transition text-sm flex items-center justify-center shadow-sm">
                     <span id="modeIcon">🌙</span>
                 </button>
@@ -60,7 +50,6 @@
         </div>
     </header>
 
-    <!-- Contact Dropdown Modal (Controlled via Admin Panel) -->
     <div id="contactModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center px-4">
         <div class="glass-card w-full max-w-md p-6 rounded-3xl space-y-5 relative border border-amber-500/40">
             <div class="flex justify-between items-center">
@@ -73,10 +62,7 @@
         </div>
     </div>
 
-    <!-- Main Container -->
     <main class="max-w-2xl mx-auto px-4 py-6 space-y-8">
-        
-        <!-- Social Media Grid Section (Grid view, no slide) -->
         <section class="space-y-3">
             <h3 class="text-xs font-black tracking-wider uppercase text-amber-600 dark:text-amber-500 px-1">Social Media</h3>
             <div id="socialContainer" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -84,36 +70,29 @@
             </div>
         </section>
 
-        <!-- About Me Section (Latest post on top) -->
         <section class="space-y-4">
             <div class="text-center space-y-1">
                 <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">About Me</h2>
                 <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Personal Profile & Updates</p>
             </div>
             <div id="aboutContainer" class="space-y-4">
-                <div class="glass-card p-6 rounded-3xl text-center text-gray-500 text-xs font-medium">
-                    Loading profile...
-                </div>
+                <div class="glass-card p-6 rounded-3xl text-center text-gray-500 text-xs font-medium">Loading profile...</div>
             </div>
         </section>
     </main>
-        <!-- Footer -->
+
     <footer class="border-t border-gray-200 dark:border-amber-500/20 py-8 text-center px-4 mt-16 mb-16">
         <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
         const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
         const html = document.documentElement;
         const modeIcon = document.getElementById('modeIcon');
-
         if (localStorage.getItem('theme') === 'light') {
             html.classList.remove('dark');
             modeIcon.innerText = '☀️';
@@ -121,7 +100,6 @@
             html.classList.add('dark');
             modeIcon.innerText = '🌙';
         }
-
         window.toggleDarkMode = function() {
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
@@ -133,20 +111,13 @@
                 localStorage.setItem('theme', 'dark');
             }
         }
-
         window.toggleContactMenu = function() {
-            const modal = document.getElementById('contactModal');
-            modal.classList.toggle('hidden');
+            document.getElementById('contactModal').classList.toggle('hidden');
         }
-
         async function loadAboutData() {
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
-                
-                let abouts = [];
-                let socials = [];
-                let contacts = [];
-
+                let abouts = [], socials = [], contacts = [];
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
                     if (data.status !== 'unpublished') {
@@ -155,11 +126,7 @@
                         else if (data.category === 'about_contact') contacts.push(data);
                     }
                 });
-
-                // Sort About posts: Latest posted on top
                 abouts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-
-                // Render About Me
                 const aboutContainer = document.getElementById('aboutContainer');
                 if (abouts.length === 0) {
                     aboutContainer.innerHTML = `<div class="glass-card p-6 rounded-3xl text-center text-xs text-gray-500">No about details added yet. Publish from your Admin Panel.</div>`;
@@ -169,7 +136,6 @@
                         const title = item.titles?.en || '';
                         const desc = item.descriptions?.en || '';
                         let mediaTag = item.media ? `<img src="${item.media}" class="w-24 h-24 rounded-full mx-auto object-cover mb-4 border-2 border-amber-500/50 shadow-md">` : '';
-                        
                         aboutContainer.innerHTML += `
                             <div class="glass-card p-6 rounded-3xl space-y-4 text-center">
                                 ${mediaTag}
@@ -179,11 +145,9 @@
                         `;
                     });
                 }
-
-                // Render Social Media (Grid layout)
                 const socialContainer = document.getElementById('socialContainer');
                 if (socials.length === 0) {
-                    socialContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 col-span-full">No social links added yet. Add from Admin Panel.</p>`;
+                    socialContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 col-span-full">No social links added yet.</p>`;
                 } else {
                     socials.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
                     socialContainer.innerHTML = "";
@@ -191,7 +155,6 @@
                         const title = item.titles?.en || 'Social';
                         const link = item.redirectLink || '#';
                         let mediaTag = item.media ? `<img src="${item.media}" class="w-7 h-7 rounded-xl object-cover border border-amber-500/35 shrink-0">` : `<div class="w-7 h-7 rounded-xl bg-amber-500/15 border border-amber-500/35 flex items-center justify-center text-amber-500 font-bold text-xs shrink-0">🔗</div>`;
-                        
                         socialContainer.innerHTML += `
                             <a href="${link}" target="_blank" class="glass-card p-3 rounded-2xl flex items-center space-x-2.5 hover:border-amber-500/70 transition group block">
                                 ${mediaTag}
@@ -200,8 +163,6 @@
                         `;
                     });
                 }
-
-                // Render Contact
                 const contactContainer = document.getElementById('contactContainer');
                 if (contacts.length === 0) {
                     contactContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No contact details added yet. Add from Admin Panel.</p>`;
@@ -211,7 +172,6 @@
                         const title = item.titles?.en || 'Contact';
                         const link = item.redirectLink || item.descriptions?.en || '#';
                         let mediaTag = item.media ? `<img src="${item.media}" class="w-9 h-9 rounded-xl object-cover border border-amber-500/30 shrink-0">` : `<div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-500 font-bold text-xs shrink-0">✉️</div>`;
-                        
                         contactContainer.innerHTML += `
                             <a href="${link.includes('@') ? 'mailto:' + link : link}" target="_blank" class="p-4 rounded-2xl bg-white/5 dark:bg-[#141414] border border-amber-500/20 hover:border-amber-500 flex items-center space-x-3.5 transition block">
                                 ${mediaTag}
@@ -223,13 +183,12 @@
                         `;
                     });
                 }
-
             } catch (err) {
                 console.error("Error loading about data:", err);
             }
         }
-
         loadAboutData();
     </script>
 </body>
-</html>
+    </html>
+    
