@@ -35,13 +35,13 @@
 </head>
 <body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-24 lg:pt-20 transition-colors duration-300 antialiased">
     
-    <!-- Fixed Top Bar with Back Button, Brand, Contact Menu & Dark Mode -->
+    <!-- Fixed Top Bar with Back Button (← Back), Brand, Contact Menu & Dark Mode -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/25 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
         <div class="max-w-2xl mx-auto flex justify-between items-center">
             
-            <!-- Left: Back Button (⬆️ / ←) -->
+            <!-- Left: Back Button with Left Arrow -->
             <a href="index.html" class="flex items-center space-x-1.5 text-xs font-bold bg-gray-200 dark:bg-[#171717] hover:bg-amber-500 hover:text-gray-950 px-3.5 py-2 rounded-xl transition border border-gray-300 dark:border-amber-500/30">
-                <span>⬆️</span>
+                <span>←</span>
                 <span>Back</span>
             </a>
 
@@ -60,7 +60,7 @@
         </div>
     </header>
 
-    <!-- Contact Dropdown Modal (Managed via Admin Panel) -->
+    <!-- Contact Dropdown Modal (Controlled via Admin Panel) -->
     <div id="contactModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center px-4">
         <div class="glass-card w-full max-w-md p-6 rounded-3xl space-y-5 relative border border-amber-500/40">
             <div class="flex justify-between items-center">
@@ -76,7 +76,7 @@
     <!-- Main Container -->
     <main class="max-w-2xl mx-auto px-4 py-6 space-y-8">
         
-        <!-- Social Media Grid Section (No slide, direct grid view with Logo & Name) -->
+        <!-- Social Media Grid Section (Grid view, no slide) -->
         <section class="space-y-3">
             <h3 class="text-xs font-black tracking-wider uppercase text-amber-600 dark:text-amber-500 px-1">Social Media</h3>
             <div id="socialContainer" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -180,7 +180,7 @@
                     });
                 }
 
-                // Render Social Media (Grid layout, no slide, Logo + Name)
+                // Render Social Media (Grid layout)
                 const socialContainer = document.getElementById('socialContainer');
                 if (socials.length === 0) {
                     socialContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 col-span-full">No social links added yet. Add from Admin Panel.</p>`;
@@ -201,7 +201,7 @@
                     });
                 }
 
-                // Render Contact (Dynamic from Admin Panel)
+                // Render Contact
                 const contactContainer = document.getElementById('contactContainer');
                 if (contacts.length === 0) {
                     contactContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No contact details added yet. Add from Admin Panel.</p>`;
