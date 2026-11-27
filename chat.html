@@ -56,7 +56,7 @@
         
         <div class="text-center space-y-1">
             <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">SK TALIB AI Assistant</h2>
-            <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Talk freely, friendly & naturally!</p>
+            <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Powered by Gemini AI (Real Chat)</p>
         </div>
 
         <!-- Chat Box Window -->
@@ -64,7 +64,7 @@
             <div class="flex items-start space-x-2.5">
                 <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
                 <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs sm:text-sm text-gray-800 dark:text-gray-200 max-w-[85%] leading-relaxed shadow-sm">
-                    Hello Talib bhai! Main aapka AI assistant hoon. Ab hum bilkul aaram se, friendly tarike se chat karenge. Boliye, aaj kya baat karni hai? 😊
+                    Hello Talib bhai! Main ab direct Google Gemini AI se connect ho gaya hoon. Aap mujhse kisi bhi language mein, kuch bhi chat kar sakte hain! ✨
                 </div>
             </div>
         </div>
@@ -72,14 +72,13 @@
         <!-- Quick Helper Buttons -->
         <div class="flex overflow-x-auto no-scrollbar space-x-2 py-1 text-xs">
             <button onclick="sendQuickPrompt('Kaise ho?')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">👋 Kaise ho?</button>
-            <button onclick="sendQuickPrompt('Apne bare me batao')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">🤖 Aap kaun ho?</button>
             <button onclick="sendQuickPrompt('Tell me about Sk Talib')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">👤 About Talib</button>
             <button onclick="sendQuickPrompt('Ek accha sa joke sunao')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">😄 Joke sunao</button>
         </div>
 
         <!-- Input Box -->
         <div class="glass-card p-2.5 rounded-2xl flex items-center space-x-2 shadow-lg">
-            <input type="text" id="userInput" placeholder="Yahan kuch bhi type karo..." class="flex-1 bg-transparent px-3 py-2 text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none placeholder-gray-500" onkeypress="if(event.key === 'Enter') sendMessage()">
+            <input type="text" id="userInput" placeholder="Ask anything..." class="flex-1 bg-transparent px-3 py-2 text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none placeholder-gray-500" onkeypress="if(event.key === 'Enter') sendMessage()">
             <button onclick="sendMessage()" class="bg-amber-500 hover:bg-amber-400 text-gray-950 px-5 py-2.5 rounded-xl text-xs font-black transition shadow-md shadow-amber-500/30 shrink-0">Send</button>
         </div>
     </main>
@@ -120,28 +119,10 @@
             }
         }
 
-        let siteData = { about: [], social: [], contact: [], products: [], movies: [], books: [] };
-
-        async function loadSiteData() {
-            try {
-                const querySnapshot = await getDocs(collection(db, "posts"));
-                querySnapshot.forEach(doc => {
-                    const data = doc.data();
-                    if (data.status !== 'unpublished') {
-                        if (data.category === 'about_me') siteData.about.push(data);
-                        else if (data.category === 'about_social') siteData.social.push(data);
-                        else if (data.category === 'about_contact') siteData.contact.push(data);
-                        else if (data.category === 'products') siteData.products.push(data);
-                        else if (data.category === 'movie') siteData.movies.push(data);
-                        else if (data.category === 'book') siteData.books.push(data);
-                        else if (data.category === 'home') siteData.about.push(data);
-                    }
-                });
-            } catch (err) {
-                console.error("Error loading knowledge base:", err);
-            }
-        }
-        loadSiteData();
+        // ==========================================
+        // YAHAN APNI FREE GEMINI API KEY DAALEIN
+        // ==========================================
+        const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"; 
 
         window.sendQuickPrompt = function(text) {
             document.getElementById('userInput').value = text;
@@ -152,6 +133,11 @@
             const inputField = document.getElementById('userInput');
             const message = inputField.value.trim();
             if (!message) return;
+
+            if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY" || !GEMINI_API_KEY) {
+                alert("Please add your Google Gemini API key in the chat.html script code!");
+                return;
+            }
 
             const chatWindow = document.getElementById('chatWindow');
             
@@ -172,93 +158,54 @@
                 <div id="${typingId}" class="flex items-start space-x-2.5">
                     <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
                     <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs text-gray-500 dark:text-gray-400 italic shadow-sm">
-                        Soch raha hoon...
+                        Thinking...
                     </div>
                 </div>
             `;
             chatWindow.scrollTop = chatWindow.scrollHeight;
 
-            // Generate Natural Conversational Response
-            setTimeout(() => {
+            try {
+                // Call Google Gemini API directly
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: "You are a friendly personal AI assistant for SK Talib on his website mrsktalib.in. Reply naturally and helpfully in the user's language. User says: " + message }]
+                        }]
+                    })
+                });
+
+                const data = await response.json();
                 document.getElementById(typingId).remove();
-                let reply = getNaturalAIResponse(message);
-                
+
+                let reply = "Sorry, I couldn't process that right now.";
+                if (data.candidates && data.candidates[0].content.parts[0].text) {
+                    reply = data.candidates[0].content.parts[0].text;
+                }
+
                 chatWindow.innerHTML += `
                     <div class="flex items-start space-x-2.5">
                         <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
                         <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs sm:text-sm text-gray-800 dark:text-gray-200 max-w-[85%] leading-relaxed shadow-sm whitespace-pre-line">
-                            ${reply}
+                            ${escapeHtml(reply)}
                         </div>
                     </div>
                 `;
                 chatWindow.scrollTop = chatWindow.scrollHeight;
-            }, 500);
-        }
 
-        function getNaturalAIResponse(query) {
-            const q = query.toLowerCase();
-            
-            // Greetings & Casual Talk
-            if (q.includes('kaise ho') || q.includes('kya haal') || q.includes('how are you') || q.includes('kemon acho')) {
-                return "Main ekdum fit and fine hoon! Aap bataiye, aapka din kaisa chal raha hai?";
+            } catch (err) {
+                console.error("Gemini API Error:", err);
+                document.getElementById(typingId).remove();
+                chatWindow.innerHTML += `
+                    <div class="flex items-start space-x-2.5">
+                        <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
+                        <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs sm:text-sm text-red-400 max-w-[85%] leading-relaxed shadow-sm">
+                            Network error or invalid API key. Please check your key.
+                        </div>
+                    </div>
+                `;
             }
-            if (q.includes('name') || q.includes('naam') || q.includes('aap kaun') || q.includes('who are you')) {
-                return "Arre main SK Talib ka apna personal AI assistant hoon! Aapke website par koi bhi visitors aayega, toh main unse baat karunga aur unhe guidance dunga.";
-            }
-            if (q.includes('joke') || q.includes('chutkula') || q.includes('hasao')) {
-                return "Suniye phir: Boss ne employee se pucha — 'Tum office late kyun aaye?' Employee bola — 'Sir, raste par ek board laga tha jiss par likha tha: Aage School hai, dheere chalein!' 😄 Kaisa laga?";
-            }
-            if (q.includes('ha batao') || q.includes('batao') || q.includes('aur sunao')) {
-                name = "Arey sunao phir! Aap apni website mrsktalib.in ko aur kaisa behtareen banana chahte ho? Koi naya feature add karna hai kya?";
-            }
-
-            // About Talib
-            if (q.includes('talib') || q.includes('about') || q.includes('owner') || q.includes('creator')) {
-                if (siteData.about.length > 0) {
-                    let res = "SK Talib ke baare mein yeh sab recorded hai:\n";
-                    siteData.about.forEach(item => {
-                        if (item.titles?.en) res += `• ${item.titles.en}: `;
-                        if (item.descriptions?.en) res += `${item.descriptions.en}\n`;
-                    });
-                    return res;
-                }
-                return "SK Talib ek talented developer aur creator hain jo apni shandaar website mrsktalib.in aur digital projects par kaam kar rahe hain!";
-            }
-
-            // Education
-            if (q.includes('education') || q.includes('study') || q.includes('college') || q.includes('padhai')) {
-                return "SK Talib ne Maulana Azad National Urdu University (MANUU) Polytechnic Cuttack Campus se Diploma in Engineering ki padhai ki hai.";
-            }
-
-            // Products & Shopping
-            if (q.includes('product') || q.includes('item') || q.includes('buy') || q.includes('kareed')) {
-                if (siteData.products.length > 0) {
-                    let res = "Yeh hain hamare available products:\n";
-                    siteData.products.forEach(p => {
-                        res += `• ${p.titles?.en || 'Product'} (${p.price || ''}) - ${p.descriptions?.en || ''}\n`;
-                    });
-                    return res;
-                }
-                return "Aap hamare Products page par jakar saari latest items dekh sakte hain!";
-            }
-
-            // Contact & Social
-            if (q.includes('contact') || q.includes('social') || q.includes('telegram') || q.includes('instagram') || q.includes('email') || q.includes('number')) {
-                let res = "Aap SK Talib se yahan connect ho sakte hain:\n";
-                if (siteData.social.length > 0) {
-                    siteData.social.forEach(s => { res += `• ${s.titles?.en}: ${s.redirectLink || ''}\n`; });
-                }
-                if (siteData.contact.length > 0) {
-                    siteData.contact.forEach(c => { res += `• ${c.titles?.en}: ${c.redirectLink || c.descriptions?.en || ''}\n`; });
-                }
-                if (res.trim() === "Aap SK Talib se yahan connect ho sakte hain:") {
-                    return "Aap About page par jakar saare social links aur contact details dekh sakte hain.";
-                }
-                return res;
-            }
-
-            // Smart Dynamic Friendly Reply for anything else
-            return `Baat toh sahi hai! Aapne ekdum interesting baat boli. Aap chahe toh website ke baare mein puch sakte hain, ya aise hi kuch aur discuss kar sakte hain. Main sun raha hoon, boliye!`;
         }
 
         function escapeHtml(text) {
