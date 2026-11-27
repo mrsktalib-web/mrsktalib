@@ -65,11 +65,12 @@
                     <input type="text" id="postPrice" placeholder="e.g. ₹499 or Coming Soon" class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
                 </div>
 
+                <!-- Media Section with Visible Toggle -->
                 <div id="mediaFieldsContainer" class="space-y-3">
-                    <div id="mediaTypeToggleBox" class="hidden flex items-center space-x-4">
-                        <label class="text-xs font-semibold text-gray-300">Media Type:</label>
-                        <label class="text-xs flex items-center space-x-1 cursor-pointer"><input type="radio" name="mediaType" value="image" checked onchange="toggleMediaType()"> <span>Image Upload</span></label>
-                        <label class="text-xs flex items-center space-x-1 cursor-pointer"><input type="radio" name="mediaType" value="video_link" onchange="toggleMediaType()"> <span>Video Link</span></label>
+                    <div id="mediaTypeToggleBox" class="flex items-center space-x-4 bg-[#0b0b0b] p-3 rounded-xl border border-amber-500/20">
+                        <label class="text-xs font-bold text-amber-500">Media Type:</label>
+                        <label class="text-xs flex items-center space-x-1.5 cursor-pointer text-gray-300"><input type="radio" name="mediaType" value="image" checked onchange="toggleMediaType()"> <span>Image Upload</span></label>
+                        <label class="text-xs flex items-center space-x-1.5 cursor-pointer text-gray-300"><input type="radio" name="mediaType" value="video_link" onchange="toggleMediaType()"> <span>Video Link</span></label>
                     </div>
 
                     <div id="imageUploadBox">
@@ -82,8 +83,8 @@
                     </div>
 
                     <div id="videoLinkBox" class="hidden">
-                        <label class="block text-xs font-semibold mb-1 text-gray-300">Video URL (YouTube/MP4)</label>
-                        <input type="url" id="videoLinkInput" placeholder="Paste video URL..." class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
+                        <label class="block text-xs font-semibold mb-1 text-gray-300">Video URL (YouTube/MP4 Link)</label>
+                        <input type="url" id="videoLinkInput" placeholder="Paste video URL here..." class="w-full p-3.5 bg-[#0b0b0b] border border-amber-500/30 rounded-xl text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
                 </div>
 
@@ -102,8 +103,8 @@
                     <button type="button" onclick="resetForm()" id="cancelEditBtn" class="hidden bg-gray-800 text-gray-300 px-5 py-3 rounded-xl text-xs font-bold transition">Cancel Edit</button>
                 </div>
             </form>
-    </div>
-            <!-- Manage Uploads List -->
+                </div>
+                        <!-- Manage Uploads List -->
         <div class="space-y-4">
             <h3 class="text-base font-bold text-white">Manage Uploads in <span id="currentCatName" class="text-amber-500">HOME</span> (<span id="totalPostsCount">0</span>)</h3>
             <div id="adminPostsList" class="space-y-3">
@@ -150,52 +151,48 @@
             const priceContainer = document.getElementById('priceFieldContainer');
             const linkContainer = document.getElementById('linkFieldContainer');
             const mediaTypeToggleBox = document.getElementById('mediaTypeToggleBox');
-            const videoLinkBox = document.getElementById('videoLinkBox');
             const imageUploadBox = document.getElementById('imageUploadBox');
             const titleLabel = document.getElementById('titleLabel');
             const descLabel = document.getElementById('descLabel');
 
             priceContainer.classList.add('hidden');
             linkContainer.classList.add('hidden');
-            mediaTypeToggleBox.classList.add('hidden');
-            videoLinkBox.classList.add('hidden');
+            mediaTypeToggleBox.classList.remove('hidden');
             imageUploadBox.classList.remove('hidden');
 
-            if (category === 'home' || category === 'gallery') {
-                mediaTypeToggleBox.classList.remove('hidden');
-                titleLabel.innerText = "Title / Caption";
-                descLabel.innerText = "Description / Content";
-                toggleMediaType();
-            } else if (category === 'movie') {
-                mediaTypeToggleBox.classList.remove('hidden');
-                titleLabel.innerText = "Movie Title";
-                descLabel.innerText = "Movie Description";
-                toggleMediaType();
+            if (category === 'home' || category === 'gallery' || category === 'movie') {
+                titleLabel.innerText = category === 'movie' ? "Movie Title" : "Title / Caption";
+                descLabel.innerText = category === 'movie' ? "Movie Description" : "Description / Content";
             } else if (category === 'products') {
                 priceContainer.classList.remove('hidden');
                 linkContainer.classList.remove('hidden');
-                mediaTypeToggleBox.classList.remove('hidden');
                 titleLabel.innerText = "Product Name";
                 document.getElementById('postPrice').placeholder = "e.g. ₹499";
                 document.getElementById('postRedirectLink').placeholder = "Product Buy Link";
                 descLabel.innerText = "Product Description";
-                toggleMediaType();
             } else if (category === 'book') {
                 priceContainer.classList.remove('hidden');
-                linkContainer.classList.add('hidden');
+                mediaTypeToggleBox.classList.add('hidden');
+                document.getElementById('videoLinkBox').classList.add('hidden');
                 titleLabel.innerText = "Book Title";
                 document.getElementById('postPrice').value = "Coming Soon";
                 descLabel.innerText = "Book Description / Author";
             } else if (category === 'about_me') {
+                mediaTypeToggleBox.classList.add('hidden');
                 imageUploadBox.classList.add('hidden');
+                document.getElementById('videoLinkBox').classList.add('hidden');
                 titleLabel.innerText = "Title / Heading (e.g. Name)";
                 descLabel.innerText = "Description / Value (e.g. Sk Talib)";
             } else if (category === 'about_social') {
+                mediaTypeToggleBox.classList.add('hidden');
+                document.getElementById('videoLinkBox').classList.add('hidden');
                 linkContainer.classList.remove('hidden');
                 titleLabel.innerText = "Social Platform Name";
                 document.getElementById('postRedirectLink').placeholder = "Social Profile URL";
                 descLabel.innerText = "Description / Handle (Optional)";
             } else if (category === 'about_contact') {
+                mediaTypeToggleBox.classList.add('hidden');
+                document.getElementById('videoLinkBox').classList.add('hidden');
                 linkContainer.classList.remove('hidden');
                 titleLabel.innerText = "Contact Name (e.g. Telegram / Gmail)";
                 document.getElementById('postRedirectLink').placeholder = "Username or Email (e.g. @mrsktalib)";
@@ -253,7 +250,7 @@
             const price = document.getElementById('postPrice').value.trim();
             const redirectLink = document.getElementById('postRedirectLink').value.trim();
 
-            const mediaType = document.querySelector('input[name="mediaType"]')?.value || 'image';
+            const mediaType = document.querySelector('input[name="mediaType"]:checked')?.value || 'image';
             let mediaVal = "";
             if (!document.getElementById('imageUploadBox').classList.contains('hidden')) {
                 mediaVal = document.getElementById('imageBase64').value;
@@ -301,6 +298,9 @@
             document.getElementById('editingId').value = '';
             document.getElementById('imageBase64').value = '';
             document.getElementById('imagePreviewContainer').classList.add('hidden');
+            document.getElementById('videoLinkBox').classList.add('hidden');
+            document.getElementById('imageUploadBox').classList.remove('hidden');
+            document.querySelector('input[name="mediaType"][value="image"]').checked = true;
             document.getElementById('submitBtn').innerText = "Publish Item";
             document.getElementById('submitBtn').disabled = false;
             document.getElementById('cancelEditBtn').classList.add('hidden');
@@ -315,11 +315,19 @@
             document.getElementById('descEn').value = post.descriptions?.en || '';
             document.getElementById('postPrice').value = post.price || '';
             document.getElementById('postRedirectLink').value = post.redirectLink || '';
-            if (post.media) {
+            
+            if (post.mediaType === 'video_link') {
+                document.querySelector('input[name="mediaType"][value="video_link"]').checked = true;
+                toggleMediaType();
+                document.getElementById('videoLinkInput').value = post.media || '';
+            } else if (post.media) {
+                document.querySelector('input[name="mediaType"][value="image"]').checked = true;
+                toggleMediaType();
                 document.getElementById('imageBase64').value = post.media;
                 document.getElementById('imagePreview').src = post.media;
                 document.getElementById('imagePreviewContainer').classList.remove('hidden');
             }
+
             document.getElementById('submitBtn').innerText = "Update Item";
             document.getElementById('cancelEditBtn').classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -350,7 +358,7 @@
                 container.innerHTML += `
                     <div class="bg-[#171717] p-4 rounded-2xl border border-white/10 flex items-center justify-between gap-4">
                         <div class="flex items-center space-x-3 overflow-hidden">
-                            ${post.media ? `<img src="${post.media}" class="w-12 h-12 object-cover rounded-xl shrink-0">` : '<div class="w-12 h-12 bg-amber-500/10 rounded-xl shrink-0 flex items-center justify-center text-xs text-amber-500">📝</div>'}
+                            ${post.media && post.mediaType !== 'video_link' ? `<img src="${post.media}" class="w-12 h-12 object-cover rounded-xl shrink-0">` : '<div class="w-12 h-12 bg-amber-500/10 rounded-xl shrink-0 flex items-center justify-center text-xs text-amber-500">🎥</div>'}
                             <div class="truncate">
                                 <h4 class="font-semibold text-xs sm:text-sm truncate text-white">${title}</h4>
                                 <p class="text-[10px] text-gray-400 mt-0.5 truncate">${post.descriptions?.en || ''}</p>
