@@ -45,8 +45,8 @@
 
     <main class="max-w-2xl mx-auto px-4 py-6 space-y-6">
         <div class="text-center space-y-1">
-            <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">Our Products</h2>
-            <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Featured Items</p>
+            <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">Products I Use & Want</h2>
+            <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">My Gear & Wishlist</p>
         </div>
 
         <div id="productsContainer" class="space-y-6">
@@ -111,10 +111,14 @@
                     const title = item.titles?.en || 'Untitled';
                     const media = item.media || '';
                     const price = item.price || '';
-                    const link = item.redirectLink || item.link || '#';
+                    const link = item.redirectLink || item.link || '';
                     const desc = item.descriptions?.en || '';
 
                     let mediaHtml = media ? `<img src="${media}" class="w-full rounded-2xl object-cover max-h-[500px] border border-amber-500/20">` : '';
+
+                    const buttonHtml = link && link.trim() !== '' 
+                        ? `<a href="${link}" target="_blank" class="block text-center bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold py-2.5 rounded-xl text-xs transition shadow-md shadow-amber-500/20">View Product / Buy Now</a>`
+                        : `<button onclick="alert('Link not added yet for this product.')" class="w-full bg-gray-700 text-gray-400 font-bold py-2.5 rounded-xl text-xs cursor-not-allowed">Link Not Available</button>`;
 
                     container.innerHTML += `
                         <div class="glass-card p-5 sm:p-6 rounded-3xl space-y-4">
@@ -124,7 +128,7 @@
                             </div>
                             ${mediaHtml}
                             ${desc ? `<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
-                            ${link && link !== '#' ? `<a href="${link}" target="_blank" class="block text-center bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold py-2.5 rounded-xl text-xs transition shadow-md shadow-amber-500/20">View Product / Buy Now</a>` : ''}
+                            ${buttonHtml}
                         </div>
                     `;
                 });
@@ -137,4 +141,5 @@
         loadProducts();
     </script>
 </body>
-</html>
+    </html>
+    
