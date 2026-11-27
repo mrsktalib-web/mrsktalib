@@ -55,24 +55,24 @@
                 <div class="space-y-3">
                     <div>
                         <label class="text-[11px] font-bold text-gray-400 ml-1">Select Category</label>
-                        <select id="postCategory" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                        <select id="postCategory" onchange="toggleCategoryFields()" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                             <option value="home">Home Feed Post</option>
                             <option value="about_me">About Me Section</option>
                             <option value="about_social">Social Media Link (Logo + Name)</option>
                             <option value="about_contact">Contact Option (Telegram/Gmail)</option>
-                            <option value="movie">Movie / Video</option>
+                            <option value="movie">Movie / TV Show</option>
                             <option value="products">Product Item</option>
                             <option value="book">Book / Writing</option>
                             <option value="gallery">Gallery Photo</option>
                         </select>
                     </div>
 
-                    <div>
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Media Type</label>
-                        <select id="mediaType" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
-                            <option value="image">Photo / Image URL</option>
-                            <option value="video_link">Video Embed Link (YouTube / Direct)</option>
-                            <option value="none">Text Only (No Media)</option>
+                    <!-- Movie Type Selector (Only for Movie/TV Show) -->
+                    <div id="movieTypeField" style="display: none;">
+                        <label class="text-[11px] font-bold text-gray-400 ml-1">Content Type</label>
+                        <select id="contentType" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                            <option value="Movie">Movie</option>
+                            <option value="TV Show">TV Show</option>
                         </select>
                     </div>
 
@@ -81,24 +81,34 @@
                         <input type="text" id="postTitle" placeholder="Enter title or name..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <div>
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Media URL (Image or Video Link)</label>
-                        <input type="text" id="postMedia" placeholder="https://..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                    <!-- Image Upload Section -->
+                    <div id="imageUploadField">
+                        <label class="text-[11px] font-bold text-gray-400 ml-1">Upload Image (From Device)</label>
+                        <input type="file" id="imageInput" accept="image/*" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2 text-xs text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-gray-950 hover:file:bg-amber-400">
                     </div>
 
-                    <div>
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Redirect Link (For Social / Contact / Buttons)</label>
-                        <input type="text" id="postLink" placeholder="https://t.me/... or mailto:..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                    <!-- Media / Video Link Section -->
+                    <div id="mediaLinkField">
+                        <label class="text-[11px] font-bold text-gray-400 ml-1">Video / Media Link (YouTube Embed Link)</label>
+                        <input type="text" id="postMedia" placeholder="https://www.youtube.com/embed/..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <div>
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Price (Optional, e.g. ₹999)</label>
-                        <input type="text" id="postPrice" placeholder="₹999" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                    <!-- Redirect Link Section -->
+                    <div id="redirectLinkField">
+                        <label class="text-[11px] font-bold text-gray-400 ml-1">Redirect Link (For Social / Contact / External Links)</label>
+                        <input type="text" id="postLink" placeholder="https://t.me/mrsktalib or mailto:..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <div>
+                    <!-- Price / Coming Soon Section -->
+                    <div id="priceField">
+                        <label class="text-[11px] font-bold text-gray-400 ml-1">Price (e.g. ₹999 or Coming Soon)</label>
+                        <input type="text" id="postPrice" placeholder="₹999 or Coming Soon" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <!-- Description Section -->
+                    <div id="descField">
                         <label class="text-[11px] font-bold text-gray-400 ml-1">Description / Content</label>
-                        <textarea id="postDesc" placeholder="Write description or content here..." rows="3" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500"></textarea>
+                        <textarea id="postDesc" placeholder="Write description here..." rows="3" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500"></textarea>
                     </div>
 
                     <button onclick="publishNewPost()" class="w-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black py-3 rounded-2xl text-xs transition shadow-md shadow-amber-500/30 mt-2">Publish Now</button>
@@ -112,8 +122,8 @@
                 </div>
             </div>
         </div>
-                            </div>
-                                <footer class="py-4 text-center text-xs text-gray-600">
+    </div>
+        <footer class="py-4 text-center text-xs text-gray-600">
         &copy; 2026 SK TALIB. All rights reserved.
     </footer>
 
@@ -153,24 +163,62 @@
             document.getElementById('passwordInput').value = "";
         }
 
+        // Show/Hide fields based on selected category for a cleaner UI
+        window.toggleCategoryFields = function() {
+            const cat = document.getElementById('postCategory').value;
+            const movieTypeField = document.getElementById('movieTypeField');
+            const priceField = document.getElementById('priceField');
+            const mediaLinkField = document.getElementById('mediaLinkField');
+
+            if (cat === 'movie') {
+                movieTypeField.style.display = 'block';
+            } else {
+                movieTypeField.style.display = 'none';
+            }
+
+            if (cat === 'products') {
+                priceField.style.display = 'block';
+            } else if (cat === 'book') {
+                priceField.style.display = 'block';
+                document.getElementById('postPrice').value = 'Coming Soon';
+            } else {
+                priceField.style.display = 'none';
+            }
+        }
+        toggleCategoryFields();
+
+        function convertImageFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
         window.publishNewPost = async function() {
             const category = document.getElementById('postCategory').value;
-            const mediaType = document.getElementById('mediaType').value;
+            const contentType = document.getElementById('contentType')?.value || 'Movie';
             const title = document.getElementById('postTitle').value.trim();
-            const media = document.getElementById('postMedia').value.trim();
+            const imageFile = document.getElementById('imageInput').files[0];
+            let media = document.getElementById('postMedia').value.trim();
             const redirectLink = document.getElementById('postLink').value.trim();
             const price = document.getElementById('postPrice').value.trim();
             const desc = document.getElementById('postDesc').value.trim();
 
-            if (!title && !desc && !media) {
-                alert("Please add at least title, description or media.");
+            if (!title && !desc && !imageFile && !media) {
+                alert("Please add at least title, description, image or media link.");
                 return;
             }
 
             try {
+                if (imageFile) {
+                    media = await convertImageFile(imageFile);
+                }
+
                 await addDoc(collection(db, "posts"), {
                     category: category,
-                    mediaType: mediaType,
+                    contentType: contentType,
                     titles: { en: title },
                     descriptions: { en: desc },
                     media: media,
@@ -181,6 +229,7 @@
                 });
                 alert("Published successfully!");
                 document.getElementById('postTitle').value = "";
+                document.getElementById('imageInput').value = "";
                 document.getElementById('postMedia').value = "";
                 document.getElementById('postLink').value = "";
                 document.getElementById('postPrice').value = "";
@@ -188,7 +237,7 @@
                 fetchAdminPosts();
             } catch (err) {
                 console.error("Error publishing:", err);
-                alert("Failed to publish.");
+                alert("Failed to publish. Image size might be too large.");
             }
         }
 
@@ -211,11 +260,11 @@
                 list.forEach(item => {
                     const titleText = item.titles?.en || 'Untitled';
                     const categoryName = item.category || 'general';
-                    const mType = item.mediaType ? `[${item.mediaType}]` : '';
+                    const badge = item.contentType ? `[${item.contentType}]` : '';
                     container.innerHTML += `
                         <div class="flex justify-between items-center p-3 rounded-2xl bg-black/60 border border-amber-500/20 text-xs">
                             <div>
-                                <span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-md font-bold uppercase text-[10px]">${categoryName} ${mType}</span>
+                                <span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-md font-bold uppercase text-[10px]">${categoryName} ${badge}</span>
                                 <p class="font-bold text-white mt-1">${titleText}</p>
                             </div>
                             <button onclick="removePost('${item.id}')" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-xl font-bold transition">Delete</button>
