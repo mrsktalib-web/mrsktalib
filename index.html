@@ -13,69 +13,74 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Dark Glass & Light Glass Cards */
         .glass-card {
             background: linear-gradient(135deg, rgba(22, 22, 22, 0.9) 0%, rgba(12, 12, 12, 0.98) 100%);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.25);
             box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.7);
         }
-        .glass-card:hover {
-            border-color: rgba(212, 175, 55, 0.5);
-            box-shadow: 0 15px 35px 0 rgba(212, 175, 55, 0.12);
-        }
-        .premium-btn {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+        html:not(.dark) .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 247, 0.98) 100%);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 4px 20px 0 rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.08);
+        }
+
+        /* Premium Buttons */
+        .premium-btn {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.08) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 4px 20px 0 rgba(212, 175, 55, 0.2);
         }
         .premium-btn:hover {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.1) 100%);
-            border-color: rgba(212, 175, 55, 0.8);
-            box-shadow: 0 4px 25px 0 rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.15) 100%);
+            border-color: rgba(212, 175, 55, 0.9);
+            box-shadow: 0 4px 25px 0 rgba(212, 175, 55, 0.35);
         }
     </style>
 </head>
-<body class="bg-gray-50 dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-40 lg:pt-28 transition-colors duration-300 antialiased">
+<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-40 lg:pt-28 transition-colors duration-300 antialiased">
     
     <!-- Fixed Top Navigation Bar -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-white/90 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-xl">
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
             <!-- Brand Logo -->
             <div class="flex items-center shrink-0">
-                <a href="index.html" class="text-base sm:text-xl font-black tracking-wider text-amber-500 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
+                <a href="index.html" class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
             </div>
 
             <!-- Desktop Nav Links -->
             <nav class="hidden lg:flex items-center space-x-1.5 text-xs font-bold tracking-wide">
-                <a href="index.html" class="text-amber-500 bg-amber-500/10 border border-amber-500/40 px-4 py-2 rounded-xl transition">Home</a>
-                <a href="about.html" class="text-gray-600 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">About</a>
-                <a href="movie.html" class="text-gray-600 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Movie</a>
-                <a href="products.html" class="text-gray-600 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Products</a>
-                <a href="book.html" class="text-gray-600 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Book</a>
-                <a href="gallery.html" class="text-gray-600 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Gallery</a>
+                <a href="index.html" class="text-amber-700 dark:text-amber-500 bg-amber-500/15 border border-amber-500/50 px-4 py-2 rounded-xl transition">Home</a>
+                <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">About</a>
+                <a href="movie.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Movie</a>
+                <a href="products.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Products</a>
+                <a href="book.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Book</a>
+                <a href="gallery.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Gallery</a>
             </nav>
 
-            <!-- Right Controls: Ultra Premium Chat with AI (Search icon style, no emojis) + Theme Toggle -->
+            <!-- Right Controls: Chat with AI (Text on left, Search icon on right) + Theme Toggle -->
             <div class="flex items-center space-x-2.5 shrink-0">
-                <a href="chat.html" class="premium-btn flex items-center space-x-2 text-amber-400 px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition">
-                    <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <a href="chat.html" class="premium-btn flex items-center space-x-2 text-amber-700 dark:text-amber-400 px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition">
                     <span>Chat with AI</span>
+                    <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </a>
-                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 dark:bg-[#171717] border border-gray-200 dark:border-amber-500/30 hover:border-amber-500/60 transition text-sm shrink-0 shadow-md">
+                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500/70 transition text-sm shrink-0 shadow-sm">
                     <span id="modeIcon">🌙</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Grid Nav Bar (All 6 Buttons Visible, Clean & Bold) -->
+    <!-- Mobile Grid Nav Bar (Sharp & Rich in Light/Dark mode) -->
     <div class="fixed top-[65px] left-0 w-full z-40 grid grid-cols-3 gap-2 lg:hidden px-3 py-3 bg-white/95 dark:bg-[#0b0b0b]/95 backdrop-blur-xl border-b border-gray-200 dark:border-amber-500/20 text-xs font-bold text-center tracking-wide">
         <a href="index.html" class="py-2 px-2 rounded-xl bg-amber-500 text-gray-950 font-black shadow-md shadow-amber-500/30">Home</a>
-        <a href="about.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-white/10">About</a>
-        <a href="movie.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-white/10">Movie</a>
-        <a href="products.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-white/10">Products</a>
-        <a href="book.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-white/10">Book</a>
-        <a href="gallery.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-white/10">Gallery</a>
+        <a href="about.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">About</a>
+        <a href="movie.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Movie</a>
+        <a href="products.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Products</a>
+        <a href="book.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Book</a>
+        <a href="gallery.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Gallery</a>
     </div>
 
     <!-- Main Container -->
@@ -86,7 +91,7 @@
         </div>
 
         <div id="homeFeedContainer" class="space-y-5">
-            <div class="text-center py-20 text-gray-500 text-xs sm:text-sm font-medium border border-dashed border-gray-300 dark:border-amber-500/20 rounded-3xl bg-gray-100/50 dark:bg-[#141414]">
+            <div class="text-center py-20 text-gray-500 text-xs sm:text-sm font-medium border border-dashed border-gray-300 dark:border-amber-500/20 rounded-3xl bg-white dark:bg-[#141414] shadow-sm">
                 Loading feed...
             </div>
         </div>
@@ -98,11 +103,11 @@
     <!-- Admin Login Modal -->
     <div id="adminModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="glass-card p-7 rounded-3xl w-full max-w-sm shadow-2xl border border-amber-500/40">
-            <h3 class="text-base font-bold mb-3 text-white">Admin Access</h3>
-            <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full p-3.5 bg-gray-900 border border-amber-500/30 rounded-2xl text-xs mb-4 text-white focus:outline-none focus:border-amber-500">
+            <h3 class="text-base font-bold mb-3 text-gray-900 dark:text-white">Admin Access</h3>
+            <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full p-3.5 bg-gray-100 dark:bg-gray-900 border border-gray-300 dark:border-amber-500/30 rounded-2xl text-xs mb-4 text-gray-900 dark:text-white focus:outline-none focus:border-amber-500">
             <div class="flex space-x-2.5">
                 <button onclick="verifyAdmin()" class="flex-1 bg-amber-500 text-gray-950 py-3 rounded-xl text-xs font-bold hover:bg-amber-400 transition shadow-lg shadow-amber-500/30">Login</button>
-                <button onclick="closeAdminModal()" class="flex-1 bg-gray-800 text-gray-300 py-3 rounded-xl text-xs font-bold hover:bg-gray-700 transition">Cancel</button>
+                <button onclick="closeAdminModal()" class="flex-1 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-300 py-3 rounded-xl text-xs font-bold hover:bg-gray-300 dark:hover:bg-gray-700 transition">Cancel</button>
             </div>
         </div>
     </div>
@@ -153,7 +158,7 @@
         }
 
         window.verifyAdmin = function() {
-            const pass = document.getElementById('adminPassInput',[span_0](start_span)[span_0](end_span)).value;
+            const pass = document.getElementById('adminPassInput').value;
             if (pass === 'SKTALIB@9037') {
                 sessionStorage.setItem('isAdmin', 'true');
                 window.location.href = 'admin.html';
@@ -196,11 +201,11 @@
                     container.innerHTML += `
                         <div class="glass-card p-5 sm:p-6 rounded-3xl transition-all duration-300">
                             <div class="flex justify-between items-center mb-3">
-                                <span class="text-[11px] text-amber-500 font-bold tracking-wider uppercase">${post.dateFormatted || ''}</span>
+                                <span class="text-[11px] text-amber-600 dark:text-amber-500 font-bold tracking-wider uppercase">${post.dateFormatted || ''}</span>
                             </div>
                             ${title ? `<h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2.5">${title}</h3>` : ''}
                             ${mediaHtml}
-                            ${desc ? `<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
+                            ${desc ? `<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
                         </div>
                     `;
                 });
@@ -212,4 +217,5 @@
         loadHomeFeed();
     </script>
 </body>
-</html>
+            </html>
+            
