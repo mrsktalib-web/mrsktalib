@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - SK TALIB</title>
+    <title>SK TALIB - Home Feed</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0b0b0b; color: #f3f4f6; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .glass-card {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.7) 0%, rgba(15, 15, 15, 0.9) 100%);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            background: linear-gradient(135deg, rgba(22, 22, 22, 0.8) 0%, rgba(12, 12, 12, 0.95) 100%);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.5);
         }
         .glass-card:hover {
-            border-color: rgba(239, 68, 68, 0.4);
-            box-shadow: 0 8px 32px 0 rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+            box-shadow: 0 10px 30px 0 rgba(239, 68, 68, 0.08);
         }
     </style>
 </head>
-<body class="bg-[#0b0b0b] text-gray-100 min-h-screen pt-28 sm:pt-32 transition-colors duration-300 antialiased">
+<body class="min-h-screen pt-28 sm:pt-32 antialiased selection:bg-red-600 selection:text-white">
     
     <!-- Fixed Top Navigation Bar -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-[#0b0b0b]/80 backdrop-blur-xl border-b border-white/10 px-4 sm:px-6 py-3.5 shadow-2xl">
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#0b0b0b]/85 backdrop-blur-2xl border-b border-white/10 px-4 sm:px-6 py-3.5 shadow-2xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-3">
             <div class="flex items-center shrink-0">
                 <a href="index.html" class="text-base sm:text-xl font-extrabold tracking-wider text-red-600 whitespace-nowrap">SK <span class="text-white">TALIB</span></a>
@@ -36,61 +36,73 @@
 
             <!-- Desktop Nav Links -->
             <nav class="hidden lg:flex items-center space-x-1 text-xs font-semibold">
-                <a href="index.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-xl transition">Home</a>
-                <a href="about.html" class="text-red-500 bg-red-500/10 border border-red-500/20 px-3 py-2 rounded-xl transition">About</a>
-                <a href="movie.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-xl transition">Movie</a>
-                <a href="products.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-xl transition">Products</a>
-                <a href="book.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-xl transition">Book</a>
-                <a href="chat.html" class="text-gray-400 hover:text-white px-3 py-2 rounded-xl transition">Chat with AI</a>
+                <a href="index.html" class="text-red-500 bg-red-500/10 border border-red-500/20 px-3.5 py-2 rounded-xl transition">Home</a>
+                <a href="about.html" class="text-gray-400 hover:text-white px-3.5 py-2 rounded-xl transition">About</a>
+                <a href="movie.html" class="text-gray-400 hover:text-white px-3.5 py-2 rounded-xl transition">Movie</a>
+                <a href="products.html" class="text-gray-400 hover:text-white px-3.5 py-2 rounded-xl transition">Products</a>
+                <a href="book.html" class="text-gray-400 hover:text-white px-3.5 py-2 rounded-xl transition">Book</a>
+                <a href="chat.html" class="text-gray-400 hover:text-white px-3.5 py-2 rounded-xl transition">Chat with AI</a>
             </nav>
 
-            <div class="flex items-center space-x-2.5 shrink-0">
-                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-9 h-9 rounded-xl bg-[#171717] border border-white/10 hover:border-red-500/50 transition text-sm">
-                    <span id="modeIcon">🌙</span>
-                </button>
+            <!-- Language Switcher Option -->
+            <div class="flex items-center space-x-2 shrink-0">
+                <div class="relative" id="langDropdownContainer">
+                    <button type="button" onclick="toggleLangMenu()" class="flex items-center space-x-1.5 bg-[#171717] text-gray-300 border border-white/10 rounded-xl px-3 py-2 text-xs font-medium hover:border-red-500/50 transition">
+                        <span>Language:</span>
+                        <span id="currentLangLabel" class="font-bold text-white">English</span>
+                    </button>
+                    <div id="langMenu" class="hidden absolute right-0 mt-2 w-36 bg-[#171717] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50">
+                        <button type="button" onclick="selectLanguage('en', 'English')" class="w-full text-left px-3.5 py-2.5 text-xs font-medium text-gray-300 hover:bg-white/5 transition flex items-center justify-between">
+                            <span>English</span>
+                            <span id="check_en" class="text-red-500 font-bold">✓</span>
+                        </button>
+                        <button type="button" onclick="selectLanguage('roman_hi', 'Roman Hindi')" class="w-full text-left px-3.5 py-2.5 text-xs font-medium text-gray-300 hover:bg-white/5 border-t border-white/5 transition flex items-center justify-between">
+                            <span>Roman Hindi</span>
+                            <span id="check_roman_hi" class="text-red-500 font-bold hidden">✓</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Mobile Horizontal Nav Bar -->
-    <div class="fixed top-[57px] left-0 w-full z-40 flex lg:hidden overflow-x-auto no-scrollbar space-x-2.5 px-4 py-3 bg-[#0b0b0b]/90 backdrop-blur-xl border-b border-white/10 text-xs font-semibold whitespace-nowrap">
-        <a href="index.html" class="px-3.5 py-2 rounded-xl bg-[#171717] text-gray-400 border border-white/5">Home</a>
-        <a href="about.html" class="px-3.5 py-2 rounded-xl bg-red-600 text-white shadow-lg shadow-red-600/30">About</a>
+    <div class="fixed top-[57px] left-0 w-full z-40 flex lg:hidden overflow-x-auto no-scrollbar space-x-2 px-4 py-3 bg-[#0b0b0b]/90 backdrop-blur-xl border-b border-white/10 text-xs font-semibold whitespace-nowrap">
+        <a href="index.html" class="px-3.5 py-2 rounded-xl bg-red-600 text-white shadow-lg shadow-red-600/30">Home</a>
+        <a href="about.html" class="px-3.5 py-2 rounded-xl bg-[#171717] text-gray-400 border border-white/5">About</a>
         <a href="movie.html" class="px-3.5 py-2 rounded-xl bg-[#171717] text-gray-400 border border-white/5">Movie</a>
         <a href="products.html" class="px-3.5 py-2 rounded-xl bg-[#171717] text-gray-400 border border-white/5">Products</a>
         <a href="book.html" class="px-3.5 py-2 rounded-xl bg-[#171717] text-gray-400 border border-white/5">Book</a>
         <a href="chat.html" class="px-3.5 py-2 rounded-xl bg-[#171717] text-gray-400 border border-white/5">Chat with AI</a>
     </div>
 
-    <!-- Main Container -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-6 space-y-8">
-        
-        <!-- Header Banner -->
-        <div class="text-center space-y-2">
-            <h2 class="text-3xl font-black tracking-tight text-white">SK TALIB</h2>
-            <div class="inline-block px-4 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-bold tracking-widest uppercase">
-                About Me & Personal Space
+    <!-- Main Home Feed Container -->
+    <main class="max-w-2xl mx-auto px-4 py-6">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-extrabold tracking-tight text-white">Latest Feed</h2>
+            <span class="h-2 w-2 rounded-full bg-red-600 animate-ping"></span>
+        </div>
+        <div id="homeFeedContainer" class="space-y-5">
+            <div class="text-center py-16 text-gray-500 text-xs border border-dashed border-white/10 rounded-3xl bg-[#141414]">
+                Loading feed...
             </div>
         </div>
-
-        <!-- Premium Sub-navigation Tabs (No Emojis, Sleek Borders & Glow) -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 p-2 bg-[#141414] rounded-2xl border border-white/10 shadow-inner">
-            <a href="about-personal.html" class="text-center py-2.5 px-3 rounded-xl text-xs font-bold bg-red-600 text-white shadow-lg shadow-red-600/30 transition">Personal</a>
-            <a href="about-education.html" class="text-center py-2.5 px-3 rounded-xl text-xs font-bold text-gray-400 hover:text-white hover:bg-white/5 transition">Education</a>
-            <a href="about-gallery.html" class="text-center py-2.5 px-3 rounded-xl text-xs font-bold text-gray-400 hover:text-white hover:bg-white/5 transition">Gallery</a>
-            <a href="about-feelings.html" class="text-center py-2.5 px-3 rounded-xl text-xs font-bold text-gray-400 hover:text-white hover:bg-white/5 transition">Feelings</a>
-            <a href="about-social.html" class="text-center py-2.5 px-3 rounded-xl text-xs font-bold text-gray-400 hover:text-white hover:bg-white/5 transition">Social</a>
-            <a href="about-contact.html" class="text-center py-2.5 px-3 rounded-xl text-xs font-bold text-gray-400 hover:text-white hover:bg-white/5 transition">Contact</a>
-        </div>
-
-        <!-- Personal Content Grid (Glass Cards) -->
-        <div id="personalContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="text-center py-16 text-gray-500 text-xs col-span-full border border-dashed border-white/10 rounded-3xl bg-[#141414]">
-                Loading personal details...
-            </div>
-        </div>
-
     </main>
+
+    <!-- Floating Admin Button (+) -->
+    <button onclick="openAdminModal()" class="fixed bottom-6 right-6 w-14 h-14 bg-red-600 text-white rounded-full shadow-2xl flex items-center justify-center text-3xl font-black hover:bg-red-700 hover:scale-105 transition duration-300 z-50 shadow-red-600/50">+</button>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="glass-card p-7 rounded-3xl w-full max-w-sm shadow-2xl border border-white/10">
+            <h3 class="text-base font-bold mb-3 text-white">Admin Access</h3>
+            <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full p-3.5 bg-[#0b0b0b] border border-white/10 rounded-2xl text-xs mb-4 text-white focus:outline-none focus:border-red-500">
+            <div class="flex space-x-2.5">
+                <button onclick="verifyAdmin()" class="flex-1 bg-red-600 text-white py-3 rounded-xl text-xs font-bold hover:bg-red-700 transition shadow-lg shadow-red-600/30">Login</button>
+                <button onclick="closeAdminModal()" class="flex-1 bg-[#222] text-gray-300 py-3 rounded-xl text-xs font-bold hover:bg-[#333] transition">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="border-t border-white/10 py-8 text-center px-4 mt-16 mb-16">
@@ -106,61 +118,96 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        const html = document.documentElement;
-        const modeIcon = document.getElementById('modeIcon');
+        let currentLang = localStorage.getItem('site_lang') || 'en';
 
-        // Force premium dark aesthetic or handle toggle
-        window.toggleDarkMode = function() {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                modeIcon.innerText = '☀️';
+        window.toggleLangMenu = function() {
+            document.getElementById('langMenu').classList.toggle('hidden');
+        }
+
+        window.selectLanguage = function(lang, label) {
+            currentLang = lang;
+            localStorage.setItem('site_lang', lang);
+            document.getElementById('currentLangLabel').innerText = label;
+            document.getElementById('check_en').classList.toggle('hidden', lang !== 'en');
+            document.getElementById('check_roman_hi').classList.toggle('hidden', lang !== 'roman_hi');
+            document.getElementById('langMenu').classList.add('hidden');
+            loadHomeFeed();
+        }
+
+        document.addEventListener('click', function(e) {
+            const container = document.getElementById('langDropdownContainer');
+            if (container && !container.contains(e.target)) {
+                document.getElementById('langMenu').classList.add('hidden');
+            }
+        });
+
+        window.openAdminModal = function() {
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        window.closeAdminModal = function() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        window.verifyAdmin = function() {
+            const pass = document.getElementById('adminPassInput').value;
+            if (pass === 'SKTALIB@9037') {
+                sessionStorage.setItem('isAdmin', 'true');
+                window.location.href = 'admin.html';
             } else {
-                html.classList.add('dark');
-                modeIcon.innerText = '🌙';
+                alert('Incorrect Password!');
             }
         }
 
-        async function loadPersonalData() {
-            const container = document.getElementById('personalContainer');
+        async function loadHomeFeed() {
+            const container = document.getElementById('homeFeedContainer');
             if (!container) return;
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
-                let fetched = [];
+                let posts = [];
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
-                    if (data.category === 'about_personal' && data.status !== 'unpublished') {
-                        fetched.push({ id: doc.id, ...data });
+                    if (data.category === 'home' && data.status !== 'unpublished') {
+                        posts.push({ id: doc.id, ...data });
                     }
                 });
-                fetched.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
-                if (fetched.length === 0) {
-                    container.innerHTML = `
-                        <div class="text-center py-16 text-gray-500 text-xs col-span-full border border-dashed border-white/10 rounded-3xl bg-[#141414]">
-                            No personal details added yet. Add them from your Admin Panel.
-                        </div>
-                    `;
+                if (posts.length === 0) {
+                    container.innerHTML = `<p class="text-xs text-gray-500 text-center py-12">No posts in Home feed yet.</p>`;
                     return;
                 }
 
                 container.innerHTML = "";
-                fetched.forEach(post => {
-                    const label = post.titles?.en || '';
-                    const val = post.descriptions?.en || '';
+                posts.forEach(post => {
+                    const title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : (post.titles?.en || '');
+                    const desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : (post.descriptions?.en || '');
+                    
+                    let mediaHtml = "";
+                    if (post.mediaType === 'video_link' && post.media) {
+                        mediaHtml = `<div class="aspect-video w-full mb-3.5"><iframe src="${post.media}" class="w-full h-full rounded-2xl border border-white/10" allowfullscreen></iframe></div>`;
+                    } else if (post.media) {
+                        mediaHtml = `<img src="${post.media}" class="w-full max-h-[480px] object-cover rounded-2xl mb-3.5 border border-white/10" loading="lazy">`;
+                    }
+
                     container.innerHTML += `
-                        <div class="glass-card p-5 rounded-2xl transition-all duration-300">
-                            ${label ? `<span class="text-red-500 text-[10px] uppercase font-black tracking-wider block mb-2">${label}</span>` : ''}
-                            <p class="text-xs sm:text-sm font-medium text-gray-200 leading-relaxed whitespace-pre-line">${val}</p>
+                        <div class="glass-card p-5 sm:p-6 rounded-3xl transition-all duration-300">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[10px] text-red-500 font-bold uppercase tracking-wider">${post.dateFormatted || ''}</span>
+                            </div>
+                            ${title ? `<h3 class="text-sm sm:text-base font-bold text-white mb-2.5">${title}</h3>` : ''}
+                            ${mediaHtml}
+                            ${desc ? `<p class="text-xs sm:text-sm text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
                         </div>
                     `;
                 });
             } catch (err) {
-                console.error("Error loading personal data:", err);
+                console.error("Home feed error:", err);
             }
         }
 
-        loadPersonalData();
+        loadHomeFeed();
     </script>
 </body>
-    </html>
+                    </html>
     
