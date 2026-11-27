@@ -158,7 +158,7 @@
                 </div>
             </div>
         </div>
-    </div>
+                        </div>
         <footer class="py-6 text-center text-xs text-gray-600">
         &copy; 2026 SK TALIB. All rights reserved.
     </footer>
@@ -257,7 +257,7 @@
                 fDesc.style.display = 'block';
             } 
             else if (cat === 'about_social') {
-                lTitle.innerText = "Social Platform Name (e.g. Instagram)";
+                lTitle.innerText = "Social Platform Name (e.g. WhatsApp channel, Instagram)";
                 lImage.innerText = "Upload Logo Image (Optional)";
                 lLink.innerText = "Profile Link (URL)";
                 fImg.style.display = 'block';
@@ -318,7 +318,7 @@
                     img.src = event.target.result;
                     img.onload = () => {
                         const canvas = document.createElement('canvas');
-                        const MAX_WIDTH = 900;
+                        const MAX_WIDTH = 300; // Small size for fast icon upload without error
                         let width = img.width;
                         let height = img.height;
                         if (width > MAX_WIDTH) {
@@ -329,8 +329,9 @@
                         canvas.height = height;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
-                        resolve(canvas.toDataURL('image/jpeg', 0.8));
+                        resolve(canvas.toDataURL('image/jpeg', 0.6));
                     };
+                    img.onerror = (err) => reject(err);
                 };
                 reader.onerror = err => reject(err);
             });
@@ -362,8 +363,11 @@
                 let mediaType = "image";
 
                 if (imageFile) {
-                    mediaData = await compressAndConvertImage(imageFile);
-                    mediaType = "image";
+                    try {
+                        mediaData = await compressAndConvertImage(imageFile);
+                    } catch (imgErr) {
+                        console.warn("Image compression skipped:", imgErr);
+                    }
                 } else if (videoRaw) {
                     mediaData = formatPlayableUrl(videoRaw);
                     mediaType = "video_link";
@@ -396,7 +400,7 @@
                 fetchAdminPosts();
             } catch (err) {
                 console.error("Save error:", err);
-                alert("Error while saving post.");
+                alert("Error while saving post. Please try without a heavy image.");
             } finally {
                 btn.innerText = "Publish Now";
                 btn.disabled = false;
@@ -539,5 +543,4 @@
         }
     </script>
 </body>
-    </html>
-    
+</html>
