@@ -98,7 +98,7 @@
 
                     <!-- Image File Upload -->
                     <div id="fieldImageUpload">
-                        <label id="labelImage" class="text-[11px] font-bold text-gray-400 ml-1">Upload Image</label>
+                        <label id="labelImage" class="text-[11px] font-bold text-gray-400 ml-1">Upload Image (Optional)</label>
                         <input type="file" id="imageInput" accept="image/*" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2 text-xs text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-gray-950 hover:file:bg-amber-400">
                     </div>
 
@@ -110,7 +110,7 @@
 
                     <!-- Link Field -->
                     <div id="fieldRedirectLink">
-                        <label id="labelLink" class="text-[11px] font-bold text-gray-400 ml-1">Link</label>
+                        <label id="labelLink" class="text-[11px] font-bold text-gray-400 ml-1">Link (URL)</label>
                         <input type="text" id="postLink" placeholder="https://..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
@@ -158,8 +158,8 @@
                 </div>
             </div>
         </div>
-            </div>
-                            <footer class="py-6 text-center text-xs text-gray-600">
+    </div>
+        <footer class="py-6 text-center text-xs text-gray-600">
         &copy; 2026 SK TALIB. All rights reserved.
     </footer>
 
@@ -257,15 +257,15 @@
                 fDesc.style.display = 'block';
             } 
             else if (cat === 'about_social') {
-                lTitle.innerText = "Social Platform Name (e.g. Instagram, YouTube, Facebook, Telegram channel, X)";
-                lImage.innerText = "Upload Logo Image";
-                lLink.innerText = "Profile Link";
+                lTitle.innerText = "Social Platform Name (e.g. Instagram)";
+                lImage.innerText = "Upload Logo Image (Optional)";
+                lLink.innerText = "Profile Link (URL)";
                 fImg.style.display = 'block';
                 fLink.style.display = 'block';
             } 
             else if (cat === 'about_contact') {
                 lTitle.innerText = "Contact Title (e.g. Telegram, Gmail)";
-                lImage.innerText = "Upload Icon Image";
+                lImage.innerText = "Upload Icon Image (Optional)";
                 lLink.innerText = "Contact Link / Email";
                 fImg.style.display = 'block';
                 fLink.style.display = 'block';
@@ -341,9 +341,9 @@
             const editId = document.getElementById('editPostId').value;
             const cat = document.getElementById('postCategory').value;
             const contentType = document.getElementById('contentType')?.value || 'Movie';
-            const title = document.getElementById('postTitle').value.trim();
+            const title = document.getElementById('postTitle')?.value?.trim() || '';
             const intro = document.getElementById('postIntro')?.value?.trim() || '';
-            const imageFile = document.getElementById('imageInput').files[0];
+            const imageFile = document.getElementById('imageInput')?.files?.[0];
             const videoRaw = document.getElementById('postVideo')?.value?.trim() || '';
             const redirectLink = document.getElementById('postLink')?.value?.trim() || '';
             let price = document.getElementById('postPrice')?.value?.trim() || '';
@@ -378,6 +378,7 @@
                     media: mediaData,
                     mediaType: mediaType,
                     redirectLink: redirectLink,
+                    link: redirectLink,
                     price: price,
                     status: 'published'
                 };
@@ -407,9 +408,9 @@
             document.getElementById('formHeading').innerText = "Publish New Item";
             document.getElementById('publishBtn').innerText = "Publish Now";
             document.getElementById('cancelEditBtn').style.display = 'none';
-            document.getElementById('postTitle').value = "";
+            if(document.getElementById('postTitle')) document.getElementById('postTitle').value = "";
             if(document.getElementById('postIntro')) document.getElementById('postIntro').value = "";
-            document.getElementById('imageInput').value = "";
+            if(document.getElementById('imageInput')) document.getElementById('imageInput').value = "";
             if(document.getElementById('postVideo')) document.getElementById('postVideo').value = "";
             if(document.getElementById('postLink')) document.getElementById('postLink').value = "";
             if(document.getElementById('postPrice')) document.getElementById('postPrice').value = "";
@@ -432,7 +433,7 @@
             if (item.category === 'movie' && item.contentType) {
                 document.getElementById('contentType').value = item.contentType;
             }
-            document.getElementById('postTitle').value = item.titles?.en || '';
+            if(document.getElementById('postTitle')) document.getElementById('postTitle').value = item.titles?.en || '';
             if(document.getElementById('postIntro')) document.getElementById('postIntro').value = item.intro || '';
             if(document.getElementById('postVideo')) document.getElementById('postVideo').value = item.videoUrl || (item.mediaType === 'video_link' ? item.media : '');
             if(document.getElementById('postLink')) document.getElementById('postLink').value = item.redirectLink || item.link || '';
