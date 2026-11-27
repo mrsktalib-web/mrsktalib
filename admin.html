@@ -19,11 +19,13 @@
             border: 1px solid rgba(212, 175, 55, 0.25);
             box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.7);
         }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="min-h-screen py-8 px-4 antialiased flex flex-col justify-between">
 
-    <div class="max-w-md mx-auto w-full mt-6">
+    <div class="max-w-xl mx-auto w-full mt-6">
         <!-- Login Box -->
         <div id="loginBox" class="glass-card p-8 rounded-3xl space-y-6 border border-amber-500/40">
             <div class="text-center space-y-2">
@@ -50,15 +52,20 @@
                 </div>
             </div>
 
+            <!-- Publish / Edit Form Card -->
             <div class="glass-card p-6 rounded-3xl space-y-4">
-                <h2 class="text-sm font-black text-amber-500 uppercase">Publish New Item</h2>
+                <div class="flex justify-between items-center">
+                    <h2 id="formHeading" class="text-sm font-black text-amber-500 uppercase">Publish New Item</h2>
+                    <button id="cancelEditBtn" onclick="resetForm()" style="display:none;" class="text-[11px] bg-gray-800 text-gray-300 px-2.5 py-1 rounded-xl font-bold hover:bg-gray-700">Cancel Edit</button>
+                </div>
+                <input type="hidden" id="editPostId" value="">
+
                 <div class="space-y-3">
-                    <!-- 1. Category Selector -->
                     <div>
                         <label class="text-[11px] font-bold text-gray-400 ml-1">Select Category</label>
                         <select id="postCategory" onchange="updateFormFields()" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                             <option value="home">Home Feed Post</option>
-                            <option value="about_me">About Me (Personal Info)</option>
+                            <option value="about_me">About Me Section</option>
                             <option value="about_social">About - Social Media</option>
                             <option value="about_contact">About - Contact Option</option>
                             <option value="movie">Movie / TV Show</option>
@@ -68,9 +75,9 @@
                         </select>
                     </div>
 
-                    <!-- Movie / TV Show Type Selector -->
+                    <!-- Movie Type Selector -->
                     <div id="fieldContentType" style="display: none;">
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Select Type (Movie or TV Show)</label>
+                        <label class="text-[11px] font-bold text-gray-400 ml-1">Content Type</label>
                         <select id="contentType" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                             <option value="Movie">Movie</option>
                             <option value="TV Show">TV Show</option>
@@ -83,68 +90,76 @@
                         <input type="text" id="postTitle" placeholder="Enter title..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <!-- Intro Box (Only for About Me) -->
-                    <div id="fieldIntro" style="display: none;">
-                        <label class="text-[11px] font-bold text-gray-400 ml-1">Short Intro (Thoda Bada Dikhega)</label>
-                        <textarea id="postIntro" placeholder="e.g. Here are some basic details about me..." rows="2" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500"></textarea>
-                    </div>
-
-                    <!-- Image File Upload (Device) -->
+                    <!-- Image File Upload -->
                     <div id="fieldImageUpload">
-                        <label id="labelImage" class="text-[11px] font-bold text-gray-400 ml-1">Upload Image (From Device)</label>
+                        <label id="labelImage" class="text-[11px] font-bold text-gray-400 ml-1">Upload Image</label>
                         <input type="file" id="imageInput" accept="image/*" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2 text-xs text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-gray-950 hover:file:bg-amber-400">
                     </div>
 
-                    <!-- Video Link Field (Any Platform Link) -->
+                    <!-- Video Link Field -->
                     <div id="fieldVideoLink">
-                        <label id="labelVideo" class="text-[11px] font-bold text-gray-400 ml-1">Video Link (Any Platform - Plays inside site)</label>
+                        <label id="labelVideo" class="text-[11px] font-bold text-gray-400 ml-1">Video Link (Any platform - Plays inside website)</label>
                         <input type="text" id="postVideo" placeholder="https://..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <!-- Redirect / Product / Book / Social Link Field -->
+                    <!-- Link Field -->
                     <div id="fieldRedirectLink">
                         <label id="labelLink" class="text-[11px] font-bold text-gray-400 ml-1">Link</label>
                         <input type="text" id="postLink" placeholder="https://..." class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <!-- Price Field (Products) -->
+                    <!-- Price Field -->
                     <div id="fieldPrice" style="display: none;">
                         <label class="text-[11px] font-bold text-gray-400 ml-1">Price</label>
                         <input type="text" id="postPrice" placeholder="e.g. ₹999" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
                     </div>
 
-                    <!-- Coming Soon Option (Book) -->
+                    <!-- Coming Soon Option -->
                     <div id="fieldComingSoon" style="display: none;" class="flex items-center space-x-2.5 bg-black/40 border border-amber-500/25 px-4 py-3 rounded-2xl">
                         <input type="checkbox" id="comingSoonCheck" checked class="w-4 h-4 accent-amber-500 rounded">
                         <label for="comingSoonCheck" class="text-xs font-bold text-amber-400">Show "Coming Soon" Badge (Price ki jagah)</label>
                     </div>
 
-                    <!-- Description / Details Box -->
+                    <!-- Description Box -->
                     <div id="fieldDesc">
-                        <label id="labelDesc" class="text-[11px] font-bold text-gray-400 ml-1">Description</label>
+                        <label id="labelDesc" class="text-[11px] font-bold text-gray-400 ml-1">Description / Details</label>
                         <textarea id="postDesc" placeholder="Write details here..." rows="4" class="w-full mt-1 bg-black/60 border border-amber-500/30 rounded-2xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-amber-500"></textarea>
                     </div>
 
-                    <button id="publishBtn" onclick="publishNewPost()" class="w-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black py-3 rounded-2xl text-xs transition shadow-md shadow-amber-500/30 mt-2">Publish Now</button>
+                    <button id="publishBtn" onclick="savePost()" class="w-full bg-amber-500 hover:bg-amber-400 text-gray-950 font-black py-3 rounded-2xl text-xs transition shadow-md shadow-amber-500/30 mt-2">Publish Now</button>
                 </div>
             </div>
 
-            <!-- Manage Posts -->
+            <!-- Manage Posts with Category Tabs -->
             <div class="glass-card p-6 rounded-3xl space-y-4">
-                <h2 class="text-sm font-black text-amber-500 uppercase">Manage Existing Posts</h2>
+                <h2 class="text-sm font-black text-amber-500 uppercase">Manage Posts</h2>
+                
+                <!-- Category Filter Tabs -->
+                <div class="flex overflow-x-auto no-scrollbar space-x-2 pb-2 text-xs">
+                    <button onclick="filterAdminCategory('all')" id="tab_all" class="px-3.5 py-2 rounded-xl bg-amber-500 text-gray-950 font-bold shrink-0 transition">All</button>
+                    <button onclick="filterAdminCategory('home')" id="tab_home" class="px-3.5 py-2 rounded-xl bg-black/60 border border-amber-500/30 text-gray-300 font-bold shrink-0 transition">Home</button>
+                    <button onclick="filterAdminCategory('about_me')" id="tab_about_me" class="px-3.5 py-2 rounded-xl bg-black/60 border border-amber-500/30 text-gray-300 font-bold shrink-0 transition">About Me</button>
+                    <button onclick="filterAdminCategory('about_social')" id="tab_about_social" class="px-3.5 py-2 rounded-xl bg-black/60 border border-amber-500/30 text-gray-300 font-bold shrink-0 transition">Social</button>
+                    <button onclick="filterAdminCategory('about_contact')" id="tab_about_contact" class="px-3.5 py-2 rounded-xl bg-black/60 border border-amber-500/30 text-gray-300 font-bold shrink-0 transition">Contact</button>
+                    <button onclick="filterAdminCategory('movie')" id="tab_movie" class="px-3.5 py-2 rounded-xl bg-black/60 border border-amber-500/30 text-gray-300 font-bold shrink-0 transition">Movie</button>
+                    <button onclick="filterAdminCategory('products')" id="tab_products" class="px-3.5 py-2 rounded-xl bg-black/60 border border-amber-500/30 text-gray-300 font-bold shrink-0 transition">Products</button>
+                    <button onclick="filterAdminCategory('book')" id="tab_book" class="px-3.5 py-2 rounded-xl bg-black/60 border border-amber-500/30 text-gray-300 font-bold shrink-0 transition">Book</button>
+                    <button onclick="filterAdminCategory('gallery')" id="tab_gallery" class="px-3.5 py-2 rounded-xl bg-black/60 border border-amber-500/30 text-gray-300 font-bold shrink-0 transition">Gallery</button>
+                </div>
+
                 <div id="postsList" class="space-y-3">
                     <p class="text-xs text-gray-500 text-center py-4">Loading posts...</p>
                 </div>
             </div>
         </div>
-                            </div>
-                                <footer class="py-6 text-center text-xs text-gray-600">
+    </div>
+        <footer class="py-6 text-center text-xs text-gray-600">
         &copy; 2026 SK TALIB. All rights reserved.
     </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
@@ -152,6 +167,8 @@
 
         const loginBox = document.getElementById('loginBox');
         const dashboardBox = document.getElementById('dashboardBox');
+        let allAdminPosts = [];
+        let currentFilter = 'all';
 
         if (sessionStorage.getItem('talibAdminAuth') === 'true') {
             loginBox.style.display = 'none';
@@ -178,7 +195,6 @@
             document.getElementById('passwordInput').value = "";
         }
 
-        // Convert any video link into embed/playable format automatically
         function formatPlayableUrl(url) {
             if (!url) return "";
             if (url.includes("youtube.com/watch?v=")) {
@@ -192,13 +208,11 @@
             return url;
         }
 
-        // Category-specific field visibility
         window.updateFormFields = function() {
             const cat = document.getElementById('postCategory').value;
 
             const fType = document.getElementById('fieldContentType');
             const fTitle = document.getElementById('fieldTitle');
-            const fIntro = document.getElementById('fieldIntro');
             const fImg = document.getElementById('fieldImageUpload');
             const fVid = document.getElementById('fieldVideoLink');
             const fLink = document.getElementById('fieldRedirectLink');
@@ -212,9 +226,7 @@
             const lLink = document.getElementById('labelLink');
             const lDesc = document.getElementById('labelDesc');
 
-            // Hide all optional boxes first
             fType.style.display = 'none';
-            fIntro.style.display = 'none';
             fImg.style.display = 'none';
             fVid.style.display = 'none';
             fLink.style.display = 'none';
@@ -223,38 +235,37 @@
             fDesc.style.display = 'none';
 
             if (cat === 'home') {
-                lTitle.innerText = "Title (Video/Photo ke upar dikhega)";
+                lTitle.innerText = "Title";
                 lImage.innerText = "Upload Image (Optional)";
-                lVideo.innerText = "Video Link (Optional - Direct website mein play hoga)";
-                lDesc.innerText = "Description (Video/Photo ke niche dikhega)";
+                lVideo.innerText = "Video Link (Optional - Plays inside site)";
+                lDesc.innerText = "Description";
                 fImg.style.display = 'block';
                 fVid.style.display = 'block';
                 fDesc.style.display = 'block';
             } 
             else if (cat === 'about_me') {
-                lTitle.innerText = "Title (Sabse Bada Dikhega - e.g. Personal Information)";
-                lDesc.innerText = "Details / Caption (Full Name, DOB, Age, etc.)";
-                fIntro.style.display = 'block';
+                lTitle.innerText = "Heading (e.g. Personal Information)";
+                lDesc.innerText = "Details / Information";
                 fDesc.style.display = 'block';
             } 
             else if (cat === 'about_social') {
-                lTitle.innerText = "Social Platform Name (e.g. Instagram, YouTube)";
-                lImage.innerText = "Upload Social Logo Image";
-                lLink.innerText = "Profile Redirect Link";
+                lTitle.innerText = "Social Platform Name (e.g. Instagram)";
+                lImage.innerText = "Upload Logo Image";
+                lLink.innerText = "Profile Link";
                 fImg.style.display = 'block';
                 fLink.style.display = 'block';
             } 
             else if (cat === 'about_contact') {
-                lTitle.innerText = "Contact Title (e.g. Telegram, Gmail)";
-                lImage.innerText = "Upload Contact Icon/Logo";
-                lLink.innerText = "Contact Link or Email (e.g. https://t.me/mrsktalib)";
+                lTitle.innerText = "Contact Title (e.g. Telegram)";
+                lImage.innerText = "Upload Icon Image";
+                lLink.innerText = "Contact Link / Email";
                 fImg.style.display = 'block';
                 fLink.style.display = 'block';
             } 
             else if (cat === 'movie') {
-                lTitle.innerText = "Banner / Movie Title";
+                lTitle.innerText = "Banner / Title";
                 lImage.innerText = "Upload Banner Image";
-                lVideo.innerText = "Watch / Video Link (Optional)";
+                lVideo.innerText = "Video Link";
                 fType.style.display = 'block';
                 fImg.style.display = 'block';
                 fVid.style.display = 'block';
@@ -262,9 +273,9 @@
             else if (cat === 'products') {
                 lTitle.innerText = "Product Title";
                 lImage.innerText = "Upload Product Image";
-                lLink.innerText = "Product Buy / Info Link (Optional)";
-                lVideo.innerText = "Product Video Link (Optional)";
-                lDesc.innerText = "Product Description";
+                lLink.innerText = "Product Link (Optional)";
+                lVid.innerText = "Video Link (Optional)";
+                lDesc.innerText = "Description";
                 fImg.style.display = 'block';
                 fLink.style.display = 'block';
                 fVid.style.display = 'block';
@@ -274,8 +285,8 @@
             else if (cat === 'book') {
                 lTitle.innerText = "Book Title";
                 lImage.innerText = "Upload Book Cover Photo";
-                lLink.innerText = "Book Link (Optional - Abhi khali chhod sakte hain)";
-                lDesc.innerText = "Book Description";
+                lLink.innerText = "Book Link (Optional)";
+                lDesc.innerText = "Description";
                 fImg.style.display = 'block';
                 fLink.style.display = 'block';
                 fSoon.style.display = 'flex';
@@ -320,110 +331,185 @@
             });
         }
 
-        window.publishNewPost = async function() {
+        window.savePost = async function() {
             const btn = document.getElementById('publishBtn');
+            const editId = document.getElementById('editPostId').value;
             const cat = document.getElementById('postCategory').value;
             const contentType = document.getElementById('contentType').value;
             const title = document.getElementById('postTitle').value.trim();
-            const intro = document.getElementById('postIntro').value.trim();
             const imageFile = document.getElementById('imageInput').files[0];
             const videoRaw = document.getElementById('postVideo').value.trim();
             const redirectLink = document.getElementById('postLink').value.trim();
             let price = document.getElementById('postPrice').value.trim();
             const comingSoon = document.getElementById('comingSoonCheck').checked;
-            let desc = document.getElementById('postDesc').value.trim();
+            const desc = document.getElementById('postDesc').value.trim();
 
-            if (cat === 'about_me' && intro) {
-                desc = intro + "\n\n" + desc;
-            }
             if (cat === 'book' && comingSoon) {
                 price = "Coming Soon";
             }
 
-            let mediaData = "";
-            let mediaType = "image";
-
-            btn.innerText = "Publishing...";
+            btn.innerText = editId ? "Updating..." : "Publishing...";
             btn.disabled = true;
 
             try {
+                let mediaData = document.getElementById('existingMedia')?.value || "";
+                let mediaType = "image";
+
                 if (imageFile) {
                     mediaData = await compressAndConvertImage(imageFile);
                     mediaType = "image";
                 } else if (videoRaw) {
                     mediaData = formatPlayableUrl(videoRaw);
                     mediaType = "video_link";
-                } else if (cat === 'gallery' && redirectLink) {
+                } else if (cat === 'gallery' && redirectLink && !mediaData) {
                     mediaData = formatPlayableUrl(redirectLink);
                     mediaType = "video_link";
                 }
 
-                await addDoc(collection(db, "posts"), {
+                const postData = {
                     category: cat,
                     contentType: cat === 'movie' ? contentType : '',
                     titles: { en: title },
                     descriptions: { en: desc },
                     media: mediaData,
                     mediaType: mediaType,
-                    videoUrl: videoRaw ? formatPlayableUrl(videoRaw) : '',
                     redirectLink: redirectLink,
                     price: price,
-                    status: 'published',
-                    createdAt: Date.now()
-                });
+                    status: 'published'
+                };
 
-                alert("Published successfully!");
-                document.getElementById('postTitle').value = "";
-                document.getElementById('postIntro').value = "";
-                document.getElementById('imageInput').value = "";
-                document.getElementById('postVideo').value = "";
-                document.getElementById('postLink').value = "";
-                document.getElementById('postPrice').value = "";
-                document.getElementById('postDesc').value = "";
+                if (editId) {
+                    await updateDoc(doc(db, "posts", editId), postData);
+                    alert("Updated successfully!");
+                } else {
+                    postData.createdAt = Date.now();
+                    await addDoc(collection(db, "posts"), postData);
+                    alert("Published successfully!");
+                }
+
+                resetForm();
                 fetchAdminPosts();
             } catch (err) {
-                console.error("Publish error:", err);
-                alert("Error while publishing.");
+                console.error("Save error:", err);
+                alert("Error while saving post.");
             } finally {
                 btn.innerText = "Publish Now";
                 btn.disabled = false;
             }
         }
 
+        window.resetForm = function() {
+            document.getElementById('editPostId').value = "";
+            document.getElementById('formHeading').innerText = "Publish New Item";
+            document.getElementById('publishBtn').innerText = "Publish Now";
+            document.getElementById('cancelEditBtn').style.display = 'none';
+            document.getElementById('postTitle').value = "";
+            document.getElementById('imageInput').value = "";
+            document.getElementById('postVideo').value = "";
+            document.getElementById('postLink').value = "";
+            document.getElementById('postPrice').value = "";
+            document.getElementById('postDesc').value = "";
+            if(document.getElementById('existingMedia')) document.getElementById('existingMedia').remove();
+        }
+
+        window.editPost = function(id) {
+            const item = allAdminPosts.find(p => p.id === id);
+            if (!item) return;
+
+            document.getElementById('editPostId').value = item.id;
+            document.getElementById('formHeading').innerText = "Edit Post / Item";
+            document.getElementById('publishBtn').innerText = "Update Post";
+            document.getElementById('cancelEditBtn').style.display = 'block';
+
+            document.getElementById('postCategory').value = item.category || 'home';
+            updateFormFields();
+
+            if (item.category === 'movie' && item.contentType) {
+                document.getElementById('contentType').value = item.contentType;
+            }
+            document.getElementById('postTitle').value = item.titles?.en || '';
+            document.getElementById('postVideo').value = item.videoUrl || (item.mediaType === 'video_link' ? item.media : '');
+            document.getElementById('postLink').value = item.redirectLink || '';
+            document.getElementById('postPrice').value = item.price || '';
+            document.getElementById('postDesc').value = item.descriptions?.en || '';
+
+            if (item.media && item.media.startsWith('data:image')) {
+                let hiddenInput = document.getElementById('existingMedia');
+                if (!hiddenInput) {
+                    hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.id = 'existingMedia';
+                    document.body.appendChild(hiddenInput);
+                }
+                hiddenInput.value = item.media;
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.filterAdminCategory = function(cat) {
+            currentFilter = cat;
+            document.querySelectorAll('[id^="tab_"]').forEach(btn => {
+                btn.className = "px-3.5 py-2 rounded-xl bg-black/60 border border-amber-500/30 text-gray-300 font-bold shrink-0 transition";
+            });
+            document.getElementById(`tab_${cat}`).className = "px-3.5 py-2 rounded-xl bg-amber-500 text-gray-950 font-bold shrink-0 transition";
+            renderAdminPosts();
+        }
+
         async function fetchAdminPosts() {
             const container = document.getElementById('postsList');
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
-                let list = [];
+                allAdminPosts = [];
                 querySnapshot.forEach(d => {
-                    list.push({ id: d.id, ...d.data() });
+                    allAdminPosts.push({ id: d.id, ...d.data() });
                 });
-                list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-
-                if (list.length === 0) {
-                    container.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No posts found.</p>`;
-                    return;
-                }
-
-                container.innerHTML = "";
-                list.forEach(item => {
-                    const titleText = item.titles?.en || 'Untitled';
-                    const categoryName = item.category || 'general';
-                    const badge = item.contentType ? ` • ${item.contentType}` : '';
-                    container.innerHTML += `
-                        <div class="flex justify-between items-center p-3 rounded-2xl bg-black/60 border border-amber-500/20 text-xs">
-                            <div>
-                                <span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-md font-bold uppercase text-[10px]">${categoryName}${badge}</span>
-                                <p class="font-bold text-white mt-1">${titleText}</p>
-                            </div>
-                            <button onclick="removePost('${item.id}')" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-xl font-bold transition">Delete</button>
-                        </div>
-                    `;
-                });
+                renderAdminPosts();
             } catch (err) {
                 console.error("Error loading posts:", err);
                 container.innerHTML = `<p class="text-xs text-red-500 text-center py-4">Error loading posts.</p>`;
             }
+        }
+
+        function renderAdminPosts() {
+            const container = document.getElementById('postsList');
+            let filtered = allAdminPosts;
+
+            if (currentFilter !== 'all') {
+                filtered = allAdminPosts.filter(p => p.category === currentFilter);
+            }
+
+            // Sorting: About Me = Oldest first (chronological), Others = Newest first (latest)
+            filtered.sort((a, b) => {
+                if (currentFilter === 'about_me' || (currentFilter === 'all' && a.category === 'about_me' && b.category === 'about_me')) {
+                    return (a.createdAt || 0) - (b.createdAt || 0);
+                }
+                return (b.createdAt || 0) - (a.createdAt || 0);
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No posts found in this category.</p>`;
+                return;
+            }
+
+            container.innerHTML = "";
+            filtered.forEach(item => {
+                const titleText = item.titles?.en || 'Untitled';
+                const categoryName = item.category || 'general';
+                const badge = item.contentType ? ` • ${item.contentType}` : '';
+                container.innerHTML += `
+                    <div class="flex justify-between items-center p-3 rounded-2xl bg-black/60 border border-amber-500/20 text-xs">
+                        <div class="truncate pr-2">
+                            <span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-md font-bold uppercase text-[10px]">${categoryName}${badge}</span>
+                            <p class="font-bold text-white mt-1 truncate max-w-[200px] sm:max-w-xs">${titleText}</p>
+                        </div>
+                        <div class="flex items-center space-x-2 shrink-0">
+                            <button onclick="editPost('${item.id}')" class="bg-blue-500/20 text-blue-400 hover:bg-blue-500 hover:text-white px-3 py-1.5 rounded-xl font-bold transition">Edit</button>
+                            <button onclick="removePost('${item.id}')" class="bg-red-500/20 text-red-400 hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-xl font-bold transition">Delete</button>
+                        </div>
+                    </div>
+                `;
+            });
         }
 
         window.removePost = async function(id) {
