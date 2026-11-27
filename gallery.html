@@ -86,8 +86,8 @@
                 Loading gallery...
             </div>
         </div>
-                                                                                                                                                                    </main>
-          <!-- Footer -->
+    </main>
+        <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-amber-500/20 py-8 text-center px-4 mt-16 mb-16">
         <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
@@ -155,11 +155,9 @@
                         mediaHtml = `<img src="${post.media}" class="w-full max-h-[480px] object-cover rounded-2xl mb-3.5 border border-amber-500/20" loading="lazy">`;
                     }
 
+                    // Date is completely removed from here as requested
                     container.innerHTML += `
                         <div class="glass-card p-5 sm:p-6 rounded-3xl transition-all duration-300">
-                            <div class="flex justify-between items-center mb-3">
-                                <span class="text-[11px] text-amber-600 dark:text-amber-500 font-bold tracking-wider uppercase">${post.dateFormatted || ''}</span>
-                            </div>
                             ${title ? `<h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2.5">${title}</h3>` : ''}
                             ${mediaHtml}
                             ${desc ? `<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
