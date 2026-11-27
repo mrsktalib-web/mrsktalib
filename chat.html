@@ -56,7 +56,7 @@
         
         <div class="text-center space-y-1">
             <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">SK TALIB AI Assistant</h2>
-            <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Powered by Gemini AI (Real Chat)</p>
+            <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Powered by Gemini AI (Live Chat)</p>
         </div>
 
         <!-- Chat Box Window -->
@@ -64,7 +64,7 @@
             <div class="flex items-start space-x-2.5">
                 <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
                 <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs sm:text-sm text-gray-800 dark:text-gray-200 max-w-[85%] leading-relaxed shadow-sm">
-                    Hello Talib bhai! Main ab direct Google Gemini AI se connect ho gaya hoon. Aap mujhse kisi bhi language mein, kuch bhi chat kar sakte hain! ✨
+                    Hello Talib bhai! Main ab aapki Gemini API key se successfully connect ho gaya hoon. Boliye, aaj kya baat karni hai? ✨
                 </div>
             </div>
         </div>
@@ -78,11 +78,11 @@
 
         <!-- Input Box -->
         <div class="glass-card p-2.5 rounded-2xl flex items-center space-x-2 shadow-lg">
-            <input type="text" id="userInput" placeholder="Ask anything..." class="flex-1 bg-transparent px-3 py-2 text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none placeholder-gray-500" onkeypress="if(event.key === 'Enter') sendMessage()">
+            <input type="text" id="userInput" placeholder="Ask anything in any language..." class="flex-1 bg-transparent px-3 py-2 text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none placeholder-gray-500" onkeypress="if(event.key === 'Enter') sendMessage()">
             <button onclick="sendMessage()" class="bg-amber-500 hover:bg-amber-400 text-gray-950 px-5 py-2.5 rounded-xl text-xs font-black transition shadow-md shadow-amber-500/30 shrink-0">Send</button>
         </div>
-    </main>
-        <!-- Footer -->
+            </main>
+                <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-amber-500/20 py-6 text-center px-4 mt-8">
         <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
@@ -119,10 +119,8 @@
             }
         }
 
-        // ==========================================
-        // YAHAN APNI FREE GEMINI API KEY DAALEIN
-        // ==========================================
-        const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY"; 
+        // Integrated Gemini API Key
+        const GEMINI_API_KEY = "AIzaSyAo0IAUAyJ8KguZb2zXobJCv0bASbiTPjo"; 
 
         window.sendQuickPrompt = function(text) {
             document.getElementById('userInput').value = text;
@@ -133,11 +131,6 @@
             const inputField = document.getElementById('userInput');
             const message = inputField.value.trim();
             if (!message) return;
-
-            if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY" || !GEMINI_API_KEY) {
-                alert("Please add your Google Gemini API key in the chat.html script code!");
-                return;
-            }
 
             const chatWindow = document.getElementById('chatWindow');
             
@@ -171,7 +164,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         contents: [{
-                            parts: [{ text: "You are a friendly personal AI assistant for SK Talib on his website mrsktalib.in. Reply naturally and helpfully in the user's language. User says: " + message }]
+                            parts: [{ text: "You are a friendly, intelligent personal AI assistant for SK Talib on his website mrsktalib.in. Reply naturally, smartly, and conversationally in the user's preferred language (Hindi, Hinglish, English, etc.). User says: " + message }]
                         }]
                     })
                 });
@@ -201,7 +194,7 @@
                     <div class="flex items-start space-x-2.5">
                         <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
                         <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs sm:text-sm text-red-400 max-w-[85%] leading-relaxed shadow-sm">
-                            Network error or invalid API key. Please check your key.
+                            Network error or connection issue. Please check your internet.
                         </div>
                     </div>
                 `;
