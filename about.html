@@ -44,12 +44,12 @@
 
             <!-- Desktop Nav Links -->
             <nav class="hidden lg:flex items-center space-x-1.5 text-xs font-bold tracking-wide">
-                <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Home</a>
+                <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Home</a>
                 <a href="about.html" class="text-amber-700 dark:text-amber-500 bg-amber-500/15 border border-amber-500/50 px-4 py-2 rounded-xl transition">About</a>
-                <a href="movie.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Movie</a>
-                <a href="products.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Products</a>
-                <a href="book.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Book</a>
-                <a href="gallery.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-500 px-4 py-2 rounded-xl transition">Gallery</a>
+                <a href="movie.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Movie</a>
+                <a href="products.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Products</a>
+                <a href="book.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Book</a>
+                <a href="gallery.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Gallery</a>
             </nav>
 
             <div class="flex items-center space-x-2.5 shrink-0">
@@ -75,40 +75,38 @@
     </div>
 
     <!-- Main Container -->
-    <main class="max-w-3xl mx-auto px-4 py-8 space-y-10">
+    <main class="max-w-2xl mx-auto px-4 py-6 space-y-8">
         
-        <div class="text-center space-y-1">
-            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-gray-900 dark:text-white">About Me</h2>
-            <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-widest">Personal Profile & Connect</p>
-        </div>
-
-        <!-- 1. About Me Section -->
-        <div class="space-y-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-amber-500 px-1">Profile Details</h3>
-            <div id="aboutMeContainer" class="space-y-3">
-                <div class="text-center py-6 text-gray-500 text-xs glass-card rounded-2xl">Loading about details...</div>
+        <!-- About Me Section (Managed from Admin Panel) -->
+        <section class="space-y-4">
+            <div class="text-center space-y-1">
+                <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">About Me</h2>
+                <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Personal Profile & Connect</p>
             </div>
-        </div>
-
-        <!-- 2. Social Media Section -->
-        <div class="space-y-4 pt-2">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-amber-500 px-1">Social Media</h3>
-            <div id="socialContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div class="text-center py-6 text-gray-500 text-xs glass-card rounded-2xl col-span-full">Loading social links...</div>
+            <div id="aboutContainer" class="space-y-4">
+                <div class="glass-card p-5 sm:p-6 rounded-3xl text-center text-gray-500 text-xs font-medium">
+                    Loading profile...
+                </div>
             </div>
-        </div>
+        </section>
 
-        <!-- 3. Contact Section -->
-        <div class="space-y-4 pt-2">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-amber-500 px-1">Contact</h3>
-            <div id="contactContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div class="text-center py-6 text-gray-500 text-xs glass-card rounded-2xl col-span-full">Loading contact info...</div>
+        <!-- Social Media Section (Clean Logo & Name without URL text) -->
+        <section class="space-y-4">
+            <h3 class="text-sm font-black tracking-wider uppercase text-amber-600 dark:text-amber-500 px-1">Social Media</h3>
+            <div id="socialContainer" class="space-y-3">
+                <div class="glass-card p-4 rounded-2xl text-center text-gray-500 text-xs">Loading social links...</div>
             </div>
-        </div>
+        </section>
 
+        <!-- Contact Section (Telegram & Gmail only) -->
+        <section class="space-y-4">
+            <h3 class="text-sm font-black tracking-wider uppercase text-amber-600 dark:text-amber-500 px-1">Contact & Support</h3>
+            <div id="contactContainer" class="space-y-3">
+                <div class="glass-card p-4 rounded-2xl text-center text-gray-500 text-xs">Loading contacts...</div>
+            </div>
+        </section>
     </main>
-
-    <!-- Footer -->
+        <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-amber-500/20 py-8 text-center px-4 mt-16 mb-16">
         <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
@@ -145,83 +143,100 @@
             }
         }
 
-        async function loadAboutPageData() {
+        async function loadAboutData() {
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
-                let aboutMeList = [];
-                let socialList = [];
-                let contactList = [];
+                
+                let aboutHtml = "";
+                let socialHtml = "";
+                let contactHtml = "";
+
+                let abouts = [];
+                let socials = [];
+                let contacts = [];
 
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
                     if (data.status !== 'unpublished') {
-                        if (data.category === 'about_me') aboutMeList.push(data);
-                        if (data.category === 'about_social') socialList.push(data);
-                        if (data.category === 'about_contact') contactList.push(data);
+                        if (data.category === 'about_me' || data.category === 'home') abouts.push(data);
+                        else if (data.category === 'about_social') socials.push(data);
+                        else if (data.category === 'about_contact') contacts.push(data);
                     }
                 });
 
                 // Render About Me
-                const aboutMeEl = document.getElementById('aboutMeContainer');
-                if (aboutMeList.length === 0) {
-                    aboutMeEl.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 glass-card rounded-2xl">No about details added yet.</p>`;
+                const aboutContainer = document.getElementById('aboutContainer');
+                if (abouts.length === 0) {
+                    aboutContainer.innerHTML = `<div class="glass-card p-6 rounded-3xl text-center text-xs text-gray-500">No about details added yet. Publish from your Admin Panel.</div>`;
                 } else {
-                    aboutMeEl.innerHTML = "";
-                    aboutMeList.forEach(item => {
-                        aboutMeEl.innerHTML += `
-                            <div class="glass-card p-5 rounded-2xl space-y-1">
-                                ${item.titles?.en ? `<span class="text-amber-600 dark:text-amber-500 text-[11px] uppercase font-black tracking-wider block">${item.titles.en}</span>` : ''}
-                                ${item.descriptions?.en ? `<p class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white leading-relaxed">${item.descriptions.en}</p>` : ''}
+                    aboutContainer.innerHTML = "";
+                    abouts.forEach(item => {
+                        const title = item.titles?.en || '';
+                        const desc = item.descriptions?.en || '';
+                        let mediaTag = item.media ? `<img src="${item.media}" class="w-24 h-24 rounded-full mx-auto object-cover mb-4 border-2 border-amber-500/50 shadow-md">` : '';
+                        
+                        aboutContainer.innerHTML += `
+                            <div class="glass-card p-6 rounded-3xl space-y-4 text-center">
+                                ${mediaTag}
+                                ${title ? `<h3 class="text-lg font-bold text-gray-900 dark:text-white">${title}</h3>` : ''}
+                                ${desc ? `<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
                             </div>
                         `;
                     });
                 }
 
-                // Render Social
-                const socialEl = document.getElementById('socialContainer');
-                if (socialList.length === 0) {
-                    socialEl.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 glass-card rounded-2xl col-span-full">No social links added yet.</p>`;
+                // Render Social Media (Logo & Name ONLY, clicking opens link without showing raw URL)
+                const socialContainer = document.getElementById('socialContainer');
+                if (socials.length === 0) {
+                    socialContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No social links added yet.</p>`;
                 } else {
-                    socialEl.innerHTML = "";
-                    socialList.forEach(item => {
-                        socialEl.innerHTML += `
-                            <a href="${item.redirectLink || '#'}" target="_blank" class="glass-card p-4 rounded-2xl flex items-center space-x-3.5 hover:scale-[1.02] transition block group">
-                                ${item.media ? `<img src="${item.media}" class="w-12 h-12 object-cover rounded-xl border border-amber-500/30 shrink-0">` : '<div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 font-bold shrink-0">🌐</div>'}
-                                <div class="overflow-hidden">
-                                    <h4 class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white group-hover:text-amber-500 transition truncate">${item.titles?.en || ''}</h4>
-                                    <p class="text-[11px] text-gray-500 dark:text-gray-400 truncate mt-0.5">${item.descriptions?.en || item.redirectLink || ''}</p>
+                    socialContainer.innerHTML = "";
+                    socials.forEach(item => {
+                        const title = item.titles?.en || 'Social Link';
+                        const link = item.redirectLink || '#';
+                        let mediaTag = item.media ? `<img src="${item.media}" class="w-9 h-9 rounded-xl object-cover border border-amber-500/30 shrink-0">` : `<div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-500 font-bold text-xs shrink-0">🔗</div>`;
+                        
+                        socialContainer.innerHTML += `
+                            <a href="${link}" target="_blank" class="glass-card p-4 rounded-2xl flex items-center justify-between hover:border-amber-500/70 transition group block">
+                                <div class="flex items-center space-x-3.5">
+                                    ${mediaTag}
+                                    <span class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white group-hover:text-amber-500 transition">${title}</span>
                                 </div>
+                                <span class="text-amber-500 text-xs font-bold px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 group-hover:bg-amber-500 group-hover:text-gray-950 transition">Open →</span>
                             </a>
                         `;
                     });
                 }
 
-                // Render Contact
-                const contactEl = document.getElementById('contactContainer');
-                if (contactList.length === 0) {
-                    contactEl.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 glass-card rounded-2xl col-span-full">No contact info added yet.</p>`;
+                // Render Contact (Telegram & Gmail only)
+                const contactContainer = document.getElementById('contactContainer');
+                if (contacts.length === 0) {
+                    contactContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No contacts added yet.</p>`;
                 } else {
-                    contactEl.innerHTML = "";
-                    contactList.forEach(item => {
-                        contactEl.innerHTML += `
-                            <div class="glass-card p-4 rounded-2xl flex items-center space-x-3.5">
-                                ${item.media ? `<img src="${item.media}" class="w-12 h-12 object-cover rounded-xl border border-amber-500/30 shrink-0">` : '<div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500 font-bold shrink-0">📞</div>'}
-                                <div class="overflow-hidden">
-                                    <h4 class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white truncate">${item.titles?.en || ''}</h4>
-                                    <p class="text-[11px] text-amber-600 dark:text-amber-400 font-bold truncate mt-0.5">${item.redirectLink || item.descriptions?.en || ''}</p>
+                    contactContainer.innerHTML = "";
+                    contacts.forEach(item => {
+                        const title = item.titles?.en || 'Contact';
+                        const link = item.redirectLink || item.descriptions?.en || '#';
+                        let mediaTag = item.media ? `<img src="${item.media}" class="w-9 h-9 rounded-xl object-cover border border-amber-500/30 shrink-0">` : `<div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-500 font-bold text-xs shrink-0">✉️</div>`;
+                        
+                        contactContainer.innerHTML += `
+                            <a href="${link.includes('@') ? 'mailto:' + link : link}" target="_blank" class="glass-card p-4 rounded-2xl flex items-center justify-between hover:border-amber-500/70 transition group block">
+                                <div class="flex items-center space-x-3.5">
+                                    ${mediaTag}
+                                    <span class="text-xs sm:text-sm font-bold text-gray-900 dark:text-white group-hover:text-amber-500 transition">${title}</span>
                                 </div>
-                            </div>
+                                <span class="text-amber-500 text-xs font-bold px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 group-hover:bg-amber-500 group-hover:text-gray-950 transition">Connect →</span>
+                            </a>
                         `;
                     });
                 }
 
             } catch (err) {
-                console.error("Error loading about page data:", err);
+                console.error("Error loading about data:", err);
             }
         }
 
-        loadAboutPageData();
+        loadAboutData();
     </script>
 </body>
-                                                                                                                                    </html>
-                                                                                                                                    
+</html>
