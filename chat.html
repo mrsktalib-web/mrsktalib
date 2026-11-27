@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat with AI - SK TALIB</title>
+    <meta name="theme-color" content="#080808">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = { darkMode: 'class' }
@@ -13,7 +15,6 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
         .glass-card {
             background: linear-gradient(135deg, rgba(22, 22, 22, 0.9) 0%, rgba(12, 12, 12, 0.98) 100%);
             backdrop-filter: blur(20px);
@@ -25,7 +26,6 @@
             border: 1px solid rgba(212, 175, 55, 0.4);
             box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.08);
         }
-
         .premium-btn {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.08) 100%);
             border: 1px solid rgba(212, 175, 55, 0.5);
@@ -34,15 +34,12 @@
     </style>
 </head>
 <body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-24 lg:pt-20 transition-colors duration-300 antialiased flex flex-col justify-between">
-    
-    <!-- Fixed Top Navigation Bar -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
             <div class="flex items-center space-x-3">
                 <a href="index.html" class="text-xs bg-gray-200 dark:bg-[#171717] hover:bg-amber-500 hover:text-gray-950 px-3.5 py-2 rounded-xl font-bold transition border border-gray-300 dark:border-amber-500/30">← Home</a>
                 <a href="index.html" class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
             </div>
-
             <div class="flex items-center space-x-2.5 shrink-0">
                 <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500/70 transition text-sm shrink-0 shadow-sm">
                     <span id="modeIcon">🌙</span>
@@ -51,25 +48,21 @@
         </div>
     </header>
 
-    <!-- Main Chat Container -->
     <main class="max-w-2xl w-full mx-auto px-4 py-4 flex flex-col flex-1 space-y-4">
-        
         <div class="text-center space-y-1">
             <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">SK TALIB AI Assistant</h2>
             <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Official Public AI Assistant</p>
         </div>
 
-        <!-- Chat Box Window -->
         <div class="glass-card flex-1 flex flex-col rounded-3xl p-4 sm:p-5 min-h-[420px] max-h-[580px] overflow-y-auto space-y-3.5" id="chatWindow">
             <div class="flex items-start space-x-2.5">
                 <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
                 <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs sm:text-sm text-gray-800 dark:text-gray-200 max-w-[85%] leading-relaxed shadow-sm">
-                    Hello! Main **SK Talib ka official AI Assistant** hoon. Aap is website par aaye hain, toh mujhse Talib ke baare mein, unke products, movies, books ya education ke baare mein kuch bhi puch sakte hain, ya fir kisi bhi bhasha mein aaram se chat kar sakte hain! ✨
+                    Hello! Main SK Talib ka official AI Assistant hoon. Aap is website par aaye hain, toh mujhse Talib ke baare mein, unke products, movies, books ya education ke baare mein kuch bhi puch sakte hain,
                 </div>
             </div>
         </div>
 
-        <!-- Quick Helper Buttons -->
         <div class="flex overflow-x-auto no-scrollbar space-x-2 py-1 text-xs">
             <button onclick="sendQuickPrompt('Who is SK Talib?')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">👤 Who is Talib?</button>
             <button onclick="sendQuickPrompt('What is his education?')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">🎓 Education</button>
@@ -77,18 +70,15 @@
             <button onclick="sendQuickPrompt('How to contact him?')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">📞 Contact</button>
         </div>
 
-        <!-- Input Box -->
         <div class="glass-card p-2.5 rounded-2xl flex items-center space-x-2 shadow-lg">
             <input type="text" id="userInput" placeholder="Ask anything or chat in any language..." class="flex-1 bg-transparent px-3 py-2 text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none placeholder-gray-500" onkeypress="if(event.key === 'Enter') sendMessage()">
             <button onclick="sendMessage()" class="bg-amber-500 hover:bg-amber-400 text-gray-950 px-5 py-2.5 rounded-xl text-xs font-black transition shadow-md shadow-amber-500/30 shrink-0">Send</button>
         </div>
     </main>
-        <!-- Footer -->
-    <footer class="border-t border-gray-200 dark:border-amber-500/20 py-6 text-center px-4 mt-8">
+        <footer class="border-t border-gray-200 dark:border-amber-500/20 py-6 text-center px-4 mt-8">
         <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -155,7 +145,6 @@
             if (!message) return;
 
             const chatWindow = document.getElementById('chatWindow');
-            
             chatWindow.innerHTML += `
                 <div class="flex items-start justify-end space-x-2.5">
                     <div class="bg-amber-500 text-gray-950 p-3.5 rounded-2xl text-xs sm:text-sm max-w-[85%] leading-relaxed font-semibold shadow-md">
@@ -170,23 +159,18 @@
             chatWindow.innerHTML += `
                 <div id="${typingId}" class="flex items-start space-x-2.5">
                     <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
-                    <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs text-gray-500 dark:text-gray-400 italic shadow-sm">
-                        Thinking...
-                    </div>
+                    <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs text-gray-500 dark:text-gray-400 italic shadow-sm">Thinking...</div>
                 </div>
             `;
             chatWindow.scrollTop = chatWindow.scrollHeight;
 
             setTimeout(() => {
                 document.getElementById(typingId).remove();
-                let reply = getSmartAIResponse(message);
-                
+                let reply = getSmartAIResponse(message).replace(/\*\*/g, '');
                 chatWindow.innerHTML += `
                     <div class="flex items-start space-x-2.5">
                         <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
-                        <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs sm:text-sm text-gray-800 dark:text-gray-200 max-w-[85%] leading-relaxed shadow-sm whitespace-pre-line">
-                            ${reply}
-                        </div>
+                        <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs sm:text-sm text-gray-800 dark:text-gray-200 max-w-[85%] leading-relaxed shadow-sm whitespace-pre-line">${reply}</div>
                     </div>
                 `;
                 chatWindow.scrollTop = chatWindow.scrollHeight;
@@ -195,18 +179,17 @@
 
         function getSmartAIResponse(query) {
             const q = query.toLowerCase();
-            
-            if (q.includes('kaise ho') || q.includes('kya haal') || q.includes('how are you') || q.includes('kemon acho')) {
+
+            if (q.includes('kaise ho') || q.includes('kya haal') || q.includes('how are you')) {
                 return "Main ekdum badhiya hoon! Main SK Talib ka official AI assistant hoon. Boliye, aapki kya sahayata kar sakta hoon?";
             }
-            if (q.includes('name') || q.includes('naam') || q.includes('who are you') || q.includes('aap kaun')) {
+            if (q.includes('name') || q.includes('naam') || q.includes('who are you')) {
                 return "Main SK Talib ka official AI assistant hoon. Yeh website (mrsktalib.in) par aane wale har visitor ko Talib ke projects, products, movies, aur social profiles ke baare mein guide karta hai!";
             }
             if (q.includes('joke') || q.includes('chutkula')) {
-                return "Suniye ek chota sa joke: Developer jab coffee peeta hai, toh code compile nahi hota — seedha magic hota hai! 😄 Aur bataiye, kya janna chahenge?";
+                return "Suniye ek chota sa joke: Developer jab coffee peeta hai, toh code compile nahi hota — seedha magic hota hai! 😄";
             }
-
-            if (q.includes('talib') || q.includes('about') || q.includes('who is') || q.includes('creator')) {
+            if (q.includes('talib') || q.includes('about') || q.includes('creator')) {
                 if (siteData.about.length > 0) {
                     let res = "SK Talib ke baare mein yeh jankari uplabdh hai:\n";
                     siteData.about.forEach(item => {
@@ -217,12 +200,10 @@
                 }
                 return "SK Talib ek passionate creator aur web developer hain jo Odisha se hain aur apni yeh personal website mrsktalib.in manage karte hain.";
             }
-
-            if (q.includes('education') || q.includes('study') || q.includes('college') || q.includes('padhai')) {
+            if (q.includes('education') || q.includes('study') || q.includes('college')) {
                 return "SK Talib ne Maulana Azad National Urdu University (MANUU) Polytechnic Cuttack Campus se Diploma in Engineering ki padhai ki hai.";
             }
-
-            if (q.includes('product') || q.includes('item') || q.includes('buy') || q.includes('shop')) {
+            if (q.includes('product') || q.includes('item') || q.includes('buy')) {
                 if (siteData.products.length > 0) {
                     let res = "Yeh hain website par available products:\n";
                     siteData.products.forEach(p => {
@@ -232,21 +213,9 @@
                 }
                 return "Aap Products page par jakar saari latest items dekh sakte hain!";
             }
-
-            if (q.includes('book') || q.includes('kitab')) {
-                if (siteData.books.length > 0) {
-                    let res = "Website par ye books/posts uplabdh hain:\n";
-                    siteData.books.forEach(b => {
-                        res += `• ${b.titles?.en || 'Book'} - ${b.descriptions?.en || ''}\n`;
-                    });
-                    return res;
-                }
-                return "Aap Book page par jakar saari books dekh sakte hain!";
-            }
-
             if (q.includes('movie') || q.includes('film') || q.includes('video')) {
                 if (siteData.movies.length > 0) {
-                    let res = "Website par ye movies/videos hain:\n";
+                    let res = "Website par available movies aur videos:\n";
                     siteData.movies.forEach(m => {
                         res += `• ${m.titles?.en || 'Movie'} - ${m.descriptions?.en || ''}\n`;
                     });
@@ -254,23 +223,29 @@
                 }
                 return "Aap Movie page par jakar saare featured videos dekh sakte hain!";
             }
-
-            if (q.includes('contact') || q.includes('social') || q.includes('telegram') || q.includes('instagram') || q.includes('email') || q.includes('number')) {
-                let res = "Aap SK Talib se in links ke zariye connect ho sakte hain:\n";
-                if (siteData.social.length > 0) {
-                    siteData.social.forEach(s => { res += `• ${s.titles?.en}: ${s.redirectLink || ''}\n`; });
+            if (q.includes('book') || q.includes('write') || q.includes('shayari')) {
+                if (siteData.books.length > 0) {
+                    let res = "Books aur writings section mein yeh uplabdh hai:\n";
+                    siteData.books.forEach(b => {
+                        res += `• ${b.titles?.en || 'Book'} - ${b.descriptions?.en || ''}\n`;
+                    });
+                    return res;
                 }
+                return "Aap Book page par jakar saari writings aur books padh sakte hain!";
+            }
+            if (q.includes('contact') || q.includes('email') || q.includes('telegram') || q.includes('social')) {
+                let res = "Aap About page par jakar right side ke menu se direct contact kar sakte hain";
                 if (siteData.contact.length > 0) {
-                    siteData.contact.forEach(c => { res += `• ${c.titles?.en}: ${c.redirectLink || c.descriptions?.en || ''}\n`; });
+                    res += ":\n";
+                    siteData.contact.forEach(c => {
+                        res += `• ${c.titles?.en || 'Contact'}: ${c.redirectLink || c.descriptions?.en || ''}\n`;
+                    });
+                    return res;
                 }
-                if (res.trim() === "Aap SK Talib se in links ke zariye connect ho sakte hain:") {
-                    return "Aap About page par jakar saare social handles aur contact details dekh sakte hain.";
-                }
-                return res;
+                return res + " ya unke Telegram (t.me/mrsktalib) aur Gmail (mrsktalib@gmail.com) par connect kar sakte hain.";
             }
 
-            // General Conversational / Multilingual fallback using database context
-            return `Main SK Talib ka official AI assistant hoon! Aapne achhi baat puchi. Aap chahe toh unke products, movies, books, ya social media ke baare mein puch sakte hain. Main yahan aapki sahayata ke liye hazir hoon!`;
+            return "Main SK Talib ka official AI assistant hoon! Aap unke products, movies, books, education ya contact details ke baare mein kuch bhi puch sakte hain.";
         }
 
         function escapeHtml(text) {
