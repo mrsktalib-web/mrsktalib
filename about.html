@@ -26,11 +26,6 @@
             border: 1px solid rgba(212, 175, 55, 0.4);
             box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.08);
         }
-        .premium-btn {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.08) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            box-shadow: 0 4px 20px 0 rgba(212, 175, 55, 0.2);
-        }
     </style>
 </head>
 <body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-24 lg:pt-20 transition-colors duration-300 antialiased">
@@ -76,21 +71,22 @@
                 <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Personal Profile & Updates</p>
             </div>
             <div id="aboutContainer" class="space-y-4">
-                <div class="glass-card p-6 rounded-3xl text-center text-gray-500 text-xs font-medium">Loading profile...</div>
+                <div class="glass-card p-6 sm:p-8 rounded-3xl text-center text-gray-500 text-xs font-medium">Loading profile...</div>
             </div>
         </section>
     </main>
-
-    <footer class="border-t border-gray-200 dark:border-amber-500/20 py-8 text-center px-4 mt-16 mb-16">
+        <footer class="border-t border-gray-200 dark:border-amber-500/20 py-8 text-center px-4 mt-16 mb-16">
         <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        
         const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
         const html = document.documentElement;
         const modeIcon = document.getElementById('modeIcon');
         if (localStorage.getItem('theme') === 'light') {
@@ -100,6 +96,7 @@
             html.classList.add('dark');
             modeIcon.innerText = '🌙';
         }
+
         window.toggleDarkMode = function() {
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
@@ -111,9 +108,11 @@
                 localStorage.setItem('theme', 'dark');
             }
         }
+
         window.toggleContactMenu = function() {
             document.getElementById('contactModal').classList.toggle('hidden');
         }
+
         async function loadAboutData() {
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
@@ -126,7 +125,10 @@
                         else if (data.category === 'about_contact') contacts.push(data);
                     }
                 });
-                abouts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                
+                // About Me sorting: Oldest first (chronological)
+                abouts.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+
                 const aboutContainer = document.getElementById('aboutContainer');
                 if (abouts.length === 0) {
                     aboutContainer.innerHTML = `<div class="glass-card p-6 rounded-3xl text-center text-xs text-gray-500">No about details added yet. Publish from your Admin Panel.</div>`;
@@ -135,16 +137,16 @@
                     abouts.forEach(item => {
                         const title = item.titles?.en || '';
                         const desc = item.descriptions?.en || '';
-                        let mediaTag = item.media ? `<img src="${item.media}" class="w-24 h-24 rounded-full mx-auto object-cover mb-4 border-2 border-amber-500/50 shadow-md">` : '';
+                        
                         aboutContainer.innerHTML += `
-                            <div class="glass-card p-6 rounded-3xl space-y-4 text-center">
-                                ${mediaTag}
-                                ${title ? `<h3 class="text-lg font-bold text-gray-900 dark:text-white">${title}</h3>` : ''}
-                                ${desc ? `<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
+                            <div class="glass-card p-6 sm:p-8 rounded-3xl space-y-3 text-left">
+                                ${title ? `<h3 class="text-base sm:text-lg font-black text-amber-500 tracking-wide">${title}</h3>` : ''}
+                                ${desc ? `<div class="text-xs sm:text-sm text-gray-300 dark:text-gray-200 leading-relaxed whitespace-pre-line">${desc}</div>` : ''}
                             </div>
                         `;
                     });
                 }
+
                 const socialContainer = document.getElementById('socialContainer');
                 if (socials.length === 0) {
                     socialContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4 col-span-full">No social links added yet.</p>`;
@@ -163,6 +165,7 @@
                         `;
                     });
                 }
+
                 const contactContainer = document.getElementById('contactContainer');
                 if (contacts.length === 0) {
                     contactContainer.innerHTML = `<p class="text-xs text-gray-500 text-center py-4">No contact details added yet. Add from Admin Panel.</p>`;
@@ -190,5 +193,4 @@
         loadAboutData();
     </script>
 </body>
-    </html>
-    
+</html>
