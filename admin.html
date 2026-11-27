@@ -158,8 +158,8 @@
                 </div>
             </div>
         </div>
-    </div>
-        <footer class="py-6 text-center text-xs text-gray-600">
+            </div>
+                            <footer class="py-6 text-center text-xs text-gray-600">
         &copy; 2026 SK TALIB. All rights reserved.
     </footer>
 
@@ -257,7 +257,7 @@
                 fDesc.style.display = 'block';
             } 
             else if (cat === 'about_social') {
-                lTitle.innerText = "Social Platform Name (e.g. Instagram)";
+                lTitle.innerText = "Social Platform Name (e.g. Instagram, YouTube, Facebook, Telegram channel, X)";
                 lImage.innerText = "Upload Logo Image";
                 lLink.innerText = "Profile Link";
                 fImg.style.display = 'block';
@@ -282,11 +282,8 @@
                 lTitle.innerText = "Product Title";
                 lImage.innerText = "Upload Product Image";
                 lLink.innerText = "Product Link (Optional)";
-                lVid.innerText = "Video Link (Optional)";
-                lDesc.innerText = "Description";
                 fImg.style.display = 'block';
                 fLink.style.display = 'block';
-                fVid.style.display = 'block';
                 fPrice.style.display = 'block';
                 fDesc.style.display = 'block';
             } 
@@ -343,15 +340,15 @@
             const btn = document.getElementById('publishBtn');
             const editId = document.getElementById('editPostId').value;
             const cat = document.getElementById('postCategory').value;
-            const contentType = document.getElementById('contentType').value;
+            const contentType = document.getElementById('contentType')?.value || 'Movie';
             const title = document.getElementById('postTitle').value.trim();
-            const intro = document.getElementById('postIntro').value.trim();
+            const intro = document.getElementById('postIntro')?.value?.trim() || '';
             const imageFile = document.getElementById('imageInput').files[0];
-            const videoRaw = document.getElementById('postVideo').value.trim();
-            const redirectLink = document.getElementById('postLink').value.trim();
-            let price = document.getElementById('postPrice').value.trim();
-            const comingSoon = document.getElementById('comingSoonCheck').checked;
-            const desc = document.getElementById('postDesc').value.trim();
+            const videoRaw = document.getElementById('postVideo')?.value?.trim() || '';
+            const redirectLink = document.getElementById('postLink')?.value?.trim() || '';
+            let price = document.getElementById('postPrice')?.value?.trim() || '';
+            const comingSoon = document.getElementById('comingSoonCheck')?.checked || false;
+            const desc = document.getElementById('postDesc')?.value?.trim() || '';
 
             if (cat === 'book' && comingSoon) {
                 price = "Coming Soon";
@@ -369,9 +366,6 @@
                     mediaType = "image";
                 } else if (videoRaw) {
                     mediaData = formatPlayableUrl(videoRaw);
-                    mediaType = "video_link";
-                } else if (cat === 'gallery' && redirectLink && !mediaData) {
-                    mediaData = formatPlayableUrl(redirectLink);
                     mediaType = "video_link";
                 }
 
@@ -414,12 +408,12 @@
             document.getElementById('publishBtn').innerText = "Publish Now";
             document.getElementById('cancelEditBtn').style.display = 'none';
             document.getElementById('postTitle').value = "";
-            document.getElementById('postIntro').value = "";
+            if(document.getElementById('postIntro')) document.getElementById('postIntro').value = "";
             document.getElementById('imageInput').value = "";
-            document.getElementById('postVideo').value = "";
-            document.getElementById('postLink').value = "";
-            document.getElementById('postPrice').value = "";
-            document.getElementById('postDesc').value = "";
+            if(document.getElementById('postVideo')) document.getElementById('postVideo').value = "";
+            if(document.getElementById('postLink')) document.getElementById('postLink').value = "";
+            if(document.getElementById('postPrice')) document.getElementById('postPrice').value = "";
+            if(document.getElementById('postDesc')) document.getElementById('postDesc').value = "";
             if(document.getElementById('existingMedia')) document.getElementById('existingMedia').remove();
         }
 
@@ -439,11 +433,11 @@
                 document.getElementById('contentType').value = item.contentType;
             }
             document.getElementById('postTitle').value = item.titles?.en || '';
-            document.getElementById('postIntro').value = item.intro || '';
-            document.getElementById('postVideo').value = item.videoUrl || (item.mediaType === 'video_link' ? item.media : '');
-            document.getElementById('postLink').value = item.redirectLink || item.link || '';
-            document.getElementById('postPrice').value = item.price || '';
-            document.getElementById('postDesc').value = item.descriptions?.en || '';
+            if(document.getElementById('postIntro')) document.getElementById('postIntro').value = item.intro || '';
+            if(document.getElementById('postVideo')) document.getElementById('postVideo').value = item.videoUrl || (item.mediaType === 'video_link' ? item.media : '');
+            if(document.getElementById('postLink')) document.getElementById('postLink').value = item.redirectLink || item.link || '';
+            if(document.getElementById('postPrice')) document.getElementById('postPrice').value = item.price || '';
+            if(document.getElementById('postDesc')) document.getElementById('postDesc').value = item.descriptions?.en || '';
 
             if (item.media && item.media.startsWith('data:image')) {
                 let hiddenInput = document.getElementById('existingMedia');
@@ -497,7 +491,6 @@
                 });
             }
 
-            // Sorting: About Me = Oldest first, Others = Newest first
             filtered.sort((a, b) => {
                 const cA = (a.category || '').toLowerCase();
                 if (currentFilter === 'about_me' || (currentFilter === 'all' && (cA === 'about_me' || cA === 'about'))) {
