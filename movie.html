@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie - SK TALIB</title>
+    <title>Movies & TV Shows - SK TALIB</title>
     <meta name="theme-color" content="#080808">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,63 +26,52 @@
             border: 1px solid rgba(212, 175, 55, 0.4);
             box-shadow: 0 15px 35px 0 rgba(0, 0, 0, 0.08);
         }
-        .premium-btn {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.08) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            box-shadow: 0 4px 20px 0 rgba(212, 175, 55, 0.2);
-        }
     </style>
 </head>
-<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-40 lg:pt-28 transition-colors duration-300 antialiased">
-    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
-        <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
-            <div class="flex items-center shrink-0">
-                <a href="index.html" class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
-            </div>
-            <nav class="hidden lg:flex items-center space-x-1.5 text-xs font-bold tracking-wide">
-                <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Home</a>
-                <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">About</a>
-                <a href="movie.html" class="text-amber-700 dark:text-amber-500 bg-amber-500/15 border border-amber-500/50 px-4 py-2 rounded-xl transition">Movie</a>
-                <a href="products.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Products</a>
-                <a href="book.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Book</a>
-                <a href="gallery.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Gallery</a>
-            </nav>
-            <div class="flex items-center space-x-2.5 shrink-0">
-                <a href="chat.html" class="premium-btn flex items-center space-x-2 text-amber-700 dark:text-amber-400 px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition">
-                    <span>Chat with AI</span>
-                    <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </a>
-                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500/70 transition text-sm shrink-0 shadow-sm">
+<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-24 lg:pt-20 transition-colors duration-300 antialiased">
+    
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/25 px-4 sm:px-6 py-3.5 shadow-md">
+        <div class="max-w-2xl mx-auto flex justify-between items-center">
+            <h1 class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500">SK <span class="text-gray-900 dark:text-white">TALIB</span></h1>
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="px-3 py-2 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 text-xs font-bold hover:border-amber-500 transition">Home</a>
+                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500 transition text-sm flex items-center justify-center shadow-sm">
                     <span id="modeIcon">🌙</span>
                 </button>
             </div>
         </div>
     </header>
-    <div class="fixed top-[65px] left-0 w-full z-40 grid grid-cols-3 gap-2 lg:hidden px-3 py-3 bg-white/95 dark:bg-[#0b0b0b]/95 backdrop-blur-xl border-b border-gray-200 dark:border-amber-500/20 text-xs font-bold text-center tracking-wide">
-        <a href="index.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Home</a>
-        <a href="about.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">About</a>
-        <a href="movie.html" class="py-2 px-2 rounded-xl bg-amber-500 text-gray-950 font-black shadow-md shadow-amber-500/30">Movie</a>
-        <a href="products.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Products</a>
-        <a href="book.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Book</a>
-        <a href="gallery.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Gallery</a>
-    </div>
+
     <main class="max-w-2xl mx-auto px-4 py-6 space-y-6">
-        <div class="flex items-center justify-between">
-            <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">Featured Movies</h2>
+        <!-- Page Title & Category Filter Tabs -->
+        <div class="text-center space-y-3">
+            <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">Movies & TV Shows</h2>
+            <div class="flex justify-center space-x-2">
+                <button onclick="filterMovieType('all')" id="mTab_all" class="px-4 py-1.5 rounded-xl bg-amber-500 text-gray-950 font-bold text-xs transition">All</button>
+                <button onclick="filterMovieType('Movie')" id="mTab_Movie" class="px-4 py-1.5 rounded-xl bg-gray-200 dark:bg-black/60 border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold text-xs transition">Movies</button>
+                <button onclick="filterMovieType('TV Show')" id="mTab_TVShow" class="px-4 py-1.5 rounded-xl bg-gray-200 dark:bg-black/60 border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold text-xs transition">TV Shows</button>
+            </div>
         </div>
-        <div id="movieContainer" class="space-y-5">
-            <div class="text-center py-20 text-gray-500 text-xs sm:text-sm font-medium border border-dashed border-gray-300 dark:border-amber-500/20 rounded-3xl bg-white dark:bg-[#141414] shadow-sm">Loading movies...</div>
+
+        <!-- Movies Container -->
+        <div id="moviesContainer" class="space-y-6">
+            <div class="glass-card p-8 rounded-3xl text-center text-gray-500 text-xs">Loading items...</div>
         </div>
     </main>
+
     <footer class="border-t border-gray-200 dark:border-amber-500/20 py-8 text-center px-4 mt-16 mb-16">
         <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        
         const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
         const html = document.documentElement;
         const modeIcon = document.getElementById('modeIcon');
         if (localStorage.getItem('theme') === 'light') {
@@ -92,6 +81,7 @@
             html.classList.add('dark');
             modeIcon.innerText = '🌙';
         }
+
         window.toggleDarkMode = function() {
             if (html.classList.contains('dark')) {
                 html.classList.remove('dark');
@@ -103,45 +93,84 @@
                 localStorage.setItem('theme', 'dark');
             }
         }
+
+        let allMovies = [];
+        let currentMovieFilter = 'all';
+
+        window.filterMovieType = function(type) {
+            currentMovieFilter = type;
+            ['all', 'Movie', 'TVShow'].forEach(t => {
+                const btn = document.getElementById(`mTab_${t}`);
+                if (btn) {
+                    btn.className = "px-4 py-1.5 rounded-xl bg-gray-200 dark:bg-black/60 border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold text-xs transition";
+                }
+            });
+            const activeBtn = document.getElementById(`mTab_${type}`);
+            if (activeBtn) {
+                activeBtn.className = "px-4 py-1.5 rounded-xl bg-amber-500 text-gray-950 font-bold text-xs transition";
+            }
+            renderMovies();
+        }
+
         async function loadMovies() {
-            const container = document.getElementById('movieContainer');
-            if (!container) return;
             try {
                 const querySnapshot = await getDocs(collection(db, "posts"));
-                let movies = [];
+                allMovies = [];
                 querySnapshot.forEach(doc => {
                     const data = doc.data();
-                    if (data.category === 'movie' && data.status !== 'unpublished') {
-                        movies.push({ id: doc.id, ...data });
+                    if (data.status !== 'unpublished' && (data.category === 'movie' || data.category === 'movies')) {
+                        allMovies.push(data);
                     }
                 });
-                movies.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-                if (movies.length === 0) {
-                    container.innerHTML = `<div class="text-center py-20 text-gray-500 text-xs sm:text-sm font-medium border border-dashed border-gray-300 dark:border-amber-500/20 rounded-3xl bg-white dark:bg-[#141414] shadow-sm">No movies added yet. Add them from your Admin Panel.</div>`;
-                    return;
-                }
-                container.innerHTML = "";
-                movies.forEach(post => {
-                    const title = post.titles?.en || '';
-                    const desc = post.descriptions?.en || '';
-                    let mediaHtml = "";
-                    if (post.mediaType === 'video_link' && post.media) {
-                        mediaHtml = `<div class="aspect-video w-full mb-3.5"><iframe src="${post.media}" class="w-full h-full rounded-2xl border border-amber-500/20" allowfullscreen></iframe></div>`;
-                    } else if (post.media) {
-                        mediaHtml = `<img src="${post.media}" class="w-full max-h-[480px] object-cover rounded-2xl mb-3.5 border border-amber-500/20" loading="lazy">`;
-                    }
-                    container.innerHTML += `
-                        <div class="glass-card p-5 sm:p-6 rounded-3xl transition-all duration-300">
-                            ${title ? `<h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2.5">${title}</h3>` : ''}
-                            ${mediaHtml}
-                            ${desc ? `<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
-                        </div>
-                    `;
-                });
+                allMovies.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                renderMovies();
             } catch (err) {
-                console.error("Movie load error:", err);
+                console.error("Error loading movies:", err);
+                document.getElementById('moviesContainer').innerHTML = `<div class="glass-card p-6 rounded-3xl text-center text-xs text-red-500">Failed to load content.</div>`;
             }
         }
+
+        function renderMovies() {
+            const container = document.getElementById('moviesContainer');
+            let filtered = allMovies;
+
+            if (currentMovieFilter !== 'all') {
+                filtered = allMovies.filter(m => (m.contentType || 'Movie').toLowerCase() === currentMovieFilter.toLowerCase());
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="glass-card p-6 rounded-3xl text-center text-xs text-gray-500">No movies or TV shows added yet.</div>`;
+                return;
+            }
+
+            container.innerHTML = "";
+            filtered.forEach(item => {
+                const title = item.titles?.en || 'Untitled';
+                const type = item.contentType || 'Movie';
+                const media = item.media || '';
+                const desc = item.descriptions?.en || '';
+                const videoUrl = item.mediaType === 'video_link' ? item.media : (item.videoUrl || '');
+
+                let mediaHtml = '';
+                if (videoUrl && videoUrl.includes('embed')) {
+                    mediaHtml = `<div class="w-full aspect-video rounded-2xl overflow-hidden bg-black"><iframe src="${videoUrl}" class="w-full h-full border-0" allowfullscreen></iframe></div>`;
+                } else if (media && media.startsWith('data:image')) {
+                    mediaHtml = `<img src="${media}" class="w-full rounded-2xl object-cover max-h-[450px] border border-amber-500/20">`;
+                }
+
+                container.innerHTML += `
+                    <div class="glass-card p-5 sm:p-6 rounded-3xl space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-base sm:text-lg font-black text-gray-900 dark:text-white tracking-wide">${title}</h3>
+                            <span class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-600 dark:text-amber-400 font-bold text-[10px] uppercase">${type}</span>
+                        </div>
+                        ${mediaHtml}
+                        ${desc ? `<p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
+                    </div>
+                `;
+            });
+        }
+
         loadMovies();
     </script>
 </body>
