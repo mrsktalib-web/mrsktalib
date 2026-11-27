@@ -8,95 +8,97 @@
     <script>
         tailwind.config = { darkMode: 'class' }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(22, 22, 22, 0.85) 0%, rgba(12, 12, 12, 0.95) 100%);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.6);
+        }
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 30px 0 rgba(212, 175, 55, 0.1);
+        }
     </style>
 </head>
-<body class="bg-white dark:bg-[#0f0f0f] text-gray-900 dark:text-gray-100 min-h-screen pt-28 sm:pt-32 transition-colors duration-300 antialiased">
+<body class="bg-gray-50 dark:bg-[#0b0b0b] text-gray-900 dark:text-gray-100 min-h-screen pt-28 sm:pt-32 transition-colors duration-300 antialiased">
     
     <!-- Fixed Top Navigation Bar -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-3 shadow-sm">
+    <header class="fixed top-0 left-0 w-full z-50 bg-white/85 dark:bg-[#0b0b0b]/85 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-3">
             <div class="flex items-center shrink-0">
-                <a href="index.html" class="text-base sm:text-xl font-bold tracking-wider text-red-600 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
+                <a href="index.html" class="text-base sm:text-xl font-extrabold tracking-wider text-amber-500 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
             </div>
 
             <!-- Desktop Nav Links -->
             <nav class="hidden lg:flex items-center space-x-1 text-xs font-semibold">
-                <a href="index.html" class="text-red-600 dark:text-red-500 px-2.5 py-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30 transition">Home</a>
-                <a href="about.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">About</a>
-                <a href="movie.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Movie</a>
-                <a href="products.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Products</a>
-                <a href="book.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Book</a>
-                <a href="chat.html" class="text-gray-600 dark:text-gray-300 px-2.5 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition">Chat with AI</a>
+                <a href="index.html" class="text-amber-500 bg-amber-500/10 border border-amber-500/30 px-3.5 py-2 rounded-xl transition">Home</a>
+                <a href="about.html" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3.5 py-2 rounded-xl transition">About</a>
+                <a href="movie.html" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3.5 py-2 rounded-xl transition">Movie</a>
+                <a href="products.html" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3.5 py-2 rounded-xl transition">Products</a>
+                <a href="book.html" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3.5 py-2 rounded-xl transition">Book</a>
+                <a href="gallery.html" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3.5 py-2 rounded-xl transition">Gallery</a>
             </nav>
 
-            <!-- Right Controls: Translate & Theme -->
+            <!-- Right Controls: Chat with AI & Theme Toggle -->
             <div class="flex items-center space-x-2.5 shrink-0">
-                <div class="relative" id="langDropdownContainer">
-                    <button type="button" onclick="toggleLangMenu()" class="flex items-center space-x-1.5 bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-800 rounded-xl px-2.5 py-1.5 text-xs font-medium hover:border-red-500 transition">
-                        <span>🌐</span>
-                        <span id="currentLangLabel">English</span>
-                        <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div id="langMenu" class="hidden absolute right-0 mt-2 w-36 bg-white dark:bg-[#171717] border border-gray-200 dark:border-gray-800 rounded-xl shadow-xl overflow-hidden z-50">
-                        <button type="button" onclick="selectLanguage('en', 'English')" class="w-full text-left px-3.5 py-2.5 text-xs font-medium text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#262626] transition flex items-center justify-between">
-                            <span>English</span>
-                            <span id="check_en" class="text-red-500 font-bold">✓</span>
-                        </button>
-                        <button type="button" onclick="selectLanguage('roman_hi', 'Roman Hindi')" class="w-full text-left px-3.5 py-2.5 text-xs font-medium text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#262626] border-t border-gray-100 dark:border-gray-800 transition flex items-center justify-between">
-                            <span>Roman Hindi</span>
-                            <span id="check_roman_hi" class="text-red-500 font-bold hidden">✓</span>
-                        </button>
-                    </div>
-                </div>
-
-                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-8 h-8 rounded-xl bg-gray-100 dark:bg-[#171717] border border-gray-200 dark:border-gray-800 hover:bg-gray-200 dark:hover:bg-[#262626] transition" title="Toggle Theme">
-                    <span id="modeIcon" class="text-xs">🌙</span>
+                <a href="chat.html" class="hidden sm:flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 text-amber-500 px-3.5 py-2 rounded-xl text-xs font-bold transition">
+                    <span>✨ Chat with AI</span>
+                </a>
+                <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-9 h-9 rounded-xl bg-gray-100 dark:bg-[#171717] border border-gray-200 dark:border-amber-500/20 hover:border-amber-500/50 transition text-sm">
+                    <span id="modeIcon">🌙</span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Mobile Horizontal Nav Bar -->
-    <div class="fixed top-[57px] left-0 w-full z-40 flex lg:hidden overflow-x-auto no-scrollbar space-x-4 px-4 py-2.5 bg-white/95 dark:bg-[#0f0f0f]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 text-xs font-semibold whitespace-nowrap">
-        <a href="index.html" class="text-red-600 dark:text-red-500">Home</a>
-        <a href="about.html" class="text-gray-600 dark:text-gray-400">About</a>
-        <a href="movie.html" class="text-gray-600 dark:text-gray-400">Movie</a>
-        <a href="products.html" class="text-gray-600 dark:text-gray-400">Products</a>
-        <a href="book.html" class="text-gray-600 dark:text-gray-400">Book</a>
-        <a href="chat.html" class="text-gray-600 dark:text-gray-400">Chat with AI</a>
+    <div class="fixed top-[57px] left-0 w-full z-40 flex lg:hidden overflow-x-auto no-scrollbar space-x-2 px-4 py-3 bg-white/90 dark:bg-[#0b0b0b]/90 backdrop-blur-xl border-b border-gray-200 dark:border-amber-500/20 text-xs font-semibold whitespace-nowrap">
+        <a href="index.html" class="px-3.5 py-2 rounded-xl bg-amber-500 text-gray-950 font-bold shadow-lg shadow-amber-500/20">Home</a>
+        <a href="about.html" class="px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-white/5">About</a>
+        <a href="movie.html" class="px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-white/5">Movie</a>
+        <a href="products.html" class="px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-white/5">Products</a>
+        <a href="book.html" class="px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-white/5">Book</a>
+        <a href="gallery.html" class="px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-white/5">Gallery</a>
+        <a href="chat.html" class="px-3.5 py-2 rounded-xl bg-amber-500/10 text-amber-500 border border-amber-500/30">Chat with AI</a>
     </div>
 
-    <!-- Main Home Feed Container -->
-    <main class="max-w-2xl mx-auto px-4 py-6">
-        <h2 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">Latest Feed</h2>
-        <div id="homeFeedContainer" class="space-y-4">
-            <p class="text-xs text-gray-500 text-center py-8">Loading feed...</p>
+    <!-- Main Container -->
+    <main class="max-w-2xl mx-auto px-4 py-6 space-y-6">
+        <div class="flex items-center justify-between">
+            <h2 class="text-xl font-extrabold tracking-tight text-gray-900 dark:text-white">Latest Feed</h2>
+            <span class="h-2 w-2 rounded-full bg-amber-500 animate-ping"></span>
+        </div>
+
+        <div id="homeFeedContainer" class="space-y-5">
+            <div class="text-center py-16 text-gray-500 text-xs border border-dashed border-gray-300 dark:border-amber-500/20 rounded-3xl bg-gray-100/50 dark:bg-[#141414]">
+                Loading feed...
+            </div>
         </div>
     </main>
 
     <!-- Floating Admin Button (+) -->
-    <button onclick="openAdminModal()" class="fixed bottom-6 right-6 w-12 h-12 bg-red-600 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl font-bold hover:bg-red-700 transition z-50">+</button>
+    <button onclick="openAdminModal()" class="fixed bottom-6 right-6 w-14 h-14 bg-amber-500 text-gray-950 rounded-full shadow-2xl flex items-center justify-center text-3xl font-black hover:bg-amber-400 hover:scale-105 transition duration-300 z-50 shadow-amber-500/40">+</button>
 
     <!-- Admin Login Modal -->
-    <div id="adminModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-[#171717] p-6 rounded-3xl w-full max-w-sm border border-gray-200 dark:border-gray-800 shadow-2xl">
-            <h3 class="text-sm font-bold mb-3 text-gray-900 dark:text-white">Admin Access</h3>
-            <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full p-3 bg-gray-100 dark:bg-[#0f0f0f] border border-gray-200 dark:border-gray-800 rounded-xl text-xs mb-3 focus:outline-none focus:border-red-500">
-            <div class="flex space-x-2">
-                <button onclick="verifyAdmin()" class="flex-1 bg-red-600 text-white py-2.5 rounded-xl text-xs font-bold hover:bg-red-700 transition">Login</button>
-                <button onclick="closeAdminModal()" class="flex-1 bg-gray-200 dark:bg-[#262626] text-gray-800 dark:text-gray-200 py-2.5 rounded-xl text-xs font-bold transition">Cancel</button>
+    <div id="adminModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="glass-card p-7 rounded-3xl w-full max-w-sm shadow-2xl border border-amber-500/30">
+            <h3 class="text-base font-bold mb-3 text-white">Admin Access</h3>
+            <input type="password" id="adminPassInput" placeholder="Enter Admin Password" class="w-full p-3.5 bg-gray-900 border border-amber-500/30 rounded-2xl text-xs mb-4 text-white focus:outline-none focus:border-amber-500">
+            <div class="flex space-x-2.5">
+                <button onclick="verifyAdmin()" class="flex-1 bg-amber-500 text-gray-950 py-3 rounded-xl text-xs font-bold hover:bg-amber-400 transition shadow-lg shadow-amber-500/30">Login</button>
+                <button onclick="closeAdminModal()" class="flex-1 bg-gray-800 text-gray-300 py-3 rounded-xl text-xs font-bold hover:bg-gray-700 transition">Cancel</button>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-gray-200 dark:border-gray-800 py-8 text-center px-4 mt-12 mb-16">
-        <p class="text-xs text-gray-500 dark:text-gray-400">&copy; 2026 SK TALIB. All rights reserved.</p>
+    <footer class="border-t border-gray-200 dark:border-amber-500/20 py-8 text-center px-4 mt-16 mb-16">
+        <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
 
     <!-- Scripts -->
@@ -107,29 +109,6 @@
         const firebaseConfig = { projectId: "mrsktalib-4ab8e" };
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
-        let currentLang = localStorage.getItem('site_lang') || 'en';
-
-        window.toggleLangMenu = function() {
-            document.getElementById('langMenu').classList.toggle('hidden');
-        }
-
-        window.selectLanguage = function(lang, label) {
-            currentLang = lang;
-            localStorage.setItem('site_lang', lang);
-            document.getElementById('currentLangLabel').innerText = label;
-            document.getElementById('check_en').classList.toggle('hidden', lang !== 'en');
-            document.getElementById('check_roman_hi').classList.toggle('hidden', lang !== 'roman_hi');
-            document.getElementById('langMenu').classList.add('hidden');
-            loadHomeFeed();
-        }
-
-        document.addEventListener('click', function(e) {
-            const container = document.getElementById('langDropdownContainer');
-            if (container && !container.contains(e.target)) {
-                document.getElementById('langMenu').classList.add('hidden');
-            }
-        });
 
         const html = document.documentElement;
         const modeIcon = document.getElementById('modeIcon');
@@ -187,30 +166,30 @@
                 posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
                 if (posts.length === 0) {
-                    container.innerHTML = `<p class="text-xs text-gray-500 text-center py-8">No posts in Home feed yet.</p>`;
+                    container.innerHTML = `<p class="text-xs text-gray-500 text-center py-12">No posts in Home feed yet.</p>`;
                     return;
                 }
 
                 container.innerHTML = "";
                 posts.forEach(post => {
-                    const title = (post.titles && post.titles[currentLang]) ? post.titles[currentLang] : (post.titles?.en || '');
-                    const desc = (post.descriptions && post.descriptions[currentLang]) ? post.descriptions[currentLang] : (post.descriptions?.en || '');
+                    const title = post.titles?.en || '';
+                    const desc = post.descriptions?.en || '';
                     
                     let mediaHtml = "";
                     if (post.mediaType === 'video_link' && post.media) {
-                        mediaHtml = `<div class="aspect-video w-full mb-3"><iframe src="${post.media}" class="w-full h-full rounded-2xl" allowfullscreen></iframe></div>`;
+                        mediaHtml = `<div class="aspect-video w-full mb-3.5"><iframe src="${post.media}" class="w-full h-full rounded-2xl border border-amber-500/20" allowfullscreen></iframe></div>`;
                     } else if (post.media) {
-                        mediaHtml = `<img src="${post.media}" class="w-full max-h-[450px] object-cover rounded-2xl mb-3 border border-gray-200 dark:border-gray-800" loading="lazy">`;
+                        mediaHtml = `<img src="${post.media}" class="w-full max-h-[480px] object-cover rounded-2xl mb-3.5 border border-amber-500/20" loading="lazy">`;
                     }
 
                     container.innerHTML += `
-                        <div class="bg-gray-50 dark:bg-[#171717] p-5 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-sm mb-4">
-                            <div class="flex justify-between items-center mb-2">
-                                <span class="text-[10px] text-gray-400">${post.dateFormatted || ''}</span>
+                        <div class="glass-card p-5 sm:p-6 rounded-3xl transition-all duration-300">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-[10px] text-amber-500 font-bold uppercase tracking-wider">${post.dateFormatted || ''}</span>
                             </div>
-                            ${title ? `<h3 class="text-sm font-bold text-gray-900 dark:text-white mb-2">${title}</h3>` : ''}
+                            ${title ? `<h3 class="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-2.5">${title}</h3>` : ''}
                             ${mediaHtml}
-                            ${desc ? `<p class="text-xs text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
+                            ${desc ? `<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line">${desc}</p>` : ''}
                         </div>
                     `;
                 });
@@ -222,5 +201,4 @@
         loadHomeFeed();
     </script>
 </body>
-                    </html>
-                    
+</html>
