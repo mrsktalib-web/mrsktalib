@@ -74,11 +74,10 @@
         <a href="gallery.html" class="py-2 px-2 rounded-xl bg-amber-500 text-gray-950 font-black shadow-md shadow-amber-500/30">Gallery</a>
     </div>
 
-    <!-- Main Container -->
+    <!-- Main Gallery Container -->
     <main class="max-w-2xl mx-auto px-4 py-6 space-y-6">
         <div class="flex items-center justify-between">
             <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">Photo Gallery</h2>
-            <span class="h-2.5 w-2.5 rounded-full bg-amber-500 animate-ping"></span>
         </div>
 
         <div id="galleryContainer" class="space-y-5">
@@ -139,7 +138,10 @@
                 galleryItems.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
                 if (galleryItems.length === 0) {
-                    container.innerHTML = `<p class="text-xs text-gray-500 text-center py-12">No gallery items added yet. Add them from your Admin Panel.</p>`;
+                    container.innerHTML = `
+                        <div class="text-center py-20 text-gray-500 text-xs sm:text-sm font-medium border border-dashed border-gray-300 dark:border-amber-500/20 rounded-3xl bg-white dark:bg-[#141414] shadow-sm">
+                            No gallery items added yet. Add them from your Admin Panel.
+                        </div>`;
                     return;
                 }
 
@@ -155,7 +157,6 @@
                         mediaHtml = `<img src="${post.media}" class="w-full max-h-[480px] object-cover rounded-2xl mb-3.5 border border-amber-500/20" loading="lazy">`;
                     }
 
-                    // Date is completely removed from here as requested
                     container.innerHTML += `
                         <div class="glass-card p-5 sm:p-6 rounded-3xl transition-all duration-300">
                             ${title ? `<h3 class="text-base sm:text-lg font-bold text-gray-900 dark:text-white mb-2.5">${title}</h3>` : ''}
