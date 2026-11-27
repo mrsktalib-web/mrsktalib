@@ -33,30 +33,17 @@
         }
     </style>
 </head>
-<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-40 lg:pt-28 transition-colors duration-300 antialiased flex flex-col justify-between">
+<body class="bg-[#f4f4f6] dark:bg-[#080808] text-gray-900 dark:text-gray-100 min-h-screen pt-24 lg:pt-20 transition-colors duration-300 antialiased flex flex-col justify-between">
     
-    <!-- Fixed Top Navigation Bar -->
+    <!-- Fixed Top Navigation Bar (Only Logo & Theme Toggle on Chat page) -->
     <header class="fixed top-0 left-0 w-full z-50 bg-white/95 dark:bg-[#0b0b0b]/90 backdrop-blur-2xl border-b border-gray-200 dark:border-amber-500/20 px-4 sm:px-6 py-3.5 shadow-md dark:shadow-xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-2">
-            <div class="flex items-center shrink-0">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="text-xs bg-gray-200 dark:bg-[#171717] hover:bg-amber-500 hover:text-gray-950 px-3.5 py-2 rounded-xl font-bold transition border border-gray-300 dark:border-amber-500/30">← Home</a>
                 <a href="index.html" class="text-base sm:text-xl font-black tracking-wider text-amber-600 dark:text-amber-500 whitespace-nowrap">SK <span class="text-gray-900 dark:text-white">TALIB</span></a>
             </div>
 
-            <!-- Desktop Nav Links -->
-            <nav class="hidden lg:flex items-center space-x-1.5 text-xs font-bold tracking-wide">
-                <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Home</a>
-                <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">About</a>
-                <a href="movie.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Movie</a>
-                <a href="products.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Products</a>
-                <a href="book.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Book</a>
-                <a href="gallery.html" class="text-gray-700 dark:text-gray-300 hover:text-amber-500 px-4 py-2 rounded-xl transition">Gallery</a>
-            </nav>
-
             <div class="flex items-center space-x-2.5 shrink-0">
-                <a href="chat.html" class="premium-btn flex items-center space-x-2 text-amber-700 dark:text-amber-400 px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition">
-                    <span>Chat with AI</span>
-                    <svg class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                </a>
                 <button onclick="toggleDarkMode()" id="themeToggleBtn" class="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-200 dark:bg-[#171717] border border-gray-300 dark:border-amber-500/30 hover:border-amber-500/70 transition text-sm shrink-0 shadow-sm">
                     <span id="modeIcon">🌙</span>
                 </button>
@@ -64,39 +51,29 @@
         </div>
     </header>
 
-    <!-- Mobile Grid Nav Bar -->
-    <div class="fixed top-[65px] left-0 w-full z-40 grid grid-cols-3 gap-2 lg:hidden px-3 py-3 bg-white/95 dark:bg-[#0b0b0b]/95 backdrop-blur-xl border-b border-gray-200 dark:border-amber-500/20 text-xs font-bold text-center tracking-wide">
-        <a href="index.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Home</a>
-        <a href="about.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">About</a>
-        <a href="movie.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Movie</a>
-        <a href="products.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Products</a>
-        <a href="book.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Book</a>
-        <a href="gallery.html" class="py-2 px-2 rounded-xl bg-gray-100 dark:bg-[#171717] text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-white/10 shadow-sm">Gallery</a>
-    </div>
-
     <!-- Main Chat Container -->
     <main class="max-w-2xl w-full mx-auto px-4 py-4 flex flex-col flex-1 space-y-4">
         
         <div class="text-center space-y-1">
             <h2 class="text-xl sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white">SK TALIB AI Assistant</h2>
-            <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Ask anything or chat freely in any language!</p>
+            <p class="text-xs text-amber-600 dark:text-amber-500 font-bold uppercase tracking-wider">Chat freely in any language!</p>
         </div>
 
         <!-- Chat Box Window -->
-        <div class="glass-card flex-1 flex flex-col rounded-3xl p-4 sm:p-5 min-h-[400px] max-h-[550px] overflow-y-auto space-y-3.5" id="chatWindow">
+        <div class="glass-card flex-1 flex flex-col rounded-3xl p-4 sm:p-5 min-h-[420px] max-h-[580px] overflow-y-auto space-y-3.5" id="chatWindow">
             <div class="flex items-start space-x-2.5">
                 <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
                 <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs sm:text-sm text-gray-800 dark:text-gray-200 max-w-[85%] leading-relaxed shadow-sm">
-                    Hello! I am SK Talib's personal AI assistant. You can ask me anything about Sk Talib, his education, products, or social media, or you can just chat with me in any language! ✨
+                    Hello! Main SK Talib ka personal assistant hoon. Aap mujhse kisi bhi bhasha mein baat kar sakte ho, time-pass chat kar sakte ho, ya Talib ke baare mein kuch bhi puch sakte ho! ✨
                 </div>
             </div>
         </div>
 
-        <!-- Quick Helper Buttons (No Business button, only clean options) -->
+        <!-- Quick Helper Buttons -->
         <div class="flex overflow-x-auto no-scrollbar space-x-2 py-1 text-xs">
+            <button onclick="sendQuickPrompt('Kaise ho?')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">👋 Kaise ho?</button>
             <button onclick="sendQuickPrompt('Tell me about Sk Talib')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">👤 About Talib</button>
             <button onclick="sendQuickPrompt('What is his education?')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">🎓 Education</button>
-            <button onclick="sendQuickPrompt('Show me products')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">🛒 Products</button>
             <button onclick="sendQuickPrompt('How can I contact him?')" class="px-3.5 py-2 rounded-xl bg-white dark:bg-[#141414] border border-gray-300 dark:border-amber-500/30 text-gray-700 dark:text-gray-300 font-bold shrink-0 hover:border-amber-500 transition shadow-sm">📞 Contact</button>
         </div>
 
@@ -105,8 +82,8 @@
             <input type="text" id="userInput" placeholder="Type your message in any language..." class="flex-1 bg-transparent px-3 py-2 text-xs sm:text-sm text-gray-900 dark:text-white focus:outline-none placeholder-gray-500" onkeypress="if(event.key === 'Enter') sendMessage()">
             <button onclick="sendMessage()" class="bg-amber-500 hover:bg-amber-400 text-gray-950 px-5 py-2.5 rounded-xl text-xs font-black transition shadow-md shadow-amber-500/30 shrink-0">Send</button>
         </div>
-                    </main>
-                        <!-- Footer -->
+    </main>
+        <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-amber-500/20 py-6 text-center px-4 mt-8">
         <p class="text-xs text-gray-500">&copy; 2026 SK TALIB. All rights reserved.</p>
     </footer>
@@ -195,16 +172,16 @@
                 <div id="${typingId}" class="flex items-start space-x-2.5">
                     <div class="w-7 h-7 rounded-xl bg-amber-500 text-gray-950 font-black text-xs flex items-center justify-center shrink-0 shadow-md">AI</div>
                     <div class="bg-gray-100 dark:bg-[#1a1a1a] border border-amber-500/20 p-3.5 rounded-2xl text-xs text-gray-500 dark:text-gray-400 italic shadow-sm">
-                        Thinking & translating...
+                        Typing...
                     </div>
                 </div>
             `;
             chatWindow.scrollTop = chatWindow.scrollHeight;
 
-            // Generate Smart Response based on site data and multilingual support
+            // Generate Smart Dynamic Conversational Response
             setTimeout(() => {
                 document.getElementById(typingId).remove();
-                let reply = generateAIResponse(message);
+                let reply = generateConversationalResponse(message);
                 
                 chatWindow.innerHTML += `
                     <div class="flex items-start space-x-2.5">
@@ -215,71 +192,70 @@
                     </div>
                 `;
                 chatWindow.scrollTop = chatWindow.scrollHeight;
-            }, 600);
+            }, 500);
         }
 
-        function generateAIResponse(query) {
+        function generateConversationalResponse(query) {
             const q = query.toLowerCase();
             
-            // Multilingual / Time-pass greeting detection
-            if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('namaste') || q.includes('kemon acho') || q.includes('kaise ho')) {
-                return "Hello! I am doing great. How can I help you today? You can ask me about SK Talib, his products, or just chat with me in any language!";
+            // Greeting & Conversational / Time-pass check
+            if (q.includes('kaise ho') || q.includes('kya haal') || q.includes('how are you') || q.includes('what\'s up') || q.includes('kemon acho')) {
+                return "Main ekdum badhiya hoon! Aap bataiye, aap kaise hain? Aaj main aapki kya madad kar sakta hoon?";
             }
-            if (q.includes('who are you') || q.includes('tum kaun ho')) {
-                return "I am SK Talib's personal AI assistant on mrsktalib.in. I can help visitors explore his profile, education, social media, and products in any language!";
+            if (q.includes('name') || q.includes('naam') || q.includes('who are you')) {
+                return "Mera naam SK Talib ka AI assistant hai. Aap mujhse kisi bhi topic par baat kar sakte hain ya Talib ke baare mein jaan sakte hain!";
+            }
+            if (q.includes('joke') || q.includes('funny') || q.includes('chutkule')) {
+                return "Suniye phir ek chota sa: Programmers ko dark mode kyun pasand hota hai? Kyunki bugs andheron mein chup jate hain! 😄 Aur bataiye, kya sunna pasand karenge?";
             }
 
-            // Category match
-            if (q.includes('about') || q.includes('talib') || q.includes('who') || q.includes('bio')) {
+            // About Talib
+            if (q.includes('talib') || q.includes('about') || q.includes('who is')) {
                 if (siteData.about.length > 0) {
-                    let res = "Here is what I know about SK Talib:\n";
+                    let res = "SK Talib ke baare mein ye details hain:\n";
                     siteData.about.forEach(item => {
                         if (item.titles?.en) res += `• ${item.titles.en}: `;
                         if (item.descriptions?.en) res += `${item.descriptions.en}\n`;
                     });
                     return res;
                 }
-                return "SK Talib is a passionate creator and developer from Odisha, India, managing his custom website and brass lighting business.";
+                return "SK Talib ek passionate creator aur web developer hain jo Odisha se hain aur apni custom website mrsktalib.in manage karte hain.";
             }
 
-            if (q.includes('education') || q.includes('study') || q.includes('college')) {
-                return "SK Talib has pursued a Diploma in Engineering at Maulana Azad National Urdu University (MANUU) Polytechnic Cuttack Campus.";
+            // Education
+            if (q.includes('education') || q.includes('study') || q.includes('college') || q.includes('padhai')) {
+                return "SK Talib ne Maulana Azad National Urdu University (MANUU) Polytechnic Cuttack Campus se Diploma in Engineering ki padhai ki hai.";
             }
 
-            if (q.includes('product') || q.includes('buy') || q.includes('shop') || q.includes('light')) {
+            // Products
+            if (q.includes('product') || q.includes('item') || q.includes('buy')) {
                 if (siteData.products.length > 0) {
-                    let res = "Here are the available products:\n";
+                    let res = "Yeh hain kuch products:\n";
                     siteData.products.forEach(p => {
-                        res += `• ${p.titles?.en || 'Product'} (${p.price || 'Check price'}) - ${p.descriptions?.en || ''}\n`;
+                        res += `• ${p.titles?.en || 'Product'} (${p.price || ''}) - ${p.descriptions?.en || ''}\n`;
                     });
                     return res;
                 }
-                return "SK Talib operates a decorative lighting business importing and distributing premium brass lights, alongside managing digital projects!";
+                return "Aap Products page par jakar saari latest items dekh sakte hain!";
             }
 
-            if (q.includes('contact') || q.includes('social') || q.includes('telegram') || q.includes('instagram') || q.includes('email')) {
-                let res = "You can connect with SK Talib here:\n";
+            // Contact / Social
+            if (q.includes('contact') || q.includes('social') || q.includes('telegram') || q.includes('instagram') || q.includes('email') || q.includes('phone')) {
+                let res = "Aap SK Talib se yahan connect kar sakte hain:\n";
                 if (siteData.social.length > 0) {
                     siteData.social.forEach(s => { res += `• ${s.titles?.en}: ${s.redirectLink || ''}\n`; });
                 }
                 if (siteData.contact.length > 0) {
                     siteData.contact.forEach(c => { res += `• ${c.titles?.en}: ${c.redirectLink || c.descriptions?.en || ''}\n`; });
                 }
-                if (res.trim() === "You can connect with SK Talib here:") {
-                    return "You can reach out via his social handles and contact options listed on the About page.";
+                if (res.trim() === "Aap SK Talib se yahan connect kar sakte hain:") {
+                    return "Aap About page par jakar saare social handles aur contact details dekh sakte hain.";
                 }
                 return res;
             }
 
-            if (q.includes('movie') || q.includes('film')) {
-                if (siteData.movies.length > 0) {
-                    return `SK Talib has curated ${sitedata.movies.length} featured movies/videos on his Movie page. Check them out!`;
-                }
-                return "Check out the Movie section on mrsktalib.in for featured cinematic edits and videos!";
-            }
-
-            // General / Time pass query fallback with polite multilingual tone
-            return `That's interesting! While I'm specialized in sharing details about SK Talib, his education, and his projects, feel free to ask me anything or chat with me in any language you prefer!`;
+            // Dynamic intelligent fallback for casual/time-pass chat in any language
+            return `Wah, yeh toh acchi baat hai! Aap chahe kisi bhi bhasha mein baat karein, main aapki baat samajh raha hoon. Kya aap SK Talib ke projects, movies, ya products ke baare mein kuch aur janna chahenge, ya aise hi kuch aur baat karni hai?`;
         }
 
         function escapeHtml(text) {
